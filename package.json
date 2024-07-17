@@ -1,0 +1,16 @@
+{
+  "name": "kapé",
+  "version": "1.0.0",
+  "description": "Capes are cool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: Do or do not. There is no test.\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "author": "listlessneko",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.15.3",
+    "nodemon": "^3.1.4"
+  }
+}
