@@ -4,6 +4,6 @@ module.exports = {
   name: Events.ClientReady,
   once: true,
   execute(client) {
-    console.log(`K2 is on the clock.`);
+    console.log(`This is ${client.user.username}. K2 is on the clock.`);
   },
 };

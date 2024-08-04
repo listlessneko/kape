@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { Collection } = require('discord.js');
 
-const { token } = require(path.join(__dirname, 'config.json'));
+const { token } = require(path.join(__dirname, 'config', 'config.json'));
 
 const { client } = require(path.join(__dirname, 'client.js'));
 

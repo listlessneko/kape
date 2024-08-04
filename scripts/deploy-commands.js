@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { REST, Routes } = require('discord.js');
-const { token, clientId, guildId } = require(path.join(__dirname, '..', 'config.json'));
+const { token, clientId, guildId } = require(path.join(__dirname, '..', 'config', 'config.json'));
 
 const commands = [];
 const dirPath = path.join(__dirname, '..', 'commands');
@@ -34,9 +34,13 @@ const rest = new REST().setToken(token);
       { body: commands },
     );
 
-    console.log(`Successfully reloaded ${data.length} application (/) commands`);
+    console.log(`Successfully reloaded ${data.length} application (/) commands.`);
+
   }
   catch (error) {
     console.error('There was an error deploying commands:', error);
+  }
+  finally {
+    process.exit();
   }
 })();
