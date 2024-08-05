@@ -1,9 +1,6 @@
 const path = require('node:path');
 const { SlashCommandBuilder } = require('discord.js');
-//const Users = require(path.join(__dirname, '..', '..', 'data', 'users.js'));
 const { UserServices } = require(path.join(__dirname, '..', '..', 'services', 'user-services.js'));
-const { client } = require(path.join(__dirname, '..', '..', 'client.js'));
-const currency = client.currency;
 
 module.exports = {
   cooldown: 5,
@@ -30,8 +27,8 @@ module.exports = {
 
     await UserServices.transferBalance(userId1, userId2, amount);
 
-    const user1 = await UserServices.checkUserData(userId1);
-    const user2 = await UserServices.checkUserData(userId2);
+    const user1 = await UserServices.checkUserCurrency(userId1);
+    const user2 = await UserServices.checkUserCurrency(userId2);
 
     console.log('Balances:');
     console.log('currentUser Id:', user1.user_id);

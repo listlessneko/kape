@@ -1,0 +1,303 @@
+{
+  "categories": [
+    {
+      "name": "Drinks",
+      "custom_id": "drinks",
+      "value": "drinks",
+      "description": "Check out our drinks menu.",
+      "content": "What would you like today?",
+      "types": [
+        {
+          "name": "Coffee",
+          "custom_id": "coffee",
+          "value": "coffee",
+          "icon": ":coffee:",
+          "description": "The real reason you are here.",
+          "content": "The real reason you are here.",
+          "items": [
+            {
+              "name": "Drip Coffee",
+              "value": "drip-coffee",
+              "description": "Coffee with style.",
+              "content": "Here you go.",
+              "cost": 2.50,
+              "energy_replen": 15,
+              "uses": 1,
+              "category": "drinks",
+              "type": "coffee"
+            },
+            {
+              "name": "Espresso",
+              "value": "espresso",
+              "description": "Express coffee.",
+              "content": "Here you go.",
+              "cost": 3.50,
+              "energy_replen": 20,
+              "uses": 1,
+              "category": "drinks",
+              "type": "coffee"
+            },
+            {
+              "name": "Americano",
+              "value": "americano",
+              "description": "Weak coffee.",
+              "content": "Here you go.",
+              "cost": 3.00,
+              "energy_replen": 15,
+              "uses": 1,
+              "category": "drinks",
+              "type": "coffee"
+            },
+            {
+              "name": "Cappuccino",
+              "value": "cappuccino",
+              "description": "Habit of the First Order.",
+              "content": "Here you go.",
+              "cost": 3.00,
+              "energy_replen": 15,
+              "uses": 1,
+              "category": "drinks",
+              "type": "coffee"
+            },
+            {
+              "name": "Latte",
+              "value": "latte",
+              "description": "Coffee with a lot a milk.",
+              "content": "Here you go.",
+              "cost": 4.00,
+              "energy_replen": 10,
+              "uses": 1,
+              "category": "drinks",
+              "type": "coffee"
+            }
+          ]
+        },
+        {
+          "name": "Tea",
+          "custom_id": "tea",
+          "value": "tea",
+          "icon": ":tea:",
+          "description": "The second reason you are here.",
+          "content": "The second reason you are here.",
+          "items": [
+            {
+              "name": "Green Tea",
+              "value": "green-tea",
+              "description": "Basic tea.",
+              "content": "Here you go.",
+              "cost": 2.50,
+              "energy_replen": 15,
+              "uses": 1,
+              "category": "drinks",
+              "type": "tea"
+            },
+            {
+              "name": "Black Tea",
+              "value": "black-tea",
+              "description": "Basic tea but black.",
+              "content": "Here you go.",
+              "cost": 3.00,
+              "energy_replen": 15,
+              "uses": 1,
+              "category": "drinks",
+              "type": "tea"
+            },
+            {
+              "name": "Matcha Green Tea",
+              "value": "matcha-green-tea",
+              "description": "Why is this not below \"Green Tea\"?",
+              "content": "Here you go.",
+              "cost": 3.50,
+              "energy_replen": 20,
+              "uses": 1,
+              "category": "drinks",
+              "type": "tea"
+            },
+            {
+              "name": "Chamomile Tea",
+              "value": "chamomile-tea",
+              "description": "Go to sleep tea.",
+              "content": "Here you go.",
+              "cost": 3.00,
+              "energy_replen": -10,
+              "uses": 1,
+              "category": "drinks",
+              "type": "tea"
+            },
+            {
+              "name": "Earl Grey Tea",
+              "value": "earl-grey-tea",
+              "description": "Not good enough to be a marquess.",
+              "content": "Here you go.",
+              "cost": 4.00,
+              "energy_replen": 10,
+              "uses": 1,
+              "category": "drinks",
+              "type": "tea"
+            }
+          ]
+        },
+        {
+          "name": "Non-Caffeinated",
+          "custom_id": "non-caffeinated",
+          "value": "non-caffeinated",
+          "icon": ":cup_with_straw:",
+          "description": "Why are you here?",
+          "content": "Why are you here?",
+          "items": [
+            {
+              "name": "Water",
+              "value": "water",
+              "description": "What are you doing here?",
+              "content": "Here you go.",
+              "cost": 0.00,
+              "energy_replen": 5,
+              "uses": 1,
+              "category": "drinks",
+              "type": "non-caffeinated"
+            },
+            {
+              "name": "Orange Juice",
+              "value": "orange-juice",
+              "description": "The original juice.",
+              "content": "Here you go.",
+              "cost": 2.00,
+              "energy_replen": 5,
+              "uses": 1,
+              "category": "drinks",
+              "type": "non-caffeinated"
+            },
+            {
+              "name": "Apple Juice",
+              "value": "apple-juice",
+              "description": "Juice of knowledge.",
+              "content": "Here you go.",
+              "cost": 2.50,
+              "energy_replen": 5,
+              "uses": 1,
+              "category": "drinks",
+              "type": "non-caffeinated"
+            },
+            {
+              "name": "Milo",
+              "value": "milo",
+              "description": "Chocolate milk.",
+              "content": "Here you go.",
+              "cost": 3.00,
+              "energy_replen": 10,
+              "uses": 1,
+              "category": "drinks",
+              "type": "non-caffeinated"
+            },
+            {
+              "name": "Sparkling Water",
+              "value": "sparkling-water",
+              "description": "Water with attitude.",
+              "content": "Here you go.",
+              "cost": 4.00,
+              "energy_replen": 5.5,
+              "uses": 1,
+              "category": "drinks",
+              "type": "non-caffeinated"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Food",
+      "custom_id": "food",
+      "value": "food",
+      "description": "Check out our food menu.",
+      "content": "A solid choice, I see.",
+      "types": [
+        {
+          "name": "Breakfast",
+          "custom_id": "breakfast",
+          "value": "breakfast",
+          "icon": ":sunrise:",
+          "description": "Morning.",
+          "content": "Morning.",
+          "items": [
+            {
+              "name": "Bagel",
+              "value": "bagel",
+              "description": "Just a bagel.",
+              "content": "Here you go.",
+              "cost": 2.00,
+              "energy_replen": 5,
+              "uses": 1,
+              "category": "food",
+              "type": "breakfast"
+            },
+            {
+              "name": "Pancakes",
+              "value": "pancakes",
+              "description": "Dessert for breakfast.",
+              "content": "Here you go.",
+              "cost": 5.00,
+              "energy_replen": 10,
+              "uses": 1,
+              "category": "food",
+              "type": "breakfast"
+            },
+            {
+              "name": "Waffles",
+              "value": "waffles",
+              "description": "Checkered, crispy (better) pancakes.",
+              "content": "Here you go.",
+              "cost": 5.00,
+              "energy_replen": 15,
+              "uses": 1,
+              "category": "food",
+              "type": "breakfast"
+            },
+            {
+              "name": "Omelette",
+              "value": "omelette",
+              "description": "You'll let what?",
+              "content": "Here you go.",
+              "cost": 5.00,
+              "energy_replen": 15,
+              "uses": 1,
+              "category": "food",
+              "type": "breakfast"
+            },
+            {
+              "name": "Silog",
+              "value": "silog",
+              "description": "Log empty.",
+              "content": "Here you go.",
+              "cost": 5.50,
+              "energy_replen": 20,
+              "uses": 1,
+              "category": "food",
+              "type": "breakfast"
+            }
+          ]
+        },
+        {
+          "name": "Lunch",
+          "custom_id": "lunch",
+          "value": "lunch",
+          "icon": "",
+          "description": "Afternoon.",
+          "content": "Afternoon.",
+          "items": [
+          ]
+        },
+        {
+          "name": "Dinner",
+          "custom_id": "dinner",
+          "value": "dinner",
+          "icon": "",
+          "description": "Evening.",
+          "content": "Evening.",
+          "items": [
+          ]
+        }
+      ]
+    }
+  ]
+}
+

@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 0,
       allowNull: false,
     },
+    energy: {
+      type: DataTypes.FLOAT,
+      defaultValue: 100,
+      allowNull: false,
+    },
   }, {
     timestamps: false,
   });

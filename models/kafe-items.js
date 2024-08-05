@@ -4,10 +4,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true,
     },
-    icon: DataTypes.STRING,
     value: DataTypes.STRING,
     description: DataTypes.TEXT,
     cost: DataTypes.FLOAT,
+    uses: DataTypes.FLOAT,
     category: DataTypes.STRING,
     type: DataTypes.STRING
   }, {

@@ -45,5 +45,26 @@ module.exports = {
         }
       }
     } 
+    //else if (interaction.isStringSelectMenu()) {
+    //  const menu = client.menus.get(interaction.values[0]);
+    //  const sameUser = i => i.user.id === interaction.user.id;
+    //  console.log('sameUser:', sameUser);
+    //
+    //  if (sameUser) {
+    //    if (!menu) {
+    //      await interaction.update({
+    //        content: `*A cat screeches and glass breaks behind the kitchen doors.*\nPlease wait while I take care of something...`,
+    //        components: [],
+    //      });
+    //      console.error(`No select menu matching '${interaction.values[0]}' was found.`);
+    //      return;
+    //    }
+    //
+    //    await interaction.update({
+    //      content: menu.content,
+    //      components: [menu.row]
+    //    });
+    //  }
+    //}
   },
 };

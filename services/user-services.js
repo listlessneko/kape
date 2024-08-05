@@ -25,7 +25,7 @@ const UserServices = {
     });
   },
 
-  async checkUserData(userId) {
+  async checkUserCurrency(userId) {
     let user = currency.get(userId);
     //// is there a user? Yes, then this : No, then this
     //return user ? user.balance : 0;
@@ -51,18 +51,18 @@ const UserServices = {
   },
 
   async getBalance(userId) {
-    const user = await this.checkUserData(userId);
+    const user = await this.checkUserCurrency(userId);
     return user.balance;
   },
 
   async addBalance(userId, amount) {
-    const user = await this.checkUserData(userId);
+    const user = await this.checkUserCurrency(userId);
     user.balance += Number(amount);
     return user.save();
   },
 
   async subtractBalance(userId, amount) {
-    const user = await this.checkUserData(userId);
+    const user = await this.checkUserCurrency(userId);
     if (amount <= user.balance) {
       user.balance -= Number(amount);
       return user.save();
@@ -74,7 +74,7 @@ const UserServices = {
   },
 
   async transferBalance(userId1, userId2, amount) {
-    const user1 = await this.checkUserData(userId1);
+    const user1 = await this.checkUserCurrency(userId1);
     if (amount > user1.balance) {
       return false;
     }

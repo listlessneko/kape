@@ -8,12 +8,14 @@ const { client } = require(path.join(__dirname, 'client.js'));
 
 client.commands = new Collection();
 client.cooldowns = new Collection();
+client.menus = new Collection();
 client.currency = new Collection();
+client.energy = new Collection();
 
 const commandsPath = path.join(__dirname, 'commands'); 
 const commandDir = fs.readdirSync(commandsPath);
 
-for (const dir of commandDir) {
+for (dir of commandDir) {
   const commandPath = path.join(commandsPath, dir);
   const commandFiles = fs.readdirSync(commandPath).filter(file => file.endsWith('.js'));
 
@@ -44,5 +46,28 @@ for (file of eventFiles) {
     client.on(event.name, (...args) => event.execute(...args));
   }
 }
+
+const menusPath = path.join(__dirname, 'handlers');
+const menuDir = fs.readdirSync(menusPath);
+
+for (dir of menuDir) {
+  const menuPath = path.join(menusPath, dir);
+  const menuFiles = fs.readdirSync(menuPath).filter(file => file.endsWith('menu.js'));
+
+  for (file of menuFiles) {
+    const filePath = path.join(menuPath, file);
+    const menu = require(filePath);
+
+    if ('content' in menu && 'row' in menu && 'customId' in menu) {
+      client.menus.set(menu.customId, {
+        content: menu.content,
+        row: menu.row
+      });
+    }
+  }
+}
+
+
+console.log(client.menus);
 
 client.login(token);
