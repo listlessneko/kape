@@ -16,6 +16,7 @@ module.exports = {
   async execute(interaction) {
     const user = interaction.options.getUser('user') ?? interaction.user;
     const items = await UserServices.getUserItems(user.id);
+    console.log(items);
 
     if (items.length > 0) {
       const thisUserItems = items.map(item => `${item.amount} ${item.item.name}`);

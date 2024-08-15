@@ -6,7 +6,7 @@ async function populateItems(KafeItems, items) {
   try {
     const allItems = items.categories.flatMap(category => category.types.flatMap(type => type.items));
     await KafeItems.bulkCreate(allItems, {
-      updateOnDuplucate: ['name', 'value', 'description', 'cost', 'uses', 'category', 'type']
+      updateOnDuplucate: ['name', 'value', 'description', 'content','cost', 'energy_replen', 'uses', 'category', 'type']
     });
     //for (const category of items.categories) {
     //  for (const drink of category.drinks) {

@@ -11,11 +11,18 @@ const selectMenu = new StringSelectMenuBuilder()
 for (const category of items.categories) {
   selectMenu.addOptions(
     new StringSelectMenuOptionBuilder()
-    .setLabel(category.name)
-    .setValue(category.value)
-    .setDescription(category.description)
+      .setLabel(category.name)
+      .setValue(category.value)
+      .setDescription(category.description)
   )
 }
+
+selectMenu.addOptions(
+  new StringSelectMenuOptionBuilder()
+    .setLabel('Nevermind')
+    .setValue('nevermind')
+    .setDescription('You change your mind')
+)
 
 const row = new ActionRowBuilder().addComponents(selectMenu);
 

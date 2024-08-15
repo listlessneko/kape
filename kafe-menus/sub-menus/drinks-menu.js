@@ -3,12 +3,13 @@ const { StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder
 const items = require(path.join(__dirname, '..', '..', 'data', 'items.json'));
 
 const drinks = items.categories.find(category => category.name === 'Drinks');
+const subCustomId = 'drinks-sub-menu';
 
 const content = drinks.content;
 
 const selectMenu = new StringSelectMenuBuilder()
-  .setCustomId(drinks.custom_id)
-  .setPlaceholder(drinks.description)
+  .setCustomId(subCustomId)
+  .setPlaceholder(drinks.placeholder)
 
 for (type of drinks.types) {
   selectMenu.addOptions(
@@ -19,10 +20,17 @@ for (type of drinks.types) {
   )
 }
 
+selectMenu.addOptions(
+  new StringSelectMenuOptionBuilder()
+    .setLabel('Nevermind')
+    .setValue('nevermind')
+    .setDescription('You change your mind.')
+)
+
 const row = new ActionRowBuilder().addComponents(selectMenu);
 
 module.exports = {
   content,
   row,
-  customId: drinks.custom_id
+  customId: subCustomId
 }

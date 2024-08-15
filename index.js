@@ -9,8 +9,7 @@ const { client } = require(path.join(__dirname, 'client.js'));
 client.commands = new Collection();
 client.cooldowns = new Collection();
 client.menus = new Collection();
-client.currency = new Collection();
-client.energy = new Collection();
+client.usersCache = new Collection();
 
 const commandsPath = path.join(__dirname, 'commands'); 
 const commandDir = fs.readdirSync(commandsPath);
@@ -47,11 +46,11 @@ for (file of eventFiles) {
   }
 }
 
-const menusPath = path.join(__dirname, 'handlers');
-const menuDir = fs.readdirSync(menusPath);
+const pathKafeMenus = path.join(__dirname, 'kafe-menus');
+const menuDir = fs.readdirSync(pathKafeMenus);
 
 for (dir of menuDir) {
-  const menuPath = path.join(menusPath, dir);
+  const menuPath = path.join(pathKafeMenus, dir);
   const menuFiles = fs.readdirSync(menuPath).filter(file => file.endsWith('menu.js'));
 
   for (file of menuFiles) {
@@ -64,10 +63,10 @@ for (dir of menuDir) {
         row: menu.row
       });
     }
+    else {
+      console.log(`[WARNING] The command at ${filePath} is missing a required 'data', 'execute', or 'customId' property.`);
+    }
   }
 }
-
-
-console.log(client.menus);
 
 client.login(token);

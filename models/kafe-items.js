@@ -6,7 +6,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     value: DataTypes.STRING,
     description: DataTypes.TEXT,
+    content: DataTypes.TEXT,
     cost: DataTypes.FLOAT,
+    energy_replen: DataTypes.FLOAT,
     uses: DataTypes.FLOAT,
     category: DataTypes.STRING,
     type: DataTypes.STRING

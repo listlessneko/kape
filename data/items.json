@@ -6,6 +6,7 @@
       "value": "drinks",
       "description": "Check out our drinks menu.",
       "content": "What would you like today?",
+      "placeholder": "What would you like to drink?",
       "types": [
         {
           "name": "Coffee",
@@ -14,6 +15,7 @@
           "icon": ":coffee:",
           "description": "The real reason you are here.",
           "content": "The real reason you are here.",
+          "placeholder": "What kind of coffee would you like?",
           "items": [
             {
               "name": "Drip Coffee",
@@ -79,6 +81,7 @@
           "icon": ":tea:",
           "description": "The second reason you are here.",
           "content": "The second reason you are here.",
+          "placeholder": "What kind of tea would you like?",
           "items": [
             {
               "name": "Green Tea",
@@ -144,6 +147,7 @@
           "icon": ":cup_with_straw:",
           "description": "Why are you here?",
           "content": "Why are you here?",
+          "placeholder": "Hm...",
           "items": [
             {
               "name": "Water",
@@ -210,6 +214,7 @@
       "value": "food",
       "description": "Check out our food menu.",
       "content": "A solid choice, I see.",
+      "placeholder": "What would you like to eat?",
       "types": [
         {
           "name": "Breakfast",
@@ -218,6 +223,7 @@
           "icon": ":sunrise:",
           "description": "Morning.",
           "content": "Morning.",
+          "placeholder": "What would you like to eat this morning?",
           "items": [
             {
               "name": "Bagel",
@@ -283,6 +289,7 @@
           "icon": "",
           "description": "Afternoon.",
           "content": "Afternoon.",
+          "placeholder": "What would you like to eat this afternoon?",
           "items": [
           ]
         },
@@ -293,6 +300,7 @@
           "icon": "",
           "description": "Evening.",
           "content": "Evening.",
+          "placeholder": "What would you like to eat this evening?",
           "items": [
           ]
         }

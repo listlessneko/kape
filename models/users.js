@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
     },
     balance: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
       defaultValue: 0,
       allowNull: false,
     },
@@ -14,6 +14,16 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 100,
       allowNull: false,
     },
+    max_energy: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+      allowNull: false
+    },
+    min_energy: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false
+    }
   }, {
     timestamps: false,
   });

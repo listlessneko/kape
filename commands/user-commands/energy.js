@@ -5,8 +5,8 @@ const { UserServices } = require(path.join(__dirname, '..', '..', 'services', 'u
 module.exports = {
   cooldown: 5,
   data: new SlashCommandBuilder()
-    .setName('balance')
-    .setDescription('Check user balance.')
+    .setName('energy')
+    .setDescription('Check user energy levels.')
     .addUserOption(option =>
       option
         .setName('user')
@@ -15,22 +15,24 @@ module.exports = {
 
   async execute(interaction) {
     const user = interaction.options.getUser('user') ?? interaction.user;
-    const current = await UserServices.getBalance(user.id);
+    const currentEnergy = await UserServices.getEnergy(user.id);
+
+    console.log('user:', user);
+    console.log('username:', user.username);
 
     if (user === interaction.user) {
-      if (current.balance < 10) {
-        const result = await UserServices.addBalance(user.id, .25);
+      if (currentEnergy < 100 && currentEnergy > 0) {
         return interaction.reply({
-          content: `You have **${current.balance}** credits.\nYou good? *The bot beeps in pity.* Here's **25 parts**. It's the most I can spare right now.\nYour New Balance: **${result.balance} credits**`
+          content: `You have **${currentEnergy.energy} energy**.\nWorking hard?`
         });
       }
       return interaction.reply({
-        content: `You have **${current.balance} credits**.`
+        content: `You have max **${currentEnergy.energy} energy**. Why don't you go do something?`
       });
     }
 
     return interaction.reply({
-      content: `**${user.username}** has **${current.balance} credits**.`
+      content: `**${user.username}** has **${currentEnergy.energy} energy**.`
     });
   }
 }

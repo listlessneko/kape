@@ -18,6 +18,7 @@ KafeItems.hasMany(UserItems, { foreignKey: 'item_id', as: 'item' });
 
 module.exports = {
   sequelize,
+  Op: Sequelize.Op,
   Users,
   KafeItems,
   UserItems

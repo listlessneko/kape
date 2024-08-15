@@ -44,7 +44,23 @@ module.exports = {
           });
         }
       }
-    } 
+    }
+    else if (interaction.isAutocomplete()) {
+      const command = client.commands.get(interaction.commandName);
+
+      if (!command) {
+        console.error(`No command matching '${interaction.commandName} was found.`);
+        return;
+      }
+
+      try {
+        await command.autocomplete(interaction);
+      }
+      catch (error) {
+        console.error(error);
+      }
+    }
+
     //else if (interaction.isStringSelectMenu()) {
     //  const menu = client.menus.get(interaction.values[0]);
     //  const sameUser = i => i.user.id === interaction.user.id;
