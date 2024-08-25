@@ -2,7 +2,9 @@ const path = require('node:path');
 const { client } = require(path.join(__dirname, '..', '..', 'client.js'));
 const { SlashCommandBuilder, ComponentType } = require('discord.js');
 const { UserServices } = require(path.join(__dirname, '..', '..', 'services', 'user-services.js'));
-const { Users, KafeItems } = require(path.join(__dirname, '..', '..', 'data', 'db-objects.js'));
+const { UserItemsServices } = require(path.join(__dirname, '..', '..', 'services', 'user-items-services.js'));
+const { KafeServices } = require(path.join(__dirname, '..', '..', 'services', 'kafe-services.js'));
+//const { Users, KafeItems } = require(path.join(__dirname, '..', '..', 'data', 'db-objects.js'));
 
 module.exports = {
   cooldown: 5,
@@ -36,31 +38,23 @@ module.exports = {
                 content: `Oh, maybe next time.`,
                 components: []
               });
-              collector.stop('User canceled order.');
+              collector.stop('Order Cmd: User canceled order.');
               return;
             }
 
-            const item = await KafeItems.findOne({
-              where: {
-                value: selectedValue
-              }
-            });
+            const item = await KafeServices.findItem(selectedValue);
 
-            const user = await Users.findOne({
-              where: {
-                user_id: interaction.user.id
-              }
-            });
+            const user = await UserServices.getUsers({requestModelInstance: false}, interaction.user.id);
 
             if (item) {
-              if (item.cost < user.balance) {
-                await UserServices.subtractBalance(user.user_id, item.cost);
-                await UserServices.addItems(user.user_id, item.id, 1);
+              if (item.cost <= user.balance) {
+                await UserServices.subtractBalance(item.cost, user.user_id);
+                await UserItemsServices.addItems(item, 1, user.user_id);
                 await i.update({
                   content: `Here is your **${item.name.toLowerCase()}**.`,
                   components: [],
                 });
-                collector.stop('Order completed.')
+                collector.stop('Order Cmd: Order completed.')
                 return;
               }
 
@@ -69,7 +63,7 @@ module.exports = {
                   content: `Hm... Maybe come back next time.`,
                   components: [],
                 });
-                collector.stop('Insufficient funds.')
+                collector.stop('Order Cmd: Insufficient funds.')
                 return;
               }
             }

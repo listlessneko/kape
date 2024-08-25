@@ -23,33 +23,47 @@ module.exports = {
     const user = interaction.options.getUser('user') ?? interaction.user;
     const amount = interaction.options.getNumber('amount');
 
-    const userEnergy = await UserServices.getEnergy(user.id);
+    const userEnergy = await UserServices.getUsers({requestModelInstance: false}, user.id);
 
     if (user.id === interaction.user.id) {
-      if (userEnergy.min === true) {
+      console.log('Remove Energy Command - Is Commander:', user.id === interaction.user.id);
+      if (userEnergy.min_energy) {
         return await interaction.reply({
-          content: `You are already at (**${userEnergy.energy}**) energy. Do you want to die?`
+          content: `You are already at **${userEnergy.energy} energy**. Do you want to die?`
         });
       }
 
-      const result = await UserServices.removeEnergy(user.id, amount);
+      const result = await UserServices.removeEnergy(amount, user.id);
+
+      if (result.min_energy) {
+        return await interaction.reply({
+          content: `Your energy is now at **${result.new_energy}**. You are dead now.`
+        });
+      }
 
       return await interaction.reply({
-        content: `You have removed **${amount} energy** from yourself and now have **${result.energy}**. You're just wasting your efforts.`
+        content: `You have removed **${amount} energy** from yourself and now have **${result.new_energy}**. You are just wasting your efforts.`
       });
     }
 
     else {
-      if (userEnergy.min === true) {
+      console.log('Remove Energy Command - Is Commander:', user.id === interaction.user.id);
+      if (userEnergy.min_energy) {
         return await interaction.reply({
-          content: `**${user.username}** is already at (**${userEnergy.energy}**) energy. Are you trying to kill them?`
+          content: `**${user.username}** is already at **${userEnergy.energy}** energy. Are you trying to kill them?`
         });
       }
 
-      const result = await UserServices.removeEnergy(user.id, amount);
+      const result = await UserServices.removeEnergy(amount, user.id);
+
+      if (result.min_energy) {
+        return await interaction.reply({
+          content: `**${user.username}**'s energy is now at **${result.new_energy}**. You have killed them.`
+        });
+      }
 
       return await interaction.reply({
-        content: `You have removed **${amount} energy** from **${user.username}**. They are now at **${result.energy}**.`
+        content: `You have removed **${amount} energy** from **${user.username}**. They now have **${result.new_energy}**. What are you going to do with that energy?`
       });
     }
   }

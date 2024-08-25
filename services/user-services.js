@@ -7,13 +7,27 @@ const { client } = require(path.join(__dirname, '..', 'client.js'));
 const usersCache = client.usersCache;
 
 const UserServices = {
-  async getUsers(...userIds) {
+  async getUsers(options = {}, ...userIds) {
+    const { requestModelInstance = false } = options;
+    //console.log('Get Users - Request Cache:', requestModelInstance);
 
-    const usersNotInCache = userIds
-      .filter(userId => usersCache.get(userId) === undefined);
+    const usersInCache = [];
+    const usersNotInCache = [];
 
-    if (usersNotInCache) {
-      const db = await Users.findAll({
+    userIds.forEach(userId => {
+      if (!usersCache.has(userId)) {
+        usersNotInCache.push(userId);
+      }
+      else {
+        usersInCache.push(userId);
+      }
+    });
+
+    //console.log('Get User - User In Cache:', usersInCache);
+    //console.log('Get User - User Not In Cache:', usersNotInCache);
+
+    if (usersNotInCache.length > 0) {
+      const dbUsers = await Users.findAll({
         where: {
           user_id: {
             [Op.in]: usersNotInCache
@@ -21,276 +35,242 @@ const UserServices = {
         }
       });
 
-      const usersInDatabase = db
-        .map(user => user.dataValues.user_id);
-      db.forEach(userId => {
-        usersCache.set(userId.user_id, userId.dataValues)
-      });
+      //console.log('Get User - User In Database:', dbUsers);
 
-      const usersNotRecorded = userIds
-        .filter(userId => !usersInDatabase.includes(userId) && usersNotInCache.includes(userId));
+      dbUsers.forEach(user => {
+        //console.log('dbusers:', user);
+        const userId = user.dataValues.user_id;
 
-      if (usersNotRecorded.length > 0) {
-        const formattedUsers = usersNotRecorded.map(userId => ({
-          user_id: userId
-        }));
-        const newUsers = await Users.bulkCreate(formattedUsers);
-        newUsers.forEach(userId => usersCache.set(userId.user_id, userId.dataValues));
-      }
-    }
+        if (!usersCache.has(userId)) {
+          usersCache.set(userId, user);
+        }
+      })
 
-    const allUsers = userIds.map(userId => usersCache.get(userId));
-    console.log('Get User - All Users:', allUsers);
-    return allUsers;
-  },
+      await Promise.all(userIds.map(async (userId) => {
+        const userExists = (dbUsers.some(user => user.dataValues.user_id === userId));
 
-  async getUserItems(userId) {
-    return await UserItems.findAll({
-      where: { user_id: userId },
-      include: ['item'],
-    });
-  },
-
-  async addItems(userId, item, amount) {
-    const userItem = await UserItems.findOne({
-      where: {
-        [Op.and]: [
-          {
+        if (!userExists) {
+          const newUser = await Users.create({
             user_id: userId
-          },
-          {
-            [Op.or]: {
-              item_id: item,
-              name: item,
-              value: item
-            }
-          }
-        ]
-      },
-    });
+          });
+          usersCache.set(userId, newUser);
+        }
+      }));
+    }
 
-    if (userItem) {
-      userItem.amount += amount;
-      await userItem.save();
-      return {
-        item_name: userItem.name,
-        item_amount: userItem.amount
+    if (requestModelInstance) {
+      if (userIds.length === 1) {
+        const cachedUser = usersCache.get(userIds[0]);
+        return cachedUser;
       }
+      const cachedUsers = userIds.map(userId => usersCache.get(userId));
+      return cachedUsers;
     }
 
-     const newUserItems = await UserItems.create({
-       user_id: userId,
-       name: item.name,
-       item_id: item.id,
-       amount: amount,
-       value: item.value,
-       description: item.description,
-       content: item.content,
-       cost: item.cost,
-       energy_replen: item.energy_replen,
-       uses: item.uses,
-       category: item.category,
-       type: item.type
-     });
-      return {
-        item_name: newUserItems.name,
-        item_amount: newUserItems.amount
+    if ( userIds.length === 1 ) {
+      const cachedUser = usersCache.get(userIds[0]);
+      const userInfo = {
+        ...cachedUser.dataValues
       }
-  },
-
-  async removeItems(userId, item, amount) {
-    console.log(userId);
-    console.log(item);
-    const userItem = await UserItems.findOne({
-      where: {
-        [Op.and]: [
-          {
-            user_id: userId
-          },
-          {
-            [Op.or]: {
-              item_id: item,
-              name: item,
-              value: item
-            }
-          }
-        ]
-      },
-    });
-
-    if (userItem) {
-      userItem.amount -= amount;
-      await userItem.save();
-      return {
-        item_name: userItem.name, 
-        item_amount: userItem.amount
-      }
-    }
-
-    return false
-  },
-
-  async checkUserEnergy(userId) {
-    let user = usersCache.get(userId);
-
-    if (user) {
-      return user;
-    }
-
-    user = await Users.findOne({
-      where: {
-        user_id: userId
-      }
-    });
-
-    if (user) {
-      usersCache.set(userId, user);
-      return user;
-    }
-
-    const newUser = await Users.create({ 
-      user_id: userId 
-    });
-    usersCache.set(userId, newUser);
-    return newUser;
-  },
-
-  async getEnergy(userId) {
-    const user = await this.checkUserEnergy(userId);
-    return {
-      user: userId,
-      energy: user.energy,
-      max: user.max_energy,
-      min: user.min_energy
-    };
-  },
-
-  async addEnergy(userId, amount) {
-    const user = await this.checkUserEnergy(userId);
-
-    if (user.energy >= 100) {
-      console.log(`User ID: ${userId} is already at max (${user.energy}) energy.`)
-      return {
-        user: userId,
-        energy: user.energy
-      }
-    }
-
-    const result = await MathServices.addUpTo100(user.energy, amount);
-    console.log('Add Energy:', result);
-
-    user.energy = Number(result);
-
-    if (result >= 100) {
-      user.max_energy = true;
-      user.min_energy = false;
-    }
-    else if (result < 100 && result > 0) {
-      user.max_energy = false;
-      user.min_energy = false;
-    }
-    else if (result ===  0) {
-      user.max_energy = false;
-      user.min_energy = true;
-    }
-
-    await user.save();
-    usersCache.set(userId, user);
-    return {
-      user: userId,
-      energy: user.energy,
-    };
-  },
-
-  async removeEnergy(userId, amount) {
-    const user = await this.checkUserEnergy(userId);
-
-    const result = await MathServices.removeDownTo0(user.energy, amount);
-
-    user.energy = Number(result);
-
-    if (result >= 100) {
-      user.max_energy = true;
-      user.min_energy = false;
-    }
-    else if (result < 100 && result > 0) {
-      user.max_energy = false;
-      user.min_energy = false;
-    }
-    else if (result ===  0) {
-      user.max_energy = false;
-      user.min_energy = true;
-    }
-
-    await user.save();
-    usersCache.set(userId, user);
-    return {
-      user: userId,
-      energy: user.energy,
-    };
-  },
-
-  async checkUserCurrency(userId) {
-    let user = usersCache.get(userId);
-      console.log('checkUserCurrency User:', user);
-    //// is there a user? Yes, then this : No, then this
-    //return user ? user.balance : 0;
-    if (user) {
-      console.log('checkUserCurrency In Cache:', usersCache);
-      return user;
+      return userInfo;
     }
 
     else {
-      user = await Users.findOne({
-        where: { user_id: userId }
+      const cachedUsers = userIds.map(userId => {
+        const cachedUser = usersCache.get(userId);
+        return {
+          user_id: userId,
+          ...cachedUser.dataValues
+        };
       });
+
+      const usersInfo = cachedUsers.reduce((acc, user) => {
+        acc[user.user_id] = {...user};
+        return acc;
+      }, {});
+
+      return usersInfo;
     }
 
-    if (user) {
-      usersCache.set(userId, user.dataValues);
-      return user;
+  },
+
+  async getAllUsers() {
+    const users = await Users.findAll();
+    users.forEach(user => {
+      usersCache.set(user.dataValues.user_id, user);
+    });
+    console.log(usersCache);
+  },
+
+  async addEnergy(amount, ...userIds) {
+    async function calculateEnergy(amount, user) {
+      const prev_energy = user.energy;
+
+      if (user.energy >= 100) {
+        console.log(`User ID: ${user.user_id} is already at max (${user.energy}) energy.`)
+        return {
+          user: user.user_id,
+          prev_energy,
+          new_energy: user.energy,
+          max_energy: user.max_energy,
+          min_energy: user.min_energy,
+        }
+      }
+
+      const result = await MathServices.addUpTo100(user.energy, amount);
+      user.energy = Number(result);
+
+      if (result >= 100) {
+        user.max_energy = true;
+        user.min_energy = false;
+      }
+      else if (result < 100 && result > 0) {
+        user.max_energy = false;
+        user.min_energy = false;
+      }
+      else if (result ===  0) {
+        user.max_energy = false;
+        user.min_energy = true;
+      }
+
+      await user.save();
+      return {
+        user: user.user_id,
+        prev_energy,
+        new_energy: user.energy,
+        max_energy: user.max_energy,
+        min_energy: user.min_energy,
+      };
     }
 
-    else {
-      const newUser = await Users.create({ 
-        user_id: userId, 
-        balance: 0 
-      });
-      usersCache.set(userId, newUser.dataValues);
-      console.log('checkUserCurrency Set Cache:', usersCache);
-      return newUser;
+    if ( userIds.length === 1 ) {
+      const user = await this.getUsers( { requestModelInstance: true }, ...userIds )
+      return await calculateEnergy(amount, user);
+    }
+
+    const users = await this.getUsers( { requestModelInstance: true }, ...userIds )
+    const usersEnergy = {};
+
+    for ( const user of users ) {
+      usersEnergy[user.user_id] = await calculateEnergy(amount, user);
     }
   },
 
-  async getBalance(userId) {
-    const user = await this.checkUserCurrency(userId);
-      console.log('getBalance:', usersCache);
-    return {
-      user: userId,
-      balance: user.balance
-    };
-  },
+  async removeEnergy(amount, ...userIds) {
+    async function calculateEnergy(amount, user) {
+      const prev_energy = user.energy;
 
-  async addBalance(userId, amount) {
-    const user = await this.checkUserCurrency(userId);
-    user.balance += Number(amount);
-    await user.save();
-    usersCache.set(userId, user);
-    return {
-      user_id: userId,
-      balance: user.balance
+      if (user.energy === 0) {
+        console.log(`User ID: ${user.user_id} is already at minimum (${user.energy}) energy.`)
+        return {
+          user: user.user_id,
+          prev_energy,
+          new_energy: user.energy,
+          max_energy: user.max_energy,
+          min_energy: user.min_energy,
+        }
+      }
+
+      const result = await MathServices.removeDownTo0(user.energy, amount);
+      user.energy = Number(result);
+
+      if (result >= 100) {
+        user.max_energy = true;
+        user.min_energy = false;
+      }
+      else if (result < 100 && result > 0) {
+        user.max_energy = false;
+        user.min_energy = false;
+      }
+      else if (result ===  0) {
+        user.max_energy = false;
+        user.min_energy = true;
+      }
+
+      await user.save();
+      return {
+        user: user.user_id,
+        prev_energy,
+        new_energy: user.energy,
+        max_energy: user.max_energy,
+        min_energy: user.min_energy,
+      };
+    }
+
+    if ( userIds.length === 1 ) {
+      const user = await this.getUsers( { requestModelInstance: true }, ...userIds )
+      return await calculateEnergy(amount, user);
+    }
+
+    const users = await this.getUsers( { requestModelInstance: true }, ...userIds )
+    const usersEnergy = {};
+
+    for ( const user of users ) {
+      usersEnergy[user.user_id] = await calculateEnergy(amount, user);
     }
   },
 
-  async subtractBalance(userId, amount) {
-    const user = await this.checkUserCurrency(userId);
-    user.balance -= Number(amount);
-    await user.save();
-    usersCache.set(userId, user);
-    return {
-      user_id: userId,
-      balance: user.balance
+  async addBalance( amount, ...userIds ) {
+    if ( userIds.length === 1 ) {
+      const user = await this.getUsers( { requestModelInstance: true }, ...userIds );
+      const prev_balance = user.balance;
+      user.balance += Number(amount);
+      await user.save();
+      usersCache.set(user.user_id, user);
+      const userBalance = {
+        user_id: user.user_id,
+        prev_balance,
+        new_balance: user.balance
+      };
+      return userBalance;
     }
+
+    const users = await this.getUsers( { requestModelInstance: true }, ...userIds );
+    const userBalances = {};
+
+    for ( const user of users ) {
+      const prev_balance = user.balance;
+      user.balance += Number(amount);
+      await user.save();
+      usersCache.set(user.user_id, user);
+      userBalances[user.user_id] = {};
+      userBalances[ user.user_id ][ 'user_id' ] = user.user_id;
+      userBalances[ user.user_id ][ 'prev_balance' ] = prev_balance;
+      userBalances[ user.user_id ][ 'new_balance' ] = user.balance;
+      }
+
+    return userBalances;
+  },
+
+  async subtractBalance(amount, ...userIds) {
+    if ( userIds.length === 1 ) {
+      const user = await this.getUsers( { requestModelInstance: true }, ...userIds );
+      const prev_balance = user.balance;
+      user.balance -= Number(amount);
+      await user.save();
+      usersCache.set(user.user_id, user);
+      const userBalance = {
+        user_id: user.user_id,
+        prev_balance,
+        new_balance: user.balance
+      };
+      return userBalance;
+    }
+
+    const users = await this.getUsers( { requestModelInstance: true }, ...userIds );
+    const userBalances = {};
+
+    for ( const user of users ) {
+      const prev_balance = user.balance;
+      user.balance -= Number(amount);
+      await user.save();
+      usersCache.set(userIds, user);
+      userBalances[ user.user_id ] = {};
+      userBalances[ user.user_id ][ 'prev_balance' ] = prev_balance;
+      userBalances[ user.user_id ][ 'new_balance' ] = new_balance;
+    }
+
+    return userBalances;
     //if (amount <= user.balance) {
     //  user.balance -= Number(amount);
     //  await user.save();
@@ -307,9 +287,13 @@ const UserServices = {
     //}
   },
 
-  async transferCredits(userId1, userId2, amount) {
-    this.subtractBalance(userId1, amount);
-    this.addBalance(userId2, amount);
+  async transferCredits(amount, userId1, userId2) {
+    const user1 = await this.subtractBalance(amount, userId1);
+    const user2 = await this.addBalance(amount, userId2);
+    return {
+      user1,
+      user2
+    }
   },
 }
 

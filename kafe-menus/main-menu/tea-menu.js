@@ -14,7 +14,7 @@ const selectMenu = new StringSelectMenuBuilder()
 for (i of tea.items) {
   selectMenu.addOptions(
     new StringSelectMenuOptionBuilder()
-      .setLabel(`${i.name} (${i.cost} credits)`)
+      .setLabel(`${i.name} (${i.cost} credits, ${i.energy_replen} energy)`)
       .setValue(i.value)
       .setDescription(i.description)
   )

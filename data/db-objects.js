@@ -13,8 +13,8 @@ const Users = require(path.join(__dirname, '..', 'models', 'users.js'))(sequeliz
 const KafeItems = require(path.join(__dirname, '..', 'models', 'kafe-items.js'))(sequelize, Sequelize.DataTypes);
 const UserItems = require(path.join(__dirname, '..', 'models', 'user-items.js'))(sequelize, Sequelize.DataTypes);
 
-UserItems.belongsTo(KafeItems, { foreignKey: 'item_id', as: 'item' });
-KafeItems.hasMany(UserItems, { foreignKey: 'item_id', as: 'item' });
+UserItems.belongsTo(KafeItems, { foreignKey: 'item_id', as: 'kafeItem' });
+KafeItems.hasMany(UserItems, { foreignKey: 'item_id', as: 'kafeItem' });
 
 module.exports = {
   sequelize,

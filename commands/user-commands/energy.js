@@ -15,24 +15,41 @@ module.exports = {
 
   async execute(interaction) {
     const user = interaction.options.getUser('user') ?? interaction.user;
-    const currentEnergy = await UserServices.getEnergy(user.id);
-
-    console.log('user:', user);
-    console.log('username:', user.username);
+    const currentEnergy = await UserServices.getUsers({requestModelInstance: false}, user.id);
 
     if (user === interaction.user) {
-      if (currentEnergy < 100 && currentEnergy > 0) {
+      if (currentEnergy.max_energy) {
         return interaction.reply({
-          content: `You have **${currentEnergy.energy} energy**.\nWorking hard?`
+          content: `You have max **${currentEnergy.energy} energy**. Why don't you go do something?`
         });
       }
-      return interaction.reply({
-        content: `You have max **${currentEnergy.energy} energy**. Why don't you go do something?`
-      });
+      if (currentEnergy.energy < 100 && currentEnergy.energy > 0) {
+        return interaction.reply({
+          content: `You have **${currentEnergy.energy} energy**. Working hard?`
+        });
+      }
+      else if (currentEnergy.min_energy) {
+        return interaction.reply({
+          content: `You have **${currentEnergy.energy} energy**. A..are you still alive?`
+        });
+      }
     }
-
-    return interaction.reply({
-      content: `**${user.username}** has **${currentEnergy.energy} energy**.`
-    });
+    else {
+      if (currentEnergy.max_energy) {
+        return interaction.reply({
+          content: `**${user.username}** has **${currentEnergy.energy} energy**. Be careful with that one.`
+        });
+      }
+      if (currentEnergy.energy < 100 && currentEnergy.energy > 0) {
+        return interaction.reply({
+          content: `**${user.username}** has **${currentEnergy.energy} energy**. They are surviving.`
+        });
+      }
+      else if (currentEnergy.min_energy) {
+        return interaction.reply({
+          content: `**${user.username}** has **${currentEnergy.energy} energy**. Perhaps they are dead now.`
+        });
+      }
+    }
   }
 }

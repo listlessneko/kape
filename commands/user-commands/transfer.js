@@ -31,7 +31,7 @@ module.exports = {
     const userId2 = interaction.options.getUser('user');
     const amount = interaction.options.getNumber('amount');
 
-    const user1Current = await UserServices.getBalance(userId1.id);
+    const user1Current = await UserServices.getUsers({requestModelInstance: false}, userId1.id);
 
     if (amount > user1Current.balance) {
       const components = new StringSelectMenuBuilder()
@@ -64,11 +64,10 @@ module.exports = {
         collector.on('collect', async i => {
           if (i.user.id === interaction.user.id) {
             if (i.values[0] === 'yes') {
-              await UserServices.transferCredits(userId1.id, userId2.id, amount);
-              const user1New = await UserServices.getBalance(userId1.id);
-              const user2New = await UserServices.getBalance(userId2.id);
+              const result = await UserServices.transferCredits(amount, userId1.id, userId2.id);
+              console.log('Transfer Cmd - Result:', result);
               await interaction.editReply({
-                content: `Successfully transferred **${amount}** to **${userId2.username}** You are now in debt.\nNew Balances:\nYou: ${user1New.balance}\n${userId2.username}: ${user2New.balance}`,
+                content: `Successfully transferred **${amount}** to **${userId2.username}** You are now in debt.\nNew Balances:\nYou: ${result.user1.new_balance}\n${userId2.username}: ${result.user2.new_balance}`,
                 components: []
               });
               collector.stop('Transfer completed.');
@@ -79,8 +78,7 @@ module.exports = {
                 content: `How selfish...`,
                 components: []
               });
-              collector.stop('Transfer declined.');
-              return;
+              return collector.stop('Transfer declined.');
             }
           }
           else if (i.user.id !== interaction.user.id) {
@@ -108,13 +106,10 @@ module.exports = {
     }
 
     else {
-      await UserServices.transferCredits(userId1.id, userId2.id, amount);
-
-      const user1New = await UserServices.getBalance(userId1.id);
-      const user2New = await UserServices.getBalance(userId2.id);
+      const result = await UserServices.transferCredits(amount, userId1.id, userId2.id);
 
       return await interaction.reply({
-        content: `Successfully transferred **${amount}** to **${userId2.username}**.\nNew Balances:\nYou: ${user1New.balance}\n${userId2.username}: ${user2New.balance}`
+        content: `Successfully transferred **${amount} credits** to **${userId2.username}**.\nNew Balances:\nYou: ${result.user1.new_balance}\n${userId2.username}: ${result.user2.new_balance}`
       });
     }
   }

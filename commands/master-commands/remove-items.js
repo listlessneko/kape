@@ -1,6 +1,6 @@
 const path = require('node:path');
 const { SlashCommandBuilder } = require('discord.js');
-const { UserServices } = require(path.join(__dirname, '..', '..', 'services', 'user-services.js'));
+const { UserItemsServices } = require(path.join(__dirname, '..', '..', 'services', 'user-items-services.js'));
 const { KafeItems } = require(path.join(__dirname, '..', '..', 'data', 'db-objects.js'));
 
 module.exports = {
@@ -17,8 +17,8 @@ module.exports = {
     )
     .addNumberOption(option =>
       option
-        .setName('amount')
-        .setDescription('Input amount of items.')
+        .setName('quantity')
+        .setDescription('Input quantity of items.')
         .setRequired(true)
     )
     .addUserOption(option =>
@@ -50,7 +50,7 @@ module.exports = {
     const user = interaction.options.getUser('user') ?? interaction.user;
     const selectedItem = interaction.options.getString('item');
     console.log(selectedItem);
-    const amount = interaction.options.getNumber('amount');
+    const quantity = interaction.options.getNumber('quantity');
 
     const item = await KafeItems.findOne({
       where: {
@@ -58,16 +58,16 @@ module.exports = {
       }
     });
 
-    const result = await UserServices.removeItems(user.id, item, amount);
+    const result = await UserItemsServices.removeItems(item, quantity, user.id);
 
-    if (result && amount > 1) {
+    if (result && quantity > 1) {
       await interaction.reply({
-        content: `You have removed **${amount} ${item.name}** from **${user.username}** and sent them to the Void.`
+        content: `You have removed **${quantity} ${item.name}** from **${user.username}** and sent them to the Void.`
       });
     }
-    else if (result && amount === 1) {
+    else if (result && quantity === 1) {
       await interaction.reply({
-        content: `You have removed **${amount} ${item.name}** from **${user.username}** and sent it to the Void.`
+        content: `You have removed **${quantity} ${item.name}** from **${user.username}** and sent it to the Void.`
       });
     }
 

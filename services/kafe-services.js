@@ -1,31 +1,30 @@
 const path = require('node:path');
-const { Op, KafeItems } = require(path.join(__dirname, '..', 'db-objects.js'));
+const { Op, KafeItems } = require(path.join(__dirname, '..', 'data', 'db-objects.js'));
 
 const KafeServices = {
-  async checkKafeInventory(itemToCheck) {
-    const item = await KafeItems.findOne({
-      where: {
-        [Op.or]: {
-          item_id: itemToCheck,
-          name: itemToCheck,
-          value: itemToCheck
+  async findItem(itemToCheck) {
+    try {
+      const item = await KafeItems.findOne({
+        where: {
+          [Op.or]: [
+            { id: itemToCheck },
+            { name: itemToCheck },
+            { value: itemToCheck }
+          ]
         }
+      });
+      if (item) {
+        return item;
       }
-    });
-    if (item) {
-      return {
-        item: item,
-        inStock: true
-      };
+      else {
+        return;
+      }
     }
-    else {
-      return false;
+    catch (e) {
+      console.error('Main - KafeServices.findItem error:', e);
     }
   }
 }
-
-const test = await KafeServices.checkKafeInventory('drip-coffee');
-console.log('test:', test);
 
 module.exports = {
   KafeServices

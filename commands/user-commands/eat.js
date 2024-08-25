@@ -2,6 +2,8 @@ const path = require('node:path');
 const { client } = require(path.join(__dirname, '..', '..', 'client.js'));
 const { SlashCommandBuilder, ComponentType, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder } = require('discord.js');
 const { UserServices } = require(path.join(__dirname, '..', '..', 'services', 'user-services.js'));
+const { UserItemsServices } = require(path.join(__dirname, '..', '..', 'services', 'user-items-services.js'));
+const { KafeServices } = require(path.join(__dirname, '..', '..', 'services', 'kafe-services.js'));
 const { Users, KafeItems } = require(path.join(__dirname, '..', '..', 'data', 'db-objects.js'));
 
 module.exports = {
@@ -54,42 +56,39 @@ module.exports = {
                   content: `Oh, maybe next time.`,
                   components: []
                 });
-                collector.stop('User canceled order.');
+                return collector.stop('Eat Cmd: User canceled order.');
               }
 
-              const item = await KafeItems.findOne({
-                where: { value: selectedValue }
-              });
-              const user = await Users.findOne({
-                where: { user_id: interaction.user.id }
-              })
+              const item = await KafeServices.findItem(selectedValue);
+              const user = await UserServices.getUsers({requestModelInstance: false}, interaction.user.id);
+
               try {
                 if (item) {
                   try {
-                    if (item.cost < user.balance) {
-                      await UserServices.subtractBalance(user.id, item.cost);
-                      await UserServices.addItem(user.id, item);
-                      await UserServices.addEnergy(user.id, item.energy_replen);
+                    if (item.cost <= user.balance) {
+                      await UserServices.subtractBalance(item.cost, user.user_id);
+                      await UserServices.addEnergy(item.energy_replen, user.user_id);
                       await interaction.editReply({
                         content: `Here is your **${item.name.toLowerCase()}**. Please enjoy it.\n*You eat the entire thing in one bite.*`,
                         components: []
                       });
-                      collector.stop('Food consumed from cafe.');
+                      return collector.stop('Eat Cmd: Food consumed from cafe.');
                     }
                     else if (item.cost > user.balance) {
                       await interaction.editReply({
                         content: `Hm... You don't have enough credits. Maybe come back next time.`,
                         components: []
                       });
+                      return collector.stop('Eat Cmd: User canceled order.');
                     }
                   }
                   catch (e) {
-                    console.error('An unexpected error occurred in evaluating item cost and user balance:', e);
+                    console.error('Eat Cmd: An unexpected error occurred in evaluating item cost and user balance:', e);
                   }
                 }
               }
               catch (e) {
-                console.error('Not an item. Error:', e);
+                console.error('Eat Cmd: Not an item. Error:', e);
               }
             }
           }
@@ -103,18 +102,18 @@ module.exports = {
         });
         collector.on('end', (collected, reason) => {
           if (reason === 'time') {
-            console.log('Food Command: Time limit reached.');
-            interaction.editReply({
+            console.log('Eat Cmd: Time limit reached.');
+            return interaction.editReply({
               content: `Hm... Take your time then.`,
               components: []
             });
           }
-          console.log('Food Command:', reason);
+          return console.log('Eat Cmd:', reason);
         });
       }
       catch (e) {
-        console.error('An unexpected error occurred:', e);
-        await i.update({
+        console.error('Eat Cmd: An unexpected error occurred:', e);
+        return await i.update({
           content: `*A cat screeches and glass breaks behind the kitchen doors.*\nPlease wait while I take care of something...`,
           components: [],
         });
@@ -126,23 +125,37 @@ module.exports = {
         .setCustomId('inventory')
         .setPlaceholder('View your inventory.')
 
-      const userItems = await UserServices.getUserItems(interaction.user.id);
+      const userItems = await UserItemsServices.getUserItems({requestModelInstance: false}, interaction.user.id);
 
       userItems.forEach(userItem => {
-        const item = userItem.dataValues;
+        const item = userItem.kafeItem;
         if (item.category === 'food') {
           inventory.addOptions(
             new StringSelectMenuOptionBuilder()
-            .setLabel(`${item.name} (${item.energy_replen} energy)`)
-            .setValue(item.value)
-            .setDescription(item.description)
+              .setLabel(`${userItem.quantity} ${item.name} (${item.energy_replen} energy)`)
+              .setValue(item.value)
+              .setDescription(item.description)
           )
         }
       });
+
+      if (inventory.options.length === 0) {
+        return await interaction.reply({
+          content: `*You ruffle through your bag and realize you don't have any food...*`
+        });
+      }
+
+      inventory.addOptions(
+        new StringSelectMenuOptionBuilder()
+          .setLabel('Nevermind')
+          .setValue('nevermind')
+          .setDescription('Close bag.')
+      )
+
       const row = new ActionRowBuilder().addComponents(inventory);
 
       const response = await interaction.reply({
-        content: `*What do I have...?*`,
+        content: `*Hm...*`,
         components: [row]
       });
 
@@ -153,16 +166,27 @@ module.exports = {
         });
 
         collector.on('collect', async i => {
+          const selectedValue = i.values[0];
+
           if (i.user.id === interaction.user.id) {
+            if (selectedValue === 'nevermind') {
+              await i.update({
+                content: `*You close your bag.*`,
+                components: []
+              });
+              return collector.stop('Eat Cmd: User closed bag.')
+            }
+
+            const item = await KafeServices.findItem(selectedValue);
             const user = interaction.user.id;
-            const selectedItem = i.values[0];
-            await UserServices.removeItems(user, selectedItem, 1);
-            await UserServices.addEnergy(user, selectedItem.energy_replen);
+
+            await UserItemsServices.removeItems(item, 1, user);
+            await UserServices.addEnergy(item.energy_replen, user);
             await i.update({
               content: `*You eat the entire thing in one bite.*`,
               components: []
             });
-            collector.stop('Food consumed from inventory.');
+            return collector.stop('Eat Cmd: Food consumed from inventory.');
           }
           else if (i.user.id !== interaction.user.id) {
             await i.update({
@@ -175,20 +199,20 @@ module.exports = {
 
         collector.on('end', (collected, reason) => {
           if (reason === 'time') {
-            console.log('Time limit reached.');
-            interaction.editReply({
+            console.log('Eat Cmd: Time limit reached.');
+            return interaction.editReply({
               content: `Distracted? Give it some more thought.`,
               components: []
             });
           }
           else {
-            console.log(reason);
+            return console.log(reason);
           }
         });
       }
       catch (e) {
-        console.error('An unexpected error occurred:', e);
-        await interaction.editReply({
+        console.error('Eat Cmd: An unexpected error occurred:', e);
+        return await interaction.editReply({
           content: `*A cat screeches and glass breaks behind the kitchen doors.*\nPlease wait while I take care of something...`,
           components: [],
         });

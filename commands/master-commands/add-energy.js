@@ -23,34 +23,49 @@ module.exports = {
     const user = interaction.options.getUser('user') ?? interaction.user;
     const amount = interaction.options.getNumber('amount');
 
-    const userEnergy = await UserServices.getEnergy(user.id);
+    const userEnergy = await UserServices.getUsers({requestModelInstance: false}, user.id);
     console.log('User Energy:', userEnergy);
 
     if (user.id === interaction.user.id) {
-      if (userEnergy.max === true) {
+      if (userEnergy.max_energy) {
         return await interaction.reply({
-          content: `You are already at max (**${userEnergy.energy}**) energy. Be careful.`
+          content: `You are already at max **${userEnergy.energy} energy**. Be careful.`
         });
       }
 
-      const result = await UserServices.addEnergy(user.id, amount);
+      if (userEnergy.min_energy) {
+        const result = await UserServices.addEnergy(amount, user.id);
+
+        return await interaction.reply({
+          content: `You have brought yourself back to life. Current energy is at **${result.new_energy}**.`
+        });
+      }
+
+      const result = await UserServices.addEnergy(amount, user.id);
 
       return await interaction.reply({
-        content: `You have given **${amount} energy** to yourself and now have **${result.energy}**. Where do you get all this energy from?`
+        content: `You have given **${amount} energy** to yourself and now have **${result.new_energy}**. Where do you get all this energy from?`
       });
     }
 
     else {
-      if (userEnergy.max === true) {
+      if (userEnergy.max_energy) {
         return await interaction.reply({
-          content: `**${user.username}** is already at max (**${userEnergy.energy}**) energy. Be careful.`
+          content: `**${user.username}** is already at max **${userEnergy.energy} energy**. Be careful.`
+        });
+      }
+      if (userEnergy.min_energy) {
+        const result = await UserServices.addEnergy(amount, user.id);
+
+        return await interaction.reply({
+          content: `You have brought **${user.username}** back to life. They now have **${result.new_energy} energy**. Are you a deity?`
         });
       }
 
-      const result = await UserServices.addEnergy(user.id, amount);
+      const result = await UserServices.addEnergy(amount, user.id);
 
       return await interaction.reply({
-        content: `You have given **${amount} energy** to **${user.username}**. They are now at **${result.energy}**.`
+        content: `You have given **${amount} energy** to **${user.username}**. They are now at **${result.new_energy} energy**.`
       });
     }
   }

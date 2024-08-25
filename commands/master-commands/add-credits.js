@@ -23,16 +23,16 @@ module.exports = {
     const user = interaction.options.getUser('user') ?? interaction.user;
     const amount = interaction.options.getNumber('amount');
 
-    const result = await UserServices.addBalance(user.id, amount);
+    const result = await UserServices.addBalance(amount, user.id);
 
     if (user === interaction.user) {
       return await interaction.reply({
-        content: `You have given yourself **${amount} credits**. You are spoiled.\nYour New Balance: **${result.balance} credits**`
+        content: `You have given yourself **${amount} credits**. You are spoiled.\nYour New Balance: **${result.new_balance} credits**`
       });
     }
 
     return await interaction.reply({
-      content: `Transfer completed. You have given **${amount} credits** to **${user.username}**.\n\n${user.username}'s New Balance: **${result.balance} credits**`
+      content: `Transfer completed. You have given **${amount} credits** to **${user.username}**.\n\n${user.username}'s New Balance: **${result.new_balance} credits**`
     });
   }
 }

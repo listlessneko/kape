@@ -15,22 +15,22 @@ module.exports = {
 
   async execute(interaction) {
     const user = interaction.options.getUser('user') ?? interaction.user;
-    const current = await UserServices.getBalance(user.id);
+    const userInfo = await UserServices.getUsers( {}, user.id );
 
     if (user === interaction.user) {
-      if (current.balance < 10) {
-        const result = await UserServices.addBalance(user.id, .25);
+      if (userInfo.balance < 10) {
+        const result = await UserServices.addBalance(.25, user.id);
         return interaction.reply({
-          content: `You have **${current.balance}** credits.\nYou good? *The bot beeps in pity.* Here's **25 parts**. It's the most I can spare right now.\nYour New Balance: **${result.balance} credits**`
+          content: `You have **${result.prev_balance} credits**.\nYou good? *The bot beeps in pity.* Here's **25 parts**. It's the most I can spare right now.\nYour New Balance: **${result.new_balance} credits**`
         });
       }
       return interaction.reply({
-        content: `You have **${current.balance} credits**.`
+        content: `You have **${userInfo.balance} credits**.`
       });
     }
 
     return interaction.reply({
-      content: `**${user.username}** has **${current.balance} credits**.`
+      content: `**${user.username}** has **${userInfo.balance} credits**.`
     });
   }
 }

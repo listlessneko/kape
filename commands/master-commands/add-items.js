@@ -1,6 +1,7 @@
 const path = require('node:path');
 const { SlashCommandBuilder } = require('discord.js');
-const { UserServices } = require(path.join(__dirname, '..', '..', 'services', 'user-services.js'));
+const { UserItemsServices } = require(path.join(__dirname, '..', '..', 'services', 'user-items-services.js'));
+const { KafeServices } = require(path.join(__dirname, '..', '..', 'services', 'kafe-services.js'));
 const { KafeItems } = require(path.join(__dirname, '..', '..', 'data', 'db-objects.js'));
 
 
@@ -18,8 +19,8 @@ module.exports = {
     )
     .addNumberOption(option =>
       option
-        .setName('amount')
-        .setDescription('Input amount of items.')
+        .setName('quantity')
+        .setDescription('Input quantity of items.')
         .setRequired(true)
     )
     .addUserOption(option =>
@@ -51,23 +52,22 @@ module.exports = {
     const user = interaction.options.getUser('user') ?? interaction.user;
     const selectedItem = interaction.options.getString('item');
     console.log(selectedItem);
-    const amount = interaction.options.getNumber('amount');
+    const quantity = interaction.options.getNumber('quantity');
 
-    const item = await KafeItems.findOne({
-      where: {
-        name: selectedItem
-      }
-    });
+    const item = await KafeServices.findItem(selectedItem);
 
-    await UserServices.addItems(user.id, item.id, amount);
+    //console.log('Add Items Command - Item:', item);
+    //console.log('Add Items Command - Item:', item.name);
+
+    await UserItemsServices.addItems(item, quantity, user.id);
 
     if (user === interaction.user.id) {
       await interaction.reply({
-        content: `You have given yourself **${amount} ${item.name}**. What are you going to do with that?`
+        content: `You have given yourself **${quantity} ${item.name}**. What are you going to do with that?`
       });
     }
       await interaction.reply({
-        content: `You have given **${amount} ${item.name}** to **${user.username}**.`
+        content: `You have given **${quantity} ${item.name}** to **${user.username}**.`
       });
   }
 }
