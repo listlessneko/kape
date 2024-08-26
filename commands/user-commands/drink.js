@@ -167,7 +167,7 @@ module.exports = {
 
       try {
         const collector = response.createMessageComponentCollector({
-          componenttype: ComponentType.StringSelect,
+          componentType: ComponentType.StringSelect,
           time: 60_000
         });
 

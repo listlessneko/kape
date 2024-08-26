@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  return sequelize.define('user_items', {
+  return sequelize.define('UserItems', {
     user_id: DataTypes.STRING,
     name: DataTypes.STRING,
     item_id: DataTypes.INTEGER,

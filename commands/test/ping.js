@@ -7,6 +7,7 @@ const { KafeItems } = require(path.join(__dirname, '..', '..', 'data', 'db-objec
 const { client } = require(path.join(__dirname, '..', '..', 'client.js'));
 const usersCache = client.usersCache;
 const userItemsCache = client.userItemsCache;
+const wait = require('node:timers/promises').setTimeout;
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -20,30 +21,32 @@ module.exports = {
     const userId2 = '763074931021316136';
 
     try {
-      //const testItem1 = await KafeItems.findOne({
-      //  where: {
-      //    name: 'Drip Coffee'
-      //  }
-      //});
-      //console.log('Ping - Test Item 1:', testItem1);
-      //await UserItemsServices.addItems(testItem1, 1, userId1);
-      //
-      //const testItem2 = await KafeServices.findItem('drip-coffee');
-      //console.log('Ping - Test Item 2:', testItem2);
-      //await UserItemsServices.addItems(testItem2, 1, userId1);
-
-      //const cachedUserItems = await UserItemsServices.getUserItems({requestModelInstance: true}, userId1);
-      //cachedUserItems.items.forEach(cachedItem => console.log('Ping - Cached User Items:', cachedItem.dataValues));
-
-      //const cachedItems = userItemsCache.get(userId1);
-      //console.log('Ping - Cached Items:', cachedItems);
-      //const userItemsInventory = cachedItems.items.map(cachedItem => cachedItem.dataValues);
-      //console.log('Ping - User Items Inventory:', userItemsInventory);
-      //userItemsInventory.forEach(cachedItem => {
-      //  console.log('Ping - Item Data Values:', cachedItem.name);
-      //});
-      const testUser = await UserServices.getUsers({requestModelInstance: false}, userId1);
-      console.log('Ping - User:', testUser);
+      await interaction.reply({ 
+        content: 'Ping...'
+      });
+      originalMessage = 'Pong...?';
+      messageOutput = '';
+      for (let i = 0; i < originalMessage.length; i++) {
+        if (originalMessage[i] === '.') {
+          await wait(100);
+          messageOutput += originalMessage[i];
+          await interaction.editReply(messageOutput);
+        } else {
+          await wait(500);
+          messageOutput += originalMessage[i];
+          await interaction.editReply(messageOutput);
+          await wait (500);
+        }
+      }
+      console.log(interaction.options)
+      await wait(2000);
+      await interaction.followUp({
+        content: 'Why are you still staring at the screen?',
+      })
+        .then(async (message) => {
+          await wait(2000);
+          await message.delete();
+        });
     }
     catch (e) {
       console.error('Ping Error:', e);

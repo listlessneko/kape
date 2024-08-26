@@ -44,14 +44,19 @@ const UserServices = {
         if (!usersCache.has(userId)) {
           usersCache.set(userId, user);
         }
-      })
+      });
 
       await Promise.all(userIds.map(async (userId) => {
         const userExists = (dbUsers.some(user => user.dataValues.user_id === userId));
 
         if (!userExists) {
-          const newUser = await Users.create({
+          await Users.create({
             user_id: userId
+          });
+          const newUser = await Users.findOne({
+            where: {
+              user_id: userId
+            }
           });
           usersCache.set(userId, newUser);
         }

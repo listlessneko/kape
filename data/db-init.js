@@ -16,6 +16,7 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 const KafeItems = require(path.join(__dirname, '..', 'models', 'kafe-items'))(sequelize, Sequelize.DataTypes);
 require(path.join(__dirname, '..', 'models', 'users'))(sequelize, Sequelize.DataTypes);
 require(path.join(__dirname, '..', 'models', 'user-items'))(sequelize, Sequelize.DataTypes);
+require(path.join(__dirname, '..', 'models', 'rock-paper-scissors-scores'))(sequelize, Sequelize.DataTypes);
 
 const force = process.argv.includes('--force') || process.argv.includes('--f');
 
