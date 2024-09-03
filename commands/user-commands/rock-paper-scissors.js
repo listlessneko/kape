@@ -72,7 +72,7 @@ module.exports = {
         }
 
         if (selectedValue === 'retreat') {
-          await i.editReply({
+          await interaction.editReply({
             content: `Scared? Come back after you have trained more.`,
             components: []
           });
@@ -115,10 +115,26 @@ module.exports = {
           };
 
           if (selectedValue === baristaWeapon) {
-            await UserServices.removeEnergy(5, interaction.user.id);
-            await ScoresServices.rpsVSKapé('', '', 'draw', interaction.user.id);
+            const energy_consumed = 5;
+            const reward = 0;
+
+            await UserServices.removeEnergy(energy_consumed, interaction.user.id);
+
+            const score = {
+              user_id: interaction.user.id,
+              victory: false,
+              defeat: false,
+              draw: true,
+              weapon: selectedValue,
+              energy_consumed,
+              reward
+            };
+
+            const result = await ScoresServices.rpsVsKapé(score);
+            console.log('RPS Cmd: Result:', result);
+
             await interaction.editReply({
-              content: `Jan... ken... pon!\n\n(You) ${outcomes[selectedValue]['weapon_icon']} vs. ${outcomes[baristaWeapon]['weapon_icon']} (Kapé)\n*That was stale, mate.*\n\nYou lost **5 energy**.`,
+              content: `Jan... ken... pon!\n\n(You) ${outcomes[selectedValue]['weapon_icon']} vs. ${outcomes[baristaWeapon]['weapon_icon']} (Kapé)\n*That was stale, mate.*\n\nYou lost **${energy_consumed} energy**.`,
               components: []
             });
             return collector.stop('Rock Paper Scissors Cmd: A draw.');
@@ -128,21 +144,53 @@ module.exports = {
           console.log('User Won:', userWon);
 
           if (userWon) {
-            await UserServices.removeEnergy(5, interaction.user.id);
-            await UserServices.addBalance(2.5, interaction.user.id);
-            await ScoresServices.rpsVSKapé('victory', '', '', interaction.user.id);
+            const energy_consumed = 5;
+            const reward = 2.5;
+
+            await UserServices.removeEnergy(energy_consumed, interaction.user.id);
+            await UserServices.addBalance(reward, interaction.user.id);
+
+            const score = {
+              user_id: interaction.user.id,
+              victory: true,
+              defeat: false,
+              draw: false,
+              weapon: selectedValue,
+              energy_consumed,
+              reward
+            };
+
+            const result = await ScoresServices.rpsVsKapé(score);
+            console.log('RPS Cmd: Result:', result);
+
             await interaction.editReply({
-              content: `Jan... ken... pon!\n\n(You) ${outcomes[selectedValue]['weapon_icon']} vs. ${outcomes[baristaWeapon]['weapon_icon']} (Kapé)\n*Huh, you won.*\n\nYou lost **5 energy**, but received **2.5 credits**.`,
+              content: `Jan... ken... pon!\n\n(You) ${outcomes[selectedValue]['weapon_icon']} vs. ${outcomes[baristaWeapon]['weapon_icon']} (Kapé)\n*Huh, you won.*\n\nYou lost **${energy_consumed} energy**, but received **${reward} credits**.`,
               components: []
             });
             return collector.stop('Rock Paper Scissors Cmd: Fight ended. User victory.');
           }
 
           else {
-            await UserServices.removeEnergy(5, interaction.user.id);
-            await ScoresServices.rpsVSKapé('', 'defeat', '', interaction.user.id);
+            const energy_consumed = 5;
+            const reward = 0;
+
+            await UserServices.removeEnergy(energy_consumed, interaction.user.id);
+
+            const score = {
+              user_id: interaction.user.id,
+              victory: false,
+              defeat: true,
+              draw: false,
+              weapon: selectedValue,
+              energy_consumed,
+              reward
+            };
+
+            const result = await ScoresServices.rpsVsKapé(score);
+            console.log('RPS Cmd: Result:', result);
+
             await interaction.editReply({
-              content: `Jan... ken... pon!\n\n(You) ${outcomes[selectedValue]['weapon_icon']} vs. ${outcomes[baristaWeapon]['weapon_icon']} (Kapé)\n*Defeat. ${outcomes[selectedValue]['losing_message']}*\n\nYou lost **5 energy**.`,
+              content: `Jan... ken... pon!\n\n(You) ${outcomes[selectedValue]['weapon_icon']} vs. ${outcomes[baristaWeapon]['weapon_icon']} (Kapé)\n*Defeat. ${outcomes[selectedValue]['losing_message']}*\n\nYou lost **${energy_consumed} energy**.`,
               components: []
             });
             return collector.stop('Rock Paper Scissors Cmd: Fight ended. User defeated.')

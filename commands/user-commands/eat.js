@@ -4,6 +4,7 @@ const { SlashCommandBuilder, ComponentType, StringSelectMenuBuilder, StringSelec
 const { UserServices } = require(path.join(__dirname, '..', '..', 'services', 'user-services.js'));
 const { UserItemsServices } = require(path.join(__dirname, '..', '..', 'services', 'user-items-services.js'));
 const { KafeServices } = require(path.join(__dirname, '..', '..', 'services', 'kafe-services.js'));
+const { MathServices } = require('../../services/math-services.js');
 const { Users, KafeItems } = require(path.join(__dirname, '..', '..', 'data', 'db-objects.js'));
 
 module.exports = {
@@ -67,7 +68,20 @@ module.exports = {
                   try {
                     if (item.cost <= user.balance) {
                       await UserServices.subtractBalance(item.cost, user.user_id);
-                      await UserServices.addEnergy(item.energy_replen, user.user_id);
+
+                      if (item.energy_replen.min !== item.energy_replen.max) {
+                        const max = item.energy_replen.max;
+                        const min = item.energy_replen.min;
+                        const interval = 5;
+
+                        const rangeSize = Math.floor((max - min) / interval) + 1;
+                        const RNG = Math.floor(Math.random() * rangeSize) + min;
+                        await UserServices.addEnergy(RNG, user.user_id);
+                      }
+                      else {
+                        await UserServices.addEnergy(item.energy_replen.max, user.user_id);
+                      }
+
                       await interaction.editReply({
                         content: `Here is your **${item.name.toLowerCase()}**. Please enjoy it.\n*You eat the entire thing in one bite.*`,
                         components: []
@@ -130,9 +144,21 @@ module.exports = {
       userItems.forEach(userItem => {
         const item = userItem.kafeItem;
         if (item.category === 'food') {
+          console.log('Eat Inventory - Item:', item);
+          const max = MathServices.formatNumber(item.energy_replen.max);
+          const min = MathServices.formatNumber(item.energy_replen.min);
           inventory.addOptions(
             new StringSelectMenuOptionBuilder()
-              .setLabel(`${userItem.quantity} ${item.name} (${item.energy_replen} energy)`)
+              .setLabel(
+                (() => {
+                  if (item.energy_replen.min === item.energy_replen.max) {
+                    return `${item.name} (${max} energy)`;
+                  }
+                  else {
+                    return `${item.name} (${min} to ${max} energy)`;
+                  }
+                })()
+              )
               .setValue(item.value)
               .setDescription(item.description)
           )
@@ -181,12 +207,32 @@ module.exports = {
             const user = interaction.user.id;
 
             await UserItemsServices.removeItems(item, 1, user);
-            await UserServices.addEnergy(item.energy_replen, user);
-            await i.update({
-              content: `*You eat the entire thing in one bite.*`,
-              components: []
-            });
-            return collector.stop('Eat Cmd: Food consumed from inventory.');
+
+            if (item.energy_replen.min !== item.energy_replen.max) {
+              const max = item.energy_replen.max;
+              const min = item.energy_replen.min;
+              const interval = 5;
+
+              const rangeSize = Math.floor((max - min) / interval) + 1;
+              const RNG = Math.floor(Math.random() * rangeSize) * interval + min;
+              await UserServices.addEnergy(RNG, user);
+              if (RNG <= 0) {
+                await i.update({
+                  content: `*You eat the entire thing in one bite. Your stomach starts to feel strange and you have a sudden urge to find the nearest restroom.*\n\nYou lose {RNG} energy. Unfortunate.`,
+                  components: []
+                });
+                return collector.stop('Eat Cmd: Food consumed from inventory.');
+              }
+            }
+            else {
+              await UserServices.addEnergy(item.energy_replen.max, user);
+              await i.update({
+                content: `*You eat the entire thing in one bite.*`,
+                components: []
+              });
+              return collector.stop('Eat Cmd: Food consumed from inventory.');
+            }
+
           }
           else if (i.user.id !== interaction.user.id) {
             await i.update({

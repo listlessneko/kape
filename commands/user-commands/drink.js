@@ -69,10 +69,10 @@ module.exports = {
                     if (item.cost <= user.balance) {
                       const a = await UserServices.subtractBalance(item.cost, user.user_id);
                       console.log('a:', a);
-                      const b = await UserServices.addEnergy(item.energy_replen, user.user_id);
+                      const b = await UserServices.addEnergy(item.energy_replen.max, user.user_id);
                       console.log('b:', b);
                       await interaction.editReply({
-                        content: `Here is your **${item.name.toLowerCase()}**. Please enjoy it.\n*You drink all of it in one gulp.*\nYou have gained **${item.energy_replen} energy**.`,
+                        content: `Here is your **${item.name.toLowerCase()}**. Please enjoy it.\n*You drink all of it in one gulp.*\nYou have gained **${item.energy_replen.max} energy**.`,
                         components: []
                       });
                       return collector.stop('Drink Cmd: Drink consumed from cafe.');
@@ -138,9 +138,18 @@ module.exports = {
         if (item.category === 'drinks') {
           inventory.addOptions(
             new StringSelectMenuOptionBuilder()
-            .setLabel(`${userItem.quantity} ${item.name} (${item.energy_replen} energy)`)
-            .setValue(item.value)
-            .setDescription(item.description)
+              .setLabel(
+                (() => {
+                  if (i.energy_replen.min === i.energy_replen.max) {
+                    return `${i.name} (${i.cost} credits, ${i.energy_replen.max} energy)`;
+                  }
+                  else {
+                    return `${i.name} (${i.cost} credits, ${i.energy_replen.min} - ${i.energy_replen.max} energy)`;
+                  }
+                })()
+              )
+              .setValue(item.value)
+              .setDescription(item.description)
           )
         }
       });
@@ -187,9 +196,9 @@ module.exports = {
             console.log('Drink Cmd: Item:', item);
             const user = interaction.user.id;
             await UserItemsServices.removeItems(item, 1, user);
-            await UserServices.addEnergy(item.energy_replen, user);
+            await UserServices.addEnergy(item.energy_replen.max, user);
             await i.update({
-              content: `*You gulp down the entire beverage.*\nYou have gained **${item.energy_replen} energy**.`,
+              content: `*You gulp down the entire beverage.*\nYou have gained **${item.energy_replen.max} energy**.`,
               components: []
             });
             return collector.stop('Drink Cmd: Drink consumed from inventory.');

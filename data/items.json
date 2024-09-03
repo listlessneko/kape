@@ -23,7 +23,7 @@
               "description": "Coffee with style.",
               "content": "Here you go.",
               "cost": 2.50,
-              "energy_replen": 15,
+              "energy_replen": { "min": 10, "max": 10 },
               "uses": 1,
               "category": "drinks",
               "type": "coffee"
@@ -34,7 +34,7 @@
               "description": "Express coffee.",
               "content": "Here you go.",
               "cost": 3.50,
-              "energy_replen": 20,
+              "energy_replen": { "min": 15, "max": 15 },
               "uses": 1,
               "category": "drinks",
               "type": "coffee"
@@ -45,7 +45,7 @@
               "description": "Weak coffee.",
               "content": "Here you go.",
               "cost": 3.00,
-              "energy_replen": 15,
+              "energy_replen": { "min": 10, "max": 10 },
               "uses": 1,
               "category": "drinks",
               "type": "coffee"
@@ -56,7 +56,7 @@
               "description": "Habit of the First Order.",
               "content": "Here you go.",
               "cost": 3.00,
-              "energy_replen": 15,
+              "energy_replen": { "min": 10, "max": 10 },
               "uses": 1,
               "category": "drinks",
               "type": "coffee"
@@ -67,7 +67,7 @@
               "description": "Coffee with a lot a milk.",
               "content": "Here you go.",
               "cost": 4.00,
-              "energy_replen": 10,
+              "energy_replen": { "min": 10, "max": 10 },
               "uses": 1,
               "category": "drinks",
               "type": "coffee"
@@ -89,7 +89,7 @@
               "description": "Basic tea.",
               "content": "Here you go.",
               "cost": 2.50,
-              "energy_replen": 15,
+              "energy_replen": { "min": 10, "max": 10 },
               "uses": 1,
               "category": "drinks",
               "type": "tea"
@@ -100,7 +100,7 @@
               "description": "Basic tea but black.",
               "content": "Here you go.",
               "cost": 3.00,
-              "energy_replen": 15,
+              "energy_replen": { "min": 10, "max": 10 },
               "uses": 1,
               "category": "drinks",
               "type": "tea"
@@ -111,7 +111,7 @@
               "description": "Why is this not below \"Green Tea\"?",
               "content": "Here you go.",
               "cost": 3.50,
-              "energy_replen": 20,
+              "energy_replen": { "min": 15, "max": 15 },
               "uses": 1,
               "category": "drinks",
               "type": "tea"
@@ -122,7 +122,7 @@
               "description": "Go to sleep tea.",
               "content": "Here you go.",
               "cost": 3.00,
-              "energy_replen": -10,
+              "energy_replen": { "min": -10, "max": -10 },
               "uses": 1,
               "category": "drinks",
               "type": "tea"
@@ -133,7 +133,7 @@
               "description": "Not good enough to be a marquess.",
               "content": "Here you go.",
               "cost": 4.00,
-              "energy_replen": 10,
+              "energy_replen": { "min": 10, "max": 10 },
               "uses": 1,
               "category": "drinks",
               "type": "tea"
@@ -155,7 +155,7 @@
               "description": "What are you doing here?",
               "content": "Here you go.",
               "cost": 0.00,
-              "energy_replen": 5,
+              "energy_replen": { "min": 5, "max": 5 }, 
               "uses": 1,
               "category": "drinks",
               "type": "non-caffeinated"
@@ -166,7 +166,7 @@
               "description": "The original juice.",
               "content": "Here you go.",
               "cost": 2.00,
-              "energy_replen": 5,
+              "energy_replen": { "min": 5, "max": 5 },
               "uses": 1,
               "category": "drinks",
               "type": "non-caffeinated"
@@ -177,7 +177,7 @@
               "description": "Juice of knowledge.",
               "content": "Here you go.",
               "cost": 2.50,
-              "energy_replen": 5,
+              "energy_replen": { "min": 5, "max": 5 },
               "uses": 1,
               "category": "drinks",
               "type": "non-caffeinated"
@@ -188,7 +188,7 @@
               "description": "Chocolate milk.",
               "content": "Here you go.",
               "cost": 3.00,
-              "energy_replen": 10,
+              "energy_replen": { "min": 10, "max": 10 },
               "uses": 1,
               "category": "drinks",
               "type": "non-caffeinated"
@@ -199,7 +199,7 @@
               "description": "Water with attitude.",
               "content": "Here you go.",
               "cost": 4.00,
-              "energy_replen": 5.5,
+              "energy_replen": { "min": 10, "max": 10 },
               "uses": 1,
               "category": "drinks",
               "type": "non-caffeinated"
@@ -231,7 +231,7 @@
               "description": "Just a bagel.",
               "content": "Here you go.",
               "cost": 2.00,
-              "energy_replen": 5,
+              "energy_replen": { "min": 10, "max": 10 },
               "uses": 1,
               "category": "food",
               "type": "breakfast"
@@ -242,7 +242,7 @@
               "description": "Dessert for breakfast.",
               "content": "Here you go.",
               "cost": 5.00,
-              "energy_replen": 10,
+              "energy_replen": { "min": 15, "max": 15 },
               "uses": 1,
               "category": "food",
               "type": "breakfast"
@@ -253,7 +253,7 @@
               "description": "Checkered, crispy (better) pancakes.",
               "content": "Here you go.",
               "cost": 5.00,
-              "energy_replen": 15,
+              "energy_replen": { "min": 15, "max": 15 },
               "uses": 1,
               "category": "food",
               "type": "breakfast"
@@ -264,7 +264,7 @@
               "description": "You'll let what?",
               "content": "Here you go.",
               "cost": 5.00,
-              "energy_replen": 15,
+              "energy_replen": { "min": 15, "max": 15 },
               "uses": 1,
               "category": "food",
               "type": "breakfast"
@@ -275,7 +275,7 @@
               "description": "Log empty.",
               "content": "Here you go.",
               "cost": 5.50,
-              "energy_replen": 20,
+              "energy_replen": { "min": 20, "max": 20 },
               "uses": 1,
               "category": "food",
               "type": "breakfast"
@@ -291,6 +291,61 @@
           "content": "Afternoon.",
           "placeholder": "What would you like to eat this afternoon?",
           "items": [
+            {
+              "name": "Burger",
+              "value": "burger",
+              "description": "Meat between buns.",
+              "content": "Here you go.",
+              "cost": 5.50,
+              "energy_replen": { "min": 15, "max": 15 },
+              "uses": 1,
+              "category": "food",
+              "type": "lunch"
+            },
+            {
+              "name": "Cheesburger",
+              "value": "cheesburger",
+              "description": "A burger with cheese.",
+              "content": "Here you go.",
+              "cost": 6.00,
+              "energy_replen": { "min": 20, "max": 20 },
+              "uses": 1,
+              "category": "food",
+              "type": "lunch"
+            },
+            {
+              "name": "Chicken Sandwich",
+              "value": "chicken-sandwich",
+              "description": "Chicken or sand? Choose.",
+              "content": "Here you go.",
+              "cost": 5.50,
+              "energy_replen": { "min": 15, "max": 15 },
+              "uses": 1,
+              "category": "food",
+              "type": "lunch"
+            },
+            {
+              "name": "Bàhn Mi",
+              "value": "bàhn-mi",
+              "description": "You are banned.",
+              "content": "Here you go.",
+              "cost": 5.50,
+              "energy_replen": { "min": 15, "max": 15 },
+              "uses": 1,
+              "category": "food",
+              "type": "lunch"
+            },
+            {
+              "name": "Salad",
+              "value": "salad",
+              "description": "Leaves without hot water.",
+              "content": "Here you go.",
+              "cost": 5.50,
+              "energy_replen": { "min": 10, "max": 10 },
+              "uses": 1,
+              "category": "food",
+              "type": "lunch"
+            }
           ]
         },
         {
@@ -302,6 +357,61 @@
           "content": "Evening.",
           "placeholder": "What would you like to eat this evening?",
           "items": [
+            {
+              "name": "Steak",
+              "value": "steak",
+              "description": "Eat at your own risk.",
+              "content": "Here you go.",
+              "cost": 6.50,
+              "energy_replen": { "min": -10, "max": 25 },
+              "uses": 1,
+              "category": "food",
+              "type": "dinner"
+            },
+            {
+              "name": "Katsu",
+              "value": "katsu",
+              "description": "Catch you later.",
+              "content": "Here you go.",
+              "cost": 6.00,
+              "energy_replen": { "min": 15, "max": 15 },
+              "uses": 1,
+              "category": "food",
+              "type": "dinner"
+            },
+            {
+              "name": "Curry",
+              "value": "curry",
+              "description": "Carry on my wayward customer.",
+              "content": "Here you go.",
+              "cost": 6,
+              "energy_replen": { "min": 15, "max": 15 },
+              "uses": 1,
+              "category": "food",
+              "type": "dinner"
+            },
+            {
+              "name": "Adobo",
+              "value": "Adobo",
+              "description": "Not the software.",
+              "content": "Here you go.",
+              "cost": 6.50,
+              "energy_replen": { "min": 20, "max": 20 },
+              "uses": 1,
+              "category": "food",
+              "type": "dinner"
+            },
+            {
+              "name": "Pancit",
+              "value": "pancit",
+              "description": "Who is Pan?",
+              "content": "Here you go.",
+              "cost": 5.50,
+              "energy_replen": { "min": 15, "max": 15 },
+              "uses": 1,
+              "category": "food",
+              "type": "dinner"
+            }
           ]
         }
       ]

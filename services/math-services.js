@@ -1,5 +1,9 @@
 const MathServices = {
-  async addUpTo100(currentAmount, ...amount) {
+  formatNumber(number) {
+    return (number >= 0 ? '+' : '') + number;
+  },
+
+  addUpTo100(currentAmount, ...amount) {
     let result = currentAmount;
 
     for (const num of amount) {
@@ -13,7 +17,7 @@ const MathServices = {
     return result;
   },
 
-  async removeDownTo0(currentAmount, ...amount) {
+  removeDownTo0(currentAmount, ...amount) {
     let result = currentAmount;
 
     for (const num of amount) {

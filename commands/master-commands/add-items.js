@@ -7,6 +7,7 @@ const { KafeItems } = require(path.join(__dirname, '..', '..', 'data', 'db-objec
 
 module.exports = {
   cooldown: 5,
+  allowedUserId: ['316419893694300160'],
   data: new SlashCommandBuilder()
     .setName('add-items')
     .setDescription('Add items to user.')
@@ -49,6 +50,12 @@ module.exports = {
   },
 
   async execute(interaction) {
+    if (!this.allowedUserId.includes(interaction.user.id)){
+      return await interaction.reply({
+        content: `You do not have permission to use this command. Please consult with the developer.`,
+        ephemeral: true
+      });
+    }
     const user = interaction.options.getUser('user') ?? interaction.user;
     const selectedItem = interaction.options.getString('item');
     console.log(selectedItem);
@@ -66,8 +73,8 @@ module.exports = {
         content: `You have given yourself **${quantity} ${item.name}**. What are you going to do with that?`
       });
     }
-      await interaction.reply({
-        content: `You have given **${quantity} ${item.name}** to **${user.username}**.`
-      });
+    await interaction.reply({
+      content: `You have given **${quantity} ${item.name}** to **${user.username}**.`
+    });
   }
 }

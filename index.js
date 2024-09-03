@@ -12,6 +12,7 @@ client.menus = new Collection();
 client.usersCache = new Collection();
 client.userItemsCache = new Collection();
 client.rpsScoresCache = new Collection();
+client.fateScoresCache = new Collection();
 
 const commandsPath = path.join(__dirname, 'commands'); 
 const commandDir = fs.readdirSync(commandsPath);

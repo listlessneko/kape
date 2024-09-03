@@ -4,6 +4,7 @@ const { UserServices } = require(path.join(__dirname, '..', '..', 'services', 'u
 
 module.exports = {
   cooldown: 5,
+  allowedUserId: ['316419893694300160'],
   data: new SlashCommandBuilder()
     .setName('add-energy')
     .setDescription('Add energy to user.')
@@ -20,6 +21,12 @@ module.exports = {
     ),
 
   async execute(interaction) {
+    if (!this.allowedUserId.includes(interaction.user.id)){
+      return await interaction.reply({
+        content: `You do not have permission to use this command. Please consult with the developer.`,
+        ephemeral: true
+      });
+    }
     const user = interaction.options.getUser('user') ?? interaction.user;
     const amount = interaction.options.getNumber('amount');
 
