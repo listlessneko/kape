@@ -1,16 +1,13 @@
 const path = require('node:path');
 const { UserContextMenuCommandInteraction } = require('discord.js');
-const { MathServices } = require(path.join(__dirname, 'math-services.js'));
+const { MathServices } = require('./math-services.js');
 const { Op, Users, UserItems } = require(path.join(__dirname, '..', 'data', 'db-objects.js'));
 //const UserItems = require(path.join(__dirname, '..', 'models', 'user-items.js'));
 const { client } = require(path.join(__dirname, '..', 'client.js'));
 const usersCache = client.usersCache;
 
 const UserServices = {
-  async getUsers(options = {}, ...userIds) {
-    const { requestModelInstance = false } = options;
-    //console.log('Get Users - Request Cache:', requestModelInstance);
-
+  async getUsers(...userIds) {
     const usersInCache = [];
     const usersNotInCache = [];
 
@@ -63,39 +60,12 @@ const UserServices = {
       }));
     }
 
-    if (requestModelInstance) {
-      if (userIds.length === 1) {
-        const cachedUser = usersCache.get(userIds[0]);
-        return cachedUser;
-      }
-      const cachedUsers = userIds.map(userId => usersCache.get(userId));
-      return cachedUsers;
-    }
-
-    if ( userIds.length === 1 ) {
+    if (userIds.length === 1) {
       const cachedUser = usersCache.get(userIds[0]);
-      const userInfo = {
-        ...cachedUser.dataValues
-      }
-      return userInfo;
+      return cachedUser;
     }
-
-    else {
-      const cachedUsers = userIds.map(userId => {
-        const cachedUser = usersCache.get(userId);
-        return {
-          user_id: userId,
-          ...cachedUser.dataValues
-        };
-      });
-
-      const usersInfo = cachedUsers.reduce((acc, user) => {
-        acc[user.user_id] = {...user};
-        return acc;
-      }, {});
-
-      return usersInfo;
-    }
+    const cachedUsers = userIds.map(userId => usersCache.get(userId));
+    return cachedUsers;
 
   },
 
@@ -149,11 +119,11 @@ const UserServices = {
     }
 
     if ( userIds.length === 1 ) {
-      const user = await this.getUsers( { requestModelInstance: true }, ...userIds )
+      const user = await this.getUsers(...userIds)
       return await calculateEnergy(amount, user);
     }
 
-    const users = await this.getUsers( { requestModelInstance: true }, ...userIds )
+    const users = await this.getUsers(...userIds)
     const usersEnergy = {};
 
     for ( const user of users ) {
@@ -203,11 +173,11 @@ const UserServices = {
     }
 
     if ( userIds.length === 1 ) {
-      const user = await this.getUsers( { requestModelInstance: true }, ...userIds )
+      const user = await this.getUsers(...userIds)
       return await calculateEnergy(amount, user);
     }
 
-    const users = await this.getUsers( { requestModelInstance: true }, ...userIds )
+    const users = await this.getUsers(...userIds)
     const usersEnergy = {};
 
     for ( const user of users ) {
@@ -217,7 +187,7 @@ const UserServices = {
 
   async addBalance( amount, ...userIds ) {
     if ( userIds.length === 1 ) {
-      const user = await this.getUsers( { requestModelInstance: true }, ...userIds );
+      const user = await this.getUsers(...userIds);
       const prev_balance = user.balance;
       user.balance += Number(amount);
       await user.save();
@@ -230,7 +200,7 @@ const UserServices = {
       return userBalance;
     }
 
-    const users = await this.getUsers( { requestModelInstance: true }, ...userIds );
+    const users = await this.getUsers(...userIds);
     const userBalances = {};
 
     for ( const user of users ) {
@@ -249,9 +219,19 @@ const UserServices = {
 
   async subtractBalance(amount, ...userIds) {
     if ( userIds.length === 1 ) {
-      const user = await this.getUsers( { requestModelInstance: true }, ...userIds );
+      const user = usersCache.get(userIds[0]);
       const prev_balance = user.balance;
-      user.balance -= Number(amount);
+
+      if (amount > user.balance) {
+        const result = await MathServices.removeDownToNegative100(user.balance, amount);
+        console.log('Subtracted Amount:', result);
+        user.balance = Number(result);
+      }
+
+      else {
+        user.balance -= Number(amount);
+      }
+
       await user.save();
       usersCache.set(user.user_id, user);
       const userBalance = {
@@ -262,12 +242,20 @@ const UserServices = {
       return userBalance;
     }
 
-    const users = await this.getUsers( { requestModelInstance: true }, ...userIds );
+    const users = await this.getUsers(...userIds);
     const userBalances = {};
 
     for ( const user of users ) {
       const prev_balance = user.balance;
-      user.balance -= Number(amount);
+
+      if (amount > user.balance) {
+      await MathServices.removeDownToNegative100(user.balance, amount);
+      }
+
+      else {
+        user.balance -= Number(amount);
+      }
+
       await user.save();
       usersCache.set(userIds, user);
       userBalances[ user.user_id ] = {};
@@ -276,20 +264,6 @@ const UserServices = {
     }
 
     return userBalances;
-    //if (amount <= user.balance) {
-    //  user.balance -= Number(amount);
-    //  await user.save();
-    //  usersCache.set(userId, user);
-    //  return {
-    //    user_id: userId,
-    //    balance: user.balance
-    //  }
-    //}
-    //
-    //else {
-    //  console.log(`${userId} is poor.`);
-    //  return false;
-    //}
   },
 
   async transferCredits(amount, userId1, userId2) {
@@ -299,7 +273,7 @@ const UserServices = {
       user1,
       user2
     }
-  },
+  }
 }
 
 module.exports = {

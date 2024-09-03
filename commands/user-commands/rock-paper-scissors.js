@@ -11,7 +11,7 @@ module.exports = {
     .setDescription('Play rock paper scissors with the barista.'),
 
   async execute(interaction) {
-    const userEnergy = await UserServices.getUsers({requestModelInstance: false}, interaction.user.id);
+    const userEnergy = await UserServices.getUsers(interaction.user.id);
 
     if (userEnergy.energy < 5) {
       await interaction.reply({

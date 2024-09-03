@@ -15,7 +15,7 @@ module.exports = {
 
   async execute(interaction) {
     const user = interaction.options.getUser('user') ?? interaction.user;
-    const currentEnergy = await UserServices.getUsers({requestModelInstance: false}, user.id);
+    const currentEnergy = await UserServices.getUsers(user.id);
 
     if (user === interaction.user) {
       if (currentEnergy.max_energy) {

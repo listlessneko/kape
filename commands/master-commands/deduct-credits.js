@@ -29,7 +29,7 @@ module.exports = {
     const user = interaction.options.getUser('user') ?? interaction.user;
     const amount = interaction.options.getNumber('amount');
 
-    const currentBalance = await UserServices.getUsers({requestModelInstance: false}, user.id);
+    const currentBalance = await UserServices.getUsers(user.id);
 
     const result = await UserServices.subtractBalance(amount, user.id);
 

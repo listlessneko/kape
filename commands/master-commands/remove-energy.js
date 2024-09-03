@@ -30,7 +30,7 @@ module.exports = {
     const user = interaction.options.getUser('user') ?? interaction.user;
     const amount = interaction.options.getNumber('amount');
 
-    const userEnergy = await UserServices.getUsers({requestModelInstance: false}, user.id);
+    const userEnergy = await UserServices.getUsers(user.id);
 
     if (user.id === interaction.user.id) {
       console.log('Remove Energy Command - Is Commander:', user.id === interaction.user.id);

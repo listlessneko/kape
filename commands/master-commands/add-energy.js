@@ -30,7 +30,7 @@ module.exports = {
     const user = interaction.options.getUser('user') ?? interaction.user;
     const amount = interaction.options.getNumber('amount');
 
-    const userEnergy = await UserServices.getUsers({requestModelInstance: false}, user.id);
+    const userEnergy = await UserServices.getUsers(user.id);
     console.log('User Energy:', userEnergy);
 
     if (user.id === interaction.user.id) {

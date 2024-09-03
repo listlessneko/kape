@@ -61,7 +61,7 @@ module.exports = {
               }
 
               const item = await KafeServices.findItem(selectedValue);
-              const user = await UserServices.getUsers({requestModelInstance: false}, interaction.user.id);
+              const user = await UserServices.getUsers(interaction.user.id);
 
               try {
                 if (item) {

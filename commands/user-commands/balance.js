@@ -15,7 +15,7 @@ module.exports = {
 
   async execute(interaction) {
     const user = interaction.options.getUser('user') ?? interaction.user;
-    const userInfo = await UserServices.getUsers( {}, user.id );
+    const userInfo = await UserServices.getUsers(user.id);
 
     if (user === interaction.user) {
       if (userInfo.balance < 10) {

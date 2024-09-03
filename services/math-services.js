@@ -29,6 +29,20 @@ const MathServices = {
       }
     }
     return result;
+  },
+
+  removeDownToNegative100(currentAmount, ...amount) {
+    let result = currentAmount;
+
+    for (const num of amount) {
+      result -= num;
+      if (result <= -100) {
+        console.log('Min 0 reached.');
+        result = -100;
+        return result;
+      }
+    }
+    return result;
   }
 }
 

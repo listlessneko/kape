@@ -61,7 +61,7 @@ module.exports = {
               }
 
               const item = await KafeServices.findItem(selectedValue);
-              const user = await UserServices.getUsers({requestModelInstance: false}, interaction.user.id);
+              const user = await UserServices.getUsers(interaction.user.id);
 
               try {
                 if (item) {
@@ -223,11 +223,18 @@ module.exports = {
                 });
                 return collector.stop('Eat Cmd: Food consumed from inventory.');
               }
+              else {
+                await i.update({
+                  content: `*You eat the entire thing in one bite.*\nYou gain ${RNG} energy.`,
+                  components: []
+                });
+                return collector.stop('Eat Cmd: Food consumed from inventory.');
+              }
             }
             else {
               await UserServices.addEnergy(item.energy_replen.max, user);
               await i.update({
-                content: `*You eat the entire thing in one bite.*`,
+                content: `*You eat the entire thing in one bite.*\nYou gain ${item.energy_replen.max} energy.`,
                 components: []
               });
               return collector.stop('Eat Cmd: Food consumed from inventory.');
