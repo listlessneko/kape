@@ -77,6 +77,10 @@ const UserServices = {
     console.log(usersCache);
   },
 
+  async checkLvl() {
+
+  },
+
   async addEnergy(amount, ...userIds) {
     async function calculateEnergy(amount, user) {
       const prev_energy = user.energy;
@@ -265,7 +269,7 @@ const UserServices = {
   },
 
   async transferCredits(amount, userId1, userId2) {
-    const user = await this.getUsers(userId1);
+    let user = await this.getUsers(userId1);
 
     if (amount > user.balance) {
       const prev_balance = user.balance;
@@ -276,19 +280,23 @@ const UserServices = {
         user_id: user.user_id,
         prev_balance,
         new_balance: user.balance
-      };
+      }
+
       const user2 = await this.addBalance(amount, userId2);
+
       return {
         user1,
         user2
       }
     }
-
-    user1 = await this.subtractBalance(amount, userId1);
-    const user2 = await this.addBalance(amount, userId2);
-    return {
-      user1,
-      user2
+    
+    else {
+      const user1 = await this.subtractBalance(amount, userId1);
+      const user2 = await this.addBalance(amount, userId2);
+      return {
+        user1,
+        user2
+      }
     }
   }
 }

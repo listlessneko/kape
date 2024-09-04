@@ -74,7 +74,7 @@ module.exports = {
 
         if (confirmation.values[0] === fate) {
           console.log('Flip A Coin Cmd: Selected Value:', confirmation.values[0]);
-          const value = Math.random() < 0.10 ? 1 : Math.random() < 0.25 ? .5 : .25;
+          const value = Math.random() < 0.05 ? 1 : Math.random() < 0.25 ? .5 : .25;
           const wholeValue = value < 1 ? value * 100 : value;
           console.log('Flip A Coin Cmd: Value:', value);
           const coin = value === 1 ? 'one_credit' : value === .5 ? 'fifty_parts' : 'twenty_five_parts';

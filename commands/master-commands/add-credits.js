@@ -34,10 +34,10 @@ module.exports = {
 
     let result = await UserServices.addBalance(amount, user.id);
 
-    const amountUnits = FormatServices.determineUnits(amount);
     amount = await MathServices.wholeNumber(amount);
-    const resultUnits = FormatServices.determineUnits(result.new_balance);
+    const amountUnits = await MathServices.wholeNumber(amount);
     result = await MathServices.wholeNumber(result.new_balance);
+    const resultUnits = await MathServices.wholeNumber(result.new_balance);
 
     if (user === interaction.user) {
       return await interaction.reply({

@@ -26,9 +26,6 @@ module.exports = {
                 hasSubcommands.push(commandName);
               }
             }
-            //else {
-            //  commandsList.push(`**/${commandName}**\n*${command.data.description}*`)
-            //}
           });
         }
         if (!hasSubcommands.includes(commandName)) {

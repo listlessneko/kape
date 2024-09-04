@@ -214,9 +214,9 @@ module.exports = {
               const interval = 5;
 
               const rangeSize = Math.floor((max - min) / interval) + 1;
-              const RNG = Math.floor(Math.random() * rangeSize) * interval + min;
-              await UserServices.addEnergy(RNG, user);
-              if (RNG <= 0) {
+              const chance = Math.floor(Math.random() * rangeSize) * interval + min;
+              await UserServices.addEnergy(chance, user);
+              if (chance <= 0) {
                 await i.update({
                   content: `*You eat the entire thing in one bite. Your stomach starts to feel strange and you have a sudden urge to find the nearest restroom.*\n\nYou lose {RNG} energy. Unfortunate.`,
                   components: []
@@ -225,7 +225,7 @@ module.exports = {
               }
               else {
                 await i.update({
-                  content: `*You eat the entire thing in one bite.*\nYou gain ${RNG} energy.`,
+                  content: `*You eat the entire thing in one bite.*\nYou gain ${chance} energy.`,
                   components: []
                 });
                 return collector.stop('Eat Cmd: Food consumed from inventory.');
