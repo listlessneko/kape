@@ -1,6 +1,20 @@
 const MathServices = {
+  isValidNumber(value) {
+    return typeof value === 'number' && 
+           !Number.isNaN(value) && 
+           Number.isFinite(value)
+  },
+
+  roundTo2Decimals(value) {
+   return Math.round(Number(value) * 100) / 100
+  },
+
   formatNumber(number) {
     return (number >= 0 ? '+' : '') + number;
+  },
+
+  wholeNumber(value) {
+    return value < 1 ? value * 100 : value;
   },
 
   addUpTo100(currentAmount, ...amount) {
@@ -14,7 +28,7 @@ const MathServices = {
         return result;
       }
     }
-    return result;
+    return this.roundTo2Decimals(result);
   },
 
   removeDownTo0(currentAmount, ...amount) {
@@ -28,7 +42,7 @@ const MathServices = {
         return result;
       }
     }
-    return result;
+    return this.roundTo2Decimals(result);
   },
 
   removeDownToNegative100(currentAmount, ...amount) {
@@ -42,7 +56,7 @@ const MathServices = {
         return result;
       }
     }
-    return result;
+    return this.roundTo2Decimals(result);
   }
 }
 

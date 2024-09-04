@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 0,
       allowNull: false,
     },
+    //debt: {
+    //  type: DataTypes.FLOAT,
+    //  defaultValue: 0,
+    //  allowNull: false,
+    //},
     energy: {
       type: DataTypes.FLOAT,
       defaultValue: 100,
@@ -26,5 +31,26 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     timestamps: false,
-  });
+  }, {
+    //hooks: {
+    //  beforeSave: (users) => {
+    //    calculate(users);
+    //  },
+    //  afterFind: (users) => {
+    //    if (Array.isArray(users)) {
+    //      users.forEach(user => {
+    //        calculate(user);
+    //      });
+    //    }
+    //    else if (users) {
+    //      calculate(users);
+    //    }
+    //  }
+    //}
+  }
+  );
+
+  //function calculate(users) {
+  //  users.balance = users.balance - users.debt;
+  //}
 }

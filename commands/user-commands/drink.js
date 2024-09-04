@@ -79,7 +79,7 @@ module.exports = {
                     }
                     else if (item.cost > user.balance) {
                       return await interaction.editReply({
-                        content: `Hm... You don't have enough credits. Maybe come back next time.`,
+                        content: `Hm... You lack the sufficient credits to purchase this item. Maybe come back next time.`,
                         components: []
                       });
                     }

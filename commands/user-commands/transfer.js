@@ -6,7 +6,9 @@ const {
   ActionRowBuilder,
   ComponentType
 } = require('discord.js');
-const { UserServices } = require(path.join(__dirname, '..', '..', 'services', 'user-services.js'));
+const { UserServices } = require('../../services/user-services.js');
+const { MathServices } = require('../../services/math-services.js');
+const { FormatServices } = require('../../services/format-services.js');
 
 module.exports = {
   cooldown: 5,
@@ -29,9 +31,13 @@ module.exports = {
   async execute(interaction) {
     const userId1 = interaction.user;
     const userId2 = interaction.options.getUser('user');
-    const amount = interaction.options.getNumber('amount');
+    let amount = interaction.options.getNumber('amount');
+    amount = MathServices.wholeNumber(amount);
+    const amountUnits = FormatServices.determineUnits(amount);
 
     const user1 = await UserServices.getUsers(userId1.id);
+    const user1Balance = MathServices.wholeNumber(Math.abs(user1.balance));
+    const user1BalanceUnits = FormatServices.determineUnits(user1.balance);
 
     const liability = (user1.balance - amount) <= -100 ? true : false;
 
@@ -52,8 +58,9 @@ module.exports = {
 
       const row = new ActionRowBuilder().addComponents(components);
 
+
       const response = await interaction.reply({
-        content: `It seems you have too low of a balance. Would you still like to transfer credits and go into debt?\nCurrent Debt: **${Math.abs(user1.balance)} credits**\nMax: 100 credits`,
+        content: `It seems you have too low of a balance. Would you still like to transfer credits and go into debt?\nCurrent Debt: **${user1Balance} ${user1BalanceUnits}**\nMax: 100 credits`,
         components: [row]
       });
 
@@ -68,8 +75,14 @@ module.exports = {
             if (i.values[0] === 'yes') {
               const result = await UserServices.transferCredits(amount, userId1.id, userId2.id);
               console.log('Transfer Cmd - Result:', result);
+
+              const user1NewBalance = await MathServices.wholeNumber(result.user1.new_balance) ;
+              const user1NewBalanceUnits = FormatServices.determineUnits(result.user1.new_balance) ;
+              const user2NewBalance = await MathServices.wholeNumber(result.user2.new_balance) ;
+              const user2NewBalanceUnits = FormatServices.determineUnits(result.user2.new_balance) ;
+
               await interaction.editReply({
-                content: `Successfully transferred **${amount} credits** to **${userId2.username}** You are now in debt.\nNew Balances:\nYou: **${result.user1.new_balance} credits**\n${userId2.username}: **${result.user2.new_balance} credits**`,
+                content: `Successfully transferred **${amount} ${amountUnits}** to **${userId2.username}** You are now in debt.\nNew Balances:\nYou: **${user1NewBalance} ${user1NewBalanceUnits}**\n${userId2.username}: **${user2NewBalance} ${user2NewBalanceUnits}**`,
                 components: []
               });
               collector.stop('Transfer completed.');
@@ -106,7 +119,7 @@ module.exports = {
 
     else if (liability) {
       await interaction.reply({
-      content: `Your Balance is **${user1.balance} credits**.\n\nIt seems you're too poor to give the inputted amount to anyone money. Focus on yourself first before choosing generosity.`
+      content: `Your Balance is **${user1Balance} ${user1BalanceUnits}**.\n\nIt seems you're too poor to give the inputted amount to anyone money. Focus on yourself first before choosing generosity.`
       });
       return collector.stop('Transfer declined.');
     }
@@ -114,8 +127,14 @@ module.exports = {
     else {
       const result = await UserServices.transferCredits(amount, userId1.id, userId2.id);
 
-      await interaction.reply({
-        content: `Successfully transferred **${amount} credits** to **${userId2.username}**.\nNew Balances:\nYou: **${result.user1.new_balance} credits**\n${userId2.username}: **${result.user2.new_balance} credits**`
+      const user1NewBalance = await MathServices.wholeNumber(result.user1.new_balance) ;
+      const user1NewBalanceUnits = FormatServices.determineUnits(result.user1.new_balance) ;
+      const user2NewBalance = await MathServices.wholeNumber(result.user2.new_balance) ;
+      const user2NewBalanceUnits = FormatServices.determineUnits(result.user2.new_balance) ;
+
+      await interaction.editReply({
+        content: `Successfully transferred **${amount} ${amountUnits}** to **${userId2.username}** You are now in debt.\nNew Balances:\nYou: **${user1NewBalance} ${user1NewBalanceUnits}**\n${userId2.username}: **${user2NewBalance} ${user2NewBalanceUnits}**`,
+        components: []
       });
       return collector.stop('Transfer completed.');
     }

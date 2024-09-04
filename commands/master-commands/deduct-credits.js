@@ -27,30 +27,35 @@ module.exports = {
       });
     }
     const user = interaction.options.getUser('user') ?? interaction.user;
-    const amount = interaction.options.getNumber('amount');
+    let amount = interaction.options.getNumber('amount');
 
-    const currentBalance = await UserServices.getUsers(user.id);
+    const current = await UserServices.getUsers(user.id);
 
-    const result = await UserServices.subtractBalance(amount, user.id);
+    let result = await UserServices.subtractBalance(amount, user.id);
+
+    amount = await MathServices.wholeNumber(amount);
+    const amountUnits = await MathServices.wholeNumber(amount);
+    result = await MathServices.wholeNumber(result.new_balance);
+    const resultUnits = await MathServices.wholeNumber(result.new_balance);
 
     if (user === interaction.user) {
-      if (amount > currentBalance.balance) {
+      if (amount > current.balance) {
         return interaction.reply({
-          content: `You have taken **${amount} credits** from youself and sent it to the Void. You are now in debt.\nYour New Balance: **${result.new_balance} credits**`
+          content: `You have taken **${amount} ${amountUnits}** from youself and sent it to the Void. You are now in debt.\nYour New Balance: **${result} ${resultUnits}**`
         });
       }
       return interaction.reply({
-        content: `You have taken **${amount} credits** from youself and sent it to the Void. You are weird.\nYour New Balance: **${result.new_balance} credits**`
+        content: `You have taken **${amount} ${amountUnits}** from youself and sent it to the Void. You are weird.\nYour New Balance: **${result} ${resultUnits}**`
       });
     }
 
-    if (amount > currentBalance.balance) {
+    if (amount > current.balance) {
         return interaction.reply({
-          content: `You have taken **${amount} credits** from **${user.username}** and sent it to the Void. They are now in debt because of you.\n${user.username}'s New Balance: **${result.new_balance} credits**`
+          content: `You have taken **${amount} ${amountUnits}** from **${user.username}** and sent it to the Void. They are now in debt because of you.\n${user.username}'s New Balance: **${result} ${resultUnits}**`
         });
     }
     return interaction.reply({
-      content: `Transfer completed. You have taken **${amount} credits** from **${user.username}** and sent it to the Void.\n\n${user.username}'s New Balance: **${result.new_balance} credits**`
+      content: `Transfer completed. You have taken **${amount} ${amountUnits}** from **${user.username}** and sent it to the Void.\n\n${user.username}'s New Balance: **${result} ${resultUnits}**`
     });
   }
 }

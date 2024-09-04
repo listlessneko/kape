@@ -92,7 +92,7 @@ const UserServices = {
         }
       }
 
-      const result = await MathServices.addUpTo100(user.energy, amount);
+      let result = await MathServices.addUpTo100(user.energy, amount);
       user.energy = Number(result);
 
       if (result >= 100) {
@@ -186,10 +186,15 @@ const UserServices = {
   },
 
   async addBalance( amount, ...userIds ) {
+    if (!MathServices.isValidNumber(amount)) {
+      return;
+    }
+
     if ( userIds.length === 1 ) {
       const user = await this.getUsers(...userIds);
       const prev_balance = user.balance;
       user.balance += Number(amount);
+      user.balance = MathServices.roundTo2Decimals(user.balance);
       await user.save();
       usersCache.set(user.user_id, user);
       const userBalance = {
@@ -206,6 +211,7 @@ const UserServices = {
     for ( const user of users ) {
       const prev_balance = user.balance;
       user.balance += Number(amount);
+      user.balance = MathServices.roundTo2Decimals(user.balance);
       await user.save();
       usersCache.set(user.user_id, user);
       userBalances[user.user_id] = {};
@@ -218,19 +224,16 @@ const UserServices = {
   },
 
   async subtractBalance(amount, ...userIds) {
+    if (!MathServices.isValidNumber(amount)) {
+      return;
+    }
+
     if ( userIds.length === 1 ) {
       const user = usersCache.get(userIds[0]);
       const prev_balance = user.balance;
 
-      if (amount > user.balance) {
-        const result = await MathServices.removeDownToNegative100(user.balance, amount);
-        console.log('Subtracted Amount:', result);
-        user.balance = Number(result);
-      }
-
-      else {
-        user.balance -= Number(amount);
-      }
+      user.balance -= Number(amount);
+      user.balance = MathServices.roundTo2Decimals(user.balance);
 
       await user.save();
       usersCache.set(user.user_id, user);
@@ -248,13 +251,8 @@ const UserServices = {
     for ( const user of users ) {
       const prev_balance = user.balance;
 
-      if (amount > user.balance) {
-      await MathServices.removeDownToNegative100(user.balance, amount);
-      }
-
-      else {
-        user.balance -= Number(amount);
-      }
+      user.balance -= Number(amount);
+      user.balance = MathServices.roundTo2Decimals(user.balance);
 
       await user.save();
       usersCache.set(userIds, user);
@@ -267,7 +265,19 @@ const UserServices = {
   },
 
   async transferCredits(amount, userId1, userId2) {
-    const user1 = await this.subtractBalance(amount, userId1);
+    let user1 = await this.getUsers(userId1);
+
+    if (amount > user1.balance) {
+      const result = await MathServices.removeDownToNegative100(user1.balance, amount);
+      user1.balance = Number(result);
+      const user2 = await this.addBalance(amount, userId2);
+      return {
+        user1,
+        user2
+      }
+    }
+
+    user1 = await this.subtractBalance(amount, userId1);
     const user2 = await this.addBalance(amount, userId2);
     return {
       user1,

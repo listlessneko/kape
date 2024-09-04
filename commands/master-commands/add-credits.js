@@ -1,6 +1,8 @@
 const path = require('node:path');
 const { SlashCommandBuilder } = require('discord.js');
-const { UserServices } = require(path.join(__dirname, '..', '..', 'services', 'user-services.js'));
+const { UserServices } = require('../../services/user-services.js');
+const { MathServices } = require('../../services/math-services.js');
+const { FormatServices } = require('../../services/format-services.js');
 
 module.exports = {
   cooldown: 5,
@@ -28,13 +30,18 @@ module.exports = {
       });
     }
     const user = interaction.options.getUser('user') ?? interaction.user;
-    const amount = interaction.options.getNumber('amount');
+    let amount = interaction.options.getNumber('amount');
 
-    const result = await UserServices.addBalance(amount, user.id);
+    let result = await UserServices.addBalance(amount, user.id);
+
+    amount = await MathServices.wholeNumber(amount);
+    const amountUnits = await MathServices.wholeNumber(amount);
+    result = await MathServices.wholeNumber(result.new_balance);
+    const resultUnits = await MathServices.wholeNumber(result.new_balance);
 
     if (user === interaction.user) {
       return await interaction.reply({
-        content: `You have given yourself **${amount} credits**. You are spoiled.\nYour New Balance: **${result.new_balance} credits**`
+        content: `You have given yourself **${amount} ${amountUnits}**. You are spoiled.\nYour New Balance: **${result} ${resultUnits}**`
       });
     }
 

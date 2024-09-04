@@ -1,5 +1,6 @@
 const path = require('node:path');
 const { SlashCommandBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder, ComponentType } = require('discord.js');
+const { MathServices } = require('../../services/math-services');
 const { UserServices } = require(path.join(__dirname, '..', '..', 'services', 'user-services.js'));
 const { ScoresServices } = require(path.join(__dirname, '..', '..', 'services', 'scores-services.js'));
 const wait = require('node:timers/promises').setTimeout;
