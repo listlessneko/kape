@@ -96,33 +96,34 @@ module.exports = (sequelize, DataTypes) => {
     },
   },
     {
-      timestamps: false
-    },
-    {
+      timestamps: false,
       hooks: {
-        beforeSave: (rpsScores) => {
-          calculateTotals(rpsScores);
+        beforeCreate: (RPSScores) => {
+          calculateTotals(RPSScores);
         },
-        afterFind: (rpsScores) => {
-          if (Array.isArray(rpsScores)) {
-            rpsScores.forEach(rpsScore => {
-              calculateTotals(rpsScore);
+        beforeUpdate: (RPSScores) => {
+          calculateTotals(RPSScores);
+        },
+        afterFind: (RPSScores) => {
+          if (Array.isArray(RPSScores)) {
+            RPSScores.forEach(RPSScore => {
+              calculateTotals(RPSScore);
             });
           }
-          else if (rpsScores) {
-            calculateTotals(rpsScores);
+          else if (RPSScores) {
+            calculateTotals(RPSScores);
           }
         },
       }
     });
 
-  function calculateTotals(rpsScores) {
-    rpsScores.wins = rpsScores.rock_wins + rpsScores.paper_wins + rpsScores.scissors_wins;
-    rpsScores.losses = rpsScores.rock_losses + rpsScores.paper_losses + rpsScores.scissors_losses;
-    rpsScores.draws = rpsScores.rock_draws + rpsScores.paper_draws + rpsScores.scissors_draws;
-    rpsScores.rock = rpsScores.rock_wins + rpsScores.rock_losses + rpsScores.rock_draws;
-    rpsScores.paper = rpsScores.paper_wins + rpsScores.paper_losses + rpsScores.paper_draws;
-    rpsScores.scissors = rpsScores.scissors_wins + rpsScores.scissors_losses + rpsScores.scissors_draws;
-    rpsScores.battles = rpsScores.wins + rpsScores.losses + rpsScores.draws;
+  function calculateTotals(RPSScores) {
+    RPSScores.wins = RPSScores.rock_wins + RPSScores.paper_wins + RPSScores.scissors_wins;
+    RPSScores.losses = RPSScores.rock_losses + RPSScores.paper_losses + RPSScores.scissors_losses;
+    RPSScores.draws = RPSScores.rock_draws + RPSScores.paper_draws + RPSScores.scissors_draws;
+    RPSScores.rock = RPSScores.rock_wins + RPSScores.rock_losses + RPSScores.rock_draws;
+    RPSScores.paper = RPSScores.paper_wins + RPSScores.paper_losses + RPSScores.paper_draws;
+    RPSScores.scissors = RPSScores.scissors_wins + RPSScores.scissors_losses + RPSScores.scissors_draws;
+    RPSScores.battles = RPSScores.wins + RPSScores.losses + RPSScores.draws;
   }
 };

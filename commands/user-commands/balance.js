@@ -33,16 +33,16 @@ module.exports = {
         console.log('Balance - Pity:', pity);
         const result = await UserServices.addBalance(pity, user.id);
 
-        pity = await MathServices.wholeNumber(pity);
         const pityUnits = FormatServices.determineUnits(pity);
+        pity = await MathServices.wholeNumber(pity);
 
-        const prev_balance = await MathServices.wholeNumber(result.prev_balance);
         const prev_balanceUnits = FormatServices.determineUnits(result.prev_balance);
-        const new_balance = await MathServices.wholeNumber(result.new_balance);
+        const prev_balance = await MathServices.wholeNumber(result.prev_balance);
         const new_balanceUnits = FormatServices.determineUnits(result.new_balance);
+        const new_balance = await MathServices.wholeNumber(result.new_balance);
 
         return interaction.reply({
-          content: `You have **${prev_balance} ${prev_balanceUnits}**.\nYou good? *The bot beeps in pity.* Here's **${pity} ${pityUnits}**. It's the most I can spare right now.\nYour New Balance: **${new_balance} ${new_balanceUnits}**`
+          content: `You have **${prev_balance} ${prev_balanceUnits}**.\nYou good? *The bot beeps in pity.* Here is **${pity} ${pityUnits}**. It is the most I can spare right now.\nYour New Balance: **${new_balance} ${new_balanceUnits}**`
         });
       }
       return interaction.reply({

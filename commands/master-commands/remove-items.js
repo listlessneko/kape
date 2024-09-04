@@ -69,12 +69,12 @@ module.exports = {
 
     if (result && quantity > 1) {
       await interaction.reply({
-        content: `You have removed **${quantity} ${item.name}** from **${user.username}** and sent them to the Void.`
+        content: `You have removed **${quantity} ${item.name}** from **${user.username}** and sent them to the *Void*.`
       });
     }
     else if (result && quantity === 1) {
       await interaction.reply({
-        content: `You have removed **${quantity} ${item.name}** from **${user.username}** and sent it to the Void.`
+        content: `You have removed **${quantity} ${item.name}** from **${user.username}** and sent it to the *Void*.`
       });
     }
 

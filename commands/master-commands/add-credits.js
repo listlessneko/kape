@@ -34,10 +34,10 @@ module.exports = {
 
     let result = await UserServices.addBalance(amount, user.id);
 
+    const amountUnits = FormatServices.determineUnits(amount);
     amount = await MathServices.wholeNumber(amount);
-    const amountUnits = await MathServices.wholeNumber(amount);
+    const resultUnits = FormatServices.determineUnits(result.new_balance);
     result = await MathServices.wholeNumber(result.new_balance);
-    const resultUnits = await MathServices.wholeNumber(result.new_balance);
 
     if (user === interaction.user) {
       return await interaction.reply({
@@ -46,7 +46,7 @@ module.exports = {
     }
 
     return await interaction.reply({
-      content: `Transfer completed. You have given **${amount} credits** to **${user.username}**.\n\n${user.username}'s New Balance: **${result.new_balance} credits**`
+      content: `Transfer completed. You have given **${amount} ${amountUnits}** to **${user.username}**.\n\n${user.username}'s New Balance: **${result} ${resultUnits}**`
     });
   }
 }

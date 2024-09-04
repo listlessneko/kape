@@ -1,6 +1,8 @@
 const path = require('node:path');
 const { SlashCommandBuilder } = require('discord.js');
-const { UserServices } = require(path.join(__dirname, '..', '..', 'services', 'user-services.js'));
+const { UserServices } = require('../../services/user-services.js');
+const { MathServices } = require('../../services/math-services.js');
+const { FormatServices } = require('../../services/format-services.js');
 
 module.exports = {
   cooldown: 5,
@@ -27,35 +29,36 @@ module.exports = {
       });
     }
     const user = interaction.options.getUser('user') ?? interaction.user;
-    let amount = interaction.options.getNumber('amount');
+    const originalAmount = interaction.options.getNumber('amount');
 
-    const current = await UserServices.getUsers(user.id);
+    const cachedUser = await UserServices.getUsers(user.id);
+    const currentBalance = cachedUser.balance;
 
-    let result = await UserServices.subtractBalance(amount, user.id);
+    const originalResult = await UserServices.subtractBalance(originalAmount, user.id);
 
-    amount = await MathServices.wholeNumber(amount);
-    const amountUnits = await MathServices.wholeNumber(amount);
-    result = await MathServices.wholeNumber(result.new_balance);
-    const resultUnits = await MathServices.wholeNumber(result.new_balance);
+    const amountUnits = FormatServices.determineUnits(originalAmount);
+    const amount = await MathServices.wholeNumber(originalAmount);
+    const resultUnits = FormatServices.determineUnits(originalResult.new_balance);
+    const result = await MathServices.wholeNumber(originalResult.new_balance);
 
     if (user === interaction.user) {
-      if (amount > current.balance) {
+      if (originalAmount > currentBalance) {
         return interaction.reply({
-          content: `You have taken **${amount} ${amountUnits}** from youself and sent it to the Void. You are now in debt.\nYour New Balance: **${result} ${resultUnits}**`
+          content: `You have taken **${amount} ${amountUnits}** from youself and sent it to the *Void*. You are now in debt.\nYour New Balance: **${result} ${resultUnits}**`
         });
       }
       return interaction.reply({
-        content: `You have taken **${amount} ${amountUnits}** from youself and sent it to the Void. You are weird.\nYour New Balance: **${result} ${resultUnits}**`
+        content: `You have taken **${amount} ${amountUnits}** from youself and sent it to the *Void*. You are weird.\nYour New Balance: **${result} ${resultUnits}**`
       });
     }
 
-    if (amount > current.balance) {
+    if (amount > currentBalance) {
         return interaction.reply({
-          content: `You have taken **${amount} ${amountUnits}** from **${user.username}** and sent it to the Void. They are now in debt because of you.\n${user.username}'s New Balance: **${result} ${resultUnits}**`
+          content: `You have taken **${amount} ${amountUnits}** from **${user.username}** and sent it to the *Void*. They are now in debt because of you.\n${user.username}'s New Balance: **${result} ${resultUnits}**`
         });
     }
     return interaction.reply({
-      content: `Transfer completed. You have taken **${amount} ${amountUnits}** from **${user.username}** and sent it to the Void.\n\n${user.username}'s New Balance: **${result} ${resultUnits}**`
+      content: `Transfer completed. You have taken **${amount} ${amountUnits}** from **${user.username}** and sent it to the *Void*.\n\n${user.username}'s New Balance: **${result} ${resultUnits}**`
     });
   }
 }

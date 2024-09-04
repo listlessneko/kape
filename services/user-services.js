@@ -265,11 +265,18 @@ const UserServices = {
   },
 
   async transferCredits(amount, userId1, userId2) {
-    let user1 = await this.getUsers(userId1);
+    const user = await this.getUsers(userId1);
 
-    if (amount > user1.balance) {
-      const result = await MathServices.removeDownToNegative100(user1.balance, amount);
-      user1.balance = Number(result);
+    if (amount > user.balance) {
+      const prev_balance = user.balance;
+      const result = await MathServices.removeDownToNegative100(user.balance, amount);
+      user.balance = Number(result);
+      await user.save();
+      const user1 = {
+        user_id: user.user_id,
+        prev_balance,
+        new_balance: user.balance
+      };
       const user2 = await this.addBalance(amount, userId2);
       return {
         user1,
