@@ -71,15 +71,12 @@ const UserLevelsServices = {
     }
   },
 
-  //async levelUp(interaction, user) {
-  //},
-
   async addExp(amount, userId) {
     let user = userLevelsCache.get(userId);
     let level_up = false;
 
     if (!user) {
-      user = await this.getUserLevels(userId);
+      user = await this.checkLevel(userId);
     }
 
     const prev_level_exp = user.current_level_exp;
@@ -103,7 +100,7 @@ const UserLevelsServices = {
     let user = userLevelsCache.get(userId);
 
     if (!user) {
-      user = await this.getUserLevels(userId);
+      user = await this.checkLevel(userId);
     }
 
     const prev_level_exp = user.current_level_exp;
