@@ -34,17 +34,7 @@ module.exports = {
     const userId2 = '763074931021316136';
 
     try {
-      const userTest1 = await UserLevelsServices.getUserLevels(userId1);
-      //console.log('Ping Cmd - Get User Levels:', userTest1.dataValues);
-      //console.log('Ping Cmd - Current Level Exp:', userTest1.current_level_exp);
-      userTest1.current_level_exp += 25;
-      //console.log('Ping Cmd - New Current Level Exp:', userTest1.current_level_exp);
-      await userTest1.save();
-      //console.log('Ping Cmd - Saved Current Level Exp:', userTest1.current_level_exp);
-      userLevelsCache.set(userId1, userTest1);
-      //console.log('Ping Cmd - Get User Levels:', userTest1.dataValues);
-      const userTest2 = await UserLevelsServices.checkLevel(userId1);
-      console.log('Ping Cmd - Check Level:', userTest2);
+      await UserLevelsServices.addExp(0, userId1);
     }
     catch (e) {
       console.error('Ping Error:', e);

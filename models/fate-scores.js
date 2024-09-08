@@ -118,7 +118,6 @@ module.exports = (sequelize, DataTypes) => {
 };
 
 function hasChanged(fateScores) {
-  console.log('Fate Scores Model - hasChanged: Test');
   const relevantFields = [
     'lucky_heads',
     'lucky_tails',
@@ -136,7 +135,6 @@ function hasChanged(fateScores) {
 }
 
 function calculateTotals(fateScores) {
-  console.log('Fate Scores Model - calculateTotals: Test');
   fateScores.lucky = fateScores.lucky_heads + fateScores.lucky_tails;
   fateScores.unlucky = fateScores.unlucky_heads + fateScores.unlucky_tails;
   fateScores.heads = fateScores.lucky_heads + fateScores.unlucky_heads + fateScores.ultra_lucky_heads;

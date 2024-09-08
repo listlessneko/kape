@@ -55,7 +55,7 @@ const ScoresServices = {
     user.energy_spent += score.energy_consumed;
 
     const prev_fortune = user.fortune;
-    user.fortune += score.reward;
+    user.fortune += score.rewards.credits;
 
     await user.save();
     rpsScoresCache.set(score.user_id, user);

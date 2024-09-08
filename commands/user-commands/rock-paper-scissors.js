@@ -1,8 +1,9 @@
 const path = require('node:path');
 const { SlashCommandBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder, ComponentType } = require('discord.js');
 const { MathServices } = require('../../services/math-services');
-const { UserServices } = require(path.join(__dirname, '..', '..', 'services', 'user-services.js'));
-const { ScoresServices } = require(path.join(__dirname, '..', '..', 'services', 'scores-services.js'));
+const { UserServices } = require(('../../services/user-services.js'));
+const { ScoresServices } = require('../../services/scores-services.js');
+const { UserLevelsServices } = require('../../services/user-levels-services');
 const wait = require('node:timers/promises').setTimeout;
 
 module.exports = {
@@ -117,25 +118,28 @@ module.exports = {
 
           if (selectedValue === baristaWeapon) {
             const energy_consumed = 5;
-            const reward = 0;
+            const rewards = {
+              credits: 0,
+              exp: 10
+            };
 
             await UserServices.removeEnergy(energy_consumed, interaction.user.id);
 
-            const score = {
+            const result = {
               user_id: interaction.user.id,
               victory: false,
               defeat: false,
               draw: true,
               weapon: selectedValue,
               energy_consumed,
-              reward
+              rewards
             };
 
-            const result = await ScoresServices.rpsVsKapé(score);
-            console.log('RPS Cmd: Result:', result);
+            await ScoresServices.rpsVsKapé(result);
+            await UserLevelsServices.addExp(result.rewards.exp, result.user_id);
 
             await interaction.editReply({
-              content: `Jan... ken... pon!\n\n(You) ${outcomes[selectedValue]['weapon_icon']} vs. ${outcomes[baristaWeapon]['weapon_icon']} (Kapé)\n*That was stale, mate.*\n\nYou lost **${energy_consumed} energy**.`,
+              content: `Jan... ken... pon!\n\n(You) ${outcomes[selectedValue]['weapon_icon']} vs. ${outcomes[baristaWeapon]['weapon_icon']} (Kapé)\n*That was stale, mate.*\n\nLost **${energy_consumed} energy**\nGained **${rewards.exp} experience**`,
               components: []
             });
             return collector.stop('Rock Paper Scissors Cmd: A draw.');
@@ -146,26 +150,29 @@ module.exports = {
 
           if (userWon) {
             const energy_consumed = 5;
-            const reward = 2.5;
+            const rewards = {
+              credits: 2.5,
+              exp: 25
+            };
 
             await UserServices.removeEnergy(energy_consumed, interaction.user.id);
-            await UserServices.addBalance(reward, interaction.user.id);
+            await UserServices.addBalance(rewards.credits, interaction.user.id);
 
-            const score = {
+            const result = {
               user_id: interaction.user.id,
               victory: true,
               defeat: false,
               draw: false,
               weapon: selectedValue,
               energy_consumed,
-              reward
+              rewards
             };
 
-            const result = await ScoresServices.rpsVsKapé(score);
-            console.log('RPS Cmd: Result:', result);
+            await ScoresServices.rpsVsKapé(result);
+            await UserLevelsServices.addExp(result.rewards.exp, result.user_id);
 
             await interaction.editReply({
-              content: `Jan... ken... pon!\n\n(You) ${outcomes[selectedValue]['weapon_icon']} vs. ${outcomes[baristaWeapon]['weapon_icon']} (Kapé)\n*Huh, you won.*\n\nYou lost **${energy_consumed} energy**, but received **${reward} credits**.`,
+              content: `Jan... ken... pon!\n\n(You) ${outcomes[selectedValue]['weapon_icon']} vs. ${outcomes[baristaWeapon]['weapon_icon']} (Kapé)\n*Huh, you won.*\n\nLost **${energy_consumed} energy**\nGained **${rewards.exp} experience**\nReceived **${rewards.credits} credits**`,
               components: []
             });
             return collector.stop('Rock Paper Scissors Cmd: Fight ended. User victory.');
@@ -173,25 +180,27 @@ module.exports = {
 
           else {
             const energy_consumed = 5;
-            const reward = 0;
+            const rewards = {
+              credits: 0,
+              exp: 0
+            };
 
             await UserServices.removeEnergy(energy_consumed, interaction.user.id);
 
-            const score = {
+            const result = {
               user_id: interaction.user.id,
               victory: false,
               defeat: true,
               draw: false,
               weapon: selectedValue,
               energy_consumed,
-              reward
+              rewards
             };
 
-            const result = await ScoresServices.rpsVsKapé(score);
-            console.log('RPS Cmd: Result:', result);
+            await ScoresServices.rpsVsKapé(result);
 
             await interaction.editReply({
-              content: `Jan... ken... pon!\n\n(You) ${outcomes[selectedValue]['weapon_icon']} vs. ${outcomes[baristaWeapon]['weapon_icon']} (Kapé)\n*Defeat. ${outcomes[selectedValue]['losing_message']}*\n\nYou lost **${energy_consumed} energy**.`,
+              content: `Jan... ken... pon!\n\n(You) ${outcomes[selectedValue]['weapon_icon']} vs. ${outcomes[baristaWeapon]['weapon_icon']} (Kapé)\n*Defeat. ${outcomes[selectedValue]['losing_message']}*\n\nLost **${energy_consumed} energy**`,
               components: []
             });
             return collector.stop('Rock Paper Scissors Cmd: Fight ended. User defeated.')

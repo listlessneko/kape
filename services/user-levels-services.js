@@ -59,6 +59,46 @@ const UserLevelsServices = {
         current_exp_req: user.current_exp_req
       }
     }
+  },
+
+  async addExp(amount, userId) {
+    let user = userLevelsCache.get(userId);
+
+    if (!user) {
+      user = await this.getUserLevels(userId);
+    }
+
+    const prev_level_exp = user.current_level_exp;
+    user.current_level_exp += Number(amount);
+    await user.save();
+    userLevelsCache.set(userId, user);
+    return {
+      user_id: userId,
+      level: user.level,
+      prev_level_exp,
+      current_level_exp: user.current_level_exp,
+      current_exp_req: user.current_exp_req
+    }
+  },
+
+  async subtractExp(amount, userId) {
+    let user = userLevelsCache.get(userId);
+
+    if (!user) {
+      user = await this.getUserLevels(userId);
+    }
+
+    const prev_level_exp = user.current_level_exp;
+    user.current_level_exp -= Number(amount);
+    await user.save();
+    userLevelsCache.set(userId, user);
+    return {
+      user_id: userId,
+      level: user.level,
+      prev_level_exp,
+      current_level_exp: user.current_level_exp,
+      current_exp_req: user.current_exp_req
+    }
   }
 }
 

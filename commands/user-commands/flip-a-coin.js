@@ -1,6 +1,7 @@
 const { SlashCommandBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder } = require('discord.js');
 const wait = require('node:timers/promises').setTimeout;
 const { UserServices } = require('../../services/user-services.js');
+const { UserLevelsServices } = require('../../services/user-levels-services.js');
 const { ScoresServices } = require('../../services/scores-services.js');
 
 module.exports = {
@@ -74,38 +75,38 @@ module.exports = {
 
         if (confirmation.values[0] === fate) {
           console.log('Flip A Coin Cmd: Selected Value:', confirmation.values[0]);
-          const value = Math.random() < 0.05 ? 1 : Math.random() < 0.25 ? .5 : .25;
-          const wholeValue = value < 1 ? value * 100 : value;
-          console.log('Flip A Coin Cmd: Value:', value);
-          const coin = value === 1 ? 'one_credit' : value === .5 ? 'fifty_parts' : 'twenty_five_parts';
-          await UserServices.addBalance(value, confirmation.user.id);
-          const units = value < 1 ? 'parts' : 'credit';
+          const originalValue = Math.random() < 0.05 ? 1 : Math.random() < 0.25 ? .5 : .25;
+          const value = originalValue < 1 ? originalValue * 100 : originalValue;
+          console.log('Flip A Coin Cmd: Value:', originalValue);
+          const coin = originalValue === 1 ? 'one_credit' : originalValue === .5 ? 'fifty_parts' : 'twenty_five_parts';
+          await UserServices.addBalance(originalValue, confirmation.user.id);
+          const units = originalValue < 1 ? 'parts' : 'credit';
           console.log('Flip A Coin Cmd: Units:', units);
 
-          const score = {
+          const result = {
             user_id: confirmation.user.id,
             side: confirmation.values[0],
             lucky: true,
             ultra_rare_plus: false,
             coin,
-            value
+            value: originalValue
           }
 
-          const result = await ScoresServices.fateScoreTracking(score);
-          console.log('Flip A Coin Cmd: Result:', result);
+          await ScoresServices.fateScoreTracking(result);
 
-          return await interaction.editReply({
-            content: `**${properFate}!** It is your lucky day.\n\nYou receive **${wholeValue} ${units}**.`,
+          await interaction.editReply({
+            content: `**${properFate}!** It is your lucky day.\n\nYou receive **${value} ${units}**.`,
             components: []
           });
+          return console.log(`${confirmation.user.id} was lucky.`)
         }
         else if (fate === 'UR+') {
           console.log('Flip A Coin Cmd: Fate:', fate);
           const value = 1;
-          const coin = value === 1 ? 'one_credit' : value === .5 ? 'fifty_parts' : 'twenty_five_parts';
-          await UserServices.addBalance(value, confirmation.user.id);
+          const exp = 500;
+          await UserServices.addBalance(originalValue, confirmation.user.id);
 
-          const score = {
+          const result = {
             user_id: confirmation.user.id,
             side: confirmation.values[0],
             lucky: null,
@@ -114,19 +115,27 @@ module.exports = {
             value
           }
 
-          const result = await ScoresServices.fateScoreTracking(score);
-          console.log('Flip A Coin Cmd: Result:', result);
+          await ScoresServices.fateScoreTracking(result);
+          await UserLevelsServices.addExp(exp, confirmation.user.id);
 
-          return await interaction.editReply({
-            content: `*The coin lands on its side and spins for what feels like forever before stopping still on its thin, outer ridges.*\n\n Huh... That rarely happens... Hold onto the coin. Maybe it is lucky one.\n\nYou gain **${value} credit**.`,
+          await interaction.editReply({
+            content: `*The coin lands on its side and spins for what feels like forever before stopping still on its thin, outer ridges.*\n\n Huh... That rarely happens... Hold onto the coin. Maybe it is lucky one.\n\nGained **${value} credit**`,
             components: []
           });
+          
+          await wait(3_000);
+
+          await interaction.followUp({
+            content: `*After picking the coin off the barista's palm, you suddenly feel wiser as though you've gained insight into how this world works.*\n\nGained **${exp} experience**`,
+            components: []
+          })
+          return console.log(`${confirmation.user.id} was ultra lucky.`)
         }
         else {
           console.log('Flip A Coin Cmd: Selected Value:', confirmation.values[0]);
           console.log('Flip A Coin Cmd: Fate:', fate);
 
-          const score = {
+          const result = {
             user_id: confirmation.user.id,
             side: confirmation.values[0],
             lucky: false,
@@ -135,13 +144,13 @@ module.exports = {
             value: null
           }
 
-          const result = await ScoresServices.fateScoreTracking(score);
-          console.log('Flip A Coin Cmd: Result:', result);
+          await ScoresServices.fateScoreTracking(result);
 
-          return await interaction.editReply({
+          await interaction.editReply({
             content: `**${properFate}**. Better luck next time.`,
             components: []
           });
+          return console.log(`${confirmation.user.id} was unlucky.`)
         }
       }
       else if (confirmation.values[0] === 'i-will-decide') {
