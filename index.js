@@ -10,6 +10,7 @@ client.commands = new Collection();
 client.cooldowns = new Collection();
 client.menus = new Collection();
 client.usersCache = new Collection();
+client.userLevelsCache = new Collection();
 client.userItemsCache = new Collection();
 client.rpsScoresCache = new Collection();
 client.fateScoresCache = new Collection();

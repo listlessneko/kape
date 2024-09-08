@@ -1,72 +1,13 @@
-const path = require('node:path');
-const { UserContextMenuCommandInteraction } = require('discord.js');
+const { Op, Users } = require('../data/db-objects.js');
 const { MathServices } = require('./math-services.js');
-const { Op, Users, UserItems } = require(path.join(__dirname, '..', 'data', 'db-objects.js'));
-//const UserItems = require(path.join(__dirname, '..', 'models', 'user-items.js'));
-const { client } = require(path.join(__dirname, '..', 'client.js'));
+const { SearchServices } = require('./search-services.js');
+const levels = require('../data/levels.json');
+const { client } = require('../client.js');
 const usersCache = client.usersCache;
 
 const UserServices = {
   async getUsers(...userIds) {
-    const usersInCache = [];
-    const usersNotInCache = [];
-
-    userIds.forEach(userId => {
-      if (!usersCache.has(userId)) {
-        usersNotInCache.push(userId);
-      }
-      else {
-        usersInCache.push(userId);
-      }
-    });
-
-    //console.log('Get User - User In Cache:', usersInCache);
-    //console.log('Get User - User Not In Cache:', usersNotInCache);
-
-    if (usersNotInCache.length > 0) {
-      const dbUsers = await Users.findAll({
-        where: {
-          user_id: {
-            [Op.in]: usersNotInCache
-          }
-        }
-      });
-
-      //console.log('Get User - User In Database:', dbUsers);
-
-      dbUsers.forEach(user => {
-        //console.log('dbusers:', user);
-        const userId = user.dataValues.user_id;
-
-        if (!usersCache.has(userId)) {
-          usersCache.set(userId, user);
-        }
-      });
-
-      await Promise.all(userIds.map(async (userId) => {
-        const userExists = (dbUsers.some(user => user.dataValues.user_id === userId));
-
-        if (!userExists) {
-          await Users.create({
-            user_id: userId
-          });
-          const newUser = await Users.findOne({
-            where: {
-              user_id: userId
-            }
-          });
-          usersCache.set(userId, newUser);
-        }
-      }));
-    }
-
-    if (userIds.length === 1) {
-      const cachedUser = usersCache.get(userIds[0]);
-      return cachedUser;
-    }
-    const cachedUsers = userIds.map(userId => usersCache.get(userId));
-    return cachedUsers;
-
+    return await SearchServices.fetch(usersCache, Users, ...userIds);
   },
 
   async getAllUsers() {
@@ -75,10 +16,6 @@ const UserServices = {
       usersCache.set(user.dataValues.user_id, user);
     });
     console.log(usersCache);
-  },
-
-  async checkLvl() {
-
   },
 
   async addEnergy(amount, ...userIds) {

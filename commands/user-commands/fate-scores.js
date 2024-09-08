@@ -20,16 +20,13 @@ module.exports = {
 
     function nameFormatter(string) {
       let newString = '';
-      console.log('Fate Scores - New String:', newString);
       let elementalize = string.split('_');
-      console.log('Fate Scores - Elementalize:', elementalize);
       let properfy = elementalize.map(word => {
         if (isLetter(word)) {
           return word.charAt(0).toUpperCase() + word.slice(1);
         }
         return word;
       });
-      console.log('Fate Scores - Properfy:', properfy);
       return newString = properfy.join(' ');
     }
 

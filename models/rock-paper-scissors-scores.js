@@ -96,33 +96,54 @@ module.exports = (sequelize, DataTypes) => {
     },
   },
     {
-      timestamps: false
-    },
-    {
+      timestamps: false,
       hooks: {
         beforeSave: (rpsScores) => {
-          calculateTotals(rpsScores);
+          if (hasChanged(rpsScores)) {
+            calculateTotals(rpsScores);
+          }
         },
         afterFind: (rpsScores) => {
           if (Array.isArray(rpsScores)) {
             rpsScores.forEach(rpsScore => {
-              calculateTotals(rpsScore);
+              if (hasChanged(rpsScore)) {
+                calculateTotals(rpsScore);
+              }
             });
           }
           else if (rpsScores) {
-            calculateTotals(rpsScores);
+            if (hasChanged(rpsScores)) {
+              calculateTotals(rpsScores);
+            }
           }
         }
       }
     });
 
-  function calculateTotals(rpsScores) {
-    rpsScores.wins = rpsScores.rock_wins + rpsScores.paper_wins + rpsScores.scissors_wins;
-    rpsScores.losses = rpsScores.rock_losses + rpsScores.paper_losses + rpsScores.scissors_losses;
-    rpsScores.draws = rpsScores.rock_draws + rpsScores.paper_draws + rpsScores.scissors_draws;
-    rpsScores.rock = rpsScores.rock_wins + rpsScores.rock_losses + rpsScores.rock_draws;
-    rpsScores.paper = rpsScores.paper_wins + rpsScores.paper_losses + rpsScores.paper_draws;
-    rpsScores.scissors = rpsScores.scissors_wins + rpsScores.scissors_losses + rpsScores.scissors_draws;
-    rpsScores.battles = rpsScores.wins + rpsScores.losses + rpsScores.draws;
-  }
 };
+
+function hasChanged(rpsScores) {
+  const relevantFields = [
+    'rock_wins',
+    'rock_losses',
+    'rock_draws',
+    'paper_wins',
+    'paper_losses',
+    'paper_draws',
+    'scissors_wins',
+    'scissors_losses',
+    'scissors_draws',
+  ];
+
+  return relevantFields.some(field => rpsScores.changed(field));
+}
+
+function calculateTotals(rpsScores) {
+  rpsScores.wins = rpsScores.rock_wins + rpsScores.paper_wins + rpsScores.scissors_wins;
+  rpsScores.losses = rpsScores.rock_losses + rpsScores.paper_losses + rpsScores.scissors_losses;
+  rpsScores.draws = rpsScores.rock_draws + rpsScores.paper_draws + rpsScores.scissors_draws;
+  rpsScores.rock = rpsScores.rock_wins + rpsScores.rock_losses + rpsScores.rock_draws;
+  rpsScores.paper = rpsScores.paper_wins + rpsScores.paper_losses + rpsScores.paper_draws;
+  rpsScores.scissors = rpsScores.scissors_wins + rpsScores.scissors_losses + rpsScores.scissors_draws;
+  rpsScores.battles = rpsScores.wins + rpsScores.losses + rpsScores.draws;
+}

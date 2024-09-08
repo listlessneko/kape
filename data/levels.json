@@ -1,0 +1,42 @@
+[
+  {
+    "level": "1",
+    "experience": 100
+  },
+  {
+    "level": "2",
+    "experience": 250
+  },
+  {
+    "level": "3",
+    "experience": 450
+  },
+  {
+    "level": "4",
+    "experience": 600
+  },
+  {
+    "level": "5",
+    "experience": 800
+  },
+  {
+    "level": "6",
+    "experience": 1050
+  },
+  {
+    "level": "7",
+    "experience": 1350
+  },
+  {
+    "level": "8",
+    "experience": 1700
+  },
+  {
+    "level": "9",
+    "experience": 2100
+  },
+  {
+    "level": "10",
+    "experience": 2550
+  }
+]

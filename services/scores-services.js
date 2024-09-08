@@ -1,69 +1,12 @@
-const path = require('node:path');
-const { Op, RPSScores, FateScores } = require(path.join(__dirname, '..', 'data', 'db-objects.js'));
-const { client } = require(path.join(__dirname, '..', 'client.js'));
+const { Op, RPSScores, FateScores } = require('../data/db-objects.js');
+const { SearchServices } = require('../services/search-services.js');
+const { client } = require('../client.js');
 const rpsScoresCache = client.rpsScoresCache;
 const fateScoresCache = client.fateScoresCache;
 
 const ScoresServices = {
   async getRpsScores(...userIds) {
-
-    const usersNotInCache = [];
-
-    userIds.forEach(userId => {
-      if (!rpsScoresCache.has(userId)) {
-        usersNotInCache.push(userId);
-      }
-    });
-
-    console.log('ScoresServices - Users Not In Cache:', usersNotInCache);
-
-    if (usersNotInCache.length > 0) {
-      const dbUsers = await RPSScores.findAll({
-        where: {
-          user_id: {
-            [Op.in]: usersNotInCache
-          }
-        }
-      });
-
-      console.log('ScoresServices - dbUsers:', dbUsers);
-
-      dbUsers.forEach(user => {
-        const userId = user.dataValues.user_id;
-
-        if (!rpsScoresCache.has(userId)) {
-          rpsScoresCache.set(userId, user);
-        }
-      });
-
-      await Promise.all(userIds.map(async (userId) => {
-        const userExists = dbUsers.some(user => user.dataValues.user_id === userId);
-        console.log('ScoresServices - User:', userId);
-        console.log('ScoresServices - User Exists:', userExists);
-
-        if (!userExists) {
-          await RPSScores.create({
-              user_id: userId
-          });
-          const newUser = await RPSScores.findOne({
-            where: {
-              user_id: userId
-            }
-          });
-          console.log('ScoresServices - New User:', newUser);
-          rpsScoresCache.set(userId, newUser);
-        }
-      }));
-    }
-
-    if (userIds.length === 1) {
-      return rpsScoresCache.get(userIds[0]);
-    }
-    const cachedUsers = userIds.map(userId => rpsScoresCache.get(userId));
-    return cachedUsers;
-  },
-
-  async rpsGetAllUsers() {
+    return await SearchServices.fetch(rpsScoresCache, RPSScores, ...userIds);
   },
 
   async oldrpsVsKapé(victory, defeat, draw, userId) {
@@ -152,54 +95,7 @@ const ScoresServices = {
   },
 
   async getFateScores(...userIds) {
-
-    const usersNotInCache = [];
-
-    userIds.forEach(userId => {
-      if (!fateScoresCache.has(userId)) {
-        usersNotInCache.push(userId);
-      }
-    });
-
-    if (usersNotInCache.length > 0) {
-      const usersInDatabase = await FateScores.findAll({
-        where: {
-          user_id: {
-            [Op.in]: usersNotInCache
-          }
-        }
-      });
-
-      if (usersInDatabase.length > 0) {
-        usersInDatabase.forEach(user => {
-          if (!fateScoresCache.has(user)) {
-            fateScoresCache.set(user.dataValues.user_id, user)
-          }
-        });
-      }
-
-      await Promise.all(userIds.map(async (userId) => {
-        const userExists = usersInDatabase.some(user => user.dataValues.id === userId);
-
-        if (!userExists) {
-          await FateScores.create({
-            user_id: userId
-          });
-
-          const newUser = await FateScores.findOne({
-            where: {
-              user_id: userId
-            }
-          });
-          fateScoresCache.set(userId, newUser);
-        }
-      }));
-    }
-    if (userIds.length === 1) {
-      return fateScoresCache.get(userIds[0]);
-    }
-    const cachedUsers = userIds.map(userId => fateScoresCache.get(userId));
-    return cachedUsers;
+    return await SearchServices.fetch(fateScoresCache, FateScores, ...userIds);
   },
 
   async fateScoreTracking(fate) {
@@ -306,22 +202,6 @@ const ScoresServices = {
       fortune: user.fortune
     };
   },
-
-  async fateCoinTracking(lucky, unlucky, ultraRarePlus, userId) {
-    const user = await this.getFateScores(userId);
-    const outcome = lucky ? 'lucky' : unlucky ? 'unlucky' : ultraRarePlus;
-    const prev_outcome = user[outcome];
-    user[outcome] += 1;
-    await user.save();
-    fateScoresCache.set(userId, user);
-    return {
-      user_id: userId,
-      prev_outcome,
-      lucky: user.lucky,
-      unlucky: user.unlucky,
-      ultra_rare_plus: user.ultra_rare_plus,
-    };
-  }
 }
 
 module.exports = {

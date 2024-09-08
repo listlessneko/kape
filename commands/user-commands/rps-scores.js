@@ -48,7 +48,7 @@ module.exports = {
       }
     });
 
-    // console.log('RPS Score Cmd - Scores:', scores);
+    console.log('RPS Score Cmd - Scores:', scores);
 
     return await interaction.reply({
       content: `__**Rock Paper Scissors Against Kapé**__\n${scores.join('\n')}`

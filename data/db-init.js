@@ -1,8 +1,9 @@
 const path = require('node:path');
 
-const items = require(path.join(__dirname, 'items.json'));
+const items = require('./items.json');
+const levels = require('./levels.json');
 
-const { populateItems } = require(path.join(__dirname, 'functions', 'populate-items.js'));
+const { populateItems, populateLevels } = require('./functions/populate-db.js');
 
 const Sequelize = require('sequelize');
 
@@ -16,6 +17,8 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 const KafeItems = require(path.join(__dirname, '..', 'models', 'kafe-items'))(sequelize, Sequelize.DataTypes);
 const Users = require(path.join(__dirname, '..', 'models', 'users'))(sequelize, Sequelize.DataTypes);
 const UserItems = require(path.join(__dirname, '..', 'models', 'user-items'))(sequelize, Sequelize.DataTypes);
+const UserLevels = require(path.join(__dirname, '..', 'models', 'user-levels'))(sequelize, Sequelize.DataTypes);
+//const UserLevels = require('../models/user-levels')(sequelize, Sequelize.DataTypes);
 const RPSScores = require(path.join(__dirname, '..', 'models', 'rock-paper-scissors-scores'))(sequelize, Sequelize.DataTypes);
 const FateScores = require(path.join(__dirname, '..', 'models', 'fate-scores'))(sequelize, Sequelize.DataTypes);
 
@@ -25,7 +28,8 @@ async function initializeDatabase() {
   //KafeItems.sync({ force: true }).then(async () => {
   //  await populateItems(KafeItems, items);
   //});
-  await Users.sync({ alter: true });
+  //await Users.sync({ alter: true });
+  await UserLevels.sync({ force: true });
   //await UserItems.sync({ force: true });
   //await RPSScores.sync({ force: true });
   //await FateScores.sync({ force: true });

@@ -89,31 +89,59 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     hooks: {
       beforeCreate: (fateScores) => {
-        calculateTotals(fateScores);
+        if (hasChanged(fateScores)) {
+          calculateTotals(fateScores);
+        }
       },
       beforeUpdate: (fateScores) => {
-        calculateTotals(fateScores);
+        if (hasChanged(fateScores)) {
+          calculateTotals(fateScores);
+        }
       },
       afterFind: (fateScores) => {
         if (Array.isArray(fateScores)) {
           fateScores.forEach(fateScore => {
-            calculateTotals(fateScore);
+            if (hasChanged(fateScore)) {
+              calculateTotals(fateScore);
+            }
           });
         }
         else if (fateScores) {
+          if (hasChanged(fateScores)) {
             calculateTotals(fateScores);
+          }
         }
       }
     }
   });
 
-  function calculateTotals(fateScores) {
-    fateScores.lucky = fateScores.lucky_heads + fateScores.lucky_tails;
-    fateScores.unlucky = fateScores.unlucky_heads + fateScores.unlucky_tails;
-    fateScores.heads = fateScores.lucky_heads + fateScores.unlucky_heads + fateScores.ultra_lucky_heads;
-    fateScores.tails = fateScores.lucky_tails + fateScores.unlucky_tails + fateScores.ultra_lucky_tails;
-    fateScores.coins = fateScores.one_credit + fateScores.fifty_parts + fateScores.twenty_five_parts;
-    fateScores.fortune = fateScores.one_credit + ((fateScores.fifty_parts * 50) / 100) + ((fateScores.twenty_five_parts * 25) / 100);
-    fateScores.trials_with_fate = fateScores.lucky + fateScores.unlucky + fateScores.ultra_rare_plus;
-  }
 };
+
+function hasChanged(fateScores) {
+  console.log('Fate Scores Model - hasChanged: Test');
+  const relevantFields = [
+    'lucky_heads',
+    'lucky_tails',
+    'unlucky_heads',
+    'unlucky_tails',
+    'ultra_lucky_heads',
+    'ultra_lucky_tails',
+    'one_credit',
+    'fifty_parts',
+    'twenty_five_parts',
+    'ultra_rare_plus',
+  ];
+
+  return relevantFields.some(field => fateScores.changed(field));
+}
+
+function calculateTotals(fateScores) {
+  console.log('Fate Scores Model - calculateTotals: Test');
+  fateScores.lucky = fateScores.lucky_heads + fateScores.lucky_tails;
+  fateScores.unlucky = fateScores.unlucky_heads + fateScores.unlucky_tails;
+  fateScores.heads = fateScores.lucky_heads + fateScores.unlucky_heads + fateScores.ultra_lucky_heads;
+  fateScores.tails = fateScores.lucky_tails + fateScores.unlucky_tails + fateScores.ultra_lucky_tails;
+  fateScores.coins = fateScores.one_credit + fateScores.fifty_parts + fateScores.twenty_five_parts;
+  fateScores.fortune = fateScores.one_credit + ((fateScores.fifty_parts * 50) / 100) + ((fateScores.twenty_five_parts * 25) / 100);
+  fateScores.trials_with_fate = fateScores.lucky + fateScores.unlucky + fateScores.ultra_rare_plus;
+}
