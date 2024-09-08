@@ -33,7 +33,6 @@ module.exports = {
         if (i.user.id === interaction.user.id) {
           if (!menu) {
             if (selectedValue === 'nevermind') {
-              console.log('test');
               await i.update({
                 content: `Oh, maybe next time.`,
                 components: []

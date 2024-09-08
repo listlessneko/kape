@@ -15,12 +15,12 @@ module.exports = {
 
   async execute(interaction) {
     const user = interaction.options.getUser('user') ?? interaction.user;
-    const userInstance = await UserLevelsServices.getUserLevels(user.id);
-    const userLevelDataValues = Object.entries(userInstance.dataValues);
+    const userInstance = await UserLevelsServices.checkLevel(user.id);
+    const userLevelDataValues = Object.entries(userInstance);
 
     const userLevelInfo = [];
 
-    const excludedFields = ['user_id', 'prev_exp_req'];
+    const excludedFields = ['user_id', 'level_up', 'prev_exp_req'];
 
     userLevelDataValues.forEach(([field, value]) => {
       if (!excludedFields.includes(field)) {

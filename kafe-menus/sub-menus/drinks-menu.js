@@ -15,7 +15,7 @@ for (type of drinks.types) {
   selectMenu.addOptions(
     new StringSelectMenuOptionBuilder()
       .setLabel(type.name)
-      .setValue(type.value)
+      .setValue(`${type.value}-sub-menu`)
       .setDescription(type.description)
   )
 }

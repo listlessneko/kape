@@ -53,7 +53,7 @@ module.exports = {
 
             else if (!menu) {
               if (selectedValue === 'nevermind') {
-                await interaction.update({
+                await i.update({
                   content: `Oh, maybe next time.`,
                   components: []
                 });

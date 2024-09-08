@@ -136,12 +136,19 @@ module.exports = {
             };
 
             await ScoresServices.rpsVsKapé(result);
-            await UserLevelsServices.addExp(result.rewards.exp, result.user_id);
+            const user = await UserLevelsServices.addExp(result.rewards.exp, result.user_id);
 
             await interaction.editReply({
               content: `Jan... ken... pon!\n\n(You) ${outcomes[selectedValue]['weapon_icon']} vs. ${outcomes[baristaWeapon]['weapon_icon']} (Kapé)\n*That was stale, mate.*\n\nLost **${energy_consumed} energy**\nGained **${rewards.exp} experience**`,
               components: []
             });
+
+            if (user.level_up) {
+              await wait(1_000);
+              await interaction.followUp({
+                content: `*You suddenly feel wiser as though you understand a little bit more how this world turns.*\n\nLeveled up from Level ${user.prev_level} to **Level ${user.level}**`
+              });
+            }
             return collector.stop('Rock Paper Scissors Cmd: A draw.');
           }
 
@@ -169,12 +176,19 @@ module.exports = {
             };
 
             await ScoresServices.rpsVsKapé(result);
-            await UserLevelsServices.addExp(result.rewards.exp, result.user_id);
+            const user = await UserLevelsServices.addExp(result.rewards.exp, result.user_id);
 
             await interaction.editReply({
               content: `Jan... ken... pon!\n\n(You) ${outcomes[selectedValue]['weapon_icon']} vs. ${outcomes[baristaWeapon]['weapon_icon']} (Kapé)\n*Huh, you won.*\n\nLost **${energy_consumed} energy**\nGained **${rewards.exp} experience**\nReceived **${rewards.credits} credits**`,
               components: []
             });
+
+            if (user.level_up) {
+              await wait(1_000);
+              await interaction.followUp({
+                content: `*You suddenly feel wiser as though you understand a little bit more how this world turns.*\n\nLeveled up from Level ${user.prev_level} to **Level ${user.level}**`
+              });
+            }
             return collector.stop('Rock Paper Scissors Cmd: Fight ended. User victory.');
           }
 

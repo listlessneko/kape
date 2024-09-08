@@ -41,6 +41,7 @@ module.exports = {
         collector.on('collect', async i => {
           const menu = client.menus.get(i.values[0])
           const selectedValue = i.values[0];
+          console.log('Drinks Cmd - Selected Value:', selectedValue);
 
           if (i.user.id === interaction.user.id) {
             if (menu) {
