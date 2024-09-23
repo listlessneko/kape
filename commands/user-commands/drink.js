@@ -1,10 +1,7 @@
 const path = require('node:path');
-const { client } = require(path.join(__dirname, '..', '..', 'client.js'));
+const { client } = require('../../client.js');
 const { SlashCommandBuilder, ComponentType, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder } = require('discord.js');
-const { UserServices } = require(path.join(__dirname, '..', '..', 'services', 'user-services.js'));
-const { UserItemsServices } = require(path.join(__dirname, '..', '..', 'services', 'user-items-services.js'));
-const { KafeServices } = require(path.join(__dirname, '..', '..', 'services', 'kafe-services.js'));
-const { Users, KafeItems } = require(path.join(__dirname, '..', '..', 'data', 'db-objects.js'));
+const { UserServices, UserItemsServices, KafeServices, MathServices } = require('../../services/all-services.js');
 
 module.exports = {
   cooldown: 5,
@@ -68,17 +65,41 @@ module.exports = {
                 if (item) {
                   try {
                     if (item.cost <= user.balance) {
-                      const a = await UserServices.subtractBalance(item.cost, user.user_id);
-                      console.log('a:', a);
-                      const b = await UserServices.addEnergy(item.energy_replen.max, user.user_id);
-                      console.log('b:', b);
-                      await interaction.editReply({
-                        content: `Here is your **${item.name.toLowerCase()}**. Please enjoy it.\n*You drink all of it in one gulp.*\nYou have gained **${item.energy_replen.max} energy**.`,
-                        components: []
-                      });
-                      return collector.stop('Drink Cmd: Drink consumed from cafe.');
+                      console.log('Drinks Cmd - Item Cost:', item.cost);
+                      await UserServices.subtractBalance(item.cost, user.user_id);
+
+                      let energy = '';
+
+                      if (item.energy_replen.min !== item.energy_replen.max) {
+                        console.log('Drinks Cmd - Energy Diff');
+                        const interval = 5;
+                        const energyDiff = MathServices.randomMultiple(item.energy_replen.min, item.energy_replen.max, interval);
+                        energy = energyDiff.fate;
+                        console.log('Drinks Cmd - Fate:', energy);
+                      }
+                      else {
+                        energy = item.energy_replen.max;
+                      }
+                      if (energy <= 0) {
+                        await UserServices.addEnergy(energy, user.user_id);
+                        console.log('Drinks Cmd - Unfortunate:', energy);
+                        await i.update({
+                          content: `Here is your **${item.name.toLowerCase()}**. Please enjoy it.\n*You drink all of it in one gulp. Your stomach starts to feel strange and you have a sudden urge to find the nearest restroom.*\n\n-# **${MathServices.formatNumber(energy)} energy**`,
+                          components: []
+                        });
+                        return collector.stop('Drink consumed from cafe.');
+                      }
+                      else {
+                        console.log('Drinks Cmd - Energy Same:', energy);
+                        await UserServices.addEnergy(energy, user.user_id);
+                        await interaction.editReply({
+                          content: `Here is your **${item.name.toLowerCase()}**. Please enjoy it.\n*You drink all of it in one gulp.*\n\n-# **${MathServices.formatNumber(energy)} energy**`,
+                          components: []
+                        });
+                        return collector.stop('Drink consumed from cafe.');
+                      }
                     }
-                    else if (item.cost > user.balance) {
+                    else {
                       return await interaction.editReply({
                         content: `Hm... You lack the sufficient credits to purchase this item. Maybe come back next time.`,
                         components: []
@@ -189,7 +210,7 @@ module.exports = {
               content: `*You close your bag.*`,
               components: []
             });
-            return collector.stop('Drink Cmd: User closed bag.')
+            return collector.stop('User closed bag.')
           }
 
           if (i.user.id === interaction.user.id) {
@@ -197,12 +218,37 @@ module.exports = {
             console.log('Drink Cmd: Item:', item);
             const user = interaction.user.id;
             await UserItemsServices.removeItems(item, 1, user);
-            await UserServices.addEnergy(item.energy_replen.max, user);
-            await i.update({
-              content: `*You gulp down the entire beverage.*\nYou have gained **${item.energy_replen.max} energy**.`,
-              components: []
-            });
-            return collector.stop('Drink Cmd: Drink consumed from inventory.');
+
+            let energy = '';
+
+            if (item.energy_replen.min !== item.energy_replen.max) {
+              console.log('Drink Cmd - Energy Diff');
+                const interval = 5;
+                const energyDiff = MathServices.randomMultiple(item.energy_replen.min, item.energy_replen.max, interval);
+                energy = energyDiff.fate;
+                console.log('Drinks Cmd - Fate:', energy);
+            }
+            else {
+              energy = item.energy_replen.max;
+            }
+            if (energy <= 0) {
+              console.log('Drink Cmd - Unfortunate:', energy);
+              await UserServices.addEnergy(energy, user.user_id);
+              await i.update({
+                content: `*You drink all of it in one gulp. Your stomach starts to feel strange and you have a sudden urge to find the nearest restroom.*\n\n-# **${MathServices.formatNumber(energy)} energy**`,
+                components: []
+              });
+              return collector.stop('Drink consumed from inventory.');
+            }
+            else {
+              console.log('Drink Cmd - Energy Same:', energy);
+              await UserServices.addEnergy(energy, user);
+              await i.update({
+                content: `*You gulp down the entire beverage.*\n-#**${MathServices.formatNumber(energy)} energy**`,
+                components: []
+              });
+              return collector.stop('Drink consumed from inventory.');
+            }
           }
           else if (i.user.id !== interaction.user.id) {
             await i.update({

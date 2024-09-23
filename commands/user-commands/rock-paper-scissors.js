@@ -13,9 +13,9 @@ module.exports = {
     .setDescription('Play rock paper scissors with the barista.'),
 
   async execute(interaction) {
-    const userEnergy = await UserServices.getUsers(interaction.user.id);
+    const userStatus = await UserServices.getUsers(interaction.user.id);
 
-    if (userEnergy.energy < 5) {
+    if (userStatus.energy < 5) {
       await interaction.reply({
         content: `Uh... You look tired. Get some rest and we can play again later.`,
         components: []

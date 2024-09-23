@@ -1,7 +1,7 @@
 const { UserLevels } = require('../data/db-objects.js');
 const { client } = require('../client.js');
 const userLevelsCache = client.userLevelsCache;
-const { SearchServices } = require('../services/search-services.js');
+const { SearchServices } = require('./search-services.js');
 
 const UserLevelsServices = {
   async getUserLevels(...userIds) {
@@ -42,6 +42,7 @@ const UserLevelsServices = {
   async checkLevel(userId) {
 
     const user = await this.getUserLevels(userId);
+    console.log('Check Level - User:', user);
 
     const expRequired = await this.calculateExpReq(user.level, user.prev_exp_req);
     console.log('Check Level - Experience Required:', expRequired);
@@ -76,8 +77,10 @@ const UserLevelsServices = {
     let level_up = false;
 
     if (!user) {
-      user = await this.checkLevel(userId);
+      user = await this.getUserLevels(userId);
     }
+
+    console.log('Add Exp - User:', user);
 
     const prev_level_exp = user.current_level_exp;
     user.current_level_exp += Number(amount);

@@ -29,12 +29,34 @@
               "type": "coffee"
             },
             {
+              "name": "Pour-Over Coffee",
+              "value": "pour-over-coffee",
+              "description": "Freshly, brewed coffee.",
+              "content": "Here you go.",
+              "cost": 3.00,
+              "energy_replen": { "min": 15, "max": 15 },
+              "uses": 1,
+              "category": "drinks",
+              "type": "coffee"
+            },
+            {
+              "name": "Cold Brew",
+              "value": "cold-brew",
+              "description": "Not to be confused with Code: Blue.",
+              "content": "Here you go.",
+              "cost": 3.50,
+              "energy_replen": { "min": 20, "max": 20 },
+              "uses": 1,
+              "category": "drinks",
+              "type": "coffee"
+            },
+            {
               "name": "Espresso",
               "value": "espresso",
               "description": "Express coffee.",
               "content": "Here you go.",
               "cost": 3.50,
-              "energy_replen": { "min": 15, "max": 15 },
+              "energy_replen": { "min": 10, "max": 10 },
               "uses": 1,
               "category": "drinks",
               "type": "coffee"
@@ -51,12 +73,23 @@
               "type": "coffee"
             },
             {
+              "name": "Macchiato",
+              "value": "macchiato",
+              "description": "Espresso with milk.",
+              "content": "Here you go.",
+              "cost": 4.00,
+              "energy_replen": { "min": 10, "max": 10 },
+              "uses": 1,
+              "category": "drinks",
+              "type": "coffee"
+            },
+            {
               "name": "Cappuccino",
               "value": "cappuccino",
               "description": "Habit of the First Order.",
               "content": "Here you go.",
               "cost": 3.00,
-              "energy_replen": { "min": 10, "max": 10 },
+              "energy_replen": { "min": 20, "max": 20 },
               "uses": 1,
               "category": "drinks",
               "type": "coffee"
@@ -68,6 +101,50 @@
               "content": "Here you go.",
               "cost": 4.00,
               "energy_replen": { "min": 10, "max": 10 },
+              "uses": 1,
+              "category": "drinks",
+              "type": "coffee"
+            },
+            {
+              "name": "Mocha",
+              "value": "mocha",
+              "description": "Chocolate milk coffee.",
+              "content": "Here you go.",
+              "cost": 4.00,
+              "energy_replen": { "min": 15, "max": 15 },
+              "uses": 1,
+              "category": "drinks",
+              "type": "coffee"
+            },
+            {
+              "name": "Hazelnut Latte",
+              "value": "hazelnut-latte",
+              "description": "Fancy chocolate-like coffee with milk.",
+              "content": "Here you go.",
+              "cost": 4.50,
+              "energy_replen": { "min": 15, "max": 15 },
+              "uses": 1,
+              "category": "drinks",
+              "type": "coffee"
+            },
+            {
+              "name": "Vanilla Latte",
+              "value": "vanilla-latte",
+              "description": "Basic coffee with milk.",
+              "content": "Here you go.",
+              "cost": 4.00,
+              "energy_replen": { "min": 15, "max": 15 },
+              "uses": 1,
+              "category": "drinks",
+              "type": "coffee"
+            },
+            {
+              "name": "Death Coffee",
+              "value": "death-coffee",
+              "description": "Four shots of espresso.",
+              "content": "Here you go.",
+              "cost": 4.00,
+              "energy_replen": { "min": -15, "max": 40 },
               "uses": 1,
               "category": "drinks",
               "type": "coffee"
@@ -117,6 +194,28 @@
               "type": "tea"
             },
             {
+              "name": "Barley Tea",
+              "value": "barley-tea",
+              "description": "Some might say it's barely tea.",
+              "content": "Here you go.",
+              "cost": 3.00,
+              "energy_replen": { "min": 10, "max": 10 },
+              "uses": 1,
+              "category": "drinks",
+              "type": "tea"
+            },
+            {
+              "name": "Oolong Tea",
+              "value": "oolong-tea",
+              "description": "A long time favorite.",
+              "content": "Here you go.",
+              "cost": 3.50,
+              "energy_replen": { "min": 15, "max": 15 },
+              "uses": 1,
+              "category": "drinks",
+              "type": "tea"
+            },
+            {
               "name": "Chamomile Tea",
               "value": "chamomile-tea",
               "description": "Go to sleep tea.",
@@ -128,12 +227,45 @@
               "type": "tea"
             },
             {
+              "name": "Lemon Tea",
+              "value": "lemon-tea",
+              "description": "It's our tea.",
+              "content": "Here you go.",
+              "cost": 3.00,
+              "energy_replen": { "min": 10, "max": 10 },
+              "uses": 1,
+              "category": "drinks",
+              "type": "tea"
+            },
+            {
+              "name": "Peach Tea",
+              "value": "peach-tea",
+              "description": "It's all peachy.",
+              "content": "Here you go.",
+              "cost": 3.00,
+              "energy_replen": { "min": 10, "max": 10 },
+              "uses": 1,
+              "category": "drinks",
+              "type": "tea"
+            },
+            {
               "name": "Earl Grey Tea",
               "value": "earl-grey-tea",
               "description": "Not good enough to be a marquess.",
               "content": "Here you go.",
               "cost": 4.00,
               "energy_replen": { "min": 10, "max": 10 },
+              "uses": 1,
+              "category": "drinks",
+              "type": "tea"
+            },
+            {
+              "name": "Pu-erh Tea",
+              "value": "pu-erh-tea",
+              "description": "For royalty.",
+              "content": "Here you go.",
+              "cost": 4.50,
+              "energy_replen": { "min": 15, "max": 15 },
               "uses": 1,
               "category": "drinks",
               "type": "tea"
@@ -183,12 +315,56 @@
               "type": "non-caffeinated"
             },
             {
+              "name": "Pineapple Juice",
+              "value": "pineapple-juice",
+              "description": "Juice of knowledge but with spikes.",
+              "content": "Here you go.",
+              "cost": 2.50,
+              "energy_replen": { "min": -5, "max": 5 },
+              "uses": 1,
+              "category": "drinks",
+              "type": "non-caffeinated"
+            },
+            {
+              "name": "Lemonade",
+              "value": "lemonade",
+              "description": "Not a lemon aide.",
+              "content": "Here you go.",
+              "cost": 3.00,
+              "energy_replen": { "min": 5, "max": 5 },
+              "uses": 1,
+              "category": "drinks",
+              "type": "non-caffeinated"
+            },
+            {
+              "name": "Energy Jelly",
+              "value": "energy-jelly",
+              "description": "Made by Dr. Jelly.",
+              "content": "Here you go.",
+              "cost": 3.50,
+              "energy_replen": { "min": 10, "max": 10 },
+              "uses": 1,
+              "category": "drinks",
+              "type": "non-caffeinated"
+            },
+            {
               "name": "Milo",
               "value": "milo",
               "description": "Chocolate milk.",
               "content": "Here you go.",
-              "cost": 3.00,
+              "cost": 3.50,
               "energy_replen": { "min": 10, "max": 10 },
+              "uses": 1,
+              "category": "drinks",
+              "type": "non-caffeinated"
+            },
+            {
+              "name": "Coconut Water",
+              "value": "coconut-water",
+              "description": "Coconut for water.",
+              "content": "Here you go.",
+              "cost": 4.00,
+              "energy_replen": { "min": 10, "max": 10 }, 
               "uses": 1,
               "category": "drinks",
               "type": "non-caffeinated"
@@ -200,6 +376,17 @@
               "content": "Here you go.",
               "cost": 4.00,
               "energy_replen": { "min": 10, "max": 10 },
+              "uses": 1,
+              "category": "drinks",
+              "type": "non-caffeinated"
+            },
+            {
+              "name": "Root Beer",
+              "value": "root-beer",
+              "description": "Not alcoholic.",
+              "content": "Here you go.",
+              "cost": 4.00,
+              "energy_replen": { "min": 5, "max": 5 },
               "uses": 1,
               "category": "drinks",
               "type": "non-caffeinated"

@@ -1,0 +1,476 @@
+{
+  "customers": [
+    {
+      "customer_id": 1,
+      "name": "Kuga",
+      "descriptive_name": "Strange boy",
+      "stranger": {
+        "name": "Strange boy"
+      },
+      "acquaintance": {
+        "name": "Kuga"
+      },
+      "trust_level_up": {
+        "acquaintance": ""
+      },
+      "orders": [
+        {
+          "category": "drinks",
+          "type": "coffee",
+          "drink": "cappuccino",
+          "acceptable_items": [ "cappuccino", "latte", "mocha" ],
+          "stranger": {
+            "order": "*A short boy with white hair and inquisitive, strange eyes approaches the counter.*\n\n**Strange boy**: Hmm... I would like one order of **cap--**, um... **Capa**... no. **Cupo**... hmmm... The human language is difficult...\n\n*Perhaps he's a foreginer...*",
+            "incorrect": "**Strange boy**: Hm... Hm... No, not this...\n\n*While you reconsidered what drink he intended to order, he too seems unsure if that was **not** the drink he intended to order.*",
+            "acceptable": "**Strange boy**: Hm... I don't think this is it... but I'll try it.\n\n*He grabs the cup with two hands and scrunches his eyes in curiosity.*",
+            "correct": "**Strange boy**: Ah, yes. This one. Thank you very much.\n\n*The boy grabs the cup with two hands and though he still looks at it inquisitively, he also seems satisfied.*"
+          },
+          "acuaintance": {
+            "order": "*The short boy with white hair and inquisitive, strange eyes approaches the counter again.*\n\n**Kuga**: Hmm... I would like one order of **cap--**, um... **Capa**... no. **Cupo**... hmmm... The human language is difficult...\n\n*He's never really explained where he's from, but you accept and appreciate he's still learning.*",
+            "incorrect": "**Kuga**: Hm... Hm... No, not this...\n\n*While you reconsidered what drink he intended to order, he too seems unsure if that was **not** the drink he intended to order.*",
+            "acceptable": "**Kuga**: Hm... I don't think this is it... but I'll try it.\n\n*He grabs the cup with two hands and scrunches his eyes in curiosity.*",
+            "correct": "**Kuga**: Ah, yes. This one. Thank you very much.\n\n*The boy grabs the cup with two hands and though he still looks at it inquisitively, he also seems satisfied.*"
+          }
+        },
+        {
+          "category": "drinks",
+          "type": "coffee",
+          "drink": "latte",
+          "acceptable_items": [ "cappuccino", "latte", "mocha" ],
+          "stranger": {
+            "order": "*A short boy with white hair and inquisitive, strange eyes approaches the counter and confidently asks...*\n\n**Strange boy**: I would like a **late**, please.\n\n*You couldn't help but stare back with the same eyes.*",
+            "incorrect": "**Strange boy**: Hm... Hm... No, not this...\n\n*While you reconsidered what drink he intended to order, he too seems unsure if that was **not** the drink he intended to order.*",
+            "acceptable": "**Strange boy**: Hm... I don't think this is it... but I'll try it.\n\n*He grabs the cup with two hands and scrunches his eyes in curiosity.*",
+            "correct": "**Strange boy**: Ah, yes. This one. Thank you very much.\n\n*The boy grabs the cup with two hands and though he still looks at it inquisitively, he also seems satisfied.*"
+          },
+          "acquaintance": {
+            "order": "*The short boy with white hair and inquisitive, strange eyes approaches the counter and confidently asks...*\n\n**Kuga**: I would like a **late**, please.\n\n*You still couldn't help but stare back with the same eyes. You've taught him many times before.*",
+            "incorrect": "**Kuga**: Hm... Hm... No, not this...\n\n*While you reconsidered what drink he intended to order, he too seems unsure if that was **not** the drink he intended to order.*",
+            "acceptable": "**Kuga**: Hm... I don't think this is it... but I'll try it.\n\n*He grabs the cup with two hands and scrunches his eyes in curiosity.*",
+            "correct": "**Kuga**: Ah, yes. This one. Thank you very much.\n\n*The boy grabs the cup with two hands and though he still looks at it inquisitively, he also seems satisfied.*"
+          }
+        },
+        {
+          "category": "drinks",
+          "type": "coffee",
+          "drink": "mocha",
+          "acceptable_items": [ "cappuccino", "latte", "mocha" ],
+          "stranger": {
+            "order": "*A short boy with white hair and inquisitive, strange eyes approaches the counter.*\n\n**Strange boy**: Can I have a **moc--**, um... **Moco**... ah! **Mac**... um...\n\n*...n' cheese?!*",
+            "incorrect": "**Strange boy**: Hm... Hm... No, not this...\n\n*While you reconsidered what drink he intended to order, he too seems unsure if that was **not** the drink he intended to order.*",
+            "acceptable": "**Strange boy**: Hm... I don't think this is it... but I'll try it.\n\n*He grabs the cup with two hands and scrunches his eyes in curiosity.*",
+            "correct": "**Strange boy**: Ah, yes. This one. Thank you very much.\n\n*The boy grabs the cup with two hands and though he still looks at it inquisitively, he also seems satisfied.*"
+          },
+          "acquaintance": {
+            "order": "*The short boy with white hair and inquisitive, strange eyes approaches the counter.*\n\n**Kuga**: Can I have a **moc--**, um... **Moco**... ah! **Mac**... um...\n\n*Still gets confused...*",
+            "incorrect": "**Kuga**: Hm... Hm... No, not this...\n\n*While you reconsidered what drink he intended to order, he too seems unsure if that was **not** the drink he intended to order.*",
+            "acceptable": "**Kuga**: Hm... I don't think this is it... but I'll try it.\n\n*He grabs the cup with two hands and scrunches his eyes in curiosity.*",
+            "correct": "**Kuga**: Ah, yes. This one. Thank you very much.\n\n*The boy grabs the cup with two hands and though he still looks at it inquisitively, he also seems satisfied.*"
+          }
+        }
+      ]
+    },
+    {
+      "customer_id": 2,
+      "name": "Ken",
+      "descriptive_name": "Silver-white-haired man",
+      "stranger": {
+        "name": "Silver-white-haired man"
+      },
+      "acquaintance": {
+        "name": "Ken"
+      },
+      "orders": [
+        {
+          "category": "drinks",
+          "type": "coffee",
+          "drink": "drip-coffee",
+          "acceptable_items": ["drip-coffee", "pour-over-coffee", "espresso"],
+          "stranger": {
+            "order": "*A young man with silver-white hair walks over to the counter, and without glancing at the menu...*\n\n**Silver-white-haired man**: Hello. I'll have the darkest roast that's ready, please.\n\n*He looks like he's exceptionally in a hurry today.*",
+            "incorrect": "**Silver-white-haired man**: Oh...\n\n*The young man lifts a curious brow as you place the cup in front of him. He politely shakes his hand towards the drink and says...*\n\n**Silver white-haired man**: This isn't what I ordered.\n\n*Confused, you quickly apologize and run back to the counter and try to make the right one.*",
+            "acceptable": "**Silver white-haired man**: Hmm...\n\n*The young man lifts a curious brow as you place the cup in front of him.*\n\n**Silver-white-haired man**: Thank you.\n\n*He politely says with a soft voice, but you get a feeling you made the wrong coffee.*",
+            "correct": "*As you place the cup in front of him, his eyes light up which contrasted with the rest of his serious, but calm demeanor.*\n\n**Silver-white-haired man**: Thank you very much.\n\n*He gestures a slight bow towards you before taking a sip.*"
+          },
+          "acquaintance": {
+            "order": "*A familiar silver-white-haired man in a fashionable clothes walks over to the counter. Without glancing at the menu...*\n\n**Ken**: Hello. I'll have the darkest roast that's ready, please.\n\n*Every once in awhile, he seems to always be in a rush.*",
+            "incorrect": "**Ken**: Oh...\n\n*The young man lifts a curious brow as you place the cup in front of him. He politely shakes his hand towards the drink and says...*\n\n**Ken**: This isn't what I ordered.\n\n*Confused, you quickly apologize and run back to the counter and try to make the right one.*",
+            "acceptable": "**Ken**: Hmm...\n\n*The young man lifts a curious brow as you place the cup in front of him.*\n\n**Ken**: Thank you.\n\n*He politely says with a soft voice, but you get a feeling you made the wrong coffee.*",
+            "correct": "*As you place the cup in front of him, his eyes light up which contrasted with the rest of his serious, but calm demeanor.*\n\n**Ken**: Thank you very much.\n\n*He gestures a slight bow towards you before taking a sip.*"
+          }
+        },
+        {
+          "category": "drinks",
+          "type": "coffee",
+          "drink": "pour-over-coffee",
+          "acceptable_items": ["drip-coffee", "pour-over-coffee", "espresso"],
+          "stranger": {
+            "order": "*A young man with silver white hair walks over to the counter, and without glancing at the menu...*\n\n**Silver white-haired man**: Hello. I'll have one cup. Just black.",
+            "incorrect": "**Silver-white-haired man**: Oh...\n\n*The young man lifts a curious brow as you place the cup in front of him. He politely shakes his hand towards the drink and says...*\n\n**Silver-white-haired man**: This isn't what I ordered.\n\n*Confused, you quickly apologize and run back to the counter and try to make the right one.*",
+            "acceptable": "**Silver-white-haired man**: Hmm...\n\n*The young man lifts a curious brow as you place the cup in front of him.*\n\n**Silver-white-haired man**: Thank you.\n\n*He politely says with a soft voice, but you get a feeling you made the wrong coffee.*",
+            "correct": "*As you place the cup in front of him, his eyes light up which contrasted with the rest of his serious, but calm demeanor.*\n\n**Silver-white-haired man**: Thank you very much.\n\n*He gestures a slight bow towards you before taking a sip.*"
+          },
+          "acquaintance": {
+            "order": "*A familiar silver-white-haired man in a fashionable clothes walks over to the counter. Without glancing at the menu...*\n\n**Ken**: Hello. I'll have **the usual**.",
+            "incorrect": "**Ken**: Oh...\n\n*The young man lifts a curious brow as you place the cup in front of him. He politely shakes his hand towards the drink and says...*\n\n**Ken**: This isn't what I ordered.\n\n*Confused, you quickly apologize and run back to the counter and try to make the right one.*",
+            "acceptable": "**Ken**: Hmm...\n\n*The young man lifts a curious brow as you place the cup in front of him.*\n\n**Ken**: Thank you.\n\n*He politely says with a soft voice, but you get a feeling you made the wrong coffee.*",
+            "correct": "*As you place the cup in front of him, his eyes light up which contrasted with the rest of his serious, but calm demeanor.*\n\n**Ken**: Thank you very much.\n\n*He gestures a slight bow towards you before taking a sip.*"
+          }
+        },
+        {
+          "category": "drinks",
+          "type": "coffee",
+          "drink": "espresso",
+          "acceptable_items": ["drip-coffee", "pour-over-coffee", "espresso"],
+          "stranger": {
+            "order": "*A young man with silver white hair walks over to the counter, and without glancing at the menu...*\n\n**Silver white-haired man**: Hello. I'll have one **espresso**, please.",
+            "incorrect": "**Silver-white-haired man**: Oh...\n\n*The young man lifts a curious brow as you place the cup in front of him. He politely shakes his hand towards the drink and says...*\n\n**Silver-white-haired man**: This isn't what I ordered.\n\n*Confused, you quickly apologize and run back to the counter and try to make the right one.*",
+            "acceptable": "**Silver-white-haired man**: Hmm...\n\n*The young man lifts a curious brow as you place the cup in front of him.*\n\n**Silver-white-haired man**: Thank you.\n\n*He politely says with a soft voice, but you get a feeling you made the wrong coffee.*",
+            "correct": "*As you place the cup in front of him, his eyes light up which contrasted with the rest of his serious, but calm demeanor.*\n\n**Silver-white-haired man**: Thank you very much.\n\n*He gestures a slight bow towards you before taking a sip.*"
+          },
+          "acquaintance": {
+            "order": "*A familiar silver-white-haired man in a fashionable clothes walks over to the counter. Without glancing at the menu...*\n\n**Ken**: Hello. I'll have one **espresso**, please.",
+            "incorrect": "**Ken**: Oh...\n\n*The young man lifts a curious brow as you place the cup in front of him. He politely shakes his hand towards the drink and says...*\n\n**Ken**: This isn't what I ordered.\n\n*Confused, you quickly apologize and run back to the counter and try to make the right one.*",
+            "acceptable": "**Ken**: Hmm...\n\n*The young man lifts a curious brow as you place the cup in front of him.*\n\n**Ken**: Thank you.\n\n*He politely says with a soft voice, but you get a feeling you made the wrong coffee.*",
+            "correct": "*As you place the cup in front of him, his eyes light up which contrasted with the rest of his serious, but calm demeanor.*\n\n**Ken**: Thank you very much.\n\n*He gestures a slight bow towards you before taking a sip.*"
+          }
+        }
+      ]
+    },
+    {
+      "customer_id": 3,
+      "name": "Mina",
+      "descriptive_name": "Young lady",
+      "stranger": {
+        "name": "Young lady"
+      },
+      "acquaintance": {
+        "name": "Mina"
+      },
+      "orders": [
+        {
+          "category": "drinks",
+          "type": "coffee",
+          "drink": "cold-brew",
+          "acceptable_items": [ "cold-brew", "pour-over-coffee", "macchiato" ],
+          "stranger": {
+            "order": "*A young lady with long, silky black hair enters the cafe. She pauses and scans the room before walking over.*\n\n**Young lady**: May I have one **cold** coffee?",
+            "incorrect": "*As you serve the coffee to the lady, her brows furrow with concern. With a wry smile, she very politely says...*\n\n**Young lady**: Um... This isn't what I ordered.\n\n*Flustered, you quickly apologize, take back the drink, and run back to make another one. Hopefully, the right one.*",
+            "acceptable": "*As you serve the coffee to the lady, her brows furrow with concern. Hesitantly, she says...*\n\n**Young lady**: Um...Thank you.\n\n*Before you realized the cause of the awkward tension, she started to take a sip of the drink and seemed somewhat satisfied.*",
+            "correct": "*You bring the coffee to the young lady, and she watches you place the cup on her table. With the brightest smile you've seen, she gratefully says...*\n\n**Young lady**: Oh, thank you so much."
+          },
+          "acquaintance": {
+            "order": "*A familiar young lady with long, silky black hair enters the cafe. She pauses and scans the room before walking over.*\n\n**Mina**: May I have one **cold** coffee?",
+            "incorrect": "*As you serve the coffee to Mina, her brows furrow with concern. With a wry smile, she very politely says...*\n\n**Mina**: Um... This isn't what I ordered.\n\n*Flustered, you quickly apologize, take back the drink, and run back to make another one. Hopefully, the right one.*",
+            "acceptable": "*As you serve the coffee to Mina, her brows furrow with concern. Hesitantly, she says...*\n\n**Mina**: Um...Thank you.\n\n*Before you realized the cause of the awkward tension, she started to take a sip of the drink and seemed somewhat satisfied.*",
+            "correct": "*You bring the coffee to Mina, and she watches you place the cup on her table. With the brightest smile you've seen, she gratefully says...*\n\n**Mina**: Oh, thank you so much."
+          }
+        },
+        {
+          "category": "drinks",
+          "type": "coffee",
+          "drink": "pour-over-coffee",
+          "acceptable_items": [ "cold-brew", "pour-over-coffee", "macchiato" ],
+          "stranger": {
+            "order": "*A young lady with long, silky black hair enters the cafe. She pauses and scans the room before walking over.*\n\n**Young lady**: May I have a **pour-over**, please?",
+            "incorrect": "*As you serve the coffee to the lady, her brows furrow with concern. With a wry smile, she very politely says...*\n\n**Young lady**: Um... This isn't what I ordered.\n\n*Flustered, you quickly apologize, take back the drink, and run back to make another one. Hopefully, the right one.*",
+            "acceptable": "*As you serve the coffee to the lady, her brows furrow with concern. Hesitantly, she says...*\n\n**Young lady**: Um...Thank you.\n\n*Before you realized the cause of the awkward tension, she started to take a sip of the drink and seemed somewhat satisfied.*",
+            "correct": "*You bring the coffee to the young lady, and she watches you place the cup on her table. With the brightest smile you've seen, she gratefully says...*\n\n**Young lady**: Oh, thank you so much."
+          },
+          "acquaintance": {
+            "order": "*A familiar young lady with long, silky black hair enters the cafe. She pauses and scans the room before walking over.*\n\n**Mina**: May I have a **pour-over**, please?",
+            "incorrect": "*As you serve the coffee to Mina, her brows furrow with concern. With a wry smile, she very politely says...*\n\n**Mina**: Um... This isn't what I ordered.\n\n*Flustered, you quickly apologize, take back the drink, and run back to make another one. Hopefully, the right one.*",
+            "acceptable": "*As you serve the coffee to Mina, her brows furrow with concern. Hesitantly, she says...*\n\n**Mina**: Um...Thank you.\n\n*Before you realized the cause of the awkward tension, she started to take a sip of the drink and seemed somewhat satisfied.*",
+            "correct": "*You bring the coffee to the Mina, and she watches you place the cup on her table. With the brightest smile you've seen, she gratefully says...*\n\n**Mina**: Oh, thank you so much."
+          }
+        },
+        {
+          "category": "drinks",
+          "type": "coffee",
+          "drink": "macchiato",
+          "acceptable_items": [ "cold-brew", "pour-over-coffee", "macchiato" ],
+          "stranger": {
+            "order": "*A young lady with long, silky black hair enters the cafe. She pauses and scans the room before walking over.*\n\n**Young lady**: May I have one cup of caffé **macchiato**?",
+            "incorrect": "*As you serve the coffee to the lady, her brows furrow with concern. With a wry smile, she very politely says...*\n\n**Young lady**: Um... This isn't what I ordered.\n\n*Flustered, you quickly apologize, take back the drink, and run back to make another one. Hopefully, the right one.*",
+            "acceptable": "*As you serve the coffee to the lady, her brows furrow with concern. Hesitantly, she says...*\n\n**Young lady**: Um...Thank you.\n\n*Before you realized the cause of the awkward tension, she started to take a sip of the drink and seemed somewhat satisfied.*",
+            "correct": "*You bring the coffee to the young lady, and she watches you place the cup on her table. With the brightest smile you've seen, she gratefully says...*\n\n**Young lady**: Oh, thank you so much."
+          },
+          "acquaintance": {
+            "order": "*A familiar young lady with long, silky black hair enters the cafe. She pauses and scans the room before walking over.*\n\n**Mina**: May I have one cup of caffé **macchiato**?",
+            "incorrect": "*As you serve the coffee to Mina, her brows furrow with concern. With a wry smile, she very politely says...*\n\n**Mina**: Um... This isn't what I ordered.\n\n*Flustered, you quickly apologize, take back the drink, and run back to make another one. Hopefully, the right one.*",
+            "acceptable": "*As you serve the coffee to Mina, her brows furrow with concern. Hesitantly, she says...*\n\n**Mina**: Um...Thank you.\n\n*Before you realized the cause of the awkward tension, she started to take a sip of the drink and seemed somewhat satisfied.*",
+            "correct": "*You bring the coffee to the Mina, and she watches you place the cup on her table. With the brightest smile you've seen, she gratefully says...*\n\n**Mina**: Oh, thank you so much."
+          }
+        }
+      ]
+    },
+    {
+      "customer_id": 4,
+      "name": "Yukino",
+      "descriptive_name": "Formal girl",
+      "stranger": {
+        "name": "Formal girl"
+      },
+      "acquaintance": {
+        "name": "Yukino"
+      },
+      "orders": [
+        {
+          "category": "drinks",
+          "type": "tea",
+          "drink": "black-tea",
+          "acceptable_items": [ "black-tea", "earl-grey-tea", "pu-erh-tea" ],
+          "stranger": {
+            "order": "*While you are busy drying some dishes, you notice a young woman timidly looking over the the register counter while clutching her shoulder bag. You quickly put the cup down and throw the towel over your shoulder. As you approach and greet her, she suddenly straightens her posture. *\n\n**Formal girl**: Hello. I will have one **black tea**, please.\n\n*Her formal, professional tone sharply contrasted her previous demeanor.*",
+            "incorrect": "*As you place the cup on the table, her eyes immediately widen.*\n\n**Formal girl**: I'm sorry, but this isn't what I ordered.\n\n*You profusely apologize and take the cup back and re-think your life choices.*",
+            "acceptable": "*As you serve the cup of tea, she silently furrows her brow.\n\n**Formal girl**: Um... thank you.\n\n*She says politely, but you begin to think you made the wrong tea.*",
+            "correct": "*As you approach her table, her eyes fixate on the cup in your hand.*\n\n**Formal girl**: Thank you very much.\n\n*She gently brings the cup near her lips and enjoys the aroma before taking a sip.*"
+          },
+          "acquaintance": {
+            "order": "*While you are busy drying some dishes, you notice a familiar young woman timidly looking over the the register counter while clutching her shoulder bag. You quickly put the cup down and throw the towel over your shoulder. As you approach and greet her, she relaxes her posture. *\n\n**Yukino**: Oh, it's you today. I will have one **black tea**, please.\n\n*Despite recognizing, she maintains her formal, professional tone when speaking to you.*",
+            "incorrect": "*As you place the cup on the table, her eyes immediately widen.*\n\n**Yukino**: This isn't what I ordered.\n\n*You profusely apologize and take the cup back and re-think your life choices.*",
+            "acceptable": "*As you serve the cup of tea, she silently furrows her brow.\n\n**Yukino**: Um... thank you.\n\n*She says politely, and you realize you made the wrong tea again.*",
+            "correct": "*As you approach Yukino table, her eyes fixate on the cup in your hand.*\n\n**Yukino**: Thank you very much.\n\n*She gently brings the cup near her lips and enjoys the aroma before taking a sip.*"
+          }
+        },
+        {
+          "category": "drinks",
+          "type": "tea",
+          "drink": "earl-grey-tea",
+          "acceptable_items": [ "black-tea", "earl-grey-tea", "pu-erh-tea" ],
+          "stranger": {
+            "order": "*As you finish wiping the counter's surface, a shadow quietly looms over.*\n\n**Formal girl**: Hello. I would like one **early grey tea**, please.\n\n*You're pretty sure she said **early**, but with her serious tone, you believed, even for a second, that was the name of the drink.*",
+            "incorrect": "*As you place the cup on the table, her eyes immediately widen.*\n\n**Formal girl**: I'm sorry, but this isn't what I ordered.\n\n*You profusely apologize and take the cup back and re-think your life choices.*",
+            "acceptable": "*As you serve the cup of tea, she silently furrows her brow.\n\n**Formal girl**: Um... thank you.\n\n*She says politely, but you begin to think you made the wrong tea*",
+            "correct": "*As you approach her table, her eyes fixate on the cup in your hand.*\n\n**Formal girl**: Thank you very much.\n\n*She gently brings the cup near her lips and enjoys the aroma before taking a sip.*"
+          },
+          "acquaintance": {
+            "order": "*As you finish wiping the counter's surface, a shadow quietly looms over.*\n\n**Yukino**: Hello. I would like one **earl grey tea**, please.\n\n*She said it correcty this time.*",
+            "incorrect": "*As you place the cup on the table, her eyes immediately widen.*\n\n**Yukino**: This isn't what I ordered.\n\n*You profusely apologize and take the cup back and re-think your life choices.*",
+            "acceptable": "*As you serve the cup of tea, she silently furrows her brow.\n\n**Yukino**: Um... thank you.\n\n*She says politely, and you realize you made the wrong tea again.*",
+            "correct": "*As you approach Yukino table, her eyes fixate on the cup in your hand.*\n\n**Yukino**: Thank you very much.\n\n*She gently brings the cup near her lips and enjoys the aroma before taking a sip.*"
+          }
+        },
+        {
+          "category": "drinks",
+          "type": "tea",
+          "drink": "pu-erh-tea",
+          "acceptable_items": [ "black-tea", "earl-grey-tea", "pu-erh-tea" ],
+          "stranger": {
+            "order": "*While you languishly polish the espresso machine, contemplating life, you hear a faint voice announce itself behind you.*\n\n**Formal girl**: Excuse me. I would like one **um... peror** tea.\n\n*Unsure if it was either due to your fatigue or her usual confident voice or both, but you realize she didn't mean \"emperor.\"*",
+            "incorrect": "*As you place the cup on the table, her eyes immediately widen.*\n\n**Formal girl**: I'm sorry, but this isn't what I ordered.\n\n*You profusely apologize and take the cup back and re-think your life choices.*",
+            "acceptable": "*As you serve the cup of tea, she silently furrows her brow.\n\n**Formal girl**: Um... thank you.\n\n*She says politely, but you begin to think you made the wrong tea*",
+            "correct": "*As you approach her table, her eyes fixate on the cup in your hand.*\n\n**Formal girl**: Thank you very much.\n\n*She gently brings the cup near her lips and enjoys the aroma before taking a sip.*"
+          },
+          "acquaintance": {
+            "order": "*While you languishly polish the espresso machine, contemplating life, you hear a faint, but familiar voice announce itself behind you.*\n\n**Yukino**: Excuse me. I would like one **emperor** tea.\n\n*She at least says it confidently.*",
+            "incorrect": "*As you place the cup on the table, her eyes immediately widen.*\n\n**Formal girl**: I'm sorry, but this isn't what I ordered.\n\n*You profusely apologize and take the cup back and re-think your life choices.*",
+            "acceptable": "*As you serve the cup of tea, she silently furrows her brow.\n\n**Formal girl**: Um... thank you.\n\n*She says politely, but you begin to think you made the wrong tea*",
+            "correct": "*As you approach her table, her eyes fixate on the cup in your hand.*\n\n**Formal girl**: Thank you very much.\n\n*She gently brings the cup near her lips and enjoys the aroma before taking a sip.*"
+          }
+        }
+      ]
+    },
+    {
+      "customer_id": 5,
+      "name": "Yui",
+      "descriptive_name": "Pink haired girl",
+      "stranger": {
+        "name": "Pink-haired girl"
+      },
+      "acquaintance": {
+        "name": "Yui"
+      },
+      "orders": [
+        {
+          "category": "drinks",
+          "type": "non-caffeinated",
+          "drink": "orange-juice",
+          "acceptable_items": [ "orange-juice", "pineapple-juice", "lemonade" ],
+          "stranger": {
+            "order": "*A pink-haird girl cautiously enters the cafe. She scans the area, though instead of looking for a seat, her face appears to indicate she was looking for something, or someone, to avoid. Seeming content, she approaches the counter. In a cheery, but anxious voice, she says... *\n\n**Pink-haired girl**: Um... Ya--, I mean, hello. May I have a uh... *Under her breath, she continues,* I didn't think this far. *Then suddenly she perks up.* Do you have something **citrusy**? B-but not anything too sour.",
+            "incorrect": "*As you hand the drink over to the girl, she immediately does a double take and retracts her hand.*\n\n**Pink-haired girl**: Um, I'm sorry, but I didn't order this.\n\n*She says with a red face even though you were the one who messed up. You apologize and return to the counter to make her correct drink.",
+            "acceptable": "*As you hand the drink over to the girl, her hand shakes and pauses before taking it.*\n\n**Pink-haired girl**: Uh, thank you.\n\n*You give the usual \"you're welcome\" before returning to the counter. But as you settle in, you realize your mistake.",
+            "correct": "*While carrying the drink, you notice the pink-haired girl tapping at her phone while waiting at a table. You announce your arrival with the drink's name.*\n\n**Pink-haired girl**: Oh! Thank you!\n\n*She cheerfully exclaims with a smile as bright as her drink.*"
+          },
+          "acquaintance": {
+            "order": "*A familiar pink-haird girl cautiously enters the cafe. She scans the area as usual, after seeming content, she approaches the counter. In a cheery, but anxious voice, she says... *\n\n**Yui**: Ya-hallo! May I have a uh... *Under her breath, she continues, *She still sometimes forgets.* Then suddenly she perks up.* May I have some **orange juice**?",
+            "incorrect": "*As you hand the drink over to Yui, she immediately does a double take and retracts her hand.*\n\n**Yui**: Um, this isn't what I ordered.\n\n*She says with an angry, but cute red face. You apologize and return to the counter to make her correct drink.",
+            "acceptable": "*As you hand the drink over to Yui, her hand shakes and pauses before taking it.*\n\n**Yui**: Uh, thank you.\n\n*You reply with \"No problem.\" before returning to the counter. But as you settle in, you realize your mistake again.",
+            "correct": "*While carrying the drink, you notice Yui tapping at her phone while waiting at a table. A little startled until realizing it's you, she says...*\n\n**Yui**: Oh! Thank you!\n\n*She cheerfully exclaims with a smile as bright as her drink.*"
+          }
+        },
+        {
+          "category": "drinks",
+          "type": "non-caffeinated",
+          "drink": "pineapple-juice",
+          "acceptable_items": [ "orange-juice", "pineapple-juice", "lemonade" ],
+          "stranger": {
+            "order": "*You nonchalantly return to the counter after finishing an order, and then realize the pink-haired girl patiently waiting at the counter.*\n\n**Pink-haired girl**: Ya--, uh... Hello! I would like one **pineapple** drink to-go, please.",
+            "incorrect": "*As you hand the drink over to the girl, she immediately does a double take and retracts her hand.*\n\n**Pink-haired girl**: Um, I'm sorry, but I didn't order this.\n\n*She says with a red face even though you were the one who messed up. You apologize and return to the counter to make her correct drink.",
+            "acceptable": "*As you hand the drink over to the girl, her hand shakes and pauses before taking it.*\n\n**Pink-haired girl**: Uh, thank you.\n\n*You gice the usual \"you're welcome\" before returning to the counter. But as you settle in, you realize your mistake.",
+            "correct": "*While carrying the drink, you notice the pink-haired girl tapping at her phone while waiting at a table. You announce your arrival with the drink's name.*\n\n**Pink-haired girl**: Oh! Thank you!\n\n*She cheerfully exclaims with a smile as bright as her drink.*"
+          },
+          "acquaintance": {
+            "order": "*You nonchalantly return to the counter after finishing an order, and then realize Yui patiently waiting at the counter. She smiles when she sees you return.*\n\n**Yui**: Ya-hallo! Can I have a **pineapple** drink to-go, please?",
+            "incorrect": "*As you hand the drink over to Yui, she immediately does a double take and retracts her hand.*\n\n**Yui**: Um, this isn't what I ordered.\n\n*She says with an angry, but cute red face. You apologize and return to the counter to make her correct drink.",
+            "acceptable": "*As you hand the drink over to Yui, her hand shakes and pauses before taking it.*\n\n**Yui**: Uh, thank you.\n\n*You reply with \"No problem.\" before returning to the counter. But as you settle in, you realize your mistake again.",
+            "correct": "*While carrying the drink, you notice Yui tapping at her phone while waiting at a table. A little startled until realizing it's you, she says...*\n\n**Yui**: Oh! Thank you!\n\n*She cheerfully exclaims with a smile as bright as her drink.*"
+          }
+        },
+        {
+          "category": "drinks",
+          "type": "non-caffeinated",
+          "drink": "lemonade",
+          "acceptable_items": [ "orange-juice", "pineapple-juice", "lemonade" ],
+          "stranger": {
+            "order": "**Female voice**: Hello...\n\n*Startled, you turn around and find a pink-haired girl timidly waiting at the counter. You wonder how long you zoned out, or how long she stood there waiting.*\n\n**Pink-haired girl**: Oh, um... I mean, I'm ready to order. Uh...\n\n*\"Uh?\" Why say you're ready and followup with that.*\n\n**Pink-haired girl**: Can I have a **lemon** drink?",
+            "incorrect": "*As you hand the drink over to the girl, she immediately does a double take and retracts her hand.*\n\n**Pink-haired girl**: Um, I'm sorry, but I didn't order this.\n\n*She says with a red face even though you were the one who messed up. You apologize and return to the counter to make her correct drink.",
+            "acceptable": "*As you hand the drink over to the girl, her hand shakes and pauses before taking it.*\n\n**Pink-haired girl**: Uh, thank you.\n\n*You gice the usual \"you're welcome\" before returning to the counter. But as you settle in, you realize your mistake.",
+            "correct": "*While carrying the drink, you notice the pink-haired girl tapping at her phone while waiting at a table. You announce your arrival with the drink's name.*\n\n**Pink-haired girl**: Oh! Thank you!\n\n*She cheerfully exclaims with a smile as bright as her drink.*"
+          },
+          "acquaintance": {
+            "order": "**Familiar female voice**: Ya-hallo!\n\n*Startled, you turn around and find a pink-haired girl eagerly waiting at the counter. But what startled you wasn't a customer waiting for you or the sudden voice. Instead, it was the strange greeting.*\n\n**Yui**: I'm ready to order. Uh...\n\n*\"Uh?\" again?*\n\n**Yui**: Can I have a **lemon** drink?",
+            "incorrect": "*As you hand the drink over to Yui, she immediately does a double take and retracts her hand.*\n\n**Yui**: Um, this isn't what I ordered.\n\n*She says with an angry, but cute red face. You apologize and return to the counter to make her correct drink.",
+            "acceptable": "*As you hand the drink over to Yui, her hand shakes and pauses before taking it.*\n\n**Yui**: Uh, thank you.\n\n*You reply with \"No problem.\" before returning to the counter. But as you settle in, you realize your mistake again.",
+            "correct": "*While carrying the drink, you notice Yui tapping at her phone while waiting at a table. A little startled until realizing it's you, she says...*\n\n**Yui**: Oh! Thank you!\n\n*She cheerfully exclaims with a smile as bright as her drink.*"
+          }
+        }
+      ]
+    },
+    {
+      "customer_id": 6,
+      "name": "Detective Hwang",
+      "descriptive_name": "Stranger",
+      "stranger": {
+        "name": "Stranger"
+      },
+      "acquaintance": {
+        "name": "Detective Hwang"
+      },
+      "orders": [
+        {
+          "category": "drinks",
+          "type": "coffee",
+          "drink": "americano",
+          "acceptable_items": [ "drip-coffee", "pour-over-coffee", "espresso", "death-coffee" ],
+          "stranger": {
+            "order": "*A slight breeze slips through the front door followed by a sharp-looking man in a long black overcoat. Below his coat, is a well-fitted, dark navy blue suit and tie with matching pants. The room's ambience fall to whispers as he scans the cafe. He looks particularly at the stack of cups and frowns.*\n\n**Stranger**: Do you recognize this logo?\n\n*He says as he does the zoom gesture on his phone and shows you a photo. You blink twice to make sure you heard him right and then shake your head. The man sighs.*\n\n**Stranger**: Hmm... *His eyes briefly drift towards the menu.* I'll have a **coffee** to-go.",
+            "incorrect": "*You shout the name of the drink having forgotten to ask for the man's name, but he doesn't react. After shouting again into the **Void**, you decide to walk over and hand deliver the drink. The man nods in appreciation, but after taking a sip, his face slightly frowns and hands the drink back to you while shaking his head.*",
+            "acceptable": "*After you finished making the drink, you look up and find the man nowhere in sight. It's not a large cafe. You walk around the counter and notice the tail of a black coat hiding behind a column. You find the man quietly sitting on the counter facing the window. You hand the coffee over to him and he nods in appreciation, but after taking a sip, he slightly frowns.*\n\n**Stranger**: Thank you.\n\n*He flatly says before slightly bowing and making his exit.*",
+            "correct": "*After popping the lid onto the cup, you look up to find the man patiently waiting by the door. You guess he's in a hurry. As you hand the coffee over, he slightly bows and says...*\n\n**Stranger**: Thank you.\n\n*He takes a quick sip before leaving.*"
+          },
+          "acquaintance": {
+            "order": "*A familar breeze slips through the front door as the room falls to whispers and a sharp-looking man in a long black overcoat approaches. He scans the cafe as though he was sent here to monitor our customers. But you know otherwise and welcome him in. The detective nods in recognition as he leans on the counter and says...*\n\n**Detective Hwang**: One **americano**.*",
+            "incorrect": "*You return to the counter with a cup of coffee. Detective Hwang nods and takes a sip, but immediately frowns. He hands the drink back to you while shaking his head.*",
+            "acceptable": "*After you finished making the drink, you look up to find him still leaning against the counter. You hand the coffee over to him and he nods in appreciation, but after taking a sip, he slightly frowns. He gestures for some milk and adds just a splash into his cup.*\n\n**Detective Hwang**: Thank you.\n\n*He says as he returns the milk container and slightly bows before making his exit.*",
+            "correct": "*After popping the lid onto the cup, you look up to find Detective Hwang patiently waiting by the door. You guess he's in a hurry today. As you hand the coffee over, he slightly bows and says...*\n\n**Stranger**: Thank you.\n\n*He takes a quick sip before leaving.*"
+          }
+        },
+        {
+          "category": "drinks",
+          "type": "coffee",
+          "drink": "espresso",
+          "acceptable_items": [ "drip-coffee", "pour-over-coffee", "americano", "death-coffee" ],
+          "stranger": {
+            "order": "*A slight breeze slips through the front door followed by a sharp-looking man in a long black overcoat. Below his coat, is a well-fitted, dark grey suit and tie with matching pants. The room's ambience fall to whispers as his eyes closely scans every other customer's face followed by a slight frown.*\n\n**Stranger**: Have you seen this person around?\n\n*He says as he zooms in on a photo on his phone and turns the screen towards you. You immediately don't recognize the person, but squint and take a few seconds as though your brain will magically fill in a fake memory before shaking your head. The man sighs.*\n\n**Stranger**: Hmm... *His eyes briefly drift around the room.* I'll have a **coffee** to-go.",
+            "incorrect": "*You shout the name of the drink having forgotten to ask for the man's name, but he doesn't react. After shouting again into the **Void**, you decide to walk over and hand deliver the drink. The man nods in appreciation, but after taking a sip, his face slightly frowns and hands the drink back to you while shaking his head.*",
+            "acceptable": "*After you finished making the drink, you look up and find the man nowhere in sight. It's not a large cafe. You walk around the counter and notice the tail of a black coat hiding behind a column. You find the man quietly sitting on the counter facing the window. You hand the coffee over to him and he nods in appreciation, but after taking a sip, he slightly frowns.*\n\n**Stranger**: Thank you.\n\n*He flatly says before slightly bowing and making his exit.*",
+            "correct": "*After popping the lid onto the cup, you look up to find the man patiently waiting by the door. You guess he's in a hurry. As you hand the coffee over, he slightly bows and says...*\n\n**Stranger**: Thank you.\n\n*He takes a quick sip before leaving.*"
+          },
+          "acquaintance": {
+            "order": "*A familar breeze slips through the front door as the room falls to whispers and a sharp-looking man in a long black overcoat approaches. He scans the cafe before leaning against the counter. You welcome him in and the detective nods in recognition and says...*\n\n**Detective Hwang**: One **espresso**.*\n\nHe pulls out his pocket notebook and fancy fountain pen and begins scribbling in it.",
+            "incorrect": "*You return to the counter and find him still buried in his notebook. As you place the cup in front of him, Detective Hwang nods and takes a sip, but immediately frowns. He hands the drink back to you while shaking his head.*",
+            "acceptable": "*After you finished making the drink, you look up to find him still buried in his notebook. You place the cup near him and he nods in appreciation, but after taking a sip, he slightly frowns. He gestures for some sugar and adds just a cube into his cup.*\n\n**Detective Hwang**: Thank you.\n\n*He says as he returns the sugar container and slightly bows before making his exit.*",
+            "correct": "*After popping the lid onto the cup, you look up to find him still buried in his notebook. You place the cup in front of him and as he picks it up, he slightly bows and says...*\n\n**Stranger**: Thank you.\n\n*He takes a sip with one hand, while twirling his fountain pen between his fingers as his eyes focus on his notebook.*"
+          }
+        },
+        {
+          "category": "drinks",
+          "type": "coffee",
+          "drink": "death-coffee",
+          "acceptable_items": [ "drip-coffee", "pour-over-coffee", "espresso", "americano" ],
+          "stranger": {
+            "order": "*A slight breeze slips through the front door followed by a sharp-looking man in a long dary navy blue overcoat. Below his coat, is a well-fitted, black suit and tie with matching pants. The room's ambience fall to whispers as he scans the cafe. His eyes pause on the walls then on the pair of single sofas near the back. He sighs, pulls out a small pocket notebook and scribbles in some notes with one of those fancy fountain pens with a retractable nib. As he finishes, he sighs and approaches the counter.*\n\n**Stranger**: I'll have a **coffee** to-go.",
+            "incorrect": "*You shout the name of the drink having forgotten to ask for the man's name, but he doesn't react. After shouting again into the **Void**, you decide to walk over and hand deliver the drink. The man nods in appreciation, but after taking a sip, his face slightly frowns and hands the drink back to you while shaking his head.*",
+            "acceptable": "*After you finished making the drink, you look up and find the man nowhere in sight. It's not a large cafe. You walk around the counter and notice the tail of a black coat hiding behind a column. You find the man quietly sitting on the counter facing the window. You hand the coffee over to him and he nods in appreciation, but after taking a sip, he slightly frowns.*\n\n**Stranger**: Thank you.\n\n*He flatly says before slightly bowing and making his exit.*",
+            "correct": "*After popping the lid onto the cup, you look up to find the man patiently waiting by the door. You guess he's in a hurry. As you hand the coffee over, he slightly bows and says...*\n\n**Stranger**: Thank you.\n\n*He takes a quick sip before leaving.*"
+          },
+          "acquaintance": {
+            "order": "*A familar breeze slips through the front door as the room falls to whispers and a sharp-looking man in a long navy blue overcoat approaches. He lethargically scans the cafe with bloodshot eyes before resting his arms against the counter. You welcome him in and the detective nods in recognition and asks...*\n\n**Detective Hwang**: May I have **four shots** of espresso? *while lifting up four fingers.**\n\n*You wonder what kind of case had him up all night.*",
+            "incorrect": "*You return to the counter and find him nowhere to be seen at the counter. Then you notice him in one of the single sofas at the back of the cafe. With his body half-slouching in the chair, one arm across his chest and the other unecessarily propped under his chin, he looked like a very lazy thinking-man. You walk over and hand him the cup. The detective takes in a deep breath and exhales as he leans forward and receives the cup. As he takes a sip, he immediately frowns and hands the drink back to you while shaking his head.*\n\n*You stand there shocked, but less so that you made the wrong drink than he was still alert enough to tell the difference.*",
+            "acceptable": "*After you finished making the drink, you look up to find him nowhere in sight. Then you see a man in one of the single sofas at the back hunched over with his head resting on one hand, which was in turn rest on his knee. Meanwhile, his eyes stared off into the Void. You walk over and hand him the cup of coffee. He slowly bows his head in appreciation, but after taking a sip, he slightly frowns.*\n\n**Detective Hwang**: Can you add some milk? Oh, and some sugar.\n\n*You nod and run to the counter and back, and then hand him the cup again. He takes a sip and says...*\n\n**Detective Hwang**: Thank you.\n\n*And immediately returns to staring out the window.*",
+            "correct": "*After popping the lid onto the cup, you look up to find him still leaning on the counter but with his head buried in his arms. You call his name and place the cup in front of him. He raises his head and stares at the cup with droopy eyes. He says...*\n\n**Stranger**: Thank you.\n\n*Or at least that's what the mumbling from his mouth sounded like. He takes a sip, then slightly bows before exiting. You guess there's never any rest in his line of work.*"
+          }
+        }
+      ]
+    },
+    {
+      "customer_id": 7,
+      "name": "Saki",
+      "descriptive_name": "Silver-blue-haired girl",
+      "stranger": {
+        "name": "Silver-blue-haired girl"
+      },
+      "acquaintance": {
+        "name": "Saki"
+      },
+      "orders": [
+        {
+          "category": "drinks",
+          "type": "coffee",
+          "drink": "hazelnut-latte",
+          "acceptable_items": [ "hazelnut-latte", "orange-juice", "milo" ],
+          "stranger": {
+            "order": "*A young lady with silver-blue hair strides in. She surveys the area as though doublechecking she's in the right place, while the young adoloscent girls whisper and teenage boys jeer and jab at each other upon catching her gaze.*\n\n**Silver-blue-haired girl**: Hey you! Um... *She quickly looks away when you make eye contact.* Do you have anything um... **sweet** but with some **caffeine**?\n\n*Her sheepish voice and mannerism made you forget what she asked. Then again, did she even ask for something specific?*",
+            "incorrect": "*You quickly finish making and serving a set of drinks. Now that it was the silver-blue-haired girl's turn, you look up to find her patiently waiting near the front door while staring at her phone. She lifts her head from the screen to reveal a glare so sharp you could feel it slice through the air and almost graze your soul... or at least what's left of it.*\n\n**Silver-blue-haired girl**: What? This isn't what I ordered.\n\n*And you finally feel her eyes piercing your chest as you look down at your mistake.*",
+            "acceptable": "*You quickly finish making the drink and find the girl patiently waiting near the front door while staring at her phone. She lifts her head from the screen to reveal a glare so sharp you could feel it slice through the air and into your soul.*\n\n**Silver haired-blue girl**: Um... This isn't what I– *She cuts herself off and continues under her breath*... I think he might like this too. *Her cheeks begin to glow red.* Agh! Thank you.\n\n*She grabs the cup from your hand hurries out the door. That was strange, you thought.*",
+            "correct": "*You find the girl patiently waiting near the door and focused on the phone in her hands while her thumbs dance around the screen. You can't help but think you've interrupted her in something important. She lifts her head from the screen to reveal a glare so sharp you could feel it slice through the air and into your soul.*\n\n**Silver-blue-haired girl**: Oh, thank you. Hm... *And under her breath she continues* ... I hope he likes it...\n\n*Her devilish glare melts into soft, concerned eyes. You wonder who she could be talking about.*"
+          },
+          "acquaintance": {
+            "order": "*A familiar young lady with silver-blue hair strides in. She surveys the area as though doublechecking she's in the right place, while the young adoloscent girls whisper and teenage boys jeer and jab at each other upon catching her gaze.*\n\n**Saki**: Hey! *She quickly looks away when you make eye contact.* Can I have that **sweet caffeine** drink again?\n\n*You thought she could order it with a serious face this time. But then again, does she even remember this drink?*",
+            "incorrect": "*You quickly finish making and serving a set of drinks. Now that it was the Saki's turn, you look up to find her waiting near the front door while staring at her phone. She lifts her head from the screen to reveal a glare so sharp you could feel it slice through the air and almost graze your soul... or at least what's left of it..*\n\n**Saki**: This isn't what I ordered.\n\n*And you finally feel her eyes piercing your chest as you look down at your mistake.*",
+            "acceptable": "*You quickly finish making the drink and find Saki patiently waiting near the front door while staring at her phone. She lifts her head from the screen to reveal that same piercing glare.*\n\n**Saki**: This isn't what I– *She pauses*... Actually, he likes this too. *She grabs the cup from your hand, quickly says,* Thank you. *and hurries out the door.*",
+            "correct": "*You find Saki patiently waiting near the door and focused on the phone in her hands while her thumbs dance around the screen. She lifts her head from the screen and responds with that glare to you interrupting her.*\n\n**Saki**: Oh, thank you. I think he wanted this one...\n\n*Her concerned eyes linger on the drink for a moment before she steps out the door.*"
+          }
+        },
+        {
+          "category": "drinks",
+          "type": "non-caffeinated",
+          "drink": "orange-juice",
+          "acceptable_items": [ "hazelnut-latte", "orange-juice", "milo" ],
+          "stranger": {
+            "order": "*A young lady with silver-blue hair strides in and the youthful half of customers drop their conversations to whispers while their gazes follow her every movement. You get the feeling she stood somewhere near the top–possibly in all aspects–of the high school class hierarchy down the street.*\n\n**Silver-blue-haired girl**: Hey! Um... do you have just regular **orange juice**? It's not for me or anything...\n\n*Her red face and lack of eye contact leads you to believe otherwise.*",
+            "incorrect": "*You quickly finish making and serving a set of drinks. Now that it was the silver-blue-haired girl's turn, you look up to find her patiently waiting near the front door while staring at her phone. She lifts her head from the screen to reveal a glare so sharp you could feel it slice through the air and almost graze your soul... or at least what's left of it.*\n\n**Silver-blue-haired girl**: What? This isn't what I ordered.\n\n*And you finally feel her eyes piercing your chest as you look down at your mistake.*",
+            "acceptable": "*You quickly finish making the drink and find the girl patiently waiting near the front door while staring at her phone. She lifts her head from the screen to reveal a glare so sharp you could feel it slice through the air and into your soul.*\n\n**Silver haired-blue girl**: Um... This isn't what I– *She cuts herself off and continues under her breath*... I think he might like this too. *Her cheeks begin to glow red.* Agh! Thank you.\n\n*She grabs the cup from your hand hurries out the door. That was strange, you thought.*",
+            "correct": "*You find the girl patiently waiting near the door and focused on the phone in her hands while her thumbs dance around the screen. You can't help but think you've interrupted her in something important. She lifts her head from the screen to reveal a glare so sharp you could feel it slice through the air and into your soul.*\n\n**Silver-blue-haired girl**: Oh, thank you. Hm... *And under her breath she continues* ... I hope he likes it...\n\n*Her devilish glare melts into soft, concerned eyes. You wonder who she could be talking about.*"
+          },
+          "acquaintance": {
+            "order": "*A familiar young lady with silver-blue hair strides in and the youthful half of customers drop their conversations to whispers while their gazes follow their queen's every movement.*\n\n**Saki**: Hey! Um... can I have just regular **orange juice**?\n\n*The stack of cups next to you seems to catch her eye's interest more.*",
+            "incorrect": "*You quickly finish making and serving a set of drinks. Now that it was the Saki's turn, you look up to find her waiting near the front door while staring at her phone. She lifts her head from the screen to reveal a glare so sharp you could feel it slice through the air and almost graze your soul... or at least what's left of it..*\n\n**Saki**: This isn't what I ordered.\n\n*And you finally feel her eyes piercing your chest as you look down at your mistake.*",
+            "acceptable": "*You quickly finish making the drink and find Saki patiently waiting near the front door while staring at her phone. She lifts her head from the screen to reveal that same piercing glare.*\n\n**Saki**: This isn't what I– *She pauses*... Actually, he likes this too. *She grabs the cup from your hand, quickly says,* Thank you. *and hurries out the door.*",
+            "correct": "*You find Saki patiently waiting near the door and focused on the phone in her hands while her thumbs dance around the screen. She lifts her head from the screen and responds with that glare to you interrupting her.*\n\n**Saki**: Oh, thank you. I think he wanted this one...\n\n*Her concerned eyes linger on the drink for a moment before she steps out the door.*"
+          }
+        },
+        {
+          "category": "drinks",
+          "type": "non-caffeinated",
+          "drink": "milo",
+          "acceptable_items": [ "hazelnut-latte", "orange-juice", "milo" ],
+          "stranger": {
+            "order": "*A young lady with silver-blue hair wanders through the front door and briefly scans the area as though doublechecking she's in the right place.*\n\n**Silver-blue-haired girl**: Hey! Do you have anything **sweet**, but maybe still **nutritious**? No caffeine or anything, but something a kid would like.\n\n*She says like she was trying to hide something. You wonder if it really was for a kid or for herself.*",
+            "incorrect": "*You quickly finish making and serving a set of drinks. Now that it was the silver-blue-haired girl's turn, you look up to find her patiently waiting near the front door while staring at her phone. She lifts her head from the screen to reveal a glare so sharp you could feel it slice through the air and almost graze your soul... or at least what's left of it.*\n\n**Silver-blue-haired girl**: What? This isn't what I ordered.\n\n*And you finally feel her eyes piercing your chest as you look down at your mistake.*",
+            "acceptable": "*You quickly finish making the drink and find the girl patiently waiting near the front door while staring at her phone. She lifts her head from the screen to reveal a glare so sharp you could feel it slice through the air and into your soul.*\n\n**Silver haired-blue girl**: Um... This isn't what I– *She cuts herself off and continues under her breath*... I think he might like this too. *Her cheeks begin to glow red.* Agh! Thank you.\n\n*She grabs the cup from your hand hurries out the door. That was strange, you thought.*",
+            "correct": "*You find the girl patiently waiting near the door and focused on the phone in her hands while her thumbs dance around the screen. You can't help but think you've interrupted her in something important. She lifts her head from the screen to reveal a glare so sharp you could feel it slice through the air and into your soul.*\n\n**Silver-blue-haired girl**: Oh, thank you. Hm... *And under her breath she continues* ... I hope he likes it...\n\n*Her devilish glare melts into soft, concerned eyes. You wonder who she could be talking about.*"
+          },
+          "acquaintance": {
+            "order": "*A familiar young lady with silver-blue hair wanders through the front door and briefly scans the area as though doublechecking she's in the right place.*\n\n**Saki**: Hey! Do you still have that **chocolate-y**? The one without caffeine.",
+            "incorrect": "*You quickly finish making and serving a set of drinks. Now that it was the Saki's turn, you look up to find her waiting near the front door while staring at her phone. She lifts her head from the screen to reveal a glare so sharp you could feel it slice through the air and almost graze your soul... or at least what's left of it..*\n\n**Saki**: This isn't what I ordered.\n\n*And you finally feel her eyes piercing your chest as you look down at your mistake.*",
+            "acceptable": "*You quickly finish making the drink and find Saki patiently waiting near the front door while staring at her phone. She lifts her head from the screen to reveal that same piercing glare.*\n\n**Saki**: This isn't what I– *She pauses*... Actually, he likes this too. *She grabs the cup from your hand, quickly says,* Thank you. *and hurries out the door.*",
+            "correct": "*You find Saki patiently waiting near the door and focused on the phone in her hands while her thumbs dance around the screen. She lifts her head from the screen and responds with that glare to you interrupting her.*\n\n**Saki**: Oh, thank you. I think he wanted this one...\n\n*Her concerned eyes linger on the drink for a moment before she steps out the door.*"
+          }
+        }
+      ]
+    }
+  ]
+}

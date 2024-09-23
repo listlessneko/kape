@@ -163,6 +163,10 @@ module.exports = {
     }
     catch (e) {
       console.error('Flip A Coin Cmd: Error:', e);
+      return await interaction.editReply({
+        content: `*A cat screeches and glass breaks behind the kitchen doors.*\nPlease wait while I take care of something...`,
+        components: [],
+      });
     }
 
   }

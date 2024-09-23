@@ -2,7 +2,7 @@ const path = require('node:path')
 
 const { Events } = require('discord.js');
 
-const { client } = require(path.join(__dirname, '..', 'client.js'))
+const { client } = require('../client.js');
 
 module.exports = {
   name: Events.InteractionCreate,
@@ -11,7 +11,7 @@ module.exports = {
       const command = client.commands.get(interaction.commandName);
 
       if (!command) {
-        console.error(`No command matching '${interaction.commandName} was found.`);
+        console.error(`No command matching ${interaction.commandName} was found.`);
         return;
       }
 
@@ -37,11 +37,13 @@ module.exports = {
           await interaction.followUp({ 
             content: `There was a problem with your request.`,
           });
+          return;
         }
         else {
           await interaction.reply({ 
             content: `There was a problem with your request.`,
           });
+          return;
         }
       }
     }
@@ -49,7 +51,7 @@ module.exports = {
       const command = client.commands.get(interaction.commandName);
 
       if (!command) {
-        console.error(`No command matching '${interaction.commandName} was found.`);
+        console.error(`No command matching ${interaction.commandName} was found.`);
         return;
       }
 

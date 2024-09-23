@@ -28,7 +28,7 @@ module.exports = {
           content: `You have **${currentEnergy.energy} energy**. Working hard?`
         });
       }
-      else if (currentEnergy.min_energy) {
+      else if (currentEnergy.energy <= 0) {
         return interaction.reply({
           content: `You have **${currentEnergy.energy} energy**. A..are you still alive?`
         });
@@ -45,7 +45,7 @@ module.exports = {
           content: `**${user.username}** has **${currentEnergy.energy} energy**. They are surviving.`
         });
       }
-      else if (currentEnergy.min_energy) {
+      else if (currentEnergy.energy <= 0) {
         return interaction.reply({
           content: `**${user.username}** has **${currentEnergy.energy} energy**. Perhaps they are dead now.`
         });

@@ -69,31 +69,41 @@ module.exports = {
                     if (item.cost <= user.balance) {
                       await UserServices.subtractBalance(item.cost, user.user_id);
 
-                      if (item.energy_replen.min !== item.energy_replen.max) {
-                        const max = item.energy_replen.max;
-                        const min = item.energy_replen.min;
-                        const interval = 5;
+                      let energy = '';
 
-                        const rangeSize = Math.floor((max - min) / interval) + 1;
-                        const RNG = Math.floor(Math.random() * rangeSize) + min;
-                        await UserServices.addEnergy(RNG, user.user_id);
+                      if (item.energy_replen.min !== item.energy_replen.max) {
+                        console.log('Eat Cmd - Energy Diff');
+                        const interval = 5;
+                        const energyDiff = MathServices.randomMultiple(item.energy_replen.min, item.energy_replen.max, interval);
+                        energy = energyDiff.fate;
+                        console.log('Eat Cmd - Fate:', energy);
                       }
                       else {
-                        await UserServices.addEnergy(item.energy_replen.max, user.user_id);
+                        energy = item.energy_replen.max;
                       }
-
-                      await interaction.editReply({
-                        content: `Here is your **${item.name.toLowerCase()}**. Please enjoy it.\n*You eat the entire thing in one bite.*`,
-                        components: []
-                      });
-                      return collector.stop('Eat Cmd: Food consumed from cafe.');
+                      if (energy <= 0) {
+                        await UserServices.addEnergy(energy, user.user_id);
+                        await interaction.editReply({
+                          content: `*Here is your **${item.name.toLowerCase()}**. Please enjoy it.\n\n*You eat the entire thing in one bite. Your stomach starts to feel strange and you have a sudden urge to find the nearest restroom.*\n\n-# **${MathServices.formatNumber(energy)} energy**`,
+                          components: []
+                        });
+                        return collector.stop('Food unfortunatey consumed from cafe.');
+                      }
+                      else {
+                        await UserServices.addEnergy(energy, user.user_id);
+                        await interaction.editReply({
+                          content: `Here is your **${item.name.toLowerCase()}**. Please enjoy it.\n*You drink all of it in one gulp.*\n\n-# **${MathServices.formatNumber(energy)} energy**`,
+                          components: []
+                        });
+                        return collector.stop('Food consumed from cafe.');
+                      }
                     }
                     else if (item.cost > user.balance) {
                       await interaction.editReply({
                         content: `Hm... You lack the sufficient credits to purchase this item. Maybe come back next time.`,
                         components: []
                       });
-                      return collector.stop('Eat Cmd: User canceled order.');
+                      return collector.stop('User canceled order.');
                     }
                   }
                   catch (e) {
@@ -208,38 +218,34 @@ module.exports = {
 
             await UserItemsServices.removeItems(item, 1, user);
 
-            if (item.energy_replen.min !== item.energy_replen.max) {
-              const max = item.energy_replen.max;
-              const min = item.energy_replen.min;
-              const interval = 5;
+            let energy = '';
 
-              const rangeSize = Math.floor((max - min) / interval) + 1;
-              const chance = Math.floor(Math.random() * rangeSize) * interval + min;
-              await UserServices.addEnergy(chance, user);
-              if (chance <= 0) {
-                await i.update({
-                  content: `*You eat the entire thing in one bite. Your stomach starts to feel strange and you have a sudden urge to find the nearest restroom.*\n\nYou lose {RNG} energy. Unfortunate.`,
-                  components: []
-                });
-                return collector.stop('Eat Cmd: Food consumed from inventory.');
-              }
-              else {
-                await i.update({
-                  content: `*You eat the entire thing in one bite.*\nYou gain ${chance} energy.`,
-                  components: []
-                });
-                return collector.stop('Eat Cmd: Food consumed from inventory.');
-              }
+            if (item.energy_replen.min !== item.energy_replen.max) {
+              console.log('Eat Cmd - Energy Diff');
+              const interval = 5;
+              const energyDiff = MathServices.randomMultiple(item.energy_replen.min, item.energy_replen.max, interval);
+              energy = energyDiff.fate;
+              console.log('Eat Cmd - Fate:', energy);
             }
             else {
-              await UserServices.addEnergy(item.energy_replen.max, user);
+              energy = item.energy_replen.max;
+            }
+            if (energy <= 0) {
+              await UserServices.addEnergy(energy, user);
               await i.update({
-                content: `*You eat the entire thing in one bite.*\nYou gain ${item.energy_replen.max} energy.`,
+                content: `*You eat the entire thing in one bite. Your stomach starts to feel strange and you have a sudden urge to find the nearest restroom.*\n\n-# **${MathServices.formatNumber(energy)} energy**`,
+                components: []
+              });
+              return collector.stop('Food consumed from inventory.');
+            }
+            else {
+              await UserServices.addEnergy(energy, user);
+              await i.update({
+                content: `*You eat the entire thing in one bite.*\n\n-# **${MathServices.formatNumber(energy)} energy**`,
                 components: []
               });
               return collector.stop('Eat Cmd: Food consumed from inventory.');
             }
-
           }
           else if (i.user.id !== interaction.user.id) {
             await i.update({

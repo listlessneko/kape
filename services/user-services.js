@@ -27,6 +27,7 @@ const UserServices = {
         return {
           user: user.user_id,
           prev_energy,
+          energy_gained: amount,
           new_energy: user.energy,
           max_energy: user.max_energy,
           min_energy: user.min_energy,
@@ -53,6 +54,7 @@ const UserServices = {
       return {
         user: user.user_id,
         prev_energy,
+        energy_gained: amount,
         new_energy: user.energy,
         max_energy: user.max_energy,
         min_energy: user.min_energy,
@@ -81,6 +83,7 @@ const UserServices = {
         return {
           user: user.user_id,
           prev_energy,
+          energy_lost: amount,
           new_energy: user.energy,
           max_energy: user.max_energy,
           min_energy: user.min_energy,
@@ -107,6 +110,7 @@ const UserServices = {
       return {
         user: user.user_id,
         prev_energy,
+        energy_lost: amount,
         new_energy: user.energy,
         max_energy: user.max_energy,
         min_energy: user.min_energy,
@@ -141,6 +145,7 @@ const UserServices = {
       const userBalance = {
         user_id: user.user_id,
         prev_balance,
+        funds_gained: amount,
         new_balance: user.balance
       };
       return userBalance;
@@ -158,6 +163,7 @@ const UserServices = {
       userBalances[user.user_id] = {};
       userBalances[ user.user_id ][ 'user_id' ] = user.user_id;
       userBalances[ user.user_id ][ 'prev_balance' ] = prev_balance;
+      userBalances[ user.user_id ][ 'funds_gained' ] = amount;
       userBalances[ user.user_id ][ 'new_balance' ] = user.balance;
       }
 
@@ -181,6 +187,7 @@ const UserServices = {
       const userBalance = {
         user_id: user.user_id,
         prev_balance,
+        funds_gained: amount,
         new_balance: user.balance
       };
       return userBalance;
@@ -199,13 +206,14 @@ const UserServices = {
       usersCache.set(userIds, user);
       userBalances[ user.user_id ] = {};
       userBalances[ user.user_id ][ 'prev_balance' ] = prev_balance;
+      userBalances[ user.user_id ][ 'funds_lost' ] = amount;
       userBalances[ user.user_id ][ 'new_balance' ] = new_balance;
     }
 
     return userBalances;
   },
 
-  async transferCredits(amount, userId1, userId2) {
+  async transferFunds(amount, userId1, userId2) {
     let user = await this.getUsers(userId1);
 
     if (amount > user.balance) {
@@ -222,6 +230,7 @@ const UserServices = {
       const user2 = await this.addBalance(amount, userId2);
 
       return {
+        balance_transferred: amount,
         user1,
         user2
       }
@@ -231,6 +240,7 @@ const UserServices = {
       const user1 = await this.subtractBalance(amount, userId1);
       const user2 = await this.addBalance(amount, userId2);
       return {
+        balance_transferred: amount,
         user1,
         user2
       }

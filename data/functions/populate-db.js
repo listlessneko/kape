@@ -11,21 +11,21 @@ async function populateItems(KafeItems, items) {
   } 
 }
 
-async function populateLevels(UserLevels, levels) {
+async function populateCustomers(Customers, customers) {
   try {
-    const allLevels = levels.map(level => level);
-    await UserLevels.bulkCreate(allLevels, {
-      updateOnDuplucate: ['level', 'experience']
+    const allCustomers = customers.customers.map(customer => customer);
+    await Customers.bulkCreate(allCustomers, {
+      updateOnDuplucate: ['customer_id', 'name']
     });
-    console.log(`'User Levels' upserted.`);
+    console.log(`'Customers' upserted.`);
   }
   catch (error) {
-    console.log(`'User Levels' failed to completely upsert: ${error}`)
+    console.log(`'Customers' failed to completely upsert: ${error}`)
   } 
 }
 
 
 module.exports = {
   populateItems,
-  populateLevels
+  populateCustomers
 }

@@ -35,6 +35,7 @@ module.exports = {
     const currentBalance = cachedUser.balance;
 
     const originalResult = await UserServices.subtractBalance(originalAmount, user.id);
+    console.log('Deduct Credits Mstr Cmd:', originalResult);
 
     const amountUnits = FormatServices.determineUnits(originalAmount);
     const amount = await MathServices.wholeNumber(originalAmount);
