@@ -7,8 +7,8 @@ const userBaristaStatsCache = client.userBaristaStatsCache;
 
 const UserCustomerStatsServices = {
   async getUsersCustomerStats(key1, key2) {
-    console.log('Get Users Customer Stats - Key 1:', key1);
-    console.log('Get Users Customer Stats - Key 2:', key2);
+    // console.log('Get Users Customer Stats - Key 1:', key1);
+    // console.log('Get Users Customer Stats - Key 2:', key2);
     return await SearchServices.fetchJunction(userCustomerStatsCache, UserCustomerStats, key1, key2);
   },
 
@@ -20,18 +20,18 @@ const UserCustomerStatsServices = {
     let compositeKey = FormatServices.generateCompositeKey(order.key1.id, order.key2.id);
     console.log('Tracking Orders - Composite Key:', compositeKey);
     let userCustomerStatsInstance = userCustomerStatsCache.get(compositeKey);
-    console.log('Tracking Orders - User Customer Stats Instance Cache:', userCustomerStatsInstance);
+    // console.log('Tracking Orders - User Customer Stats Instance Cache:', userCustomerStatsInstance);
     let userBaristaStatsInstance = userBaristaStatsCache.get(order.key1.id);
     //console.log('Tracking Orders - User Barista Stats Instance Cache:', userBaristaStatsInstance);
 
     if (!userCustomerStatsInstance) {
       userCustomerStatsInstance = await this.getUsersCustomerStats(order.key1, order.key2);
-      console.log('Tracking Orders - User Customer Stats Instance Database:', userCustomerStatsInstance);
+      // console.log('Tracking Orders - User Customer Stats Instance Database:', userCustomerStatsInstance);
     }
 
     if (!userBaristaStatsInstance) {
       userBaristaStatsInstance = await this.getUsersBaristaStats(order.key1.id);
-      //console.log('Tracking Orders - User Barista Stats Instance Database:', userBaristaStatsInstance);
+      // console.log('Tracking Orders - User Barista Stats Instance Database:', userBaristaStatsInstance);
     }
 
     const outcome = order.outcome + '_orders';
@@ -39,7 +39,7 @@ const UserCustomerStatsServices = {
     console.log('Tracking Orders - User:', outcome);
     const prev_outcome = userCustomerStatsInstance[outcome];
     userCustomerStatsInstance[outcome] += 1;
-    console.log('Tracking Orders - User Customer Stats Instance:', userCustomerStatsInstance);
+    // console.log('Tracking Orders - User Customer Stats Instance:', userCustomerStatsInstance);
     userBaristaStatsInstance[outcome] += 1;
     //console.log('Tracking Orders - User Barista Stats Instance:', userBaristaStatsInstance);
     await userCustomerStatsInstance.save();

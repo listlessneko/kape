@@ -29,19 +29,19 @@ const FateScores = require(path.join(__dirname, '..', 'models', 'fate-scores'))(
 const force = process.argv.includes('--force') || process.argv.includes('--f');
 
 async function initializeDatabase() {
-  //KafeItems.sync({ force: true }).then(async () => {
-  //  await populateItems(KafeItems, items);
-  //});
+  KafeItems.sync({ force: true }).then(async () => {
+   await populateItems(KafeItems, items);
+  });
   Customers.sync({ force: true }).then(async () => {
     await populateCustomers(Customers, customers);
   });
-  //await Users.sync({ alter: true });
-  //await UserLevels.sync({ force: true });
+  await Users.sync({ alter: true });
+  await UserLevels.sync({ force: true });
   await UserCustomerStats.sync({ force: true });
   await UserBaristaStats.sync({ force: true });
-  //await UserItems.sync({ force: true });
-  //await RPSScores.sync({ force: true });
-  //await FateScores.sync({ force: true });
+  await UserItems.sync({ force: true });
+  await RPSScores.sync({ force: true });
+  await FateScores.sync({ force: true });
   console.log('Database initialized.')
 }
 

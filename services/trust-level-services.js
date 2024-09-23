@@ -78,7 +78,7 @@ const TrustLevelServices = {
 
     if (!instance.level) {
       ordersMet = await this.checkOrdersReq(instance);
-      console.log('Trust Level - Orders Met:', ordersMet);
+      // console.log('Trust Level - Orders Met:', ordersMet);
       if (ordersMet) {
         //console.log('Trust Level - Orders Met True:', ordersMet);
         instance.trust_level = 'acquaintance';

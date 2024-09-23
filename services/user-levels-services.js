@@ -80,7 +80,7 @@ const UserLevelsServices = {
       user = await this.getUserLevels(userId);
     }
 
-    console.log('Add Exp - User:', user);
+    // console.log('Add Exp - User:', user);
 
     const prev_level_exp = user.current_level_exp;
     user.current_level_exp += Number(amount);

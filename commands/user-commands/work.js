@@ -46,8 +46,11 @@ module.exports = {
       if (subcommand === 'barista') {
         const customer = customers.customers[Math.floor(Math.random() * customers.customers.length)];
         //const customer = customers.customers[0];
+        console.log('Work Barista Cmd - Customer:', customer.name);
         const customerOrder = customer.orders[Math.floor(Math.random() * customer.orders.length)];
         const drink = customerOrder.drink;
+        console.log('Work Barista Cmd - Customer Drink:', drink);
+        console.log('Work Barista Cmd - Customer Acceptable Items:', customerOrder.acceptable_items);
 
         const keys = {
           key1: {
@@ -99,6 +102,7 @@ module.exports = {
                 await TextAnimationsServices.loadingEllipses(interaction, cafeNoises);
 
                 if (selectedValue === drink) {
+                console.log('Work Barista Cmd - Selected Drink:', selectedValue);
                   const exp = 100;
                   const itemOrdered = await KafeServices.findItem(selectedValue);
                   const commission = MathServices.roundTo2Decimals(itemOrdered.cost * .25);
@@ -135,7 +139,7 @@ module.exports = {
                   console.log('Work Barista Cmd: Order successful.');
 
                   const userCustomer = await TrustLevelServices.checkTrustLevel(results.key1, results.key2);
-                  console.log('Work Barista Cmd - Trust Level:', userCustomer);
+                  console.log('Work Barista Cmd - Trust Level:', userCustomer.trust_level);
 
                   if (userCustomer.levelUp) {
                   console.log('Work Barista Cmd - User Customer Level Up:', userCustomer.levelUp);
@@ -177,6 +181,7 @@ module.exports = {
                   }
                 }
                 else if (customerOrder.acceptable_items.includes(selectedValue)) {
+                  console.log('Work Barista Cmd - Selected Drink:', selectedValue);
                   const exp = 25;
                   const commission = 0;
                   const rewards = {
@@ -209,6 +214,7 @@ module.exports = {
                   }
                 }
                 else {
+                  console.log('Work Barista Cmd - Selected Drink:', selectedValue);
 
                   const results = {
                     ...keys,
