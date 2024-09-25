@@ -35,7 +35,7 @@ async function initializeDatabase() {
   Customers.sync({ force: true }).then(async () => {
     await populateCustomers(Customers, customers);
   });
-  await Users.sync({ alter: true });
+  await Users.sync({ force: true });
   await UserLevels.sync({ force: true });
   await UserCustomerStats.sync({ force: true });
   await UserBaristaStats.sync({ force: true });
