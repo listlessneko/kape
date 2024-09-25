@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: Do or do not. There is no test.\" && exit 1",
-    "dev": "nodemon index.js"
+    "dev": "NODE_ENV=dev nodemon index.js",
+    "main": "NODE_ENV=main nodemon index.js"
   },
   "author": "listlessneko",
   "license": "ISC",

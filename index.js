@@ -2,9 +2,10 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { Collection } = require('discord.js');
 
-const { token } = require(path.join(__dirname, 'config', 'config.json'));
+const environment = process.env.NODE_ENV || 'dev';
+const { token } = require(`./config/${environment}-config.json`);
 
-const { client } = require(path.join(__dirname, 'client.js'));
+const { client } = require('./client.js');
 
 client.commands = new Collection();
 client.cooldowns = new Collection();
