@@ -13,7 +13,7 @@ const {
   KafeServices,
   TextAnimationsServices,
   UserCustomerStatsServices,
-  TrustLevelServices
+  RelationshipLevelServices
 } = require('../../services/all-services.js');
 
 const wait = require('node:timers/promises').setTimeout;
@@ -63,8 +63,8 @@ module.exports = {
           }
         }
 
-        const userCustomerRelationship = await TrustLevelServices.getRelationshipLevel(keys.key1, keys.key2);
-        const relationshipStatus = userCustomerRelationship.trust_level ?? 'stranger';
+        const userCustomerRelationship = await RelationshipLevelServices.getRelationshipLevel(keys.key1, keys.key2);
+        const relationshipStatus = userCustomerRelationship.relationship_level ?? 'stranger';
         console.log('Work Barista Cmd - Relationship Status:', relationshipStatus);
         const customerDialogue = customerOrder[relationshipStatus];
         //console.log('Work Barista Cmd - Customer Dialogue Options:', customerDialogue);
@@ -138,8 +138,8 @@ module.exports = {
                   });
                   console.log('Work Barista Cmd: Order successful.');
 
-                  const userCustomer = await TrustLevelServices.checkTrustLevel(results.key1, results.key2);
-                  console.log('Work Barista Cmd - Trust Level:', userCustomer.trust_level);
+                  const userCustomer = await RelationshipLevelServices.checkRelationshipLevel(results.key1, results.key2);
+                  console.log('Work Barista Cmd - Relationship Level:', userCustomer.relationship_level);
 
                   if (userCustomer.levelUp) {
                   console.log('Work Barista Cmd - User Customer Level Up:', userCustomer.levelUp);

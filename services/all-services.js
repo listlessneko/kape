@@ -4,7 +4,7 @@ const { UserLevelsServices } = require('./user-levels-services.js');
 const { UserItemsServices } = require('./user-items-services.js');
 const { KafeServices } = require('./kafe-services.js');
 const { CustomerServices } = require('./customer-services.js');
-const { TrustLevelServices } = require('./trust-level-services.js');
+const { RelationshipLevelServices } = require('./relationship-level-services.js');
 const { ScoresServices } = require('./scores-services.js');
 const { MathServices } = require('./math-services.js');
 const { FormatServices } = require('./format-services.js');
@@ -19,7 +19,7 @@ module.exports = {
   UserCustomerStatsServices,
   KafeServices,
   CustomerServices,
-  TrustLevelServices,
+  RelationshipLevelServices,
   ScoresServices,
   MathServices,
   FormatServices,

@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
         key: 'customer_id'
       }
     },
-    trust_level: {
+    relationship_level: {
       ...CustomString(),
       defaultValue: 'stranger'
     },
@@ -42,6 +42,8 @@ module.exports = (sequelize, DataTypes) => {
           instance.composite_key = `${instance.user_id}:${instance.customer_id}`;
         }
         else {
+          console.log('Model User Cusotmer Stats User Id:', instance.user_id);
+          console.log('Model User Cusotmer Stats User Id:', instance.customer_id);
           throw new Error('Both user_id and customer_id must be provided.')
         }
       },

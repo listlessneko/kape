@@ -1,14 +1,16 @@
 const { REST, Routes } = require('discord.js');
-const { clientId, guildIds, token } = require('../config/config.json');
+
+const environment = process.env.NODE_ENV || 'dev';
+const { token, clientId, guildIds } = require(`../config/${environment}-config.json`);
 
 const rest = new REST().setToken(token);
 
 const commandIds = [
-  '1280394933014102084',
-  '1280394933118828677',
-  '1280394933118828678',
-  '1282182650466930743',
-  '1280394933118828685',
+  '1288589638281199628',
+  '1288589638180671506',
+  '1288589638281199629',
+  '1288589638281199634',
+  '1288589638394712106',
 ];
 
 const guildIdsList = [];
@@ -17,7 +19,7 @@ for (const guildId of guildIds) {
   guildIdsList.push(guildId)
 }
 for (const commandId of commandIds) {
-  rest.delete(Routes.applicationGuildCommand(clientId, guildIdsList[1], commandId))
+  rest.delete(Routes.applicationGuildCommand(clientId, guildIdsList[0], commandId))
     .then(() => console.log('Successfully deleted guild command'))
     .catch(console.error);
 }

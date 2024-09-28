@@ -237,7 +237,15 @@ module.exports = {
           return console.log(`${user.id} barista stats displayed.`);
         }
 
-        const customer = await CustomerServices.findCustomer(interaction.options.getString('customer'));
+        const customerInteractionString = interaction.options.getString('customer').toLowerCase();
+        const customer = await CustomerServices.findCustomer(customerInteractionString);
+
+        if (!customer) {
+          await interaction.reply({
+            content: `"${customerInteractionString}" does not exist. Are you seeing ghosts?`
+          });
+          return console.log(`${user.id} inputted invalid customer: '${customerInteractionString}'.`)
+        }
 
         const key1 = {
           id: user.id,
@@ -246,8 +254,10 @@ module.exports = {
 
         const key2 = {
           id: customer.customer_id,
-          name: 'customer__id'
+          name: 'customer_id'
         };
+        
+        //console.log('User Stats - Key 2:', key2);
 
         const instance = await UserCustomerStatsServices.getUsersCustomerStats(key1, key2);
         const dataValues = Object.entries(instance.get());
@@ -322,7 +332,7 @@ module.exports = {
     catch (e) {
       console.error('User Stats Cmd Error:', e);
       return await interaction.reply({
-        content: `*A cat screeches and glass breaks behind the kitchen doors.`,
+        content: `*A cat screeches and glass breaks behind the kitchen doors.*`,
         components: [],
       });
     }

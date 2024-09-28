@@ -2,8 +2,8 @@
   "customers": [
     {
       "customer_id": 1,
-      "name": "Kuga",
-      "descriptive_name": "Strange boy",
+      "name": "kuga",
+      "descriptive_name": "strange boy",
       "stranger": {
         "name": "Strange boy"
       },
@@ -72,8 +72,8 @@
     },
     {
       "customer_id": 2,
-      "name": "Ken",
-      "descriptive_name": "Silver-white-haired man",
+      "name": "ken",
+      "descriptive_name": "silver-white-haired man",
       "stranger": {
         "name": "Silver-white-haired man"
       },
@@ -139,8 +139,8 @@
     },
     {
       "customer_id": 3,
-      "name": "Mina",
-      "descriptive_name": "Young lady",
+      "name": "mina",
+      "descriptive_name": "young lady",
       "stranger": {
         "name": "Young lady"
       },
@@ -206,8 +206,8 @@
     },
     {
       "customer_id": 4,
-      "name": "Yukino",
-      "descriptive_name": "Formal girl",
+      "name": "yukino",
+      "descriptive_name": "formal girl",
       "stranger": {
         "name": "Formal girl"
       },
@@ -273,8 +273,8 @@
     },
     {
       "customer_id": 5,
-      "name": "Yui",
-      "descriptive_name": "Pink haired girl",
+      "name": "yui",
+      "descriptive_name": "pink haired girl",
       "stranger": {
         "name": "Pink-haired girl"
       },
@@ -340,8 +340,8 @@
     },
     {
       "customer_id": 6,
-      "name": "Detective Hwang",
-      "descriptive_name": "Stranger",
+      "name": "detective hwang",
+      "descriptive_name": "stranger",
       "stranger": {
         "name": "Stranger"
       },
@@ -407,8 +407,8 @@
     },
     {
       "customer_id": 7,
-      "name": "Saki",
-      "descriptive_name": "Silver-blue-haired girl",
+      "name": "saki",
+      "descriptive_name": "silver-blue-haired girl",
       "stranger": {
         "name": "Silver-blue-haired girl"
       },

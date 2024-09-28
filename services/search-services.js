@@ -65,7 +65,7 @@ const SearchServices = {
 
   async fetchJunction(Cache, Database, key1, key2) {
     const compositeKey = FormatServices.generateCompositeKey(key1.id, key2.id);
-    // console.log('Fetch Junction - Composite Key:', compositeKey);
+     //console.log('Fetch Junction - Composite Key:', compositeKey);
 
     if (Cache.has(compositeKey)) {
     //console.log('Fetch Junction - Cache:', Cache.get(compositeKey));
@@ -86,9 +86,9 @@ const SearchServices = {
 
     if (!db) {
       const field1 = key1.name;
-      // console.log('Fetch Junction - Key 1 Name:', key1.name);
+       //console.log('Fetch Junction - Key 1 Name:', key1.name);
       const field2 = key2.name;
-      // console.log('Fetch Junction - Key 2 Name:', key2.name);
+       //console.log('Fetch Junction - Key 2 Name:', key2.name);
 
       await Database.create({
         [field1]: key1.id,
