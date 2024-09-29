@@ -36,6 +36,7 @@ const SearchServices = {
       }
 
       await Promise.all(userIds.map(async (userId) => {
+        console.log('Get User - UserId:', userId);
         const userExists = (dbUsers.some(user => user.dataValues.user_id === userId));
 
         //console.log('Get User - Database User Exists:', userExists);
@@ -64,16 +65,17 @@ const SearchServices = {
   },
 
   async fetchJunction(Cache, Database, key1, key2) {
+    console.log('Fetch Junction - Key 1:', key1);
+    console.log('Fetch Junction - Key 2:', key2);
     const compositeKey = FormatServices.generateCompositeKey(key1.id, key2.id);
-     //console.log('Fetch Junction - Composite Key:', compositeKey);
+     console.log('Fetch Junction - Composite Key:', compositeKey);
 
     if (Cache.has(compositeKey)) {
-    //console.log('Fetch Junction - Cache:', Cache.get(compositeKey));
+    console.log('Fetch Junction - Cache:', Cache.get(compositeKey));
       return Cache.get(compositeKey);
     }
-    //console.log('Get User - User Not In Cache:', usersNotInCache);
 
-    //console.log('Fetch Junction - Database:', Database);
+    console.log('Fetch Junction - Database:', Database);
 
     const db = await Database.findOne({
       where: {
@@ -81,14 +83,14 @@ const SearchServices = {
       }
     });
 
-    // console.log('Fetch Junction - db:', db);
+     console.log('Fetch Junction - db:', db);
 
 
     if (!db) {
       const field1 = key1.name;
-       //console.log('Fetch Junction - Key 1 Name:', key1.name);
+      console.log('Fetch Junction - Key 1 Name:', key1.name);
       const field2 = key2.name;
-       //console.log('Fetch Junction - Key 2 Name:', key2.name);
+      console.log('Fetch Junction - Key 2 Name:', key2.name);
 
       await Database.create({
         [field1]: key1.id,

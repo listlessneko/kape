@@ -1,9 +1,10 @@
 const path = require('node:path');
 
 const items = require('./items.json');
+const npcs = require('./npcs.json');
 const customers = require('./customers.json');
 
-const { populateItems, populateCustomers } = require('./functions/populate-db.js');
+const { populateItems, populateCustomers, populateNpcs } = require('./functions/populate-db.js');
 
 const Sequelize = require('sequelize');
 const userBaristaStats = require('../models/user-barista-stats.js');
@@ -19,11 +20,13 @@ const KafeItems = require(path.join(__dirname, '..', 'models', 'kafe-items'))(se
 const Users = require(path.join(__dirname, '..', 'models', 'users'))(sequelize, Sequelize.DataTypes);
 const UserItems = require(path.join(__dirname, '..', 'models', 'user-items'))(sequelize, Sequelize.DataTypes);
 const UserLevels = require(path.join(__dirname, '..', 'models', 'user-levels'))(sequelize, Sequelize.DataTypes);
+const Npcs = require(path.join(__dirname, '..', 'models', 'npcs.js'))(sequelize, Sequelize.DataTypes);
 const Customers = require(path.join(__dirname, '..', 'models', 'customers'))(sequelize, Sequelize.DataTypes);
 const UserCustomerStats = require(path.join(__dirname, '..', 'models', 'user-customer-stats'))(sequelize, Sequelize.DataTypes);
 const UserBaristaStats = require(path.join(__dirname, '..', 'models', 'user-barista-stats'))(sequelize, Sequelize.DataTypes);
 //const UserLevels = require('../models/user-levels')(sequelize, Sequelize.DataTypes);
 const RPSScores = require(path.join(__dirname, '..', 'models', 'rock-paper-scissors-scores'))(sequelize, Sequelize.DataTypes);
+const UserNpcJankenStats = require(path.join(__dirname, '..', 'models', 'user-npc-janken-stats.js'))(sequelize, Sequelize.DataTypes);
 const FateScores = require(path.join(__dirname, '..', 'models', 'fate-scores'))(sequelize, Sequelize.DataTypes);
 
 const force = process.argv.includes('--force') || process.argv.includes('--f');
@@ -32,15 +35,21 @@ async function initializeDatabase() {
   //KafeItems.sync({ force: true }).then(async () => {
   // await populateItems(KafeItems, items);
   //});
+  Npcs.sync({ force: true }).then(async () => {
+    await populateNpcs(Npcs, npcs);
+  });
+  //const npcData = await Npcs.findAll();
+  //console.log('Npcs:', JSON.stringify(npcData, null, 2)); // Pretty print JSON
   Customers.sync({ force: true }).then(async () => {
     await populateCustomers(Customers, customers);
   });
   //await Users.sync({ force: true });
   //await UserLevels.sync({ force: true });
-  await UserCustomerStats.sync({ force: true });
-  await UserBaristaStats.sync({ force: true });
+  UserCustomerStats.sync({ force: true });
+  UserBaristaStats.sync({ force: true });
   //await UserItems.sync({ force: true });
   //await RPSScores.sync({ force: true });
+  UserNpcJankenStats.sync({ force: true });
   //await FateScores.sync({ force: true });
   console.log('Database initialized.')
 }

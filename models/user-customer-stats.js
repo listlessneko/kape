@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   return sequelize.define('UserCustomerStats', {
     composite_key: CustomString(),
     user_id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       references: {
         model: 'Users',
         key: 'user_id'

@@ -1,97 +1,67 @@
-const { Op, RPSScores, FateScores } = require('../data/db-objects.js');
+const { Op, RPSScores, UserNpcJankenStats, FateScores } = require('../data/db-objects.js');
 const { SearchServices } = require('../services/search-services.js');
+const { FormatServices } = require('../services/format-services.js');
 const { client } = require('../client.js');
 const rpsScoresCache = client.rpsScoresCache;
+const userNpcJankenStatsCache = client.userNpcJankenStatsCache;
 const fateScoresCache = client.fateScoresCache;
 
 const ScoresServices = {
-  async getRpsScores(...userIds) {
-    return await SearchServices.fetch(rpsScoresCache, RPSScores, ...userIds);
+  async getJankenStats(key1, key2) {
+    console.log('Get Janken Stats -  Key 1:', key1);
+    console.log('Get Janken Stats -  Key 2:', key2);
+    return await SearchServices.fetchJunction(userNpcJankenStatsCache, UserNpcJankenStats, key1, key2);
   },
 
-  async oldrpsVsKapé(victory, defeat, draw, userId) {
-    const user = await this.getRpsScores(userId);
-    console.log('rpsVsKapé: user', user);
-    console.log('rpsVsKapé: user', user.dataValues);
-    console.log('rpsVsKapé: user', user.losses);
+  async calculateJankenResults(results) {
+    console.log('Calculate Janken Results -  Stats:', results);
+    console.log('Calculate Janken Results -  Key 1:', results.key1);
+    console.log('Calculate Janken Results -  Key 2:', results.key2);
+    //const key1 = results.key1;
+    //const key2 = results.key2;
+    //const instance = await this.getJankenStats(key1, key2);
+    let compositeKey = FormatServices.generateCompositeKey(results.key1.id, results.key2.id);
+    console.log('Calculate Janken Results - Composite Key:', compositeKey);
+    let instance = userNpcJankenStatsCache.get(compositeKey);
+     console.log('Tracking Orders - User Npc Janken Stats Instance Cache:', instance);
 
-    const outcome = victory ? 'wins' : defeat ? 'losses' : 'draws';
-
-    const prev_outcome = user[outcome];
-    console.log('rpsVsKapé: prev_outcome', prev_outcome);
-    user[outcome] += 1;
-    await user.save();
-    rpsScoresCache.set(userId, user);
-    return {
-      user_id: userId,
-      prev_outcome,
-      current_wins: user.wins,
-      current_losses: user.losses,
-      current_draws: user.draws
+    if (!instance) {
+      instance = await this.getJankenStats(results.key1, results.key2);
+       console.log('Calculate Janken Results - User Npc Janken Stats Instance Database:', instance);
     }
-  },
 
-  async rpsVsKapé(score) {
-    const user = await this.getRpsScores(score.user_id);
-    //user.battles += 1;
-
-    const outcome = score.victory ? 'wins' : score.defeat ? 'losses' : 'draws';
+    const outcome = results.victory ? 'wins' : results.defeat ? 'losses' : 'draws';
     const prev_outcome_keyName = 'prev_' + outcome;
-    const prev_outcome = user[outcome];
-    console.log('rpsVsKapé: prev_outcome', prev_outcome);
+    const prev_outcome = instance[outcome];
+    console.log('Calculate Janken Results -  Previous Outcome:', prev_outcome);
     //user[outcome] += 1;
 
-    const weapon = score.weapon;
+    const weapon = results.weapon;
     const prev_weapon_keyName = 'prev_' + weapon;
-    const prev_weapon = user[weapon];
+    const prev_weapon = instance[weapon];
     //user[weapon] += 1;
 
     const prev_weapon_outcome_keyName = `prev_${weapon}_${outcome}`;
     const weapon_outcome = `${weapon}_${outcome}`;
-    const prev_weapon_outcome = user[weapon_outcome];
-    user[weapon_outcome] += 1;
+    const prev_weapon_outcome = instance[weapon_outcome];
+    instance[weapon_outcome] += 1;
 
-    const prev_energy_spent = user.energy_spent;
-    user.energy_spent += score.energy_consumed;
+    const prev_energy_spent = instance.energy_spent;
+    instance.energy_spent += results.energy_consumed;
 
-    const prev_fortune = user.fortune;
-    user.fortune += score.rewards.credits;
+    const prev_fortune = instance.fortune;
+    instance.fortune += results.rewards.credits;
 
-    await user.save();
-    rpsScoresCache.set(score.user_id, user);
+    await instance.save();
+    rpsScoresCache.set(results.user_id, instance);
     return {
-      user_id: score.user_id,
-      battles: user.battles,
+      ...instance.get({ plain: true }),
       [prev_outcome_keyName]: prev_outcome,
-      current_wins: user.wins,
-      current_losses: user.losses,
-      current_draws: user.draws,
       [prev_weapon_keyName]: prev_weapon,
       [prev_weapon_outcome_keyName]: prev_weapon_outcome,
-      current_rock: user.rock,
-      current_rock_w: user.rock_wins,
-      current_rock_l: user.rock_losses,
-      current_rock_d: user.rock_draws,
-      current_paper: user.paper,
-      current_paper_w: user.paper_wins,
-      current_paper_l: user.paper_losses,
-      current_paper_d: user.paper_draws,
-      current_scissors: user.scissors,
-      current_scissors_w: user.scissors_wins,
-      current_scissors_l: user.scissors_losses,
-      current_scissors_d: user.scissors_draws,
       prev_energy_spent,
-      energy_spent: user.energy_spent,
       prev_fortune,
-      fortune: user.fortune
     }
-  },
-
-  async rpsRivalsGetUsers(userId1, userId2) {
-    // for each user, create a new record of scores per associated user id
-  },
-
-  async rpsRivalTracking(userId1, userId2, outcome) {
   },
 
   async getFateScores(...userIds) {

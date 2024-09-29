@@ -239,6 +239,7 @@ module.exports = {
 
         const customerInteractionString = interaction.options.getString('customer').toLowerCase();
         const customer = await CustomerServices.findCustomer(customerInteractionString);
+        //console.log('User Stats - Customer:', customer);
 
         if (!customer) {
           await interaction.reply({
@@ -260,6 +261,14 @@ module.exports = {
         //console.log('User Stats - Key 2:', key2);
 
         const instance = await UserCustomerStatsServices.getUsersCustomerStats(key1, key2);
+
+        if (instance.relationship_level === 'stranger') {
+          await interaction.reply({
+            content: `It appears you and **${customer.descriptive_name}** are not close enough.`
+          });
+          return console.log(`${user.id} is not close enough with: '${customer.name}'.`)
+        }
+
         const dataValues = Object.entries(instance.get());
 
         const userCustomerStatsInfo = [];
@@ -287,7 +296,7 @@ module.exports = {
 
       if (subcommand === 'janken') {
         const user = interaction.options.getUser('user') ?? interaction.user;
-        const instance = await ScoresServices.getRpsScores(user.id);
+        const instance = await ScoresServices.getJankenStats(user.id);
         const dataValues = Object.entries(instance.dataValues);
         // console.log('RPS Score Cmd - Scores Data Values:', scoresDataValues);
         const points = [];

@@ -15,7 +15,7 @@ async function populateCustomers(Customers, customers) {
   try {
     const allCustomers = customers.customers.map(customer => customer);
     await Customers.bulkCreate(allCustomers, {
-      updateOnDuplucate: ['customer_id', 'name']
+      updateOnDuplucate: ['customer_id', 'name', 'descriptive_name']
     });
     console.log(`'Customers' upserted.`);
   }
@@ -24,8 +24,21 @@ async function populateCustomers(Customers, customers) {
   } 
 }
 
+async function populateNpcs(Npcs, npcs) {
+  try {
+    const allNpcs = npcs.npcs.map(npc => npc);
+    await Npcs.bulkCreate(allNpcs, {
+      updateOnDuplucate: ['npc_id', 'name', 'descriptive_name', 'proper_name', 'janken']
+    });
+    console.log(`'Npcs' upserted.`);
+  }
+  catch (error) {
+    console.log(`'Npcs' failed to completely upsert: ${error}`)
+  } 
+}
 
 module.exports = {
   populateItems,
-  populateCustomers
+  populateCustomers,
+  populateNpcs
 }

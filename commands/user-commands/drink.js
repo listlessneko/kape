@@ -150,6 +150,7 @@ module.exports = {
         .setPlaceholder('View your inventory.')
 
       const userItems = await UserItemsServices.getUserItems({requestModelInstance: false}, interaction.user.id);
+        console.log('Drink Cmd - UserItems:', userItems);
 
       userItems.forEach(userItem => {
         console.log('Drink Cmd - UserItem:', userItem);

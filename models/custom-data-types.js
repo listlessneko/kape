@@ -14,6 +14,20 @@ const CustomInteger = () => ({
   }
 });
 
+const CustomFloat = () => ({ 
+  type: DataTypes.FLOAT,
+  defaultValue: 0,
+  allowNull: false,
+  validate: {
+    isFloat: true,
+    notNaN(value) {
+      if (typeof value !== 'number' || isNaN(value)) {
+        throw new Error('Value must be a valid number and cannot be NaN.');
+      }
+    }
+  }
+});
+
 const CustomString = () => ({ 
   type: DataTypes.STRING,
   defaultValue: 'The Void',
@@ -50,6 +64,7 @@ const CustomText = () => ({
 
 module.exports = {
   CustomInteger,
+  CustomFloat,
   CustomString,
   CustomText
 }

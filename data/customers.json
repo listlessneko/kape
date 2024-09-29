@@ -340,13 +340,13 @@
     },
     {
       "customer_id": 6,
-      "name": "detective hwang",
-      "descriptive_name": "stranger",
+      "name": "hwang",
+      "descriptive_name": "mysterious detective",
       "stranger": {
-        "name": "Stranger"
+        "name": "Mysterious detective"
       },
       "acquaintance": {
-        "name": "Detective Hwang"
+        "name": "Hwang"
       },
       "orders": [
         {

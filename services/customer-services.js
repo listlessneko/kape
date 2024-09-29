@@ -8,7 +8,8 @@ const CustomerServices = {
         where: {
           [Op.or]: [
             { customer_id: customer },
-            { name: customer }
+            { name: customer },
+            { descriptive_name: customer }
           ]
         }
       });

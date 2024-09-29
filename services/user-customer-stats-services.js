@@ -8,7 +8,7 @@ const userBaristaStatsCache = client.userBaristaStatsCache;
 const UserCustomerStatsServices = {
   async getUsersCustomerStats(key1, key2) {
     // console.log('Get Users Customer Stats - Key 1:', key1);
-    // console.log('Get Users Customer Stats - Key 2:', key2);
+     console.log('Get Users Customer Stats - Key 2:', key2);
     return await SearchServices.fetchJunction(userCustomerStatsCache, UserCustomerStats, key1, key2);
   },
 

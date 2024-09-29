@@ -63,6 +63,8 @@ module.exports = {
           }
         }
 
+        console.log('Work Barista Cmd - Keys:', keys);
+
         const userCustomerRelationship = await RelationshipLevelServices.getRelationshipLevel(keys.key1, keys.key2);
         const relationshipStatus = userCustomerRelationship.relationship_level ?? 'stranger';
         console.log('Work Barista Cmd - Relationship Status:', relationshipStatus);

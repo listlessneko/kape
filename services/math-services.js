@@ -93,6 +93,20 @@ const MathServices = {
       rangeSize,
       fate
     };
+  },
+
+  getWeightedSelection(options) {
+    const totalWeight = options.reduce((acc, option) => acc + option.weight, 0);
+
+    const fate = Math.random() * totalWeight;
+    let cumulativeWeight = 0;
+
+    for (let i = 0; i < totalWeight; i++) {
+      cumulativeWeight += options[i].weight;
+      if (fate < cumulativeWeight) {
+        return options[i];
+      }
+    }
   }
 }
 
