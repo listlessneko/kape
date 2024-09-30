@@ -15,7 +15,7 @@ client.userBaristaStatsCache = new Collection();
 client.userCustomerStatsCache = new Collection();
 client.userLevelsCache = new Collection();
 client.userItemsCache = new Collection();
-client.rpsScoresCache = new Collection();
+client.jankenStatsCache = new Collection();
 client.userNpcJankenStatsCache = new Collection();
 client.fateScoresCache = new Collection();
 

@@ -17,7 +17,7 @@ const UserCustomerStats = require(path.join(__dirname, '..', 'models', 'user-cus
 const UserBaristaStats = require(path.join(__dirname, '..', 'models', 'user-barista-stats'))(sequelize, Sequelize.DataTypes);
 const KafeItems = require(path.join(__dirname, '..', 'models', 'kafe-items.js'))(sequelize, Sequelize.DataTypes);
 const UserItems = require(path.join(__dirname, '..', 'models', 'user-items.js'))(sequelize, Sequelize.DataTypes);
-const RPSScores = require(path.join(__dirname, '..', 'models', 'rock-paper-scissors-scores.js'))(sequelize, Sequelize.DataTypes);
+const JankenStats = require(path.join(__dirname, '..', 'models', 'janken-stats.js'))(sequelize, Sequelize.DataTypes);
 const UserNpcJankenStats = require(path.join(__dirname, '..', 'models', 'user-npc-janken-stats'))(sequelize, Sequelize.DataTypes);
 const FateScores = require(path.join(__dirname, '..', 'models', 'fate-scores.js'))(sequelize, Sequelize.DataTypes);
 
@@ -57,7 +57,7 @@ module.exports = {
   UserBaristaStats,
   KafeItems,
   UserItems,
-  RPSScores,
+  JankenStats,
   UserNpcJankenStats,
   FateScores
 }

@@ -50,7 +50,7 @@ module.exports = {
             content: `"${opponentInteractionString}" does not exist. Are you remembering ghosts?`,
             components: []
           });
-          return console.log(`${interaction.user.id} inputted invalid customer: '${opponentInteractionString}'.`)
+          return console.log(`Janken Cmd: ${interaction.user.id} inputted invalid customer: '${opponentInteractionString}'.`)
         }
 
         const keys = {
@@ -82,7 +82,7 @@ module.exports = {
             content: `It seems you and the **${customer.descriptive_name}** are not close enough to play games.`,
             components: []
           });
-          return console.log(`${interaction.user.id} is not close enough to '${customer.name}'.`)
+          return console.log(`Janken Cmd: ${interaction.user.id} is not close enough to '${customer.name}'.`)
         }
       }
 

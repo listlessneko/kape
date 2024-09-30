@@ -25,7 +25,7 @@ const Customers = require(path.join(__dirname, '..', 'models', 'customers'))(seq
 const UserCustomerStats = require(path.join(__dirname, '..', 'models', 'user-customer-stats'))(sequelize, Sequelize.DataTypes);
 const UserBaristaStats = require(path.join(__dirname, '..', 'models', 'user-barista-stats'))(sequelize, Sequelize.DataTypes);
 //const UserLevels = require('../models/user-levels')(sequelize, Sequelize.DataTypes);
-const RPSScores = require(path.join(__dirname, '..', 'models', 'rock-paper-scissors-scores'))(sequelize, Sequelize.DataTypes);
+const JankenStats = require(path.join(__dirname, '..', 'models', 'janken-stats'))(sequelize, Sequelize.DataTypes);
 const UserNpcJankenStats = require(path.join(__dirname, '..', 'models', 'user-npc-janken-stats.js'))(sequelize, Sequelize.DataTypes);
 const FateScores = require(path.join(__dirname, '..', 'models', 'fate-scores'))(sequelize, Sequelize.DataTypes);
 
@@ -48,7 +48,7 @@ async function initializeDatabase() {
   UserCustomerStats.sync({ force: true });
   UserBaristaStats.sync({ force: true });
   //await UserItems.sync({ force: true });
-  //await RPSScores.sync({ force: true });
+  JankenStats.sync({ force: true });
   UserNpcJankenStats.sync({ force: true });
   //await FateScores.sync({ force: true });
   console.log('Database initialized.')

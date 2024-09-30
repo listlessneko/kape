@@ -154,27 +154,24 @@ module.exports = {
 
       userItems.forEach(userItem => {
         console.log('Drink Cmd - UserItem:', userItem);
-        const item = userItem.kafeItem;
-        console.log('Drink Cmd - Item:', item);
+        const i = userItem.kafeItem;
+        console.log('Drink Cmd - Item:', i);
         //console.log('Drink Cmd - Item Data Values:', item.dataValues);
-        console.log('Drink Cmd - Item Category:', item.category);
-        if (item.category === 'drinks') {
-          inventory.addOptions(
-            new StringSelectMenuOptionBuilder()
-              .setLabel(
-                (() => {
-                  if (i.energy_replen.min === i.energy_replen.max) {
-                    return `${i.name} (${i.cost} credits, ${i.energy_replen.max} energy)`;
-                  }
-                  else {
-                    return `${i.name} (${i.cost} credits, ${i.energy_replen.min} - ${i.energy_replen.max} energy)`;
-                  }
-                })()
-              )
-              .setValue(item.value)
-              .setDescription(item.description)
-          )
-        }
+        inventory.addOptions(
+          new StringSelectMenuOptionBuilder()
+            .setLabel(
+              (() => {
+                if (i.energy_replen.min === i.energy_replen.max) {
+                  return `${i.name} (${i.cost} credits, ${i.energy_replen.max} energy)`;
+                }
+                else {
+                  return `${i.name} (${i.cost} credits, ${i.energy_replen.min} - ${i.energy_replen.max} energy)`;
+                }
+              })()
+            )
+            .setValue(i.value)
+            .setDescription(i.description)
+        )
       });
 
       if (inventory.options.length === 0) {

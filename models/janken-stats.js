@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  return sequelize.define('RPSScores', {
+  return sequelize.define('JankenStats', {
     user_id: {
       type: DataTypes.STRING,
       primaryKey: true
@@ -98,22 +98,22 @@ module.exports = (sequelize, DataTypes) => {
     {
       timestamps: false,
       hooks: {
-        beforeSave: (rpsScores) => {
-          if (hasChanged(rpsScores)) {
-            calculateTotals(rpsScores);
+        beforeSave: (instance) => {
+          if (hasChanged(instance)) {
+            calculateTotals(instance);
           }
         },
-        afterFind: (rpsScores) => {
-          if (Array.isArray(rpsScores)) {
-            rpsScores.forEach(rpsScore => {
-              if (hasChanged(rpsScore)) {
-                calculateTotals(rpsScore);
+        afterFind: (instances) => {
+          if (Array.isArray(instances)) {
+            instances.forEach(instance => {
+              if (hasChanged(instance)) {
+                calculateTotals(instance);
               }
             });
           }
-          else if (rpsScores) {
-            if (hasChanged(rpsScores)) {
-              calculateTotals(rpsScores);
+          else if (instances) {
+            if (hasChanged(instances)) {
+              calculateTotals(instances);
             }
           }
         }
@@ -122,7 +122,7 @@ module.exports = (sequelize, DataTypes) => {
 
 };
 
-function hasChanged(rpsScores) {
+function hasChanged(instance) {
   const relevantFields = [
     'rock_wins',
     'rock_losses',
@@ -135,15 +135,15 @@ function hasChanged(rpsScores) {
     'scissors_draws',
   ];
 
-  return relevantFields.some(field => rpsScores.changed(field));
+  return relevantFields.some(field => instance.changed(field));
 }
 
-function calculateTotals(rpsScores) {
-  rpsScores.wins = rpsScores.rock_wins + rpsScores.paper_wins + rpsScores.scissors_wins;
-  rpsScores.losses = rpsScores.rock_losses + rpsScores.paper_losses + rpsScores.scissors_losses;
-  rpsScores.draws = rpsScores.rock_draws + rpsScores.paper_draws + rpsScores.scissors_draws;
-  rpsScores.rock = rpsScores.rock_wins + rpsScores.rock_losses + rpsScores.rock_draws;
-  rpsScores.paper = rpsScores.paper_wins + rpsScores.paper_losses + rpsScores.paper_draws;
-  rpsScores.scissors = rpsScores.scissors_wins + rpsScores.scissors_losses + rpsScores.scissors_draws;
-  rpsScores.battles = rpsScores.wins + rpsScores.losses + rpsScores.draws;
+function calculateTotals(instances) {
+  instances.wins = instances.rock_wins + instances.paper_wins + instances.scissors_wins;
+  instances.losses = instances.rock_losses + instances.paper_losses + instances.scissors_losses;
+  instances.draws = instances.rock_draws + instances.paper_draws + instances.scissors_draws;
+  instances.rock = instances.rock_wins + instances.rock_losses + instances.rock_draws;
+  instances.paper = instances.paper_wins + instances.paper_losses + instances.paper_draws;
+  instances.scissors = instances.scissors_wins + instances.scissors_losses + instances.scissors_draws;
+  instances.battles = instances.wins + instances.losses + instances.draws;
 }

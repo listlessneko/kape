@@ -7,7 +7,8 @@ const {
   UserCustomerStatsServices,
   ScoresServices,
   MathServices,
-  FormatServices
+  FormatServices,
+  NpcServices
 } = require('../../services/all-services');
 const { UserBaristaStats, UserCustomerStats } = require('../../data/db-objects');
 
@@ -69,6 +70,11 @@ module.exports = {
           option
           .setName('user')
           .setDescription('Input username')
+        )
+        .addStringOption(option =>
+          option
+            .setName('npc')
+            .setDescription('Input npc name.')
         )
     )
     .addSubcommand(subcommand =>
@@ -296,23 +302,72 @@ module.exports = {
 
       if (subcommand === 'janken') {
         const user = interaction.options.getUser('user') ?? interaction.user;
-        const instance = await ScoresServices.getJankenStats(user.id);
-        const dataValues = Object.entries(instance.dataValues);
-        // console.log('RPS Score Cmd - Scores Data Values:', scoresDataValues);
-        const points = [];
+        let npc;
+        let instance;
 
-        const excludedKeys = ['id', 'user_id'];
+        const npcInteractionString = interaction.options.getString('npc');
+
+        if (npcInteractionString) {
+          npc = await NpcServices.findNpc(npcInteractionString.toLowerCase());
+          if (!npc) {
+            await interaction.reply({
+              content: `"${npcInteractionString}" does not exists. Are you remembering ghosts?`
+            });
+            console.log(`User Stats Janken Cmd: ${npcInteractionString} does not exist.`)
+          }
+
+          const keys = {
+            key1: {
+              id: user.id,
+              name: 'user_id'
+            },
+            key2: {
+              id: npc.npc_id,
+              name: 'npc_id'
+            }
+          }
+
+          if (npc.name !== 'kapé') {
+            const customer = await CustomerServices.findCustomer(npcInteractionString);
+            const customerKeys = {
+              id: customer.customer_id,
+              name: 'customer_id'
+            }
+
+            const userCustomer = await UserCustomerStatsServices.getUsersCustomerStats(keys.key1, customerKeys)
+
+            if (userCustomer.relationship_level === 'stranger') {
+              await interaction.reply({
+                content: `It appears you and **${customer.descriptive_name}** are not close enough.`
+              });
+              console.log(`User Stats Janken Cmd: ${user.id} is not close enough with '${customer.name}'.`)
+            }
+          }
+          instance = await ScoresServices.getUserNpcJankenStats(keys.key1, keys.key2);
+        }
+        else {
+          instance = await ScoresServices.getJankenStats(user.id);
+
+        }
+
+        const dataValues = Object.entries(instance.dataValues);
+        const stats = [];
+
+        const excludedKeys = ['id', 'user_id', 'npc_id', 'composite_key'];
 
         dataValues.forEach(([key, value]) => {
           if (!excludedKeys.includes(key)) {
-            points.push(`${FormatServices.nameFormatter(key)}: ${value}`);
+            stats.push(`${FormatServices.nameFormatter(key)}: ${value}`);
           }
         });
 
-        console.log('User Stats Janken Cmd - Points:', points);
+        //console.log('User Stats Janken Cmd - Stats:', stats);
+        //console.log('User Stats Janken Cmd - NPC:', npc);
+
+        const displayedName = npc ? FormatServices.nameFormatter(npc.name) : 'The World';
 
         return await interaction.reply({
-          content: `__**Rock Paper Scissors Against Kapé**__\n${points.join('\n')}`
+          content: `__**Rock Paper Scissors Against ${displayedName}**__\n${stats.join('\n')}`
         });
       }
 

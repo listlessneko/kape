@@ -1,61 +1,68 @@
-const { Op, RPSScores, UserNpcJankenStats, FateScores } = require('../data/db-objects.js');
+const { Op, JankenStats, UserNpcJankenStats, FateScores } = require('../data/db-objects.js');
 const { SearchServices } = require('../services/search-services.js');
 const { FormatServices } = require('../services/format-services.js');
 const { client } = require('../client.js');
-const rpsScoresCache = client.rpsScoresCache;
+const jankenStatsCache = client.jankenStatsCache;
 const userNpcJankenStatsCache = client.userNpcJankenStatsCache;
 const fateScoresCache = client.fateScoresCache;
 
 const ScoresServices = {
-  async getJankenStats(key1, key2) {
+  async getJankenStats(userId) {
+    return await SearchServices.fetch(jankenStatsCache, JankenStats, userId);
+  },
+
+  async getUserNpcJankenStats(key1, key2) {
     console.log('Get Janken Stats -  Key 1:', key1);
     console.log('Get Janken Stats -  Key 2:', key2);
     return await SearchServices.fetchJunction(userNpcJankenStatsCache, UserNpcJankenStats, key1, key2);
   },
 
   async calculateJankenResults(results) {
-    console.log('Calculate Janken Results -  Stats:', results);
-    console.log('Calculate Janken Results -  Key 1:', results.key1);
-    console.log('Calculate Janken Results -  Key 2:', results.key2);
-    //const key1 = results.key1;
-    //const key2 = results.key2;
-    //const instance = await this.getJankenStats(key1, key2);
+    //console.log('Calculate Janken Results -  Stats:', results);
+    //console.log('Calculate Janken Results -  Key 1:', results.key1);
+    //console.log('Calculate Janken Results -  Key 2:', results.key2);
     let compositeKey = FormatServices.generateCompositeKey(results.key1.id, results.key2.id);
     console.log('Calculate Janken Results - Composite Key:', compositeKey);
-    let instance = userNpcJankenStatsCache.get(compositeKey);
-     console.log('Tracking Orders - User Npc Janken Stats Instance Cache:', instance);
+    let userNpcJankenStatsInstance = userNpcJankenStatsCache.get(compositeKey);
+     console.log('Tracking Orders - User Npc Janken Stats Instance Cache:', userNpcJankenStatsInstance);
 
-    if (!instance) {
-      instance = await this.getJankenStats(results.key1, results.key2);
-       console.log('Calculate Janken Results - User Npc Janken Stats Instance Database:', instance);
+    if (!userNpcJankenStatsInstance) {
+      userNpcJankenStatsInstance = await this.getUserNpcJankenStats(results.key1, results.key2);
+       console.log('Calculate Janken Results - User Npc Janken Stats Instance Database:', userNpcJankenStatsInstance);
     }
+
+    const userJankenStatsInstance = await this.getJankenStats(results.key1.id);
+
 
     const outcome = results.victory ? 'wins' : results.defeat ? 'losses' : 'draws';
     const prev_outcome_keyName = 'prev_' + outcome;
-    const prev_outcome = instance[outcome];
+    const prev_outcome = userNpcJankenStatsInstance[outcome];
     console.log('Calculate Janken Results -  Previous Outcome:', prev_outcome);
-    //user[outcome] += 1;
 
     const weapon = results.weapon;
     const prev_weapon_keyName = 'prev_' + weapon;
-    const prev_weapon = instance[weapon];
-    //user[weapon] += 1;
+    const prev_weapon = userNpcJankenStatsInstance[weapon];
 
     const prev_weapon_outcome_keyName = `prev_${weapon}_${outcome}`;
     const weapon_outcome = `${weapon}_${outcome}`;
-    const prev_weapon_outcome = instance[weapon_outcome];
-    instance[weapon_outcome] += 1;
+    const prev_weapon_outcome = userNpcJankenStatsInstance[weapon_outcome];
+    userNpcJankenStatsInstance[weapon_outcome] += 1;
+    userJankenStatsInstance[weapon_outcome] += 1;
 
-    const prev_energy_spent = instance.energy_spent;
-    instance.energy_spent += results.energy_consumed;
+    const prev_energy_spent = userNpcJankenStatsInstance.energy_spent;
+    userNpcJankenStatsInstance.energy_spent += results.energy_consumed;
+    userJankenStatsInstance.energy_spent += results.energy_consumed;
 
-    const prev_fortune = instance.fortune;
-    instance.fortune += results.rewards.credits;
+    const prev_fortune = userNpcJankenStatsInstance.fortune;
+    userNpcJankenStatsInstance.fortune += results.rewards.credits;
+    userJankenStatsInstance.fortune += results.rewards.credits;
 
-    await instance.save();
-    rpsScoresCache.set(results.user_id, instance);
+    await userNpcJankenStatsInstance.save();
+    userNpcJankenStatsCache.set(results.user_id, userNpcJankenStatsInstance);
+    await userJankenStatsInstance.save();
+    jankenStatsCache.set(results.user_id, userNpcJankenStatsInstance);
     return {
-      ...instance.get({ plain: true }),
+      ...userNpcJankenStatsInstance.get({ plain: true }),
       [prev_outcome_keyName]: prev_outcome,
       [prev_weapon_keyName]: prev_weapon,
       [prev_weapon_outcome_keyName]: prev_weapon_outcome,

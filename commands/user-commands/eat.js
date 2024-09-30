@@ -152,27 +152,25 @@ module.exports = {
       const userItems = await UserItemsServices.getUserItems({requestModelInstance: false}, interaction.user.id);
 
       userItems.forEach(userItem => {
-        const item = userItem.kafeItem;
-        if (item.category === 'food') {
-          console.log('Eat Inventory - Item:', item);
-          const max = MathServices.formatNumber(item.energy_replen.max);
-          const min = MathServices.formatNumber(item.energy_replen.min);
-          inventory.addOptions(
-            new StringSelectMenuOptionBuilder()
-              .setLabel(
-                (() => {
-                  if (item.energy_replen.min === item.energy_replen.max) {
-                    return `${item.name} (${max} energy)`;
-                  }
-                  else {
-                    return `${item.name} (${min} to ${max} energy)`;
-                  }
-                })()
-              )
-              .setValue(item.value)
-              .setDescription(item.description)
-          )
-        }
+        const i = userItem.kafeItem;
+        console.log('Eat Inventory - Item:', i);
+        const max = MathServices.formatNumber(i.energy_replen.max);
+        const min = MathServices.formatNumber(i.energy_replen.min);
+        inventory.addOptions(
+          new StringSelectMenuOptionBuilder()
+            .setLabel(
+              (() => {
+                if (i.energy_replen.min === i.energy_replen.max) {
+                  return `${i.name} (${max} energy)`;
+                }
+                else {
+                  return `${i.name} (${min} to ${max} energy)`;
+                }
+              })()
+            )
+            .setValue(i.value)
+            .setDescription(i.description)
+        )
       });
 
       if (inventory.options.length === 0) {
