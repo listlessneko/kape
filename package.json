@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: Do or do not. There is no test.\" && exit 1",
-    "dev": "NODE_ENV=dev nodemon index.js",
-    "main": "NODE_ENV=main nodemon index.js"
+    "dev": "cross-env NODE_ENV=dev nodemon index.js",
+    "main": "cross-env NODE_ENV=main nodemon index.js"
   },
   "author": "listlessneko",
   "license": "ISC",
   "dependencies": {
+    "cross-env": "^7.0.3",
     "discord.js": "^14.15.3",
     "nodemon": "^3.1.4",
     "sequelize": "^6.37.3",
