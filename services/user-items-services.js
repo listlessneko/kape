@@ -1,28 +1,22 @@
-const path = require('node:path');
-const { UserContextMenuCommandInteraction } = require('discord.js');
-const { MathServices } = require(path.join(__dirname, 'math-services.js'));
-const { Op, Users, UserItems } = require(path.join(__dirname, '..', 'data', 'db-objects.js'));
-//const UserItems = require(path.join(__dirname, '..', 'models', 'user-items.js'));
-const { client } = require(path.join(__dirname, '..', 'client.js'));
+const { client } = require('../client.js');
+const { Op, Users, UserItems } = require('../data/db-objects.js');
 const userItemsCache = client.userItemsCache;
 
 const UserItemsServices = {
-  async getUserItems(options = {}, ...userIds) {
-    const { requestModelInstance = false } = options;
+  async getUserItems(...userIds) {
+    //console.log('Get User Items - User Ids:', ...userIds);
 
-    const usersInCache = [];
     const usersNotInCache = [];
+    //console.log('Get User Items - Users Not In Cache:', usersNotInCache);
 
     userIds.forEach(userId => {
-      if ( userItemsCache.has(userId) ) {
-        usersInCache.push(userId);
-      }
-      else {
+      if (!userItemsCache.has(userId)) {
         usersNotInCache.push(userId);
       }
+      //console.log('Get User Items - Cached User Items:', userItemsCache.get(userId));
     });
 
-    if ( usersNotInCache.length > 0 ) {
+    if (usersNotInCache.length > 0) {
       const dbUserItems = await UserItems.findAll({
         where: { 
           user_id: {
@@ -31,64 +25,45 @@ const UserItemsServices = {
         },
         include: ['kafeItem'],
       });
+      //console.log('Get User Items - Database User Items:', dbUserItems);
 
       dbUserItems.forEach(userItem => {
         const userId = userItem.dataValues.user_id;
 
-        if ( !userItemsCache.has(userId) ) {
+        if (!userItemsCache.has(userId)) {
           userItemsCache.set(userId, { items: [] });
         }
         userItemsCache.get(userId).items.push(userItem);
       });
 
       userIds.forEach(userId => {
-        if ( !userItemsCache.has(userId) ) {
+        if (!userItemsCache.has(userId)) {
           userItemsCache.set(userId, { items: [] });
+          //console.log('Get User Items - Cached User Items:', userItemsCache.get(userId));
         }
       });
     }
 
-    if ( requestModelInstance ) {
-      if ( userIds.length === 1 ) {
-        const userCachedItems = userItemsCache.get(userIds[0]);
-        return userCachedItems;
-      }
-
-      if ( userIds.length > 1 ) {
-        const cachedUsersItems = usersWithItems.map(user => userItemsCache.get(user));
-        return cachedUsersItems;
-      }
+    if ( userIds.length > 1 ) {
+      const cachedUsersItems = userIds.map(userId => userItemsCache.get(userId));
+      return cachedUsersItems;
     }
 
     if ( userIds.length === 1 ) {
       const cachedItems = userItemsCache.get(userIds[0]);
-      const userItemsInventory = cachedItems.items.map(item => item.dataValues);
-      return userItemsInventory;
-    }
-
-    else {
-      const cachedUsersItems = userIds.map(userId => {
-        const cachedItems = userItemsCache.get(userId);
-        const userItemsInventory = cachedItems.items.map(item => item.dataValues);
-        return {
-          user_id: userId,
-          items: userItemsInventory
-        }
-      });
-
-      const usersItemsInventory = cachedUsersItems.reduce((acc, user) => {
-        acc[user.user_id] = {...user};
-        return acc;
-      }, {});
-
-      return usersItemsInventory;
+      //console.log('Get User Items - Cached Items:', cachedItems);
+      return cachedItems;
     }
   },
 
   async findItem(item) {
     const userItem = await UserItems.findOne({
       where: {
-        item_id: item
+        [Op.or]: [
+          { id: item },
+          { name: item },
+          { value: item }
+        ]
       },
       include: ['kafeItem']
     });
@@ -96,7 +71,7 @@ const UserItemsServices = {
   },
 
   async addItems(item, quantity, userId) {
-    const cachedItems = await this.getUserItems({ requestModelInstance: true }, userId);
+    const cachedItems = await this.getUserItems(userId);
     const userItem = cachedItems.items.find(cachedItem => cachedItem.dataValues.item_id === item.id);
 
     try { 
@@ -116,17 +91,26 @@ const UserItemsServices = {
         let newUserItems = await UserItems.create({
           user_id: userId,
           name: item.name,
+          value: item.value,
           item_id: item.id,
           quantity: quantity,
         });
 
-        newUserItems = await this.findItem(newUserItems.item_id);
+        console.log('User Items Add Items - UserId:', userId);
+        console.log('User Items Add Items - Item Name:', item.name);
+        console.log('User Items Add Items - Item Value:', item.value);
+        console.log('User Items Add Items - Item Id:', item.id);
+        console.log('User Items Add Items - Quantity:', quantity);
+
+        newUserItems = await this.findItem(item.value);
+        console.log('User Items Add Items - New User Items:', newUserItems);
         const cachedItems = userItemsCache.get(userId);
         cachedItems.items.push(newUserItems);
 
         return {
           user: newUserItems.user_id,
           item_name: newUserItems.name,
+          item_value: newUserItems.value,
           item_quantity: newUserItems.quantity
         }
       }
@@ -137,7 +121,7 @@ const UserItemsServices = {
   },
 
   async removeItems(item, quantity ,userId) {
-    const cachedItems = await this.getUserItems({ requestModelInstance: true }, userId);
+    const cachedItems = await this.getUserItems(userId);
     const userItem = cachedItems.items.find(cachedItem => cachedItem.dataValues.item_id === item.id);
 
     if (userItem) {

@@ -2,6 +2,7 @@ module.exports = (sequelize, DataTypes) => {
   return sequelize.define('UserItems', {
     user_id: DataTypes.STRING,
     name: DataTypes.STRING,
+    value: DataTypes.STRING,
     item_id: DataTypes.INTEGER,
     quantity: {
       type: DataTypes.FLOAT,

@@ -1,10 +1,6 @@
-const path = require('node:path');
-const { client } = require(path.join(__dirname, '..', '..', 'client.js'));
+const { client } = require('../../client.js');
 const { SlashCommandBuilder, ComponentType } = require('discord.js');
-const { UserServices } = require(path.join(__dirname, '..', '..', 'services', 'user-services.js'));
-const { UserItemsServices } = require(path.join(__dirname, '..', '..', 'services', 'user-items-services.js'));
-const { KafeServices } = require(path.join(__dirname, '..', '..', 'services', 'kafe-services.js'));
-//const { Users, KafeItems } = require(path.join(__dirname, '..', '..', 'data', 'db-objects.js'));
+const { UserServices, UserItemsServices, KafeServices } = require('../../services/all-services.js');
 
 module.exports = {
   cooldown: 5,
@@ -26,53 +22,60 @@ module.exports = {
       });
 
       collector.on('collect', async i => {
-        const menu = client.menus.get(i.values[0]);
         const selectedValue = i.values[0];
-        console.log(i.values[0]);
+        const menu = client.menus.get(selectedValue);
+        const itemCheck = await KafeServices.findItem(selectedValue);
+        console.log(itemCheck);
+        console.log(selectedValue);
 
         if (i.user.id === interaction.user.id) {
-          if (!menu) {
-            if (selectedValue === 'nevermind') {
-              await i.update({
-                content: `Oh, maybe next time.`,
-                components: []
-              });
-              collector.stop('Order Cmd: User canceled order.');
-              return;
-            }
-
-            const item = await KafeServices.findItem(selectedValue);
-
-            const user = await UserServices.getUsers(interaction.user.id);
-
-            if (item) {
-              if (item.cost <= user.balance) {
-                await UserServices.subtractBalance(item.cost, user.user_id);
-                await UserItemsServices.addItems(item, 1, user.user_id);
-                await i.update({
-                  content: `Here is your **${item.name.toLowerCase()}**.`,
-                  components: [],
-                });
-                collector.stop('Order Cmd: Order completed.')
-                return;
-              }
-
-              else if (item.cost > user.balance) {
-                await i.update({
-                  content: `Hm... You lack the sufficient credits to purchase this item. Maybe come back next time.`,
-                  components: [],
-                });
-                collector.stop('Order Cmd: Insufficient funds.')
-                return;
-              }
-            }
+          if (selectedValue === 'nevermind') {
+            await i.update({
+              content: `Oh, maybe next time.`,
+              components: []
+            });
+            return collector.stop('User canceled order.');
           }
-
-          else if (menu) {
+          if (menu) {
             await i.update({
               content: menu.content,
               components: [menu.row]
             });
+          }
+          if (itemCheck) {
+            const quantityMenu = client.menus.get('quantity-menu');
+            console.log('Order Cmd - Item Check:', itemCheck);
+            const prev_menu = itemCheck.type;
+            console.log('Order Cmd - Prev Menu:', prev_menu);
+            await i.update({
+              components: [quantityMenu.row(prev_menu, 'Order', 5, itemCheck.value)]
+            });
+          }
+          else if (!menu && !itemCheck) {
+            const item = await KafeServices.findItem(selectedValue.slice(2));
+            const quantity = Number(selectedValue.slice(0, 1));
+            const totalCost = item.cost * quantity;
+            const user = await UserServices.getUsers(interaction.user.id);
+
+            if (totalCost <= user.balance) {
+              await UserServices.subtractBalance(totalCost, user.user_id);
+              await UserItemsServices.addItems(item, quantity, user.user_id);
+              const content = quantity > 1 ? `Here are your **${quantity} ${item.name.toLowerCase()}** orders.` : `Here is your **${item.name.toLowerCase()}**.`;
+              await i.update({
+                content: content,
+                components: [],
+              });
+              return collector.stop('Order completed.');
+            }
+
+            else if (totalCost > user.balance) {
+              const content = quantity > 1 ? `Hm... You lack the sufficient credits to purchase these items. Maybe come back next time.` : `Hm... You lack the sufficient credits to purchase this item. Maybe come back next time.`;
+              await i.update({
+                content: content,
+                components: [],
+              });
+              return collector.stop('Insufficient funds.');
+            }
           }
         }
 
@@ -93,7 +96,7 @@ module.exports = {
           });
         }
         else {
-          console.log(reason);
+          console.log('Order Cmd:', reason);
         }
       });
     }

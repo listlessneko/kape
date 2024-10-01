@@ -15,7 +15,7 @@ const wait = require('node:timers/promises').setTimeout;
 module.exports = {
   cooldown: 5,
   data: new SlashCommandBuilder()
-    .setName('rock-paper-scissors')
+    .setName('janken')
     .setDescription('Play rock paper scissors with the kapé or npcs.')
     .addStringOption(option =>
       option

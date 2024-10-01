@@ -1,6 +1,6 @@
 const path = require('node:path');
 const { SlashCommandBuilder } = require('discord.js');
-const { UserItemsServices } = require(path.join(__dirname, '..', '..', 'services', 'user-items-services.js'));
+const { UserItemsServices } = require('../../services/user-items-services.js');
 
 module.exports = {
   cooldown: 5,
@@ -15,10 +15,10 @@ module.exports = {
 
   async execute(interaction) {
     const user = interaction.options.getUser('user') ?? interaction.user;
-    const items = await UserItemsServices.getUserItems({ requestModelInstance: false }, user.id);
+    const instance = await UserItemsServices.getUserItems(user.id);
 
-    if (items.length > 0) {
-      const thisUserItems = items.map(item => `${item.quantity} ${item.name}`);
+    if (instance.items.length > 0) {
+      const thisUserItems = instance.items.map(item => `${item.quantity} ${item.name}`);
 
       console.log('Inventory Cmd: Items successfully displayed.');
       return interaction.reply({

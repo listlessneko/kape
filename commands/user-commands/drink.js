@@ -36,8 +36,9 @@ module.exports = {
         });
 
         collector.on('collect', async i => {
-          const menu = client.menus.get(i.values[0])
           const selectedValue = i.values[0];
+          const menu = client.menus.get(selectedValue)
+          const itemCheck = await KafeServices.findItem(selectedValue);
           console.log('Drinks Cmd - Selected Value:', selectedValue);
 
           if (i.user.id === interaction.user.id) {
@@ -58,52 +59,74 @@ module.exports = {
                 return;
               }
 
-              const item = await KafeServices.findItem(selectedValue);
               const user = await UserServices.getUsers(interaction.user.id);
 
               try {
-                if (item) {
+                if (itemCheck) {
+                  const quantityMenu = client.menus.get('quantity-menu');
+                  const item = await KafeServices.findItem(selectedValue);
+                  const prev_menu = item.type + '-sub-menu';
+                  console.log('Drinks Cmd - Prev Menu:', prev_menu);
+                  await i.update({
+                    components: [quantityMenu.row(prev_menu, 'Order', 5, itemCheck.value)]
+                  });
+                }
+                else if (!itemCheck) {
                   try {
-                    if (item.cost <= user.balance) {
-                      console.log('Drinks Cmd - Item Cost:', item.cost);
-                      await UserServices.subtractBalance(item.cost, user.user_id);
+                    const item = await KafeServices.findItem(selectedValue.slice(2));
+                    console.log('Drinks Cmd - Item:', item);
+                    const quantity = Number(selectedValue.slice(0, 1));
+                    console.log('Drinks Cmd - Selected Value Quantity:', selectedValue.slice(0, 1));
+                    console.log('Drinks Cmd - Quantity:', quantity);
+                    const totalCost = item.cost * quantity;
+                    if (totalCost <= user.balance) {
+                      console.log('Drinks Cmd - Total Cost:', totalCost);
+                      await UserServices.subtractBalance(totalCost, user.user_id);
 
-                      let energy = '';
+                      let totalEnergy = 0;
 
                       if (item.energy_replen.min !== item.energy_replen.max) {
                         console.log('Drinks Cmd - Energy Diff');
-                        const interval = 5;
-                        const energyDiff = MathServices.randomMultiple(item.energy_replen.min, item.energy_replen.max, interval);
-                        energy = energyDiff.fate;
-                        console.log('Drinks Cmd - Fate:', energy);
+                        let i = 0;
+                        while (i < quantity) {
+                          const interval = 5;
+                          const energyDiff = MathServices.randomMultiple(item.energy_replen.min, item.energy_replen.max, interval);
+                          totalEnergy += energyDiff.fate;
+                          i++;
+                          console.log('Drinks Cmd - Fate:', totalEnergy);
+                        }
                       }
                       else {
-                        energy = item.energy_replen.max;
+                        totalEnergy = item.energy_replen.max * quantity;
                       }
-                      if (energy <= 0) {
-                        await UserServices.addEnergy(energy, user.user_id);
-                        console.log('Drinks Cmd - Unfortunate:', energy);
+                      if (totalEnergy <= 0) {
+                        await UserServices.addEnergy(totalEnergy, user.user_id);
+                        console.log('Drinks Cmd - Unfortunate:', totalEnergy);
+                        const content = quantity > 1 ? `Here are your **${quantity} ${item.name.toLowerCase()}** orders. Please enjoy them.\n*You drink each of them one gulp after another. Your stomach starts to feel strange and you have a sudden urge to find the nearest restroom.*\n\n-# **${MathServices.formatNumber(totalEnergy)} energy**` : `Here is your **${item.name.toLowerCase()}**. Please enjoy it.\n*You drink all of it in one gulp. Your stomach starts to feel strange and you have a sudden urge to find the nearest restroom.*\n\n-# **${MathServices.formatNumber(totalEnergy)} energy**`;
                         await i.update({
-                          content: `Here is your **${item.name.toLowerCase()}**. Please enjoy it.\n*You drink all of it in one gulp. Your stomach starts to feel strange and you have a sudden urge to find the nearest restroom.*\n\n-# **${MathServices.formatNumber(energy)} energy**`,
+                          content: content,
                           components: []
                         });
                         return collector.stop('Drink consumed from cafe.');
                       }
                       else {
-                        console.log('Drinks Cmd - Energy Same:', energy);
-                        await UserServices.addEnergy(energy, user.user_id);
+                        console.log('Drinks Cmd - Energy Same:', totalEnergy);
+                        await UserServices.addEnergy(totalEnergy, user.user_id);
+                        const content = quantity > 1 ? `Here are your **${quantity} ${item.name.toLowerCase()}** orders. Please enjoy them.\n*You drink each of them one gulp after another.*\n\n-# **${MathServices.formatNumber(totalEnergy)} energy**` : `Here is your **${item.name.toLowerCase()}**. Please enjoy it.\n*You drink all of it in one gulp.*\n\n-# **${MathServices.formatNumber(totalEnergy)} energy**`;
                         await interaction.editReply({
-                          content: `Here is your **${item.name.toLowerCase()}**. Please enjoy it.\n*You drink all of it in one gulp.*\n\n-# **${MathServices.formatNumber(energy)} energy**`,
+                          content: content,
                           components: []
                         });
                         return collector.stop('Drink consumed from cafe.');
                       }
                     }
                     else {
-                      return await interaction.editReply({
-                        content: `Hm... You lack the sufficient credits to purchase this item. Maybe come back next time.`,
+                      const content = quantity > 1 ? `Hm... You lack the sufficient credits to purchase these items. Maybe come back next time.` : `Hm... You lack the sufficient credits to purchase this item. Maybe come back next time.`;
+                      await interaction.editReply({
+                        content: content,
                         components: []
                       });
+                      return collector.stop('User is too poor.')
                     }
                   }
                   catch (e) {
@@ -145,53 +168,20 @@ module.exports = {
     }
 
     else if (subcommand === 'inventory') {
-      const inventory = new StringSelectMenuBuilder()
-        .setCustomId('inventory')
-        .setPlaceholder('View your inventory.')
-
-      const userItems = await UserItemsServices.getUserItems({requestModelInstance: false}, interaction.user.id);
-        console.log('Drink Cmd - UserItems:', userItems);
-
-      userItems.forEach(userItem => {
-        console.log('Drink Cmd - UserItem:', userItem);
-        const i = userItem.kafeItem;
-        console.log('Drink Cmd - Item:', i);
-        //console.log('Drink Cmd - Item Data Values:', item.dataValues);
-        inventory.addOptions(
-          new StringSelectMenuOptionBuilder()
-            .setLabel(
-              (() => {
-                if (i.energy_replen.min === i.energy_replen.max) {
-                  return `${i.name} (${i.cost} credits, ${i.energy_replen.max} energy)`;
-                }
-                else {
-                  return `${i.name} (${i.cost} credits, ${i.energy_replen.min} - ${i.energy_replen.max} energy)`;
-                }
-              })()
-            )
-            .setValue(i.value)
-            .setDescription(i.description)
-        )
-      });
-
-      if (inventory.options.length === 0) {
+      const inventoryMenu = client.menus.get('inventory-menu');
+      const userItems = await UserItemsServices.getUserItems(interaction.user.id);
+      //console.log('Drink Cmd - User Items:', userItems);
+      const drinkItems = userItems.items.filter(item => item.kafeItem.category === 'drinks');
+      //console.log('Drink Cmd - Drink Items:', drinkItems);
+      if (drinkItems.length === 0) {
         return await interaction.reply({
-          content: `*You ruffle through your bag and realize you don't have any food...*`
+          content: `*You ruffle through your bag and realize you don't have any drinks...*`
         });
       }
 
-      inventory.addOptions(
-        new StringSelectMenuOptionBuilder()
-          .setLabel('Nevermind')
-          .setValue('nevermind')
-          .setDescription('Close bag.')
-      )
-
-      const row = new ActionRowBuilder().addComponents(inventory);
-
       const response = await interaction.reply({
         content: `*You ruffle through your bag. Hm...*`,
-        components: [row]
+        components: [inventoryMenu.row(drinkItems)]
       });
 
       try {
@@ -202,50 +192,81 @@ module.exports = {
 
         collector.on('collect', async i => {
           const selectedValue = i.values[0];
+          const inventoryMenu = client.menus.get(selectedValue);
+          const itemCheck = await UserItemsServices.findItem(selectedValue);
+          console.log('Drink Inventory Cmd - Item Check:', itemCheck);
 
-          if (selectedValue === 'nevermind') {
-            await i.update({
-              content: `*You close your bag.*`,
-              components: []
-            });
-            return collector.stop('User closed bag.')
-          }
 
           if (i.user.id === interaction.user.id) {
-            const item = await KafeServices.findItem(selectedValue);
-            console.log('Drink Cmd: Item:', item);
-            const user = interaction.user.id;
-            await UserItemsServices.removeItems(item, 1, user);
-
-            let energy = '';
-
-            if (item.energy_replen.min !== item.energy_replen.max) {
-              console.log('Drink Cmd - Energy Diff');
-                const interval = 5;
-                const energyDiff = MathServices.randomMultiple(item.energy_replen.min, item.energy_replen.max, interval);
-                energy = energyDiff.fate;
-                console.log('Drinks Cmd - Fate:', energy);
-            }
-            else {
-              energy = item.energy_replen.max;
-            }
-            if (energy <= 0) {
-              console.log('Drink Cmd - Unfortunate:', energy);
-              await UserServices.addEnergy(energy, user.user_id);
+            if (selectedValue === 'nevermind') {
               await i.update({
-                content: `*You drink all of it in one gulp. Your stomach starts to feel strange and you have a sudden urge to find the nearest restroom.*\n\n-# **${MathServices.formatNumber(energy)} energy**`,
+                content: `*You close your bag.*`,
                 components: []
               });
-              return collector.stop('Drink consumed from inventory.');
+              return collector.stop('User closed bag.')
             }
-            else {
-              console.log('Drink Cmd - Energy Same:', energy);
-              await UserServices.addEnergy(energy, user);
+
+            if (inventoryMenu) {
+              console.log('Drink Inventory Cmd - Selected Value Go Back:', selectedValue);
               await i.update({
-                content: `*You gulp down the entire beverage.*\n-#**${MathServices.formatNumber(energy)} energy**`,
-                components: []
+                components: [inventoryMenu.row(drinkItems)]
               });
-              return collector.stop('Drink consumed from inventory.');
+            }
+            if (itemCheck) {
+              console.log('Drink Inventory Cmd - Selected Value Item:', selectedValue);
+              const quantityMenu = client.menus.get('quantity-menu');
+              const prev_menu = 'inventory-menu';
+              const quantity = itemCheck.quantity;
+              console.log('Drink Inventory Cmd - Quantity:', quantity);
+              await i.update({
+                components: [quantityMenu.row(prev_menu, 'Drink', quantity, itemCheck.value)]
+              });
+            }
+            else if (!inventoryMenu && !itemCheck) {
+              console.log('Drink Inventory Cmd - Selected Value Quantity:', selectedValue);
+              const user = interaction.user.id;
+              console.log('Drink Inventory Cmd - Selected Value:', selectedValue);
+              console.log('Drink Inventory Cmd - Selected Value Slice:', selectedValue.slice(2));
+              const item = await KafeServices.findItem(selectedValue.slice(2));
+              console.log('Drink Inventory Cmd - Item:', item);
+              const quantity = Number(selectedValue.slice(0, 1));
+              await UserItemsServices.removeItems(item, quantity, user);
+
+              let totalEnergy = 0;
+
+              if (item.energy_replen.min !== item.energy_replen.max) {
+                console.log('Drink Cmd - Energy Diff');
+                let i = 0;
+                while (i < quantity) {
+                  const interval = 5;
+                  const energyDiff = MathServices.randomMultiple(item.energy_replen.min, item.energy_replen.max, interval);
+                  totalEnergy = energyDiff.fate;
+                  console.log('Drinks Cmd - Fate:', totalEnergy);
+                }
+              }
+              else {
+                totalEnergy = item.energy_replen.max * quantity;
+              }
+              if (totalEnergy <= 0) {
+                console.log('Drink Cmd - Unfortunate:', totalEnergy);
+                await UserServices.addEnergy(totalEnergy, user.user_id);
+                const content = quantity > 1 ? `*You drink each of them one gulp after another. Your stomach starts to feel strange and you have a sudden urge to find the nearest restroom.*\n\n-# **${MathServices.formatNumber(totalEnergy)} energy**` : `*You drink all of it in one gulp. Your stomach starts to feel strange and you have a sudden urge to find the nearest restroom.*\n\n-# **${MathServices.formatNumber(totalEnergy)} energy**`;
+                await i.update({
+                  content: content,
+                  components: []
+                });
+                return collector.stop('Drink consumed from inventory.');
+              }
+              else {
+                console.log('Drink Cmd - Energy Same:', totalEnergy);
+                await UserServices.addEnergy(totalEnergy, user);
+                const content = quantity > 1 ? `*You drink each of them one gulp after another.*\n\n-# **${MathServices.formatNumber(totalEnergy)} energy**` : `*You drink all of it in one gulp.*\n\n-# **${MathServices.formatNumber(totalEnergy)} energy**`;
+                await i.update({
+                  content: content,
+                  components: []
+                });
+                return collector.stop('Drink consumed from inventory.');
+              }
             }
           }
           else if (i.user.id !== interaction.user.id) {

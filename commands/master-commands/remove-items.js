@@ -39,6 +39,7 @@ module.exports = {
 
     const filtered = choices
       .filter(choice => choice.value.includes(focusedValue))
+      .slice(0, 25)
       .map(choice => ({
         name: choice.name,
         value: choice.name

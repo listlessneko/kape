@@ -41,6 +41,7 @@ module.exports = {
 
     const filtered = choices
       .filter(choice => choice.value.includes(focusedValue))
+      .slice(0, 25)
       .map(choice => ({
         name: choice.name,
         value: choice.name
@@ -66,6 +67,9 @@ module.exports = {
     //console.log('Add Items Command - Item:', item);
     //console.log('Add Items Command - Item:', item.name);
 
+    console.log('Add Items Command - Item:', item);
+    console.log('Add Items Command - Quantity:', quantity);
+    console.log('Add Items Command - UserId:', user.id);
     await UserItemsServices.addItems(item, quantity, user.id);
 
     if (user === interaction.user.id) {

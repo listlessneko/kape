@@ -1,7 +1,7 @@
 const path = require('node:path');
 const { StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder } = require('discord.js');
 const { MathServices } = require('../../services/math-services.js');
-const items = require(path.join(__dirname, '..', '..', 'data', 'items.json'));
+const items = require('../../data/items.json');
 
 const drinks = items.categories.find(category => category.name === 'Drinks')
 const coffee = drinks.types.find(type => type.name === 'Coffee');

@@ -24,6 +24,7 @@ const items = require(path.join(__dirname, '..', '..', 'data', 'items.json'));
 const food = items.categories.find(category => category.name === 'Food')
 const dinner = food.types.find(type => type.name === 'Dinner');
 const customer_orders = require('../../data/customer-orders.json');
+const userItems = require('../../models/user-items.js');
 
 module.exports = {
   allowedUserId: ['316419893694300160'],
@@ -53,18 +54,20 @@ module.exports = {
       name: 'customer_id'
     }
 
-    console.log('Ping - Database:', UserCustomerStats);
-
     try {
-      const db = await UserCustomerStats.findAll();
-      console.log('Ping - Database:', db);
+      const userItem = await UserItemsServices.getUserItems(userId1);
+      //console.log('Ping - User Item:', userItem);
+      const cachedUserItem = userItemsCache.get(userId1);
+      //console.log('Ping - Cached User Item:', cachedUserItem);
+      const drinks = userItem.items.find(item => item.kafeItem.dataValues.category === 'drinks');
+      console.log('Ping - Drinks:', drinks);
     }
     catch (e) {
       console.error('Ping Error:', e);
     }
 
-    //await interaction.reply({
-    //  content: `Hello. Welcome to Kapé Kafe. We are currently running *tests*. Don't worry about it.\n*A cat deathly screeches in the kitchen.*`
-    //});
+    await interaction.reply({
+      content: `Hello. Welcome to Kapé Kafe. We are currently running *tests*. Don't worry about it.\n*A cat deathly screeches in the kitchen.*`
+    });
   }
 }

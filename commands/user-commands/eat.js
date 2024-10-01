@@ -1,11 +1,7 @@
 const path = require('node:path');
 const { client } = require(path.join(__dirname, '..', '..', 'client.js'));
 const { SlashCommandBuilder, ComponentType, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder } = require('discord.js');
-const { UserServices } = require(path.join(__dirname, '..', '..', 'services', 'user-services.js'));
-const { UserItemsServices } = require(path.join(__dirname, '..', '..', 'services', 'user-items-services.js'));
-const { KafeServices } = require(path.join(__dirname, '..', '..', 'services', 'kafe-services.js'));
-const { MathServices } = require('../../services/math-services.js');
-const { Users, KafeItems } = require(path.join(__dirname, '..', '..', 'data', 'db-objects.js'));
+const { UserServices, UserItemsServices, KafeServices, MathServices } = require('../../services/all-services.js');
 
 module.exports = {
   cooldown: 5,
@@ -40,8 +36,9 @@ module.exports = {
         });
 
         collector.on('collect', async i => {
-          const menu = client.menus.get(i.values[0])
           const selectedValue = i.values[0];
+          const menu = client.menus.get(selectedValue)
+          const itemCheck = await KafeServices.findItem(selectedValue);
 
           if (i.user.id === interaction.user.id) {
             if (menu) {
@@ -60,47 +57,65 @@ module.exports = {
                 return collector.stop('Eat Cmd: User canceled order.');
               }
 
-              const item = await KafeServices.findItem(selectedValue);
               const user = await UserServices.getUsers(interaction.user.id);
 
               try {
-                if (item) {
+                if (itemCheck) {
+                  const quantityMenu = client.menus.get('quantity-menu');
+                  const item = await KafeServices.findItem(selectedValue);
+                  const prev_menu = item.type + '-sub-menu';
+                  console.log('Eat Cmd - Prev Menu:', prev_menu);
+                  await i.update({
+                    components: [quantityMenu.row(prev_menu, 'Order', 5, item.value)]
+                  });
+                }
+                else if (!itemCheck) {
                   try {
-                    if (item.cost <= user.balance) {
-                      await UserServices.subtractBalance(item.cost, user.user_id);
+                    const item = await KafeServices.findItem(selectedValue.slice(2));
+                    const quantity = Number(selectedValue.slice(0, 1));
+                    const totalCost = item.cost * quantity;
+                    if (totalCost <= user.balance) {
+                      await UserServices.subtractBalance(totalCost, user.user_id);
 
-                      let energy = '';
+                      let totalEnergy = 0;
 
                       if (item.energy_replen.min !== item.energy_replen.max) {
                         console.log('Eat Cmd - Energy Diff');
-                        const interval = 5;
-                        const energyDiff = MathServices.randomMultiple(item.energy_replen.min, item.energy_replen.max, interval);
-                        energy = energyDiff.fate;
-                        console.log('Eat Cmd - Fate:', energy);
+                        let i = 0;
+                        while (i < quantity) {
+                          const interval = 5;
+                          const energyDiff = MathServices.randomMultiple(item.energy_replen.min, item.energy_replen.max, interval);
+                          totalEnergy += energyDiff.fate;
+                          i++;
+                          console.log('Eat Cmd - Fate:', totalEnergy);
+                        }
                       }
                       else {
-                        energy = item.energy_replen.max;
+                        totalEnergy = item.energy_replen.max * quantity;
                       }
-                      if (energy <= 0) {
-                        await UserServices.addEnergy(energy, user.user_id);
+                      if (totalEnergy <= 0) {
+                        await UserServices.addEnergy(totalEnergy, user.user_id);
+                        const content = quantity > 1 ? `Here are your **${quantity} ${item.name.toLowerCase()}** orders. Please enjoy them.\n\n*You inhale each of them one after the other. Your stomach starts to feel strange and you have a sudden urge to find the nearest restroom.*\n\n-# **${MathServices.formatNumber(totalEnergy)} energy**` : `Here is your **${item.name.toLowerCase()}**. Please enjoy it.\n\n*You eat the entire thing in one bite. Your stomach starts to feel strange and you have a sudden urge to find the nearest restroom.*\n\n-# **${MathServices.formatNumber(totalEnergy)} energy**`;
                         await interaction.editReply({
-                          content: `*Here is your **${item.name.toLowerCase()}**. Please enjoy it.\n\n*You eat the entire thing in one bite. Your stomach starts to feel strange and you have a sudden urge to find the nearest restroom.*\n\n-# **${MathServices.formatNumber(energy)} energy**`,
+                          content: content,
                           components: []
                         });
                         return collector.stop('Food unfortunatey consumed from cafe.');
                       }
                       else {
-                        await UserServices.addEnergy(energy, user.user_id);
+                        await UserServices.addEnergy(totalEnergy, user.user_id);
+                        const content = quantity > 1 ? `Here are your **${quantity} ${item.name.toLowerCase()}** orders. Please enjoy them.\n*You inhale each of them one after the other.*\n\n-# **${MathServices.formatNumber(totalEnergy)} energy**` : `Here is your **${item.name.toLowerCase()}**. Please enjoy it.\n*You eat the entire thing in one bite.*\n\n-# **${MathServices.formatNumber(totalEnergy)} energy**`;
                         await interaction.editReply({
-                          content: `Here is your **${item.name.toLowerCase()}**. Please enjoy it.\n*You drink all of it in one gulp.*\n\n-# **${MathServices.formatNumber(energy)} energy**`,
+                          content: content,
                           components: []
                         });
                         return collector.stop('Food consumed from cafe.');
                       }
                     }
-                    else if (item.cost > user.balance) {
+                    else if (totalCost > user.balance) {
+                      const content = quantity > 1 ? `Hm... You lack the sufficient credits to purchase these items. Maybe come back next time.` : `Hm... You lack the sufficient credits to purchase this item. Maybe come back next time.`;
                       await interaction.editReply({
-                        content: `Hm... You lack the sufficient credits to purchase this item. Maybe come back next time.`,
+                        content: content,
                         components: []
                       });
                       return collector.stop('User canceled order.');
@@ -145,52 +160,20 @@ module.exports = {
     }
 
     else if (subcommand === 'inventory') {
-      const inventory = new StringSelectMenuBuilder()
-        .setCustomId('inventory')
-        .setPlaceholder('View your inventory.')
-
-      const userItems = await UserItemsServices.getUserItems({requestModelInstance: false}, interaction.user.id);
-
-      userItems.forEach(userItem => {
-        const i = userItem.kafeItem;
-        console.log('Eat Inventory - Item:', i);
-        const max = MathServices.formatNumber(i.energy_replen.max);
-        const min = MathServices.formatNumber(i.energy_replen.min);
-        inventory.addOptions(
-          new StringSelectMenuOptionBuilder()
-            .setLabel(
-              (() => {
-                if (i.energy_replen.min === i.energy_replen.max) {
-                  return `${i.name} (${max} energy)`;
-                }
-                else {
-                  return `${i.name} (${min} to ${max} energy)`;
-                }
-              })()
-            )
-            .setValue(i.value)
-            .setDescription(i.description)
-        )
-      });
-
-      if (inventory.options.length === 0) {
+      const inventoryMenu = client.menus.get('inventory-menu');
+      const userItems = await UserItemsServices.getUserItems(interaction.user.id);
+      //console.log('Eat Cmd - User Items:', userItems);
+      const foodItems = userItems.items.filter(item => item.kafeItem.category === 'food');
+      //console.log('Eat Cmd - Eat Items:', drinkItems);
+      if (foodItems.length === 0) {
         return await interaction.reply({
           content: `*You ruffle through your bag and realize you don't have any food...*`
         });
       }
 
-      inventory.addOptions(
-        new StringSelectMenuOptionBuilder()
-          .setLabel('Nevermind')
-          .setValue('nevermind')
-          .setDescription('Close bag.')
-      )
-
-      const row = new ActionRowBuilder().addComponents(inventory);
-
       const response = await interaction.reply({
         content: `*Hm...*`,
-        components: [row]
+        components: [inventoryMenu.row(foodItems)]
       });
 
       try {
@@ -201,6 +184,9 @@ module.exports = {
 
         collector.on('collect', async i => {
           const selectedValue = i.values[0];
+          const inventoryMenu = client.menus.get(selectedValue);
+          const itemCheck = await UserItemsServices.findItem(selectedValue);
+          console.log('Eat Inventory Cmd - Item Check:', itemCheck);
 
           if (i.user.id === interaction.user.id) {
             if (selectedValue === 'nevermind') {
@@ -208,41 +194,70 @@ module.exports = {
                 content: `*You close your bag.*`,
                 components: []
               });
-              return collector.stop('Eat Cmd: User closed bag.')
+              return collector.stop('User closed bag.')
             }
 
-            const item = await KafeServices.findItem(selectedValue);
-            const user = interaction.user.id;
-
-            await UserItemsServices.removeItems(item, 1, user);
-
-            let energy = '';
-
-            if (item.energy_replen.min !== item.energy_replen.max) {
-              console.log('Eat Cmd - Energy Diff');
-              const interval = 5;
-              const energyDiff = MathServices.randomMultiple(item.energy_replen.min, item.energy_replen.max, interval);
-              energy = energyDiff.fate;
-              console.log('Eat Cmd - Fate:', energy);
-            }
-            else {
-              energy = item.energy_replen.max;
-            }
-            if (energy <= 0) {
-              await UserServices.addEnergy(energy, user);
+            if (inventoryMenu) {
+              console.log('Eat Inventory Cmd - Selected Value Go Back:', selectedValue);
               await i.update({
-                content: `*You eat the entire thing in one bite. Your stomach starts to feel strange and you have a sudden urge to find the nearest restroom.*\n\n-# **${MathServices.formatNumber(energy)} energy**`,
-                components: []
+                components: [inventoryMenu.row(foodItems)]
               });
-              return collector.stop('Food consumed from inventory.');
             }
-            else {
-              await UserServices.addEnergy(energy, user);
+
+            if (itemCheck) {
+              console.log('Eat Inventory Cmd - Selected Value Item:', selectedValue);
+              const quantityMenu = client.menus.get('quantity-menu');
+              const prev_menu = 'inventory-menu';
+              const quantity = itemCheck.quantity;
+              console.log('Eat Inventory Cmd - Quantity:', quantity);
               await i.update({
-                content: `*You eat the entire thing in one bite.*\n\n-# **${MathServices.formatNumber(energy)} energy**`,
-                components: []
+                components: [quantityMenu.row(prev_menu, 'Eat', quantity, itemCheck.value)]
               });
-              return collector.stop('Eat Cmd: Food consumed from inventory.');
+            }
+
+            else if (!inventoryMenu && !itemCheck) {
+              console.log('Eat Inventory Cmd - Selected Value Quantity:', selectedValue);
+              const user = interaction.user.id;
+              console.log('Eat Inventory Cmd - Selected Value:', selectedValue);
+              console.log('Eat Inventory Cmd - Selected Value Slice:', selectedValue.slice(2));
+              const item = await KafeServices.findItem(selectedValue.slice(2));
+              console.log('Eat Inventory Cmd - Item:', item);
+              const quantity = Number(selectedValue.slice(0, 1));
+              await UserItemsServices.removeItems(item, quantity, user);
+
+              let totalEnergy = 0;
+
+              if (item.energy_replen.min !== item.energy_replen.max) {
+                console.log('Eat Cmd - Energy Diff');
+                let i = 0;
+                while (i < quantity) {
+                  const interval = 5;
+                  const energyDiff = MathServices.randomMultiple(item.energy_replen.min, item.energy_replen.max, interval);
+                  totalEnergy = energyDiff.fate;
+                  console.log('Eat Cmd - Fate:', totalEnergy);
+                }
+              }
+              else {
+                totalEnergy = item.energy_replen.max * quantity;
+              }
+              if (totalEnergy <= 0) {
+                await UserServices.addEnergy(totalEnergy, user);
+                const content = quantity > 1 ? `*You inhale each of them one after the other. Your stomach starts to feel strange and you have a sudden urge to find the nearest restroom.*\n\n-# **${MathServices.formatNumber(totalEnergy)} energy**` : `*You eat the entire thing in one bite. Your stomach starts to feel strange and you have a sudden urge to find the nearest restroom.*\n\n-# **${MathServices.formatNumber(totalEnergy)} energy**`;
+                await i.update({
+                  content: content,
+                  components: []
+                });
+                return collector.stop('Food consumed from inventory.');
+              }
+              else {
+                await UserServices.addEnergy(totalEnergy, user);
+                const content = quantity > 1 ? `*You inhale each of them one after the other.*\n\n-# **${MathServices.formatNumber(totalEnergy)} energy**` : `*You eat the entire thing in one bite.*\n\n-# **${MathServices.formatNumber(totalEnergy)} energy**`;
+                await i.update({
+                  content: content,
+                  components: []
+                });
+                return collector.stop('Food consumed from inventory.');
+              }
             }
           }
           else if (i.user.id !== interaction.user.id) {
@@ -263,7 +278,7 @@ module.exports = {
             });
           }
           else {
-            return console.log(reason);
+            return console.log('Eat Inventory Cmd:', reason);
           }
         });
       }
