@@ -3,7 +3,7 @@ const { MathServices } = require('./math-services.js');
 const { SearchServices } = require('./search-services.js');
 const levels = require('../data/levels.json');
 const { client } = require('../client.js');
-const usersCache = client.usersCache;
+const usersCache = client.cache['usersCache'];
 
 const UserServices = {
   async getUsers(...userIds) {
@@ -16,6 +16,31 @@ const UserServices = {
       usersCache.set(user.dataValues.user_id, user);
     });
     console.log(usersCache);
+  },
+
+  async refreshEnergy() {
+    try { 
+      await Users.update(
+        {
+          energy: 100,
+          max_energy: true,
+        },
+        {
+          where: {},
+        }
+      );
+
+      const user = await Users.findOne({
+        where: {
+          user_id: '316419893694300160'
+        }
+      });
+      console.log('User:', user);
+      console.log('All users energy refreshed.');
+    }
+    catch (e) {
+      console.error('Error refreshing energy:', e);
+    }
   },
 
   async addEnergy(amount, ...userIds) {
@@ -34,7 +59,8 @@ const UserServices = {
         }
       }
 
-      let result = await MathServices.addUpTo100(user.energy, amount);
+      const result = MathServices.addUpTo100(user.energy, amount);
+      console.log('Add Energy - Result:', result);
       user.energy = Number(result);
 
       if (result >= 100) {
@@ -54,7 +80,7 @@ const UserServices = {
       return {
         user: user.user_id,
         prev_energy,
-        energy_gained: amount,
+        energy_gained: result,
         new_energy: user.energy,
         max_energy: user.max_energy,
         min_energy: user.min_energy,
@@ -78,7 +104,7 @@ const UserServices = {
     async function calculateEnergy(amount, user) {
       const prev_energy = user.energy;
 
-      if (user.energy === 0) {
+      if (user.energy <= 0) {
         console.log(`User ID: ${user.user_id} is already at minimum (${user.energy}) energy.`)
         return {
           user: user.user_id,
@@ -90,7 +116,8 @@ const UserServices = {
         }
       }
 
-      const result = await MathServices.removeDownTo0(user.energy, amount);
+      const result = MathServices.removeDownTo0(user.energy, amount);
+      console.log('Remove Energy - Result:', result);
       user.energy = Number(result);
 
       if (result >= 100) {

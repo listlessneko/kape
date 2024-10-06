@@ -32,7 +32,7 @@ module.exports = {
           content: `Uh... You look tired. Get some rest and we can play again later.`,
           components: []
         });
-        return console.log('Rock Paper Scissors Cmd: User is too tired.');
+        return console.log('Janken Cmd: User is too tired.');
       }
 
       const opponentInteractionString = interaction.options.getString('npc');
@@ -239,7 +239,7 @@ module.exports = {
                   content: `*You suddenly feel wiser as though you understand a little bit more how this world turns.*\n\nLeveled up from Level ${user.prev_level} to **Level ${user.level}**`
                 });
               }
-              return collector.stop('Janken Cmd - A draw.');
+              return collector.stop('Janken Cmd: A draw.');
             }
 
             const userWon = selectedValue === outcomes[opponentWeapon]['loses_to'];
@@ -311,7 +311,7 @@ module.exports = {
                 content: `Jan... ken... pon!\n\n(You) ${outcomes[selectedValue]['weapon_icon']} vs. ${outcomes[opponentWeapon]['weapon_icon']} (${npc.proper_name})\n*Defeat. ${outcomes[selectedValue]['losing_message']}*\n\nLost **${energy_consumed} energy**`,
                 components: []
               });
-              return collector.stop('Janken Cmd - Fight ended. User defeated.')
+              return collector.stop('Fight ended. User defeated.')
             }
           }
         });

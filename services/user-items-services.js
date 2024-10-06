@@ -1,6 +1,6 @@
-const { client } = require('../client.js');
 const { Op, Users, UserItems } = require('../data/db-objects.js');
-const userItemsCache = client.userItemsCache;
+const { client } = require('../client.js');
+const userItemsCache = client.cache['userItemsCache'];
 
 const UserItemsServices = {
   async getUserItems(...userIds) {

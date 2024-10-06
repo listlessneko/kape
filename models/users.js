@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     user_id: {
       type: DataTypes.STRING,
       primaryKey: true,
+      allowNull: false,
     },
     balance: {
       type: DataTypes.FLOAT,

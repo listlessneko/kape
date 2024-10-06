@@ -7,6 +7,7 @@ const SearchServices = {
 
     userIds.forEach(userId => {
       if (!Cache.has(userId)) {
+        console.log('User not in cache.')
         usersNotInCache.push(userId);
       }
     });

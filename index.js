@@ -7,17 +7,42 @@ const { token } = require(`./config/${environment}-config.json`);
 
 const { client } = require('./client.js');
 
-client.commands = new Collection();
-client.cooldowns = new Collection();
-client.menus = new Collection();
-client.usersCache = new Collection();
-client.userBaristaStatsCache = new Collection();
-client.userCustomerStatsCache = new Collection();
-client.userLevelsCache = new Collection();
-client.userItemsCache = new Collection();
-client.jankenStatsCache = new Collection();
-client.userNpcJankenStatsCache = new Collection();
-client.fateScoresCache = new Collection();
+const cacheArrNames = [
+  'commands',
+  'cooldowns',
+  'menus',
+  'usersCache',
+  'userBaristaStatsCache',
+  'userCustomerStatsCache',
+  'userLevelsCache',
+  'userItemsCache',
+  'jankenStatsCache',
+  'userNpcJankenStatsCache',
+  'fateScoresCache'
+];
+
+client.cache = {};
+
+for (let cacheName of cacheArrNames) {
+  console.log('Cache:', cacheName);
+  client.cache[cacheName] = new Collection();
+}
+
+console.log('Caches Created.');
+
+const { CronServices } = require('./cron/cron.js');
+CronServices.setUpJobSchedules();
+//client.commands = new Collection();
+//client.cooldowns = new Collection();
+//client.menus = new Collection();
+//client.usersCache = new Collection();
+//client.userBaristaStatsCache = new Collection();
+//client.userCustomerStatsCache = new Collection();
+//client.userLevelsCache = new Collection();
+//client.userItemsCache = new Collection();
+//client.jankenStatsCache = new Collection();
+//client.userNpcJankenStatsCache = new Collection();
+//client.fateScoresCache = new Collection();
 
 const commandsPath = path.join(__dirname, 'commands'); 
 const commandDir = fs.readdirSync(commandsPath);
@@ -31,7 +56,7 @@ for (dir of commandDir) {
     const command = require(filePath);
 
     if ('data' in command && 'execute' in command) {
-      client.commands.set(command.data.name, command);
+      client.cache['commands'].set(command.data.name, command);
     }
     else {
       console.log(`[WARNING] The command at ${filePath} is missing a required 'data' or 'execute' property.`);
@@ -66,7 +91,7 @@ for (dir of menuDir) {
     const menu = require(filePath);
 
     if ('content' in menu && 'row' in menu && 'customId' in menu) {
-      client.menus.set(menu.customId, {
+      client.cache['menus'].set(menu.customId, {
         content: menu.content,
         row: menu.row
       });

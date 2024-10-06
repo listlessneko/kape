@@ -1,9 +1,9 @@
-const { client } = require('../client.js');
 const { UserCustomerStats, UserBaristaStats } = require('../data/db-objects.js');
 const { FormatServices } = require('./format-services.js');
 const { SearchServices } = require('./search-services.js');
-const userCustomerStatsCache = client.userCustomerStatsCache;
-const userBaristaStatsCache = client.userBaristaStatsCache;
+const { client } = require('../client.js');
+const userCustomerStatsCache = client.cache['userCustomerStatsCache'];
+const userBaristaStatsCache = client.cache['userBaristaStatsCache'];
 
 const UserCustomerStatsServices = {
   async getUsersCustomerStats(key1, key2) {

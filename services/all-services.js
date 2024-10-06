@@ -1,4 +1,5 @@
 const { SearchServices } = require('./search-services.js');
+const { CacheServices } = require('./cache-services.js');
 const { UserServices } = require('./user-services.js');
 const { NpcServices } = require('./npc-services.js');
 const { UserLevelsServices } = require('./user-levels-services.js');
@@ -14,6 +15,7 @@ const { UserCustomerStatsServices } = require('./user-customer-stats-services.js
 
 module.exports = {
   SearchServices,
+  CacheServices,
   UserServices,
   NpcServices,
   UserLevelsServices,

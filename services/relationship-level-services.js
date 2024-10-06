@@ -1,8 +1,8 @@
-const { client } = require('../client.js');
-const userCustomerStatsCache = client.userCustomerStatsCache;
 const { UserCustomerStats } = require('../data/db-objects.js');
 const { FormatServices } = require('./format-services.js');
 const { SearchServices } = require('./search-services.js');
+const { client } = require('../client.js');
+const userCustomerStatsCache = client.cache['userCustomerStatsCache'];
 
 const RelationshipLevelServices = {
   async getRelationshipLevel(key1, key2) {

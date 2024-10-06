@@ -32,25 +32,25 @@ const FateScores = require(path.join(__dirname, '..', 'models', 'fate-scores'))(
 const force = process.argv.includes('--force') || process.argv.includes('--f');
 
 async function initializeDatabase() {
-  //KafeItems.sync({ force: true }).then(async () => {
-  // await populateItems(KafeItems, items);
-  //});
-  //Npcs.sync({ force: true }).then(async () => {
-  //  await populateNpcs(Npcs, npcs);
-  //});
+  KafeItems.sync({ force: true }).then(async () => {
+   await populateItems(KafeItems, items);
+  });
+  Npcs.sync({ force: true }).then(async () => {
+    await populateNpcs(Npcs, npcs);
+  });
   //const npcData = await Npcs.findAll();
   //console.log('Npcs:', JSON.stringify(npcData, null, 2)); // Pretty print JSON
-  //Customers.sync({ force: true }).then(async () => {
-  //  await populateCustomers(Customers, customers);
-  //});
-  //await Users.sync({ force: true });
-  //await UserLevels.sync({ force: true });
-  //UserCustomerStats.sync({ force: true });
-  //UserBaristaStats.sync({ force: true });
-  UserItems.sync({ force: true });
-  //JankenStats.sync({ force: true });
-  //UserNpcJankenStats.sync({ force: true });
-  //await FateScores.sync({ force: true });
+  Customers.sync({ force: true }).then(async () => {
+    await populateCustomers(Customers, customers);
+  });
+  await Users.sync({ force: true });
+  await UserLevels.sync({ force: true });
+  await UserCustomerStats.sync({ force: true });
+  await UserBaristaStats.sync({ force: true });
+  await UserItems.sync({ force: true });
+  await JankenStats.sync({ force: true });
+  await UserNpcJankenStats.sync({ force: true });
+  await FateScores.sync({ force: true });
   console.log('Database initialized.')
 }
 

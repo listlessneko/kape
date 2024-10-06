@@ -5,7 +5,7 @@ module.exports = {
   name: Events.InteractionCreate,
   async execute(interaction) {
     if (interaction.isChatInputCommand()) {
-      const command = client.commands.get(interaction.commandName);
+      const command = client.cache['commands'].get(interaction.commandName);
 
       if (!command) {
         console.error(`No command matching ${interaction.commandName} was found.`);
@@ -45,7 +45,7 @@ module.exports = {
       }
     }
     else if (interaction.isAutocomplete()) {
-      const command = client.commands.get(interaction.commandName);
+      const command = client.cache['commands'].get(interaction.commandName);
 
       if (!command) {
         console.error(`No command matching ${interaction.commandName} was found.`);

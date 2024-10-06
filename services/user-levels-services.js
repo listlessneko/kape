@@ -1,7 +1,7 @@
 const { UserLevels } = require('../data/db-objects.js');
-const { client } = require('../client.js');
-const userLevelsCache = client.userLevelsCache;
 const { SearchServices } = require('./search-services.js');
+const { client } = require('../client.js');
+const userLevelsCache = client.cache['userLevelsCache'];
 
 const UserLevelsServices = {
   async getUserLevels(...userIds) {

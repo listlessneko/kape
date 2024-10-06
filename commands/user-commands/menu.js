@@ -65,7 +65,12 @@ module.exports = {
         //console.log('Menu Cmd - Cost:', cost);
         const energy = MathServices.formatEnergy(item.energy_replen.min, item.energy_replen.max);
         //console.log('Menu Cmd - Energy:', energy);
-        menu.push(`**${item.name}**\n-# ${cost.funds} ${cost.units}, ${energy.min} energy to ${energy.max} energy\n*${item.description}*\n`);
+        if (item.energy_replen.min !== item.energy_replen.max) {
+          menu.push(`**${item.name}**\n-# ${cost.funds} ${cost.units}, ${energy.min} energy to ${energy.max} energy\n*${item.description}*\n`);
+        }
+        else {
+          menu.push(`**${item.name}**\n-# ${cost.funds} ${cost.units}, ${energy.max} energy\n*${item.description}*\n`);
+        }
       });
       console.log('Menu Cmd - Items Formatted:', itemsFormatted);
 

@@ -1,6 +1,6 @@
-const path = require('node:path');
 const { SlashCommandBuilder } = require('discord.js');
 const { 
+  CacheServices,
   UserServices,
   UserLevelsServices,
   UserItemsServices,
@@ -11,20 +11,7 @@ const {
   MathServices,
   FormatServices
 } = require('../../services/all-services.js');
-const { KafeItems, Customers } = require(path.join(__dirname, '..', '..', 'data', 'db-objects.js'));
-const { UserCustomerStats, UserBaristaStats } = require('../../data/db-objects.js');
-const { client } = require(path.join(__dirname, '..', '..', 'client.js'));
-const usersCache = client.usersCache;
-const userLevelsCache = client.userLevelsCache;
-const userItemsCache = client.userItemsCache;
-const userCustomerStatsCache = client.userCustomerStatsCache;
-const userBaristaStatsCache = client.userBaristaStatsCache;
-const wait = require('node:timers/promises').setTimeout;
-const items = require(path.join(__dirname, '..', '..', 'data', 'items.json'));
-const food = items.categories.find(category => category.name === 'Food')
-const dinner = food.types.find(type => type.name === 'Dinner');
-const customer_orders = require('../../data/customer-orders.json');
-const userItems = require('../../models/user-items.js');
+const { CronServices, cronJobs } = require('../../cron/cron.js');
 
 module.exports = {
   allowedUserId: ['316419893694300160'],
@@ -55,12 +42,10 @@ module.exports = {
     }
 
     try {
-      const userItem = await UserItemsServices.getUserItems(userId1);
-      //console.log('Ping - User Item:', userItem);
-      const cachedUserItem = userItemsCache.get(userId1);
-      //console.log('Ping - Cached User Item:', cachedUserItem);
-      const drinks = userItem.items.find(item => item.kafeItem.dataValues.category === 'drinks');
-      console.log('Ping - Drinks:', drinks);
+      console.log(cronJobs);
+      for (let key of Object.keys(cronJobs)) {
+        console.log('Cron Job:', key);
+      }
     }
     catch (e) {
       console.error('Ping Error:', e);

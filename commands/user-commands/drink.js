@@ -90,7 +90,10 @@ module.exports = {
                         let i = 0;
                         while (i < quantity) {
                           const interval = 5;
-                          const energyDiff = MathServices.randomMultiple(item.energy_replen.min, item.energy_replen.max, interval);
+                          const range = MathServices.generateRangeWeightedNegative(item.energy_replen.min, item.energy_replen.max, interval);
+                          //console.log('Drinks Cmd - Range:', range);
+                          const energyDiff = MathServices.getWeightedSelection(range);
+                          console.log('Drinks Cmd - Energy Diff:', energyDiff);
                           totalEnergy += energyDiff.fate;
                           i++;
                           console.log('Drinks Cmd - Fate:', totalEnergy);
@@ -98,6 +101,7 @@ module.exports = {
                       }
                       else {
                         totalEnergy = item.energy_replen.max * quantity;
+                        console.log('Drinks Cmd - Energy Same:', totalEnergy);
                       }
                       if (totalEnergy <= 0) {
                         await UserServices.addEnergy(totalEnergy, user.user_id);
@@ -110,7 +114,6 @@ module.exports = {
                         return collector.stop('Drink consumed from cafe.');
                       }
                       else {
-                        console.log('Drinks Cmd - Energy Same:', totalEnergy);
                         await UserServices.addEnergy(totalEnergy, user.user_id);
                         const content = quantity > 1 ? `Here are your **${quantity} ${item.name.toLowerCase()}** orders. Please enjoy them.\n*You drink each of them one gulp after another.*\n\n-# **${MathServices.formatNumber(totalEnergy)} energy**` : `Here is your **${item.name.toLowerCase()}**. Please enjoy it.\n*You drink all of it in one gulp.*\n\n-# **${MathServices.formatNumber(totalEnergy)} energy**`;
                         await interaction.editReply({
@@ -239,8 +242,12 @@ module.exports = {
                 let i = 0;
                 while (i < quantity) {
                   const interval = 5;
-                  const energyDiff = MathServices.randomMultiple(item.energy_replen.min, item.energy_replen.max, interval);
-                  totalEnergy = energyDiff.fate;
+                  const range = MathServices.generateRangeWeightedNegative(item.energy_replen.min, item.energy_replen.max, interval);
+                  console.log('Drinks Cmd - Range:', range);
+                  const energyDiff = MathServices.getWeightedSelection(range);
+                  console.log('Drinks Cmd - Energy Diff:', energyDiff);
+                  totalEnergy += energyDiff.fate;
+                  i++;
                   console.log('Drinks Cmd - Fate:', totalEnergy);
                 }
               }

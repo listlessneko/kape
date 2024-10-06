@@ -2,9 +2,9 @@ const { Op, JankenStats, UserNpcJankenStats, FateScores } = require('../data/db-
 const { SearchServices } = require('../services/search-services.js');
 const { FormatServices } = require('../services/format-services.js');
 const { client } = require('../client.js');
-const jankenStatsCache = client.jankenStatsCache;
-const userNpcJankenStatsCache = client.userNpcJankenStatsCache;
-const fateScoresCache = client.fateScoresCache;
+const jankenStatsCache = client.cache['jankenStatsCache'];
+const userNpcJankenStatsCache = client.cache['userNpcJankenStatsCache'];
+const fateScoresCache = client.cache['fateScoresCache'];
 
 const ScoresServices = {
   async getJankenStats(userId) {

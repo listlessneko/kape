@@ -84,7 +84,8 @@ module.exports = {
                         let i = 0;
                         while (i < quantity) {
                           const interval = 5;
-                          const energyDiff = MathServices.randomMultiple(item.energy_replen.min, item.energy_replen.max, interval);
+                          const range = MathServices.generateRangeWeightedNegative(item.energy_replen.min, item.energy_replen.max, interval);
+                          const energyDiff = MathServices.getWeightedSelection(range);
                           totalEnergy += energyDiff.fate;
                           i++;
                           console.log('Eat Cmd - Fate:', totalEnergy);
@@ -232,8 +233,10 @@ module.exports = {
                 let i = 0;
                 while (i < quantity) {
                   const interval = 5;
-                  const energyDiff = MathServices.randomMultiple(item.energy_replen.min, item.energy_replen.max, interval);
+                  const range = MathServices.generateRangeWeightedNegative(item.energy_replen.min, item.energy_replen.max, interval);
+                  const energyDiff = MathServices.getWeightedSelection(range);
                   totalEnergy = energyDiff.fate;
+                  i++;
                   console.log('Eat Cmd - Fate:', totalEnergy);
                 }
               }

@@ -1,5 +1,4 @@
-const path = require('node:path');
-const { Op, KafeItems } = require(path.join(__dirname, '..', 'data', 'db-objects.js'));
+const { Op, KafeItems } = require('../data/db-objects.js');
 
 const KafeServices = {
   async findItem(itemToCheck) {

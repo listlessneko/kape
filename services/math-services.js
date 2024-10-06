@@ -36,6 +36,8 @@ const MathServices = {
   },
 
   addUpTo100(currentAmount, ...amount) {
+    console.log('Add Up To 0 - Current Amount:', currentAmount);
+    console.log('Add Up To 0 - ...Amount:', ...amount);
     let result = currentAmount;
 
     for (const num of amount) {
@@ -43,9 +45,10 @@ const MathServices = {
       if (result >= 100) {
         console.log('Max 100 reached.');
         result = 100;
-        return result;
+        break;
       }
     }
+    console.log('Add Up To 0 - Result:', result);
     return this.roundTo2Decimals(result);
   },
 
@@ -57,9 +60,10 @@ const MathServices = {
       if (result <= 0) {
         console.log('Min 0 reached.');
         result = 0;
-        return result;
+        break;
       }
     }
+    console.log('Remove Down To 0 - Result:', result);
     return this.roundTo2Decimals(result);
   },
 
@@ -80,10 +84,13 @@ const MathServices = {
   randomMultiple(min, max, interval) {
     const maxMultiples = max / interval;
     console.log('Math Services - Max Multiples:', maxMultiples);
+
     const minMultiples = min / interval;
     console.log('Math Services - Min Multiples:', minMultiples);
+
     const rangeSize = (maxMultiples - minMultiples) + 1;
     console.log('Math Services - Range Size:', rangeSize);
+
     const chance = Math.random();
     const fate = 5 * (Math.floor(chance * rangeSize) + minMultiples);
     console.log('Math Services - Chance:', chance);
@@ -107,7 +114,24 @@ const MathServices = {
         return options[i];
       }
     }
+  },
+
+  generateRangeWeightedNegative(min, max, step) {
+    const range = [];
+
+    for (let fate = min; fate <= max; fate += step) {
+
+      if (fate < 0) {
+        range.push({ fate, weight: 5});
+      }
+      else {
+        range.push({ fate, weight: 1});
+      }
+    }
+
+    return range;
   }
+
 }
 
 module.exports = {
