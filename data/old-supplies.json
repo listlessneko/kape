@@ -1,0 +1,292 @@
+[
+  {
+    "name": "kapé beans (500g)",
+    "value": "kapé-beans-500g",
+    "type": "coffee beans",
+    "group": "coffee beans",
+    "description": "Quality coffee beans from somewhere.",
+    "cost": 32,
+    "amount": 500,
+    "max_amount": 500
+  },
+  {
+    "name": "kapé beans (1kg)",
+    "value": "kapé-beans-1kg",
+    "type": "coffee beans",
+    "group": "coffee beans",
+    "description": "Double the quality coffee beans from somewhere.",
+    "cost": 60,
+    "amount": 1000,
+    "max_amount": 1000
+  },
+  {
+    "name": "milk (1L)",
+    "value": "milk-1l",
+    "type": "milk",
+    "group": "milk",
+    "description": "Milk from a cow.",
+    "cost": 2.5,
+    "amount": 1000,
+    "max_amount": 1000
+  },
+  {
+    "name": "milk (3.79L)",
+    "value": "milk-3.79l",
+    "type": "milk",
+    "group": "milk",
+    "description": "More milk from a cow.",
+    "cost": 4,
+    "amount": 3790,
+    "max_amount": 3790
+  },
+  {
+    "name": "cocoa powder (1kg)",
+    "value": "cocoa-powder-1kg",
+    "type": "cocoa powder",
+    "group": "powders",
+    "description": "Coco for cocoa powder.",
+    "cost": 20,
+    "amount": 1000,
+    "max_amount": 1000
+  },
+  {
+    "name": "hazelnut syrup (375ml)",
+    "value": "hazelnut-syrup-375ml",
+    "type": "hazelnut syrup",
+    "group": "syrups",
+    "description": "Hazy, nutty syrup.",
+    "cost": 12,
+    "amount": 375,
+    "max_amount": 375
+  },
+  {
+    "name": "hazelnut syrup (750ml)",
+    "value": "hazelnut-syrup-750ml",
+    "type": "hazelnut syrup",
+    "group": "syrups",
+    "description": "More hazy, nutty syrup.",
+    "cost": 20,
+    "amount": 750,
+    "max_amount": 750
+  },
+  {
+    "name": "vanilla syrup (375ml)",
+    "value": "vanilla-syrup-375ml",
+    "type": "vanilla syrup",
+    "group": "syrups",
+    "description": "Basic syrup.",
+    "cost": 10,
+    "amount": 375,
+    "max_amount": 375
+  },
+  {
+    "name": "vanilla syrup (750ml)",
+    "value": "vanilla-syrup-750ml",
+    "type": "vanilla syrup",
+    "group": "syrups",
+    "description": "More basic syrup.",
+    "cost": 18,
+    "amount": 750,
+    "max_amount": 750
+  },
+  {
+    "name": "sencha leaves (500g)",
+    "value": "sencha-leaves-500g",
+    "type": "sencha leaves",
+    "group": "leaves",
+    "description": "Steamed camellia sinensis leaves.",
+    "cost": 50,
+    "amount": 500,
+    "max_amount": 500
+  },
+  {
+    "name": "assam leaves (400g)",
+    "value": "assam-leaves-400g",
+    "type": "assam leaves",
+    "group": "leaves",
+    "description": "Fully oxidized camellia sinensis leaves.",
+    "cost": 40,
+    "amount": 400,
+    "max_amount": 400
+  },
+  {
+    "name": "matcha powder (55g)",
+    "value": "matcha-powder-55g",
+    "type": "matcha powder",
+    "group": "powders",
+    "description": "Pulverized green tea leaves that met their match.",
+    "cost": 15,
+    "amount": 55,
+    "max_amount": 55
+  },
+  {
+    "name": "roasted barley (450g)",
+    "value": "roasted-barley-450g",
+    "type": "roasted barley",
+    "group": "leaves",
+    "description": "Barely roasted tea leaves.",
+    "cost": 22.5,
+    "amount": 450,
+    "max_amount": 450
+  },
+  {
+    "name": "oolong leaves (450g)",
+    "value": "oolong-leaves-450g",
+    "type": "oolong-leaves",
+    "group": "leaves",
+    "description": "Very long tea leaves.",
+    "cost": 45,
+    "amount": 450,
+    "max_amount": 450
+  },
+  {
+    "name": "dried chamomile flowers (500g)",
+    "value": "dried-chamomile-flowers-500g",
+    "type": "dried-chamomile-flowers",
+    "group": "leaves",
+    "description": "Flowers camouflaged as tea leaves.",
+    "cost": 35,
+    "amount": 500,
+    "max_amount": 500
+  },
+  {
+    "name": "earl grey leaves (450g)",
+    "value": "earl-grey-leaves-450g",
+    "type": "earl grey leaves",
+    "group": "leaves",
+    "description": "Leaves from the Earl of Grey.",
+    "cost": 67.5,
+    "amount": 450,
+    "max_amount": 450
+  },
+  {
+    "name": "pu-erh leaves (400g)",
+    "value": "pu-erh-leaves-400g",
+    "type": "pu-erh leaves",
+    "group": "leaves",
+    "description": "Leaves from the Emperor.",
+    "cost": 72,
+    "amount": 400,
+    "max_amount": 400
+  },
+  {
+    "name": "lemon juice (125ml)",
+    "value": "lemon-juice-125ml",
+    "type": "lemon juice",
+    "group": "juices",
+    "description": "Sour juice.",
+    "cost": 4,
+    "amount": 125,
+    "max_amount": 125
+  },
+  {
+    "name": "peach syrup (375ml)",
+    "value": "peach-syrup-375ml",
+    "type": "peach syrup",
+    "group": "syrup",
+    "description": "Peachy syrup.",
+    "cost": 12,
+    "amount": 375,
+    "max_amount": 375
+  },
+  {
+    "name": "orange juice (1L)",
+    "value": "orange-juice-1l",
+    "type": "orange juice",
+    "group": "juices",
+    "description": "Original juice.",
+    "cost": 4,
+    "amount": 1000,
+    "max_amount": 1000
+  },
+  {
+    "name": "apple juice (1L)",
+    "value": "apple-juice-1l",
+    "type": "apple juice",
+    "group": "juices",
+    "description": "Juice of knowledge.",
+    "cost": 4,
+    "amount": 1000,
+    "max_amount": 1000
+  },
+  {
+    "name": "pineapple juice (1L)",
+    "value": "pineapple-juice-1l",
+    "type": "pineapple juice",
+    "group": "juices",
+    "description": "Juice of knowledge with spikes.",
+    "cost": 4,
+    "amount": 1000,
+    "max_amount": 1000
+  },
+  {
+    "name": "lemons (1kg)",
+    "value": "lemons-1kg",
+    "type": "lemons",
+    "group": "fruit",
+    "description": "Their lemons.",
+    "cost": 5,
+    "amount": 6,
+    "max_amount": 6
+  },
+  {
+    "name": "sugar (2kg)",
+    "value": "sugar-2kg",
+    "type": "sugar",
+    "group": "sugar",
+    "description": "Sweet.",
+    "cost": 4.25,
+    "amount": 2000,
+    "max_amount": 2000
+  },
+  {
+    "name": "energy jelly (1pk)",
+    "value": "energy-jelly-1pk",
+    "type": "energy jelly",
+    "group": "jelly",
+    "description": "Made by Dr. Jelly.",
+    "cost": 30,
+    "amount": 6,
+    "max_amount": 6
+  },
+  {
+    "name": "milo (1pk)",
+    "value": "milo-1pk",
+    "type": "milo",
+    "group": "beverages",
+    "description": "Chocolate milk.",
+    "cost": 30,
+    "amount": 24,
+    "max_amount": 24
+  },
+  {
+    "name": "coconut water (1pk)",
+    "value": "coconut-water-1pk",
+    "type": "coconut water",
+    "group": "beverages",
+    "description": "Coconut for water.",
+    "cost": 20,
+    "amount": 12,
+    "max_amount": 12
+  },
+  {
+    "name": "sparkling water (1pk)",
+    "value": "sparkling-water-1pk",
+    "type": "sparkling water",
+    "group": "beverages",
+    "description": "Water with attitude.",
+    "cost": 12,
+    "amount": 12,
+    "max_amount": 12
+  },
+  {
+    "name": "root beer (1pk)",
+    "value": "root-beer-1pk",
+    "type": "root beer",
+    "group": "beverages",
+    "description": "Not alcoholic.",
+    "cost": 18,
+    "amount": 6,
+    "max_amount": 6
+  }
+]

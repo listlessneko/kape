@@ -1,26 +1,27 @@
-const cron = require('node-cron');
-const { CacheServices, UserServices } = require('../services/all-services.js');
+import cron from 'node-cron';
+import { 
+  CacheServices,
+  UserServices,
+  InventoryServices,
+} from '../services/all-services.js';
 
-const cronJobs = {};
+export const cronJobs = {};
 
-function scheduleCronJob(name, cronTime, jobFunction) {
+async function scheduleCronJob(name, cronTime, jobFunction) {
   const job = cron.schedule(cronTime, () => {
-    console.log(`Running ${name}...`);
+    console.log(`[LOG] Running ${name}...`);
     jobFunction();
   });
   cronJobs[name] = job;
-  console.log(`Cron Job '${name}' scheduled to run at: ${cronTime}`);
+  console.log(`[LOG] Cron Job '${name}' scheduled to run at: ${cronTime}`);
 }
 
-const CronServices = {
-  setUpJobSchedules() {
-    scheduleCronJob('Clear Cache', '0 0 * * *', CacheServices.clearAllCache);
-    scheduleCronJob('Refresh Energy', '0 0 * * *', UserServices.refreshEnergy);
-    console.log(`All Cron Jobs scehduled.`);
+export const CronServices = {
+  async setUpJobSchedules() {
+    //await scheduleCronJob('Clear Cache', '0 0 * * *', CacheServices.clearAllCache);
+    await scheduleCronJob('Refresh Energy', '*/6 * * * *', CacheServices.refreshEnergy);
+    //await scheduleCronJob('Refresh Water Allowance', '0 * * * *', CacheServices.refreshWaterRetrievalPower);
+    //await scheduleCronJob('Refresh Supplies', '0 0 * * *', CacheServices.refreshSupplies);
+    console.log(`[LOG] All Cron Jobs scehduled.`);
   }
-}
-
-module.exports = {
-  cronJobs,
-  CronServices
 }

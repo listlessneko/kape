@@ -1,10 +1,18 @@
-const { SlashCommandBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder } = require('discord.js');
-const wait = require('node:timers/promises').setTimeout;
-const { UserServices } = require('../../services/user-services.js');
-const { UserLevelsServices } = require('../../services/user-levels-services.js');
-const { ScoresServices } = require('../../services/scores-services.js');
+import { logger } from '../../logger.js';
+import {
+  SlashCommandBuilder,
+  StringSelectMenuBuilder,
+  StringSelectMenuOptionBuilder,
+  ActionRowBuilder
+} from 'discord.js';
+import { setTimeout as wait } from 'node:timers/promises';
+import { UserServices } from '../../services/user-services.js';
+import { StatsServices } from '../../services/stats-services.js';
+import { MathServices } from '../../services/math-services.js';
+import { ErrorServices } from '../../services/error-services.js';
 
-module.exports = {
+const commandName = 'UserCommand.FlipACoin';
+export default {
   cooldown: 5,
   data: new SlashCommandBuilder()
     .setName('flip-a-coin')
@@ -36,7 +44,7 @@ module.exports = {
       components: [row]
     });
 
-    console.log('Flip A Coin Cmd: Fate Stay Night');
+    console.log(`[LOG] ${commandName}: Fate Stay Night`);
 
     const collectorFilter = i => i.user.id === interaction.user.id;
 
@@ -46,128 +54,202 @@ module.exports = {
         time: 60_000
       });
 
+      const traveler = {
+        id: confirmation.user.id
+      };
+      const travelerChoice = confirmation.values[0];
+      const travelerWillDecide = travelerChoice === 'i-will-decide';
+      const letFateDecide = travelerChoice !== 'i-will-decide';
 
-      if (confirmation.values[0] !== 'i-will-decide') {
-        const fate = Math.random() < 0.49 ? 'heads' : Math.random() < 0.961 ? 'tails' : 'UR+';
-        const properFate = fate.charAt(0).toUpperCase() + fate.slice(1);
-        console.log('Flip A Coin Cmd: Fate Proper:', properFate);
+      logger.log(`[LOG] ${commandName} Traveler's choice:`, travelerChoice);
 
-        await interaction.editReply({
-          content: `*Flip...*`,
-          components: []
-        });
-
-        await wait(1_000);
-
-        await interaction.editReply({
-          content: `*Whoosh...*`,
-          components: []
-        });
-
-        await wait(1_000);
-
-        await interaction.editReply({
-          content: `*Spin...*`,
-          components: []
-        });
-
-        await wait(1_000);
-
-        if (confirmation.values[0] === fate) {
-          console.log('Flip A Coin Cmd: Selected Value:', confirmation.values[0]);
-          const originalValue = Math.random() < 0.05 ? 1 : Math.random() < 0.25 ? .5 : .25;
-          const value = originalValue < 1 ? originalValue * 100 : originalValue;
-          console.log('Flip A Coin Cmd: Value:', originalValue);
-          const coin = originalValue === 1 ? 'one_credit' : originalValue === .5 ? 'fifty_parts' : 'twenty_five_parts';
-          await UserServices.addBalance(originalValue, confirmation.user.id);
-          const units = originalValue < 1 ? 'parts' : 'credit';
-          console.log('Flip A Coin Cmd: Units:', units);
-
-          const result = {
-            user_id: confirmation.user.id,
-            side: confirmation.values[0],
-            lucky: true,
-            ultra_rare_plus: false,
-            coin,
-            value: originalValue
-          }
-
-          await ScoresServices.fateScoreTracking(result);
-
-          await interaction.editReply({
-            content: `**${properFate}!** It is your lucky day.\n\nYou receive **${value} ${units}**.`,
-            components: []
-          });
-          return console.log(`${confirmation.user.id} was lucky.`)
-        }
-        else if (fate === 'UR+') {
-          console.log('Flip A Coin Cmd: Fate:', fate);
-          const value = 1;
-          const exp = 500;
-          await UserServices.addBalance(originalValue, confirmation.user.id);
-
-          const result = {
-            user_id: confirmation.user.id,
-            side: confirmation.values[0],
-            lucky: null,
-            ultra_rare_plus: true,
-            coin,
-            value
-          }
-
-          await ScoresServices.fateScoreTracking(result);
-          await UserLevelsServices.addExp(exp, confirmation.user.id);
-
-          await interaction.editReply({
-            content: `*The coin lands on its side and spins for what feels like forever before stopping still on its thin, outer ridges.*\n\n Huh... That rarely happens... Hold onto the coin. Maybe it is lucky one.\n\nGained **${value} credit**`,
-            components: []
-          });
-          
-          await wait(3_000);
-
-          await interaction.followUp({
-            content: `*After picking the coin off the barista's palm, you suddenly feel wiser as though you've gained insight into how this world works.*\n\nGained **${exp} experience**`,
-            components: []
-          })
-          return console.log(`${confirmation.user.id} was ultra lucky.`)
-        }
-        else {
-          console.log('Flip A Coin Cmd: Selected Value:', confirmation.values[0]);
-          console.log('Flip A Coin Cmd: Fate:', fate);
-
-          const result = {
-            user_id: confirmation.user.id,
-            side: confirmation.values[0],
-            lucky: false,
-            ultra_rare_plus: false,
-            coin: null,
-            value: null
-          }
-
-          await ScoresServices.fateScoreTracking(result);
-
-          await interaction.editReply({
-            content: `**${properFate}**. Better luck next time.`,
-            components: []
-          });
-          return console.log(`${confirmation.user.id} was unlucky.`)
-        }
-      }
-      else if (confirmation.values[0] === 'i-will-decide') {
-        console.log('Flip A Coin Cmd: Selected Value:', confirmation.values[0]);
+      if (travelerWillDecide) {
         return await interaction.editReply({
           content: `Not feeling lucky today? Maybe next time.\n\n*You decide to take fate into your own hands.*`,
           components: []
         });
+      } if (letFateDecide) {
+
+        let guests = {};
+        let bouncer = {};
+
+        try {
+          const fate = Math.random() < 0.49 ? 'heads' : Math.random() < 0.961 ? 'tails' : 'UR+';
+          console.log(`[LOG] ${commandName} Fate:`, fate);
+
+          const properFate = fate.charAt(0).toUpperCase() + fate.slice(1);
+
+          const travelerWithFate = travelerChoice === fate;
+          const blessedByFate = fate === 'UR+';
+          const favoredByFate = travelerWithFate || blessedByFate;
+          const unlucky = !favoredByFate;
+
+          await interaction.editReply({
+            content: `*Flip...*`,
+            components: []
+          });
+
+          await wait(1_000);
+
+          await interaction.editReply({
+            content: `*Whoosh...*`,
+            components: []
+          });
+
+          await wait(1_000);
+
+          await interaction.editReply({
+            content: `*Spin...*`,
+            components: []
+          });
+
+          await wait(1_000);
+
+          logger.log(`[LOG] ${commandName} travelerWithFate:`, travelerWithFate);
+          logger.log(`[LOG] ${commandName} blessedByFate:`, blessedByFate);
+          logger.log(`[LOG] ${commandName} favoredByFate:`, favoredByFate);
+
+          if (favoredByFate) {
+            logger.log(`[LOG] ${commandName} ${traveler.id} was favored by fate.`);
+
+            const coins = {
+              twenty_five_parts: {
+                name: 'twenty_five_parts',
+                value: .25,
+              },
+              fifty_parts: {
+                name: 'fify_parts',
+                value: .50,
+              },
+              one_credit: {
+                name: 'one_credit',
+                value: 1,
+              },
+            };
+
+            if (travelerWithFate) {
+              logger.log(`[LOG] ${commandName} ${traveler.id} was lucky.`);
+
+              const coin = Math.random() < 0.75 ? coins.twenty_five_parts : Math.random() < .98 ? coins.fifty_parts : coins.one_credit;
+              const fortune = MathServices.displayCurrency(coin.value);
+
+              guests = {
+                UserBalance: traveler.id,
+                JankenStats: traveler.id,
+              };
+              bouncer = await ErrorServices.startAdvancedSquealOperations(commandName, guests);
+
+              await UserServices.addBalance(traveler.id, coin.value, bouncer);
+
+              const fateByFate = {
+                side: travelerChoice,
+                lucky: true,
+                ultra_rare_plus: false,
+                coin: coin.name,
+              }
+
+              await StatsServices.calculateFateStats(traveler, fateByFate, bouncer);
+
+              await ErrorServices.endAdvancedSquealOperations(commandName, bouncer);
+
+              return await interaction.editReply({
+                content: `**${properFate}!** It is your lucky day.\n\n-# **+${fortune.amount} ${fortune.units}**.`,
+                components: []
+              });
+            } if (blessedByFate) {
+              logger.log(`[LOG] ${commandName}: ${traveler.id} was ultra lucky.`);
+              const coin = {
+                name: 'one_credit',
+                value: 1,
+              }
+              const fortune = MathServices.displayCurrency(coin.value);
+              const exp = 500;
+
+              guests = {
+                UserBalance: traveler.id,
+                JankenStats: traveler.id,
+                UserLevel: traveler.id
+              };
+              bouncer = await ErrorServices.startAdvancedSquealOperations(commandName, guests);
+
+              await UserServices.addBalance(traveler.id, coin.value, bouncer);
+
+              const fateByFate = {
+                side: travelerChoice,
+                lucky: null,
+                ultra_rare_plus: true,
+                coin: coin.name,
+              }
+
+              await StatsServices.calculateFateStats(traveler, fateByFate, bouncer);
+              const { userLevel, levelUp } = await UserServices.addExp(traveler.id, exp, bouncer);
+
+              await ErrorServices.endAdvancedSquealOperations(commandName, bouncer);
+
+              await interaction.editReply({
+                content: `*The coin lands on its side and spins for what feels like forever before stopping still on its thin, outer ridges.*\n\n Huh... That rarely happens... Hold onto the coin. Maybe it is lucky one.\n\n-# **+${fortune.amount} ${fortune.units}**\n-# **+${exp} experience**`,
+                components: []
+              });
+
+              if (levelUp) {
+                await wait(3_000);
+                return await interaction.followUp({
+                  content: `*After picking the coin off the barista's palm, you suddenly feel wiser as though you've gained insight into how this world works.*\n\nLeveled up from Level ${userLevel.level - 1} to **Level ${userLevel.level}**!`,
+                  components: []
+                });
+              } else {
+                return;
+              }
+            }
+          } if (unlucky) {
+            logger.log(`[LOG] ${commandName} ${traveler.id} was unlucky.`);
+
+            guests = {
+              UserBalance: traveler.id,
+              JankenStats: traveler.id,
+            };
+            bouncer = await ErrorServices.startAdvancedSquealOperations(commandName, guests);
+
+            const fateByFate = {
+              side: travelerChoice,
+              lucky: false,
+              ultra_rare_plus: false,
+              coin: null,
+            }
+
+            await StatsServices.calculateFateStats(traveler, fateByFate, bouncer);
+
+            await ErrorServices.endAdvancedSquealOperations(commandName, bouncer);
+
+            return await interaction.editReply({
+              content: `**${properFate}**. Better luck next time.`,
+              components: []
+            });
+          }
+          return logger.log(`[LOG] ${commandName}: Error?`);
+        } catch (e) {
+          ErrorServices.handleError(commandName, e);
+          if (!bouncer.transaction.finished) {
+            await ErrorServices.handleAdvancedDataRollback(commandName, guests, bouncer);
+          }
+          return await interaction.editReply({
+            content: `Looks like fate is indecisive right now. Try again later.`,
+            component: []
+          });
+        }
       }
-    }
-    catch (e) {
-      console.error('Flip A Coin Cmd: Error:', e);
+    } catch (e) {
+      if (e.message === 'reason: time') {
+        logger.error(`[ERROR] ${commandName} The traveler was indecisive.`);
+        return await interaction.editReply({
+          content: `Indecisive?`
+        });
+      }
+      ErrorServices.handleError(commandName, e);
       return await interaction.editReply({
         content: `*A cat screeches and glass breaks behind the kitchen doors.*\nPlease wait while I take care of something...`,
         components: [],
       });
     }
-
   }
 }

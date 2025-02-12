@@ -1,0 +1,4094 @@
+{
+  "categories": [
+    {
+      "name": "Prepared Coffees",
+      "custom_id": "prepared-coffees",
+      "value": "prepared-coffees",
+      "description": "In and out. Fast drink edition.",
+      "content": "In and out. Fast drink edition.",
+      "placeholder": "Select a coffee.",
+      "types": [
+        { 
+          "name": "Hot Coffees",
+          "custom_id": "hot-coffees",
+          "value": "hot-coffees",
+          "description": "It'll get cold eventually.",
+          "content": "It'll get cold eventually.",
+          "placeholder": "Select a coffee",
+          "items": [
+            {
+              "id": "PREPAREDCOFFEES-HOT-H001",
+              "name": "Drip Coffee",
+              "value": "drip-coffee",
+              "description": "Coffee with style.",
+              "cost": 2.75,
+              "category": "Prepared Coffees",
+              "type": "Hot Coffees",
+              "prepared": true,
+              "supplies_required": [
+                {
+                  "name": "Drip Coffee",
+                  "supply_item": {
+                    "id": "PPREPAREDCOFFEES-HOT-C001",
+                    "group": "hot coffee"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "PREPAREDCOFFEES-HOT-H002",
+              "name": "Drip Coffee (Dark Roast)",
+              "value": "drip-coffee-dark-roast",
+              "description": "Coffee with a snarky, uncomfortable bite.",
+              "cost": 2.75,
+              "category": "Prepared Coffees",
+              "type": "Hot Coffees",
+              "prepared": true,
+              "supplies_required": [
+                {
+                  "name": "Very Volcano Drip Coffee",
+                  "supply_item": {
+                    "id": "PPREPAREDCOFFEES-HOT-C002",
+                    "group": "hot coffee"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "PREPAREDCOFFEES-HOT-H003",
+              "name": "Dekaf Drip Coffee",
+              "value": "dekaf-drip-coffee",
+              "description": "Why is this here?",
+              "cost": 2.75,
+              "category": "Prepared Coffees",
+              "type": "Hot Coffees",
+              "prepared": true,
+              "supplies_required": [
+                {
+                  "name": "Dekaf Drip Coffee",
+                  "supply_item": {
+                    "id": "PPREPAREDCOFFEES-HOT-C003",
+                    "group": "hot coffee"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Cold Coffees",
+          "custom_id": "cold-coffees",
+          "value": "cold-coffees",
+          "description": "It got cold.",
+          "content": "It got cold",
+          "placeholder": "Select a coffee.",
+          "items": [
+            {
+              "id": "PREPAREDCOFFEES-COLD-C001",
+              "name": "Cold Brew",
+              "value": "cold-brew",
+              "description": "Quality, prepared cold brew made from Kapé Coffee Beans.",
+              "cost": 3.75,
+              "category": "Prepared Coffees",
+              "type": "Cold Coffees",
+              "prepared": true,
+              "supplies_required": [
+                {
+                  "name": "Cold Brew",
+                  "supply_item": {
+                    "id": "PPREPAREDCOFFEES-COLD-C001",
+                    "group": "cold coffee"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "PREPAREDCOFFEES-COLD-C002",
+              "name": "Premium Cold Brew",
+              "value": "premium-cold-brew",
+              "description": "A cold can of premium cold brew made from preimum Kapé Coffeen Beans.",
+              "cost": 4.25,
+              "category": "Prepared Coffees",
+              "type": "Cold Coffees",
+              "prepared": true,
+              "supplies_required": [
+                {
+                  "name": "Premium Cold Brew",
+                  "supply_item": {
+                    "id": "PPREPAREDCOFFEES-COLD-C002",
+                    "group": "cold coffee"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "PREPAREDCOFFEES-COLD-C003",
+              "name": "Creamy Cold Brew",
+              "value": "creamy-cold-brew",
+              "description": "A cold can of Kapé cold brew mixed with Kow's Farms milk.",
+              "cost": 4.25,
+              "supplies_required": [
+                {
+                  "name": "Creamy Cold Brew",
+                  "supply_item": {
+                    "id": "PPREPAREDCOFFEES-COLD-C003",
+                    "group": "cold coffee"
+                  }
+                }
+              ],
+              "category": "Prepared Coffees",
+              "type": "Cold Coffees"
+            },
+            {
+              "id": "PREPAREDCOFFEES-COLD-C004",
+              "name": "Nitro Cold Brew",
+              "value": "nitro-cold-brew",
+              "description": "Disclaimer: This product does not make you go fast.",
+              "cost": 4.75,
+              "category": "Prepared Coffees",
+              "type": "Cold Coffees",
+              "prepared": true,
+              "supplies_required": [
+                {
+                  "name": "Nitro Cold Brew",
+                  "supply_item": {
+                    "id": "PPREPAREDCOFFEES-COLD-C004",
+                    "group": "cold coffee"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Brews",
+      "custom_id": "brews",
+      "value": "brews",
+      "description": "Your brews.",
+      "content": "Memorize them.",
+      "placeholder": "Select a brew",
+      "types": [
+        {
+          "name": "Brewed Coffees",
+          "custom_id": "brewed-coffees",
+          "value": "brewed-coffees",
+          "description": "Your coffee brews.",
+          "content": "Your coffee brews.",
+          "placeholder": "Select a coffee",
+          "items": [
+            {
+              "id": "BREWED-COFFEES-C001A",
+              "name": "Pour-Over Coffee",
+              "value": "pour-over-coffee",
+              "description": "Freshly, brewed coffee.",
+              "cost": 4.25,
+              "category": "Brews",
+              "type": "Brewed Coffees",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Kapé Coffee Beans (9g) (Pour-over)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-COFFEEBEANS-B001",
+                    "group": "coffee-beans"
+                  },
+                  "specifications": [
+                    {
+                      "name": "amounts",
+                      "value": "9g"
+                    },
+                    {
+                      "name": "techniques",
+                      "value": "pour-over"
+                    }
+                  ]
+                }
+              ],
+              "modifications": [
+                {
+                  "id": "BREWED-COFFEES-C001B",
+                  "name": "Pour-Over Coffee (Dark Roast)",
+                  "value": "pour-over-coffee(dark-roast)",
+                  "description": "Freshly, brewed coffee with a darker roast.",
+                  "cost": 4.25,
+                  "supplies_required": [
+                    {
+                      "name": "Very Volcano Coffee Beans (9g) (Pour-over)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B002",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "pour-over"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C001C",
+                  "name": "Pour-Over Coffee (Decaf)",
+                  "value": "pour-over-coffee(decaf)",
+                  "description": "Freshly, brewed coffee with a decaffeinated beans.",
+                  "cost": 4.25,
+                  "supplies_required": [
+                    {
+                      "name": "Dekaf Coffee Beans (9g) (Pour-over)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B003",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "pour-over"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BREWED-COFFEES-C002A",
+              "name": "Espresso",
+              "value": "espresso",
+              "description": "Express coffee.",
+              "cost": 3.00,
+              "category": "Brews",
+              "type": "Brewed Coffees",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Kapé Coffee Beans (9g) (Espresso Shot)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-COFFEEBEANS-B001",
+                    "group": "coffee-beans"
+                  },
+                  "specifications": [
+                    {
+                      "name": "amounts",
+                      "value": "9g"
+                    },
+                    {
+                      "name": "techniques",
+                      "value": "espresso-shot"
+                    }
+                  ]
+                }
+              ],
+              "modifications": [
+                {
+                  "id": "BREWED-COFFEES-C002B",
+                  "name": "Espresso (Dark Roast)",
+                  "value": "espresso-(dark-roast)",
+                  "description": "Because there is never enough bitterness in this world.",
+                  "cost": 3.00,
+                  "supplies_required": [
+                    {
+                      "name": "Very Volcano Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B002",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C002C",
+                  "name": "Espresso (Decaf)",
+                  "value": "espresso-(decaf)",
+                  "description": "Snail coffee.",
+                  "cost": 3.00,
+                  "supplies_required": [
+                    {
+                      "name": "Dekaf Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B003",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BREWED-COFFEES-C003A",
+              "name": "Americano",
+              "value": "americano",
+              "description": "Weak coffee.",
+              "cost": 3.25,
+              "category": "Brews",
+              "type": "Brewed Coffees",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Kapé Coffee Beans (9g) (Espresso Shot)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-COFFEEBEANS-B001",
+                    "group": "coffee-beans"
+                  },
+                  "specifications": [
+                    {
+                      "name": "amounts",
+                      "value": "9g"
+                    },
+                    {
+                      "name": "techniques",
+                      "value": "espresso-shot"
+                    }
+                  ]
+                },
+                {
+                  "name": "Hot Water (160ml)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-WATERS-W001",
+                    "value": "waters"
+                  },
+                  "specifications": [
+                    {
+                      "name": "amounts",
+                      "value": "160ml"
+                    },
+                    {
+                      "name": "techniques",
+                      "value": "hot"
+                    }
+                  ]
+                }
+              ],
+              "modifications": [
+                {
+                  "id": "BREWED-COFFEES-C003B",
+                  "name": "Americano (Dark Roast)",
+                  "value": "americano-(dark-roast)",
+                  "description": "Weak and bitter coffee.",
+                  "cost": 3.25,
+                  "supplies_required": [
+                    {
+                      "name": "Very Volcano Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B002",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Hot Water (160ml)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-WATERS-W001",
+                        "group": "waters"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "160ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "hot"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C003C",
+                  "name": "Americano (Decaf)",
+                  "value": "americano-(decaf)",
+                  "description": "Frail coffee.",
+                  "cost": 3.25,
+                  "supplies_required": [
+                    {
+                      "name": "Dekaf Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B003",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Hot Water (160ml)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-WATERS-W001",
+                        "group": "waters"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "160ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "hot"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BREWED-COFFEES-C004A",
+              "name": "Macchiato",
+              "value": "macchiato",
+              "description": "Espresso with milk.",
+              "cost": 4.00,
+              "category": "Brews",
+              "type": "Brewed Coffees",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Kapé Coffee Beans (9g) (Espresso Shot)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-COFFEEBEANS-B001",
+                    "group": "coffee-beans"
+                  },
+                  "specifications": [
+                    {
+                      "name": "amounts",
+                      "value": "9g"
+                    },
+                    {
+                      "name": "techniques",
+                      "value": "espresso-shot"
+                    }
+                  ]
+                },
+                {
+                  "name": "Whole Milk (12ml) (Steamed with Macrofoam)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-MILK-M001",
+                    "group": "milk"
+                  },
+                  "specifications": [
+                    {
+                      "name": "amounts",
+                      "value": "12ml"
+                    },
+                    {
+                      "name": "techniques",
+                      "value": "steamed-with-macrofoam"
+                    }
+                  ]
+                }
+              ],
+              "modifications": [
+                {
+                  "id": "BREWED-COFFEES-C004B",
+                  "name": "Macchiato (Dark Roast)",
+                  "value": "macchiato-(dark-roast)",
+                  "description": "Dark espresso with milk.",
+                  "cost": 4.00,
+                  "supplies_required": [
+                    {
+                      "name": "Very Volcano Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B002",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Whole Milk (12ml) (Steamed with Macrofoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M001",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "12ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-macrofoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C004C",
+                  "name": "Macchiato (Decaf)",
+                  "value": "macchiato-(decaf)",
+                  "description": "Sad espresso with milk.",
+                  "cost": 4.00,
+                  "supplies_required": [
+                    {
+                      "name": "Dekaf Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B003",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Whole Milk (12ml) (Steamed with Macrofoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M001",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "12ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-macrofoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C004D",
+                  "name": "Macchiato (Oat Milk)",
+                  "value": "macchiato-(oat-milk)",
+                  "description": "Espresso with oat milk.",
+                  "cost": 4.75,
+                  "supplies_required": [
+                    {
+                      "name": "Kapé Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B001",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Oat Milk (12ml) (Steamed with Macrofoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M002",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "12ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-macrofoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C004E",
+                  "name": "Macchiato (Soy Milk)",
+                  "value": "macchiato-(soy-milk)",
+                  "description": "Espresso with soy milk.",
+                  "cost": 4.75,
+                  "supplies_required": [
+                    {
+                      "name": "Kapé Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B001",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Soy Milk (12ml) (Steamed with Macrofoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M003",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "12ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-macrofoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C004F",
+                  "name": "Macchiato (Dark Roast) (Oat Milk)",
+                  "value": "macchiato-(dark-roast)-(oat-milk)",
+                  "description": "Dark espresso with oat milk.",
+                  "cost": 4.75,
+                  "supplies_required": [
+                    {
+                      "name": "Very Volcano Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B002",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Oat Milk (12ml) (Steamed with Macrofoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M002",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "12ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-macrofoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C004G",
+                  "name": "Macchiato (Dark Roast) (Soy Milk)",
+                  "value": "macchiato-(dark-roast)-(soy-milk)",
+                  "description": "Dark espresso with soy milk.",
+                  "cost": 4.75,
+                  "supplies_required": [
+                    {
+                      "name": "Very Volcano Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B002",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Soy Milk (12ml) (Steamed with Macrofoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M003",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "12ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-macrofoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C004H",
+                  "name": "Macchiato (Decaf) (Oat Milk)",
+                  "value": "macchiato-(decaf)-(oat-milk)",
+                  "description": "Sad espresso with oat milk.",
+                  "cost": 4.75,
+                  "supplies_required": [
+                    {
+                      "name": "Dekaf Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B003",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Oat Milk (12ml) (Steamed with Macrofoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M002",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "12ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-macrofoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C004I",
+                  "name": "Macchiato (Decaf) (Soy Milk)",
+                  "value": "macchiato-(decaf)-(soy-milk)",
+                  "description": "Sad espresso with soy milk.",
+                  "cost": 4.75,
+                  "supplies_required": [
+                    {
+                      "name": "Dekaf Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B003",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Soy Milk (12ml) (Steamed with Macrofoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M003",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "12ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-macrofoam"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BREWED-COFFEES-C005A",
+              "name": "Cappuccino",
+              "value": "cappuccino",
+              "description": "Habit of the First Order.",
+              "cost": 4.25,
+              "category": "Brews",
+              "type": "Brewed Coffees",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Kapé Coffee Beans (9g) (Espresso Shot)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-COFFEEBEANS-B001",
+                    "group": "coffee-beans"
+                  },
+                  "specifications": [
+                    {
+                      "name": "amounts",
+                      "value": "9g"
+                    },
+                    {
+                      "name": "techniques",
+                      "value": "espresso-shot"
+                    }
+                  ]
+                },
+                {
+                  "name": "Whole Milk (160ml) (Steamed with Macrofoam)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-MILK-M001",
+                    "group": "milk"
+                  },
+                  "specifications": [
+                    {
+                      "name": "amounts",
+                      "value": "160ml"
+                    },
+                    {
+                      "name": "techniques",
+                      "value": "steamed-with-macrofoam"
+                    }
+                  ]
+                }
+              ],
+              "modifications": [
+                {
+                  "id": "BREWED-COFFEES-C005B",
+                  "name": "Cappuccino (Dark Roast)",
+                  "value": "cappuccino-(dark-roast)",
+                  "description": "Dark Habit of the First Order.",
+                  "cost": 4.25,
+                  "supplies_required": [
+                    {
+                      "name": "Very Volcano Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B002",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Whole Milk (160ml) (Steamed with Macrofoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M001",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "160ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-macrofoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C005C",
+                  "name": "Cappuccino (Decaf)",
+                  "value": "cappuccino-(decaf)",
+                  "description": "Light Habit of the First Order.",
+                  "cost": 4.25,
+                  "supplies_required": [
+                    {
+                      "name": "Dekaf Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B003",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Whole Milk (160ml) (Steamed with Macrofoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M001",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "160ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-macrofoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C005D",
+                  "name": "Cappuccino (Oat Milk)",
+                  "value": "cappuccino-(oat-milk)",
+                  "description": "Habit of the Cereal Order.",
+                  "cost": 5.00,
+                  "supplies_required": [
+                    {
+                      "name": "Kapé Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B001",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Oat Milk (160ml) (Steamed with Macrofoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M002",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "160ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-macrofoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C005E",
+                  "name": "Cappuccino (Soy Milk)",
+                  "value": "cappuccino-(soy-milk)",
+                  "description": "Habit of the Bean Order.",
+                  "cost": 5.00,
+                  "supplies_required": [
+                    {
+                      "name": "Kapé Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B001",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Soy Milk (160ml) (Steamed with Macrofoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M002",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "160ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-macrofoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C005F",
+                  "name": "Cappuccino (Dark Roast) (Oat Milk)",
+                  "value": "cappuccino-(dark-roast)-(oat-milk)",
+                  "description": "Dark Habit of the Cereal Order.",
+                  "cost": 5.00,
+                  "supplies_required": [
+                    {
+                      "name": "Very Volcano Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B002",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Oat Milk (160ml) (Steamed with Macrofoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M002",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "160ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-macrofoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C005G",
+                  "name": "Cappuccino (Dark Roast) (Soy Milk)",
+                  "value": "cappuccino-(dark-roast)-(soy-milk)",
+                  "description": "Dark Habit of the Bean Order.",
+                  "cost": 5.00,
+                  "supplies_required": [
+                    {
+                      "name": "Very Volcano Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B002",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Soy Milk (160ml) (Steamed with Macrofoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M003",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "160ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-macrofoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C005H",
+                  "name": "Cappuccino (Decaf) (Oat Milk)",
+                  "value": "cappuccino-(decaf)-(oat-milk)",
+                  "description": "Light Habit of the Cereal Order.",
+                  "cost": 5.00,
+                  "supplies_required": [
+                    {
+                      "name": "Dekaf Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B003",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Oat Milk (160ml) (Steamed with Macrofoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M002",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "160ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-macrofoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C005I",
+                  "name": "Cappuccino (Decaf) (Soy Milk)",
+                  "value": "cappuccino-(decaf)-(soy-milk)",
+                  "description": "Light Habit of the Bean Order.",
+                  "cost": 5.00,
+                  "supplies_required": [
+                    {
+                      "name": "Dekaf Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B003",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Soy Milk (160ml) (Steamed with Macrofoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M003",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "160ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-macrofoam"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BREWED-COFFEES-C006A",
+              "name": "Latte",
+              "value": "latte",
+              "description": "Coffee with a lot a milk.",
+              "cost": 4.50,
+              "category": "Brews",
+              "type": "Brewed Coffees",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Kapé Coffee Beans (9g) (Espresso Shot)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-COFFEEBEANS-B001",
+                    "group": "coffee-beans"
+                  },
+                  "specifications": [
+                    {
+                      "name": "amounts",
+                      "value": "9g"
+                    },
+                    {
+                      "name": "techniques",
+                      "value": "espresso-shot"
+                    }
+                  ]
+                },
+                {
+                  "name": "Whole Milk (240ml) (Steamed with Microfoam)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-MILK-M001",
+                    "group": "milk"
+                  },
+                  "specifications": [
+                    {
+                      "name": "amounts",
+                      "value": "240ml"
+                    },
+                    {
+                      "name": "techniques",
+                      "value": "steamed-with-microfoam"
+                    }
+                  ]
+                }
+              ],
+              "modifications": [
+                {
+                  "id": "BREWED-COFFEES-C006B",
+                  "name": "Latte (Dark Roast)",
+                  "value": "latte-(dark-roast)",
+                  "description": "Dark coffee with a lot a milk.",
+                  "cost": 4.50,
+                  "supplies_required": [
+                    {
+                      "name": "Very Volcano Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B002",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Whole Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M001",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C006C",
+                  "name": "Latte (Decaf)",
+                  "value": "latte-(decaf)",
+                  "description": "Not coffee with a lot a milk.",
+                  "cost": 4.50,
+                  "supplies_required": [
+                    {
+                      "name": "Dekaf Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B003",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Whole Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M001",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C006D",
+                  "name": "Latte (Oat Milk)",
+                  "value": "latte-(oat-milk)",
+                  "description": "Coffee with a lot a cereal milk.",
+                  "cost": 5.25,
+                  "supplies_required": [
+                    {
+                      "name": "Kapé Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B001",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Oat Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M002",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C006E",
+                  "name": "Latte (Soy Milk)",
+                  "value": "latte-(soy-milk)",
+                  "description": "Coffee with a lot a bean milk.",
+                  "cost": 5.25,
+                  "supplies_required": [
+                    {
+                      "name": "Kapé Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B001",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Soy Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M003",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C006F",
+                  "name": "Latte (Dark Roast) (Oat Milk)",
+                  "value": "latte-(dark-roast)-(oat-milk)",
+                  "description": "Dark coffee with a lot a cereal milk.",
+                  "cost": 5.25,
+                  "supplies_required": [
+                    {
+                      "name": "Very Volcano Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B002",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Oat Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M002",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C006G",
+                  "name": "Latte (Dark Roast) (Soy Milk)",
+                  "value": "latte-(dark-roast)-(soy-milk)",
+                  "description": "Dark coffee with a lot a bean milk.",
+                  "cost": 5.25,
+                  "supplies_required": [
+                    {
+                      "name": "Very Volcano Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B002",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Soy Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M003",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C006H",
+                  "name": "Latte (Decaf) (Oat Milk)",
+                  "value": "latte-(decaf)-(oat-milk)",
+                  "description": "Not coffee with a lot a cereal milk.",
+                  "cost": 5.25,
+                  "supplies_required": [
+                    {
+                      "name": "Dekaf Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B003",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Oat Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M002",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C006I",
+                  "name": "Latte (Decaf) (Soy Milk)",
+                  "value": "latte-(decaf)-(soy-milk)",
+                  "description": "Not coffee with a lot a bean milk.",
+                  "cost": 5.25,
+                  "supplies_required": [
+                    {
+                      "name": "Dekaf Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B003",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Soy Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M003",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BREWED-COFFEES-C007A",
+              "name": "Vanilla Latte",
+              "value": "vanilla-latte",
+              "description": "Basic coffee with milk.",
+              "cost": 4.75,
+              "category": "Brews",
+              "type": "Brewed Coffees",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Kapé Coffee Beans (9g) (Espresso Shot)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-COFFEEBEANS-B001",
+                    "group": "milk"
+                  },
+                  "specifications": [
+                    {
+                      "name": "amounts",
+                      "value": "9g"
+                    },
+                    {
+                      "name": "techniques",
+                      "value": "espresso-shot"
+                    }
+                  ]
+                },
+                {
+                  "name": "Vanilla Syrup (30ml)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-SYRUPS-S003",
+                    "group": "syrups"
+                  },
+                  "specifications": [
+                    {
+                      "name": "amounts",
+                      "value": "30ml"
+                    }
+                  ]
+                },
+                {
+                  "name": "Whole Milk (240ml) (Steamed with Microfoam)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-MILK-M001",
+                    "group": "milk"
+                  },
+                  "specifications": [
+                    {
+                      "name": "amounts",
+                      "value": "240ml"
+                    },
+                    {
+                      "name": "techniques",
+                      "value": "steamed-with-microfoam"
+                    }
+                  ]
+                }
+              ],
+              "modifications": [
+                {
+                  "id": "BREWED-COFFEES-C007B",
+                  "name": "Vanilla Latte (Dark Roast)",
+                  "value": "vanilla-latte-(dark-roast)",
+                  "description": "Basic, dark coffee with milk.",
+                  "cost": 4.75,
+                  "supplies_required": [
+                    {
+                      "name": "Very Volcano Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B002",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Vanilla Syrup (30ml)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-SYRUPS-S003",
+                        "group": "syrups"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "30ml"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Whole Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M001",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C007C",
+                  "name": "Vanilla Latte (Decaf)",
+                  "value": "vanilla-latte-(decaf)",
+                  "description": "Basic, not coffee with milk.",
+                  "cost": 4.75,
+                  "supplies_required": [
+                    {
+                      "name": "Dekaf Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B003",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Vanilla Syrup (30ml)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-SYRUPS-S003",
+                        "group": "syrups"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "30ml"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Whole Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M001",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C007D",
+                  "name": "Vanilla Latte (Oat Milk)",
+                  "value": "vanilla-latte-(oat-milk)",
+                  "description": "Basic coffee with cereal milk.",
+                  "cost": 5.50,
+                  "supplies_required": [
+                    {
+                      "name": "Kapé Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B001",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Vanilla Syrup (30ml)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-SYRUPS-S003",
+                        "group": "syrups"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "30ml"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Oat Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M002",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C007E",
+                  "name": "Vanilla Latte (Soy Milk)",
+                  "value": "vanilla-latte-(soy-milk)",
+                  "description": "Basic coffee with bean milk.",
+                  "cost": 5.50,
+                  "supplies_required": [
+                    {
+                      "name": "Kapé Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B001",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Vanilla Syrup (30ml)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-SYRUPS-S003",
+                        "group": "syrups"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "30ml"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Soy Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M003",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C007F",
+                  "name": "Vanilla Latte (Dark Roast) (Oat Milk)",
+                  "value": "vanilla-latte-(dark-roast)-(oat-milk)",
+                  "description": "Basic, dark coffee with cereal milk.",
+                  "cost": 5.50,
+                  "supplies_required": [
+                    {
+                      "name": "Very Volcano Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B002",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Vanilla Syrup (30ml)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-SYRUPS-S003",
+                        "group": "syrups"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "30ml"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Oat Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M002",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C007G",
+                  "name": "Vanilla Latte (Dark Roast) (Soy Milk)",
+                  "value": "vanilla-latte-(dark-roast)-(soy-milk)",
+                  "description": "Basic, dark coffee with bean milk.",
+                  "cost": 5.50,
+                  "supplies_required": [
+                    {
+                      "name": "Very Volcano Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B002",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Vanilla Syrup (30ml)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-SYRUPS-S003",
+                        "group": "syrups"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "30ml"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Soy Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M003",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C007H",
+                  "name": "Vanilla Latte (Decaf) (Oat Milk)",
+                  "value": "vanilla-latte-(decaf)-(oat-milk)",
+                  "description": "Basic, not coffee with cereal milk.",
+                  "cost": 5.50,
+                  "supplies_required": [
+                    {
+                      "name": "Dekaf Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B003",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Vanilla Syrup (30ml)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-SYRUPS-S003",
+                        "group": "syrups"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "30ml"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Oat Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M002",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C007I",
+                  "name": "Vanilla Latte (Decaf) (Soy Milk)",
+                  "value": "vanilla-latte-(decaf)-(soy-milk)",
+                  "description": "Basic, not coffee with bean milk.",
+                  "cost": 5.50,
+                  "supplies_required": [
+                    {
+                      "name": "Dekaf Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B003",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Vanilla Syrup (30ml)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-SYRUPS-S003",
+                        "group": "syrups"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "30ml"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Soy Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M003",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BREWED-COFFEES-C008A",
+              "name": "Hazelnut Latte",
+              "value": "hazelnut-latte",
+              "description": "Fancy chocolate-like coffee with milk.",
+              "cost": 4.75,
+              "category": "Brews",
+              "type": "Brewed Coffees",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Kapé Coffee Beans (9g) (Espresso Shot)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-COFFEEBEANS-B001",
+                    "group": "coffee-beans"
+                  },
+                  "specifications": [
+                    {
+                      "name": "amounts",
+                      "value": "9g"
+                    },
+                    {
+                      "name": "techniques",
+                      "value": "espresso-shot"
+                    }
+                  ]
+                },
+                {
+                  "name": "Hazelnut Syrup (30ml)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-SYRUPS-S001",
+                    "group": "syrups"
+                  },
+                  "specifications": [
+                    {
+                      "name": "amounts",
+                      "value": "30ml"
+                    }
+                  ]
+                },
+                {
+                  "name": "Whole Milk (240ml) (Steamed with Microfoam)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-MILK-M001",
+                    "group": "milk"
+                  },
+                  "specifications": [
+                    {
+                      "name": "amounts",
+                      "value": "240ml"
+                    },
+                    {
+                      "name": "techniques",
+                      "value": "steamed-with-microfoam"
+                    }
+                  ]
+                }
+              ],
+              "modifications": [
+                {
+                  "id": "BREWED-COFFEES-C008B",
+                  "name": "Hazelnut Latte (Dark Roast)",
+                  "value": "hazelnut-latte-(dark-roast)",
+                  "description": "Fancy chocolate-like, dark coffee with milk.",
+                  "cost": 4.75,
+                  "supplies_required": [
+                    {
+                      "name": "Very Volcano Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B002",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Hazelnut Syrup (30ml)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-SYRUPS-S001",
+                        "group": "syrups"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "30ml"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Whole Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M001",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C008C",
+                  "name": "Hazelnut Latte (Decaf)",
+                  "value": "hazelnut-latte-(decaf)",
+                  "description": "Fancy chocolate-like not coffee with milk.",
+                  "cost": 4.75,
+                  "supplies_required": [
+                    {
+                      "name": "Dekaf Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B003",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Hazelnut Syrup (30ml)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-SYRUPS-S001",
+                        "group": "syrups"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "30ml"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Whole Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M001",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C008D",
+                  "name": "Hazelnut Latte (Oat Milk)",
+                  "value": "hazelnut-latte-(oat-milk)",
+                  "description": "Fancy chocolate-like coffee with cereal milk.",
+                  "cost": 5.50,
+                  "supplies_required": [
+                    {
+                      "name": "Kapé Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B001",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Hazelnut Syrup (30ml)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-SYRUPS-S001",
+                        "group": "syrups"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "30ml"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Oat Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M002",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C008E",
+                  "name": "Hazelnut Latte (Soy Milk)",
+                  "value": "hazelnut-latte-(soy-milk)",
+                  "description": "Fancy chocolate-like coffee with bean milk.",
+                  "cost": 5.50,
+                  "supplies_required": [
+                    {
+                      "name": "Kapé Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B001",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Hazelnut Syrup (30ml)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-SYRUPS-S001",
+                        "group": "syrups"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "30ml"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Soy Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M003",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C008F",
+                  "name": "Hazelnut Latte (Dark Roast) (Oat Milk)",
+                  "value": "hazelnut-latte-(dark-roast)-(oat-milk)",
+                  "description": "Fancy chocolate-like, dark coffee with cereal milk.",
+                  "cost": 5.50,
+                  "supplies_required": [
+                    {
+                      "name": "Very Volcano Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B002",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Hazelnut Syrup (30ml)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-SYRUPS-S001",
+                        "group": "syrups"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "30ml"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Oat Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M002",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C008G",
+                  "name": "Hazelnut Latte (Dark Roast) (Soy Milk)",
+                  "value": "hazelnut-latte-(dark-roast)-(soy-milk)",
+                  "description": "Fancy chocolate-like, dark coffee with bean milk.",
+                  "cost": 5.50,
+                  "supplies_required": [
+                    {
+                      "name": "Very Volcano Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B002",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Hazelnut Syrup (30ml)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-SYRUPS-S001",
+                        "group": "syrups"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "30ml"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Soy Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M003",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C008H",
+                  "name": "Hazelnut Latte (Decaf) (Oat Milk)",
+                  "value": "hazelnut-latte-(decaf)-(oat-milk)",
+                  "description": "Fancy chocolate-like, not coffee with cereal milk.",
+                  "cost": 5.50,
+                  "supplies_required": [
+                    {
+                      "name": "Dekaf Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B003",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Hazelnut Syrup (30ml)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-SYRUPS-S001",
+                        "group": "syrups"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "30ml"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Oat Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M002",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C008I",
+                  "name": "Hazelnut Latte (Decaf) (Soy Milk)",
+                  "value": "hazelnut-latte-(decaf)-(soy-milk)",
+                  "description": "Fancy chocolate-like, not coffee with bean milk.",
+                  "cost": 5.50,
+                  "supplies_required": [
+                    {
+                      "name": "Dekaf Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B003",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Hazelnut Syrup (30ml)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-SYRUPS-S001",
+                        "group": "syrups"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "30ml"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Soy Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M003",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BREWED-COFFEES-C009A",
+              "name": "Mocha",
+              "value": "mocha",
+              "description": "Chocolate milk with coffee.",
+              "cost": 4.75,
+              "category": "Brews",
+              "type": "Brewed Coffees",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Kapé Coffee Beans (9g) (Espresso Shot)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-COFFEEBEANS-B001",
+                    "value": "kapé-coffee-beans"
+                  },
+                  "specifications": [
+                    {
+                      "name": "amounts",
+                      "value": "9g"
+                    },
+                    {
+                      "name": "techniques",
+                      "value": "espresso-shot"
+                    }
+                  ]
+                },
+                {
+                  "name": "Cocoa Powder (10g)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-POWDERS-P001",
+                    "group": "powders"
+                  },
+                  "specifications": [
+                    {
+                      "modification": "amounts",
+                      "value": "10g"
+                    }
+                  ]
+                },
+                {
+                  "name": "Whole Milk (240ml) (Steamed with Microfoam)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-MILK-M001",
+                    "group": "milk"
+                  },
+                  "specifications": [
+                    {
+                      "name": "amounts",
+                      "value": "240ml"
+                    },
+                    {
+                      "name": "techniques",
+                      "value": "steamed-with-microfoam"
+                    }
+                  ]
+                }
+              ],
+              "modifications": [
+                {
+                  "id": "BREWED-COFFEES-C009B",
+                  "name": "Mocha (Dark Roast)",
+                  "value": "mocha-(dark-roast)",
+                  "description": "Chocolate milk with dark coffee.",
+                  "cost": 4.75,
+                  "supplies_required": [
+                    {
+                      "name": "Very Volcano Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B002",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Cocoa Powder (10g)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-POWDERS-P001",
+                        "group": "powders"
+                      },
+                      "specifications": [
+                        {
+                          "modification": "amounts",
+                          "value": "10g"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Whole Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M001",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C009C",
+                  "name": "Mocha (Decaf)",
+                  "value": "mocha-(decaf)",
+                  "description": "Chocolate milk with not coffee.",
+                  "cost": 4.75,
+                  "supplies_required": [
+                    {
+                      "name": "Dekaf Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B003",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Cocoa Powder (10g)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-POWDERS-P001",
+                        "group": "powders"
+                      },
+                      "specifications": [
+                        {
+                          "modification": "amounts",
+                          "value": "10g"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Whole Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M001",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C009D",
+                  "name": "Mocha (Oat Milk)",
+                  "value": "mocha-(oat-milk)",
+                  "description": "Chocolate cereal milk with coffee.",
+                  "cost": 5.50,
+                  "supplies_required": [
+                    {
+                      "name": "Kapé Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B001",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Cocoa Powder (10g)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-POWDERS-P001",
+                        "group": "powders"
+                      },
+                      "specifications": [
+                        {
+                          "modification": "amounts",
+                          "value": "10g"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Oat Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M002",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C009E",
+                  "name": "Mocha (Soy Milk)",
+                  "value": "mocha-(soy-milk)",
+                  "description": "Chocolate bean milk with coffee.",
+                  "cost": 5.50,
+                  "supplies_required": [
+                    {
+                      "name": "Kapé Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B001",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Cocoa Powder (10g)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-POWDERS-P001",
+                        "group": "powders"
+                      },
+                      "specifications": [
+                        {
+                          "modification": "amounts",
+                          "value": "10g"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Soy Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M003",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C009F",
+                  "name": "Mocha (Dark Roast) (Oat Milk)",
+                  "value": "mocha-(dark-roast)-(oat-milk)",
+                  "description": "Chocolate cereal milk with dark coffee.",
+                  "cost": 5.50,
+                  "supplies_required": [
+                    {
+                      "name": "Very Volcano Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B002",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Cocoa Powder (10g)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-POWDERS-P001",
+                        "group": "powders"
+                      },
+                      "specifications": [
+                        {
+                          "modification": "amounts",
+                          "value": "10g"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Oat Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M002",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C009G",
+                  "name": "Mocha (Dark Roast) (Soy Milk)",
+                  "value": "mocha-(dark-roast)-(soy-milk)",
+                  "description": "Chocolate bean milk with dark coffee.",
+                  "cost": 5.50,
+                  "supplies_required": [
+                    {
+                      "name": "Very Volcano Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B002",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Cocoa Powder (10g)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-POWDERS-P001",
+                        "group": "powders"
+                      },
+                      "specifications": [
+                        {
+                          "modification": "amounts",
+                          "value": "10g"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Soy Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M003",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C009H",
+                  "name": "Mocha (Decaf) (Oat Milk)",
+                  "value": "mocha-(decaf)-(oat-milk)",
+                  "description": "Chocolate cereal milk with not coffee.",
+                  "cost": 5.50,
+                  "supplies_required": [
+                    {
+                      "name": "Dekaf Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B003",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Cocoa Powder (10g)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-POWDERS-P001",
+                        "group": "powders"
+                      },
+                      "specifications": [
+                        {
+                          "modification": "amounts",
+                          "value": "10g"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Oat Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M002",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "BREWED-COFFEES-C009I",
+                  "name": "Mocha (Decaf) (Soy Milk)",
+                  "value": "mocha-(decaf)-(soy-milk)",
+                  "description": "Chocolate bean milk with not coffee.",
+                  "cost": 5.50,
+                  "supplies_required": [
+                    {
+                      "name": "Dekaf Coffee Beans (9g) (Espresso Shot)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-COFFEEBEANS-B003",
+                        "group": "coffee-beans"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "9g"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "espresso-shot"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Cocoa Powder (10g)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-POWDERS-P001",
+                        "group": "powders"
+                      },
+                      "specifications": [
+                        {
+                          "modification": "amounts",
+                          "value": "10g"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Soy Milk (240ml) (Steamed with Microfoam)",
+                      "supply_item": {
+                        "id": "INGREDIENTS-MILK-M003",
+                        "group": "milk"
+                      },
+                      "specifications": [
+                        {
+                          "name": "amounts",
+                          "value": "240ml"
+                        },
+                        {
+                          "name": "techniques",
+                          "value": "steamed-with-microfoam"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BREWED-COFFEES-C010",
+              "name": "Death Coffee",
+              "value": "death-coffee",
+              "description": "Four shots of espresso.",
+              "cost": 4.25,
+              "category": "Brews",
+              "type": "Brewed Coffees",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Very Volcano Coffee Beans (27g) (Espresso Shot)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-COFFEEBEANS-B002",
+                    "group": "coffee-beans"
+                  },
+                  "specifications": [
+                    {
+                      "name": "amounts",
+                      "value": "27g"
+                    },
+                    {
+                      "name": "techniques",
+                      "value": "espresso-shot"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Brewed Teas",
+          "custom_id": "brewed-teas",
+          "value": "brewed-teas",
+          "description": "Your tea brews.",
+          "content": "Your tea brews.",
+          "placeholder": "Select a tea",
+          "items": [
+            {
+              "id": "BREWED-TEAS-T001A",
+              "name": "Green Tea",
+              "value": "green-tea",
+              "description": "Basic tea.",
+              "cost": 3.25,
+              "category": "Brews",
+              "type": "Brewed Teas",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Water (240ml) (Hot)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-WATERS-W001",
+                    "group": "waters"
+                  },
+                  "specifications": [
+                    {
+                      "modification": "amounts",
+                      "value": "240ml"
+                    },
+                    {
+                      "modification": "temperature",
+                      "value": "hot"
+                    }
+                  ]
+                },
+                {
+                  "name": "Sencha Leaves (3g) (Steeped for 3min)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-LEAVES-L001",
+                    "group": "tea-leaves"
+                  },
+                  "specifications": [
+                    {
+                      "modification": "amounts",
+                      "value": "3g"
+                    },
+                    {
+                      "modification": "steep",
+                      "value": "3min"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BREWED-TEAS-T002",
+              "name": "Black Tea",
+              "value": "black-tea",
+              "description": "Basic tea but black.",
+              "cost": 3.25,
+              "category": "Brews",
+              "type": "Brewed Teas",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Water (240ml) (Hot)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-WATERS-W001",
+                    "group": "waters"
+                  },
+                  "specifications": [
+                    {
+                      "name": "temperature",
+                      "value": "hot"
+                    },
+                    {
+                      "name": "amounts",
+                      "value": "240ml"
+                    }
+                  ]
+                },
+                {
+                  "name": "Assam Leaves (3g) (Steeped for 5min)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-LEAVES-L002",
+                    "group": "tea-leaves"
+                  },
+                  "specifications": [
+                    {
+                      "modification": "amounts",
+                      "value": "3g"
+                    },
+                    {
+                      "modification": "steep",
+                      "value": "5min"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BREWED-TEAS-T003",
+              "name": "Matcha Green Tea",
+              "value": "matcha-green-tea",
+              "description": "Not to be confused with matchlock... Very dangerous.",
+              "cost": 3.50,
+              "category": "Brews",
+              "type": "Brewed Teas",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Water (240ml) (Hot)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-WATERS-W001",
+                    "group": "waters"
+                  },
+                  "specifications": [
+                    {
+                      "name": "temperature",
+                      "value": "hot",
+                      "value_display_name": "Hot"
+                    },
+                    {
+                      "name": "amounts",
+                      "value": "240ml",
+                      "value_display_name": "240ml"
+                    }
+                  ]
+                },
+                {
+                  "name": "Matcha Powder (2g) (Whisked)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-POWDERS-P002",
+                    "group": "powders"
+                  },
+                  "specifications": [
+                    {
+                      "modification": "amounts",
+                      "value": "2g"
+                    },
+                    {
+                      "modification": "techniques",
+                      "value": "whisk"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BREWED-TEAS-T004",
+              "name": "Barley Tea",
+              "value": "barley-tea",
+              "description": "Some might say it's barely tea.",
+              "cost": 3.50,
+              "category": "Brews",
+              "type": "Brewed Teas",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Water (240ml) (Hot)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-WATERS-W001",
+                    "group": "waters"
+                  },
+                  "specifications": [
+                    {
+                      "name": "temperature",
+                      "value": "hot",
+                      "value_display_name": "Hot"
+                    },
+                    {
+                      "name": "amounts",
+                      "value": "240ml",
+                      "value_display_name": "240ml"
+                    }
+                  ]
+                },
+                {
+                  "name": "Roasted Barley (6g) (Steeped for 10min)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-LEAVES-L003",
+                    "group": "tea-leaves"
+                  },
+                  "specifications": [
+                    {
+                      "modification": "amounts",
+                      "value": "6g"
+                    },
+                    {
+                      "modification": "steep",
+                      "value": "10min"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BREWED-TEAS-T005",
+              "name": "Oolong Tea",
+              "value": "oolong-tea",
+              "description": "A long time favorite.",
+              "cost": 3.25,
+              "category": "Brews",
+              "type": "Brewed Teas",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Water (240ml) (Hot)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-WATERS-W001",
+                    "group": "waters"
+                  },
+                  "specifications": [
+                    {
+                      "name": "temperature",
+                      "value": "hot",
+                      "value_display_name": "Hot"
+                    },
+                    {
+                      "name": "amounts",
+                      "value": "240ml",
+                      "value_display_name": "240ml"
+                    }
+                  ]
+                },
+                {
+                  "name": "Oolong Leaves (3g) (Steeped for 5min)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-LEAVES-L004",
+                    "group": "tea-leaves"
+                  },
+                  "specifications": [
+                    {
+                      "modification": "amounts",
+                      "value": "3g"
+                    },
+                    {
+                      "modification": "steep",
+                      "value": "5min"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BREWED-TEAS-T006",
+              "name": "Chamomile Tea",
+              "value": "chamomile-tea",
+              "description": "Go to sleep tea.",
+              "cost": 3.25,
+              "category": "Brews",
+              "type": "Brewed Teas",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Water (240ml) (Hot)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-WATERS-W001",
+                    "group": "waters"
+                  },
+                  "specifications": [
+                    {
+                      "name": "temperature",
+                      "value": "hot",
+                      "value_display_name": "Hot"
+                    },
+                    {
+                      "name": "amounts",
+                      "value": "240ml",
+                      "value_display_name": "240ml"
+                    }
+                  ]
+                },
+                {
+                  "name": "Dried Chamomile Flowers (3g) (Steeped for 5min)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-LEAVES-L005",
+                    "group": "tea-leaves"
+                  },
+                  "specifications": [
+                    {
+                      "modification": "amounts",
+                      "value": "3g"
+                    },
+                    {
+                      "modification": "steep",
+                      "value": "5min"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BREWED-TEAS-T007",
+              "name": "Lemon Tea",
+              "value": "lemon-tea",
+              "description": "It's our tea.",
+              "cost": 3.75,
+              "category": "Brews",
+              "type": "Brewed Teas",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Water (240ml) (Hot)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-WATERS-W001",
+                    "group": "waters"
+                  },
+                  "specifications": [
+                    {
+                      "name": "temperature",
+                      "value": "hot",
+                      "value_display_name": "Hot"
+                    },
+                    {
+                      "name": "amounts",
+                      "value": "240ml",
+                      "value_display_name": "240ml"
+                    }
+                  ]
+                },
+                {
+                  "name": "Assam Leaves (3g) (Steeped for 5min)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-LEAVES-L002",
+                    "group": "tea-leaves"
+                  },
+                  "specifications": [
+                    {
+                      "modification": "amounts",
+                      "value": "3g"
+                    },
+                    {
+                      "modification": "steep",
+                      "value": "5min"
+                    }
+                  ]
+                },
+                {
+                  "name": "Lemons (Slice)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-FRUITS-F001",
+                    "group": "fruits"
+                  },
+                  "specification": [
+                    {
+                      "modification": "something",
+                      "value": "slice"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BREWED-TEAS-T008",
+              "name": "Peach Tea",
+              "value": "peach-tea",
+              "description": "It's all peachy.",
+              "cost": 3.75,
+              "category": "Brews",
+              "type": "Brewed Teas",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Water (240ml) (Hot)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-WATERS-W001",
+                    "group": "waters"
+                  },
+                  "specifications": [
+                    {
+                      "name": "temperature",
+                      "value": "hot",
+                      "value_display_name": "Hot"
+                    },
+                    {
+                      "name": "amounts",
+                      "value": "240ml",
+                      "value_display_name": "240ml"
+                    }
+                  ]
+                },
+                {
+                  "name": "Assam Leaves (3g) (Steeped for 5min)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-LEAVES-L002",
+                    "group": "tea-leaves"
+                  },
+                  "specifications": [
+                    {
+                      "modification": "amounts",
+                      "value": "3g"
+                    },
+                    {
+                      "modification": "steep",
+                      "value": "5min"
+                    }
+                  ]
+                },
+                {
+                  "name": "Peach Syrup (15ml)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-SYRUPS-S005",
+                    "group": "syrups"
+                  },
+                  "specifications": [
+                    {
+                      "modification": "amounts",
+                      "value": "15ml"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "BREWED-TEAS-T009",
+              "name": "Earl Grey Tea",
+              "value": "earl-grey-tea",
+              "description": "Not good enough to be a marquess.",
+              "cost": 3.25,
+              "category": "Brews",
+              "type": "Brewed Teas",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Water (240ml) (Hot)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-WATERS-W001",
+                    "group": "waters"
+                  },
+                  "specifications": [
+                    {
+                      "name": "temperature",
+                      "value": "hot",
+                      "value_display_name": "Hot"
+                    },
+                    {
+                      "name": "amounts",
+                      "value": "240ml",
+                      "value_display_name": "240ml"
+                    }
+                  ]
+                },
+                {
+                  "name": "Earl Grey Leaves (3g) (Steeped for 5min)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-LEAVES-L006",
+                    "group": "tea-leaves"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "BREWED-TEAS-T010",
+              "name": "Pu-erh Tea",
+              "value": "pu-erh-tea",
+              "description": "For royalty.",
+              "cost": 3.25,
+              "category": "Brews",
+              "type": "Brewed Teas",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Water (240ml) (Hot)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-WATERS-W001",
+                    "group": "waters"
+                  },
+                  "specifications": [
+                    {
+                      "name": "temperature",
+                      "value": "hot",
+                      "value_display_name": "Hot"
+                    },
+                    {
+                      "name": "amounts",
+                      "value": "240ml",
+                      "value_display_name": "240ml"
+                    }
+                  ]
+                },
+                {
+                  "name": "Pu-erh Leaves (3g) (Steeped for 5min)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-LEAVES-L007",
+                    "group": "tea-leaves"
+                  },
+                  "specifications": [
+                    {
+                      "modification": "amounts",
+                      "value": "3g"
+                    },
+                    {
+                      "modification": "steep",
+                      "value": "5min"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Miscellaneous",
+      "custom_id": "miscellaneous",
+      "value": "miscellaneous",
+      "description": "Why do we have these?",
+      "content": "Why do we have these?",
+      "placeholder": "Miscellaneous",
+      "types": [
+        {
+          "name": "Waters",
+          "custom_id": "waters",
+          "value": "waters",
+          "description": "Waters of all temperatures.",
+          "content": "Waters of all temperatures.",
+          "placeholder": "Select a water",
+          "items": [
+            {
+              "id": "MISCD-WATERS-W001",
+              "name": "Hot Water",
+              "value": "hot-water",
+              "description": "What are they doing here?",
+              "cost": 0.00,
+              "category": "Miscellaneous",
+              "type": "Waters",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Water (240ml) (Hot)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-WATERS-W001",
+                    "group": "waters"
+                  },
+                  "specifications": [
+                    {
+                      "modification": "amounts",
+                      "value": "240ml"
+                    },
+                    {
+                      "modification": "temperature",
+                      "value": "hot"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "MISCD-WATERS-W002",
+              "name": "Water",
+              "value": "water",
+              "description": "What are they doing here?",
+              "cost": 0.00,
+              "category": "Miscellaneous",
+              "type": "Waters",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Water (240ml) (Room Temperature)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-WATERS-W001",
+                    "group": "waters"
+                  },
+                  "specifications": [
+                    {
+                      "modification": "amounts",
+                      "value": "240ml"
+                    },
+                    {
+                      "modification": "temperature",
+                      "value": "filtered-water"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "MISCD-WATERS-W003",
+              "name": "Water (With Ice)",
+              "value": "water-(with-ice)",
+              "description": "What are they doing here?",
+              "cost": 0.00,
+              "category": "Miscellaneous",
+              "type": "Waters",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Water (240ml) (With Ice)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-WATERS-W001",
+                    "group": "waters"
+                  },
+                  "specifications": [
+                    {
+                      "modification": "amounts",
+                      "value": "240ml"
+                    },
+                    {
+                      "modification": "temperature",
+                      "value": "with-ice"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Special Waters",
+          "custom_id": "special-waters",
+          "value": "special-waters",
+          "description": "Waters with some spice.",
+          "content": "Waters with some oomph.",
+          "placeholder": "Select a *special* water",
+          "items": [
+            {
+              "id": "MISCD-SPECIALWATERS-S001",
+              "name": "Coconut Water",
+              "value": "coconut-water",
+              "description": "Coconut for water.",
+              "cost": 4.00,
+              "category": "Miscellaneous",
+              "type": "Special Waters",
+              "prepared": true,
+              "supplies_required": [
+                {
+                  "name": "Coconut Water",
+                  "supply_item": {
+                    "id": "MISCS-SPECIALWATERS-S001",
+                    "group": "special-waters"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "MISCD-SPECIALWATERS-S002",
+              "name": "Sparkling Water",
+              "value": "sparkling-water",
+              "description": "Water with attitude.",
+              "cost": 4.00,
+              "category": "Miscellaneous",
+              "type": "Special Waters",
+              "prepared": true,
+              "supplies_required": [
+                {
+                  "name": "Sparkling Water",
+                  "supply_item": {
+                    "id": "MISCS-SPECIALWATERS-S002",
+                    "group": "special-waters"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Juices",
+          "custom_id": "juices",
+          "value": "juices",
+          "description": "Made from \"natural\" flavors.",
+          "content": "All kinds of juices.",
+          "placeholder": "Select a juice.",
+          "items": [
+            {
+              "id": "MISCD-JUICES-J001",
+              "name": "Orange Juice",
+              "value": "orange-juice",
+              "description": "The original juice.",
+              "cost": 4.00,
+              "category": "Miscellaneous",
+              "type": "Juices",
+              "prepared": true,
+              "supplies_required": [
+                {
+                  "name": "Oranges (Squeezed)",
+                  "supply_item": 
+                  {
+                    "id": "INGREDIENTS-FRUITS-F002",
+                    "group": "fruits"
+                  },
+                  "specifications": [
+                    {
+                      "modification": "something",
+                      "value": "squeezed"
+                    }
+                  ]
+                },
+                {
+                  "name": "Ice (Normal)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-WATERS-W002",
+                    "group": "waters"
+                  },
+                  "specifications": [
+                    {
+                      "modification": "amounts",
+                      "value": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "MISCD-JUICES-J002",
+              "name": "Apple Juice",
+              "value": "apple-juice",
+              "description": "Juice of knowledge.",
+              "cost": 3.25,
+              "category": "Miscellaneous",
+              "type": "Juices",
+              "prepared": true,
+              "supplies_required": [
+                {
+                  "name": "Apple Juice",
+                  "supply_item": {
+                    "id": "MISCS-JUICES-J002",
+                    "group": "juices"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "MISCD-JUICES-J003",
+              "name": "Pineapple Juice",
+              "value": "pineapple-juice",
+              "description": "Juice of knowledge but with spikes.",
+              "cost": 3.25,
+              "category": "Miscellaneous",
+              "type": "Juices",
+              "prepared": true,
+              "supplies_required": [
+                {
+                  "name": "Pineapple Juice",
+                  "supply_item": {
+                    "id": "MISCS-JUICES-J003",
+                    "group": "juices"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "MISCD-JUICES-J004",
+              "name": "Lemonade",
+              "value": "lemonade",
+              "description": "Not a lemon aide.",
+              "cost": 4.25,
+              "category": "Miscellaneous",
+              "type": "Juices",
+              "prepared": false,
+              "supplies_required": [
+                {
+                  "name": "Water (With Ice) (360ml)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-WATERS-W001",
+                    "group": "waters"
+                  },
+                  "specifications": [
+                    {
+                      "modification": "amounts",
+                      "value": "360ml"
+                    },
+                    {
+                      "modification": "temperature",
+                      "value": "with-ice"
+                    }
+                  ]
+                },
+                {
+                  "name": "Lemon (Squeezed)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-FRUITS-F001",
+                    "group": "fruits"
+                  },
+                  "specifications": [
+                    {
+                      "modification": "something",
+                      "value": "squeeze"
+                    }
+                  ]
+                },
+                {
+                  "name": "Sugar (15g)",
+                  "supply_item": {
+                    "id": "INGREDIENTS-SUGARS-S001",
+                    "group": "sugars"
+                  },
+                  "specifications": [
+                    {
+                      "modification": "amounts",
+                      "value": "15g"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Sodas",
+          "custom_id": "sodas",
+          "value": "sodas",
+          "description": "Fizzy drinks",
+          "content": "View our supply of sodas.",
+          "placeholder": "Select a soda",
+          "items": [
+            {
+              "id": "MISCD-SODAS-S001",
+              "name": "Root Beer",
+              "value": "root-beer",
+              "description": "Not alcoholic.",
+              "cost": 5.00,
+              "category": "Miscellaneous",
+              "type": "Sodas",
+              "prepared": true,
+              "supplies_required": [
+                {
+                  "name": "Root Beer",
+                  "supply_item": {
+                    "id": "MISCS-SODAS-S001",
+                    "group": "sodas"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Other",
+          "custom_id": "other",
+          "value": "other",
+          "description": "Other drinks I could not fit into a group.",
+          "content": "View our supply of other drinks.",
+          "placeholder": "Select a beverage",
+          "items": [
+            {
+              "id": "MISCD-OTHER-O001",
+              "name": "Mile",
+              "value": "mile",
+              "description": "Chocolate milk.",
+              "cost": 4.50,
+              "category": "Miscellaneous",
+              "type": "Other",
+              "prepared": true,
+              "supplies_required": [
+                {
+                  "name": "Mile",
+                  "supply_item": {
+                    "id": "MISCS-OTHER-S001",
+                    "group": "miscellaneous"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "MISCD-OTHER-O002",
+              "name": "Energy Jelly",
+              "value": "energy-jelly",
+              "description": "Made by Dr. Jelly.",
+              "cost": 5.50,
+              "category": "Miscellaneous",
+              "type": "Other",
+              "prepared": true,
+              "supplies_required": [
+                {
+                  "name": "Energy Jelly",
+                  "supply_item": {
+                    "id": "MISCS-OTHER-S002",
+                    "group": "miscellaneous"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

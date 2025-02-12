@@ -1,126 +1,90 @@
-module.exports = (sequelize, DataTypes) => {
-  return sequelize.define('JankenStats', {
-    user_id: {
-      type: DataTypes.STRING,
-      primaryKey: true
-    },
-    battles: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-      allowNull: false
-    },
-    wins: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-      allowNull: false
-    },
-    losses: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-      allowNull: false
-    },
-    draws: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-      allowNull: false
-    },
-    rock: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-      allowNull: false
-    },
-    rock_wins: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-      allowNull: false
-    },
-    rock_losses: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-      allowNull: false
-    },
-    rock_draws: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-      allowNull: false
-    },
-    paper: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-      allowNull: false
-    },
-    paper_wins: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-      allowNull: false
-    },
-    paper_losses: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-      allowNull: false
-    },
-    paper_draws: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-      allowNull: false
-    },
-    scissors: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-      allowNull: false
-    },
-    scissors_wins: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-      allowNull: false
-    },
-    scissors_losses: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-      allowNull: false
-    },
-    scissors_draws: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-      allowNull: false
-    },
-    energy_spent: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-      allowNull: false
-    },
-    fortune: {
-      type: DataTypes.FLOAT,
-      defaultValue: 0,
-      allowNull: false
-    },
+import * as CustomDataTypes from './custom-data-types.js';
+import { sequelize } from '../data/db.js';
+import { DataTypes } from 'sequelize';
+
+export const JankenStats = sequelize.define('JankenStats', {
+  id: {
+    ...CustomDataTypes.String(),
+    primaryKey: true,
   },
-    {
-      timestamps: false,
-      hooks: {
-        beforeSave: (instance) => {
-          if (hasChanged(instance)) {
-            calculateTotals(instance);
-          }
-        },
-        afterFind: (instances) => {
-          if (Array.isArray(instances)) {
-            instances.forEach(instance => {
-              if (hasChanged(instance)) {
-                calculateTotals(instance);
-              }
-            });
-          }
-          else if (instances) {
-            if (hasChanged(instances)) {
-              calculateTotals(instances);
+  battles: {
+    ...CustomDataTypes.Integer(),
+  },
+  wins: {
+    ...CustomDataTypes.Integer(),
+  },
+  losses: {
+    ...CustomDataTypes.Integer(),
+  },
+  draws: {
+    ...CustomDataTypes.Integer(),
+  },
+  rock: {
+    ...CustomDataTypes.Integer(),
+  },
+  rock_wins: {
+    ...CustomDataTypes.Integer(),
+  },
+  rock_losses: {
+    ...CustomDataTypes.Integer(),
+  },
+  rock_draws: {
+    ...CustomDataTypes.Integer(),
+  },
+  paper: {
+    ...CustomDataTypes.Integer(),
+  },
+  paper_wins: {
+    ...CustomDataTypes.Integer(),
+  },
+  paper_losses: {
+    ...CustomDataTypes.Integer(),
+  },
+  paper_draws: {
+    ...CustomDataTypes.Integer(),
+  },
+  scissors: {
+    ...CustomDataTypes.Integer(),
+  },
+  scissors_wins: {
+    ...CustomDataTypes.Integer(),
+  },
+  scissors_losses: {
+    ...CustomDataTypes.Integer(),
+  },
+  scissors_draws: {
+    ...CustomDataTypes.Integer(),
+  },
+  energy_spent: {
+    ...CustomDataTypes.Integer(),
+  },
+  fortune: {
+    ...CustomDataTypes.Float(),
+  },
+}, {
+    hooks: {
+      beforeSave: (instance) => {
+        if (hasChanged(instance)) {
+          calculateTotals(instance);
+        }
+      },
+      afterFind: (instances) => {
+        if (Array.isArray(instances)) {
+          instances.forEach(instance => {
+            if (hasChanged(instance)) {
+              calculateTotals(instance);
             }
+          });
+        }
+        else if (instances) {
+          if (hasChanged(instances)) {
+            calculateTotals(instances);
           }
         }
       }
-    });
-
-};
+    }
+  }
+);
 
 function hasChanged(instance) {
   const relevantFields = [

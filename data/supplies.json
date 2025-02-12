@@ -1,0 +1,453 @@
+{ 
+  "categories": [
+    {
+      "name": "Ingredients",
+      "custom_id": "ingredients",
+      "value": "ingredients",
+      "description": "View our supply of ingredients.",
+      "content": "What would you like to purchase today?",
+      "placeholder": "ingredients",
+      "groups": [
+        {
+          "name": "Coffee Beans",
+          "custom_id": "coffee-beans",
+          "value": "coffee-beans",
+          "description": "Beans for coffee.",
+          "content": "Which beans would you like?",
+          "placeholder": "Select a bean",
+          "items": [
+            {
+              "id": 1,
+              "name": "Kapé Beans (500g)",
+              "value": "kapé-beans-500g",
+              "type": "coffee beans",
+              "group": "coffee beans",
+              "description": "Quality coffee beans from Kapé.",
+              "cost": 32,
+              "amount": 500,
+              "max_amount": 500
+            },
+            {
+              "id": 2,
+              "name": "Kapé Beans (1kg)",
+              "value": "kapé-beans-1kg",
+              "type": "coffee beans",
+              "group": "coffee beans",
+              "description": "Double the quality coffee beans from Kapé.",
+              "cost": 60,
+              "amount": 1000,
+              "max_amount": 1000
+            }
+          ]
+        },
+        {
+          "name": "Milk",
+          "custom_id": "milk",
+          "value": "milk",
+          "description": "Milk of all kinds.",
+          "content": "Which milk would you like?",
+          "placeholder": "Select a milk",
+          "items": [
+            {
+              "id": 3,
+              "name": "Whole Milk (1L)",
+              "value": "whole-milk-1l",
+              "type": "whole milk",
+              "group": "milk",
+              "description": "Dairy milk from Kow's Farm.",
+              "cost": 2.5,
+              "amount": 1000,
+              "max_amount": 1000
+            },
+            {
+              "id": 4,
+              "name": "Whole Milk (3.79L)",
+              "value": "whole-milk-3.79l",
+              "type": "whole milk",
+              "group": "milk",
+              "description": "More dairy milk from Kow's Farm.",
+              "cost": 4,
+              "amount": 3790,
+              "max_amount": 3790
+            }
+          ]
+        },
+        {
+          "name": "Powders",
+          "custom_id": "powders",
+          "value": "powders",
+          "description": "Not curses. I promise.",
+          "content": "Which powder would you like?",
+          "placeholder": "Select a curs– powder",
+          "items": [
+            {
+              "id": 5,
+              "name": "Cocoa Powder (1kg)",
+              "value": "cocoa-powder-1kg",
+              "type": "cocoa powder",
+              "group": "powders",
+              "description": "coco for cocoa powder.",
+              "cost": 20,
+              "amount": 1000,
+              "max_amount": 1000
+            },
+            {
+              "id": 6,
+              "name": "Matcha Powder (55g)",
+              "value": "matcha-powder-55g",
+              "type": "matcha powder",
+              "group": "powders",
+              "description": "Pulverized green tea leaves that met their match.",
+              "cost": 15,
+              "amount": 55,
+              "max_amount": 55
+            }
+          ]
+        },
+        {
+          "name": "Syrups",
+          "custom_id": "syrups",
+          "value": "syrups",
+          "description": "Liquid, flavored sugar for your beverage.",
+          "content": "Which syrup would you like?",
+          "placeholder": "Select a syrup",
+          "items": [
+            {
+              "id": 7,
+              "name": "Hazelnut Syrup (375ml)",
+              "value": "hazelnut-syrup-375ml",
+              "type": "hazelnut syrup",
+              "group": "syrups",
+              "description": "Hazy, nutty syrup.",
+              "cost": 12,
+              "amount": 375,
+              "max_amount": 375
+            },
+            {
+              "id": 8,
+              "name": "Hazelnut Syrup (750ml)",
+              "value": "hazelnut-syrup-750ml",
+              "type": "hazelnut syrup",
+              "group": "syrups",
+              "description": "More hazy, nutty syrup.",
+              "cost": 20,
+              "amount": 750,
+              "max_amount": 750
+            },
+            {
+              "id": 9,
+              "name": "Vanilla Syrup (375ml)",
+              "value": "vanilla-syrup-375ml",
+              "type": "vanilla syrup",
+              "group": "syrups",
+              "description": "Basic syrup.",
+              "cost": 10,
+              "amount": 375,
+              "max_amount": 375
+            },
+            {
+              "id": 10,
+              "name": "Vanilla Syrup (750ml)",
+              "value": "vanilla-syrup-750ml",
+              "type": "vanilla syrup",
+              "group": "syrups",
+              "description": "More basic syrup.",
+              "cost": 18,
+              "amount": 750,
+              "max_amount": 750
+            },
+            {
+              "id": 11,
+              "name": "Peach Syrup (375ml)",
+              "value": "peach-syrup-375ml",
+              "type": "peach syrup",
+              "group": "syrups",
+              "description": "Peachy syrup.",
+              "cost": 12,
+              "amount": 375,
+              "max_amount": 375
+            }
+          ]
+        },
+        {
+          "name": "Leaves",
+          "custom_id": "leaves",
+          "value": "leaves",
+          "description": "Tea leaves (and flowers)",
+          "content": "Which tea leaves would you like?",
+          "placeholder": "Leaves from the vine...",
+          "items": [
+            {
+              "id": 12,
+              "name": "Sencha Leaves (500g)",
+              "value": "sencha-leaves-500g",
+              "type": "sencha leaves",
+              "group": "leaves",
+              "description": "Steamed camellia sinensis leaves.",
+              "cost": 50,
+              "amount": 500,
+              "max_amount": 500
+            },
+            {
+              "id": 13,
+              "name": "Assam Leaves (400g)",
+              "value": "assam-leaves-400g",
+              "type": "assam leaves",
+              "group": "leaves",
+              "description": "Fully oxidized camellia sinensis leaves.",
+              "cost": 40,
+              "amount": 400,
+              "max_amount": 400
+            },
+            {
+              "id": 14,
+              "name": "Roasted Barley (450g)",
+              "value": "roasted-barley-450g",
+              "type": "roasted barley",
+              "group": "leaves",
+              "description": "Barely roasted tea leaves.",
+              "cost": 22.5,
+              "amount": 450,
+              "max_amount": 450
+            },
+            {
+              "id": 15,
+              "name": "Oolong Leaves (450g)",
+              "value": "oolong-leaves-450g",
+              "type": "oolong-leaves",
+              "group": "leaves",
+              "description": "Very long tea leaves.",
+              "cost": 45,
+              "amount": 450,
+              "max_amount": 450
+            },
+            {
+              "id": 16,
+              "name": "Dried Chamomile Flowers (500g)",
+              "value": "dried-chamomile-flowers-500g",
+              "type": "dried-chamomile-flowers",
+              "group": "leaves",
+              "description": "Flowers camouflaged as tea leaves.",
+              "cost": 35,
+              "amount": 500,
+              "max_amount": 500
+            },
+            {
+              "id": 17,
+              "name": "Earl Grey Leaves (450g)",
+              "value": "earl-grey-leaves-450g",
+              "type": "earl grey leaves",
+              "group": "leaves",
+              "description": "Leaves from the Earl of Grey.",
+              "cost": 67.5,
+              "amount": 450,
+              "max_amount": 450
+            },
+            {
+              "id": 18,
+              "name": "Pu-erh Leaves (400g)",
+              "value": "pu-erh-leaves-400g",
+              "type": "pu-erh leaves",
+              "group": "leaves",
+              "description": "Leaves from the Emperor.",
+              "cost": 72,
+              "amount": 400,
+              "max_amount": 400
+            }
+          ]
+        },
+        {
+          "name": "Sugars",
+          "custom_id": "sugars",
+          "value": "sugars",
+          "description": "Sugar, sugar.",
+          "content": "Which sugar would you like?",
+          "placeholder": "Select a sugar",
+          "items": [
+            {
+              "id": 19,
+              "name": "Sugar (2kg)",
+              "value": "sugar-2kg",
+              "type": "sugar",
+              "group": "sugar",
+              "description": "Sweet.",
+              "cost": 4.25,
+              "amount": 2000,
+              "max_amount": 2000
+            }
+          ]
+        },
+        {
+          "name": "Juices",
+          "custom_id": "juices",
+          "value": "juices",
+          "description": "Juices of all kind.",
+          "content": "Which juice would you like?",
+          "placeholder": "Select a juice",
+          "items": [
+            {
+              "id": 20,
+              "name": "Lemon Juice (125ml)",
+              "value": "lemon-juice-125ml",
+              "type": "lemon juice",
+              "group": "juices",
+              "description": "Sour juice.",
+              "cost": 4,
+              "amount": 125,
+              "max_amount": 125
+            },
+            {
+              "id": 21,
+              "name": "Orange Juice (1L)",
+              "value": "orange-juice-1l",
+              "type": "orange juice",
+              "group": "juices",
+              "description": "Original juice.",
+              "cost": 4,
+              "amount": 1000,
+              "max_amount": 1000
+            },
+            {
+              "id": 22,
+              "name": "Apple Juice (1L)",
+              "value": "apple-juice-1l",
+              "type": "apple juice",
+              "group": "juices",
+              "description": "Juice of knowledge.",
+              "cost": 4,
+              "amount": 1000,
+              "max_amount": 1000
+            },
+            {
+              "id": 23,
+              "name": "Pineapple Juice (1L)",
+              "value": "pineapple-juice-1l",
+              "type": "pineapple juice",
+              "group": "juices",
+              "description": "Juice of knowledge with spikes.",
+              "cost": 4,
+              "amount": 1000,
+              "max_amount": 1000
+            }
+          ]
+        },
+        {
+          "name": "Fruits",
+          "custom_id": "fruits",
+          "value": "fruits",
+          "description": "Fruits of all kinds",
+          "content": "Which fruit would you like?",
+          "placeholder": "Select a fruit",
+          "items": [
+            {
+              "id": 24,
+              "name": "Lemons (1kg)",
+              "value": "lemons-1kg",
+              "type": "lemons",
+              "group": "fruits",
+              "description": "Their lemons.",
+              "cost": 5,
+              "amount": 6,
+              "max_amount": 6
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Beverages",
+      "custom_id": "beverages",
+      "value": "beverages",
+      "description": "View our supply of beverages.",
+      "content": "What would you like to purchase today?",
+      "placeholder": "beverages",
+      "groups": [
+        {
+          "name": "Special Waters",
+          "custom_id": "special-waters",
+          "value": "special-waters",
+          "description": "Waters with spice.",
+          "content": "Which water would you like?",
+          "placeholder": "Select a water",
+          "items": [
+            {
+              "id": 25,
+              "name": "Coconut Water (1pk)",
+              "value": "coconut-water-1pk",
+              "type": "coconut water",
+              "group": "special-waters",
+              "description": "Coconut for water.",
+              "cost": 20,
+              "amount": 12,
+              "max_amount": 12
+            },
+            {
+              "id": 26,
+              "name": "Sparkling Water (1pk)",
+              "value": "sparkling-water-1pk",
+              "type": "sparkling water",
+              "group": "special-waters",
+              "description": "Water with attitude.",
+              "cost": 12,
+              "amount": 12,
+              "max_amount": 12
+            }
+          ]
+        },
+        {
+          "name": "Soda",
+          "custom_id": "soda",
+          "value": "soda",
+          "description": "Fizzy drinks.",
+          "content": "Which soda would you like?",
+          "placeholder": "Select a soda",
+          "items": [
+            {
+              "id": 27,
+              "name": "Root Beer (1pk)",
+              "value": "root-beer-1pk",
+              "type": "root beer",
+              "group": "soda",
+              "description": "Not alcoholic.",
+              "cost": 18,
+              "amount": 6,
+              "max_amount": 6
+            }
+          ]
+        },
+        {
+          "name": "Miscellaneous",
+          "custom_id": "miscellaneous",
+          "value": "miscellaneous",
+          "description": "Other drinks I could not fit into a group.",
+          "content": "Which beverage would you like?",
+          "placeholder": "Select a beverage",
+          "items": [
+            {
+              "id": 28,
+              "name": "Milo (1pk)",
+              "value": "milo-1pk",
+              "type": "milo",
+              "group": "miscellaneous",
+              "description": "Chocolate milk.",
+              "cost": 30,
+              "amount": 24,
+              "max_amount": 24
+            },
+            {
+              "id": 29,
+              "name": "Energy Jelly (1pk)",
+              "value": "energy-jelly-1pk",
+              "type": "energy jelly",
+              "group": "miscellaneous",
+              "description": "Made by Dr. Jelly.",
+              "cost": 30,
+              "amount": 6,
+              "max_amount": 6
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

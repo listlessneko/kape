@@ -1,7 +1,7 @@
 const { REST, Routes } = require('discord.js');
 
 const environment = process.env.NODE_ENV || 'dev';
-const { token, clientId, guildIds } = require(`../config/${environment}-config.json`);
+import { token, clientId, guildIds } from `../config/${environment}-config.json` assert { type: 'json' };
 
 const rest = new REST().setToken(token);
 

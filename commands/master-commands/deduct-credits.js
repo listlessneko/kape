@@ -1,65 +1,80 @@
-const path = require('node:path');
-const { SlashCommandBuilder } = require('discord.js');
-const { UserServices } = require('../../services/user-services.js');
-const { MathServices } = require('../../services/math-services.js');
-const { FormatServices } = require('../../services/format-services.js');
+import { SlashCommandBuilder } from 'discord.js';
+import { UserServices } from '../../services/user-services.js';
+import { MathServices } from '../../services/math-services.js';
+import { ErrorServices } from '../../services/error-services.js';
 
-module.exports = {
+const commandName = 'MasterCommand.DeductCredits';
+export default {
   cooldown: 5,
   allowedUserId: ['316419893694300160'],
   data: new SlashCommandBuilder()
     .setName('deduct-credits')
     .setDescription('Deduct credits from user.')
+    .addUserOption(option => 
+      option
+      .setName('user')
+      .setDescription('Input username.')
+    )
     .addNumberOption(option =>
       option
         .setName('amount')
         .setDescription('Input amount.')
-    )
-    .addUserOption(option => 
-      option
-        .setName('user')
-        .setDescription('Input username.')
     ),
 
   async execute(interaction) {
-    if (!this.allowedUserId.includes(interaction.user.id)){
-      return await interaction.reply({
-        content: `You do not have permission to use this command. Please consult with the developer.`,
-        ephemeral: true
-      });
-    }
-    const user = interaction.options.getUser('user') ?? interaction.user;
-    const originalAmount = interaction.options.getNumber('amount');
-
-    const cachedUser = await UserServices.getUsers(user.id);
-    const currentBalance = cachedUser.balance;
-
-    const originalResult = await UserServices.subtractBalance(originalAmount, user.id);
-    console.log('Deduct Credits Mstr Cmd:', originalResult);
-
-    const amountUnits = FormatServices.determineUnits(originalAmount);
-    const amount = await MathServices.wholeNumber(originalAmount);
-    const resultUnits = FormatServices.determineUnits(originalResult.new_balance);
-    const result = await MathServices.wholeNumber(originalResult.new_balance);
-
-    if (user === interaction.user) {
-      if (originalAmount > currentBalance) {
-        return interaction.reply({
-          content: `You have taken **${amount} ${amountUnits}** from youself and sent it to the *Void*. You are now in debt.\nYour New Balance: **${result} ${resultUnits}**`
+    try {
+      if (!this.allowedUserId.includes(interaction.user.id)) {
+        return await interaction.reply({
+          content: `You do not have permission to use this command. Please consult with the developer.`,
+          ephemeral: true
         });
       }
-      return interaction.reply({
-        content: `You have taken **${amount} ${amountUnits}** from youself and sent it to the *Void*. You are weird.\nYour New Balance: **${result} ${resultUnits}**`
-      });
-    }
 
-    if (amount > currentBalance) {
-        return interaction.reply({
-          content: `You have taken **${amount} ${amountUnits}** from **${user.username}** and sent it to the *Void*. They are now in debt because of you.\n${user.username}'s New Balance: **${result} ${resultUnits}**`
+      const user = interaction.options.getUser('user') ?? interaction.user;
+      const isSelf = user.id === interaction.user.id;
+
+      const amount = interaction.options.getNumber('amount');
+      const funds = MathServices.displayCurrency(amount);
+
+      const cachedUser = await UserServices.getBalance(user.id);
+      const inDebt = amount > cachedUser.balance;
+      const willBeLiable = (cachedUser.balance - amount) < cachedUser.max_debt;
+
+
+      if (willBeLiable) {
+        if (isSelf) {
+          return await interaction.reply({
+            content: `Word from the wise. Do not sacrifice more than what you have.`
+          });
+        }
+        return await interaction.reply({
+          content: `Hey. This person is already poor enough. Go rob someone else.`
         });
+      }
+
+      let result = await UserServices.subtractBalance(user.id, amount);
+      result = MathServices.displayCurrency(result.userBalance.balance);
+
+      if (inDebt) {
+        if (isSelf) {
+          return await interaction.reply({
+            content: `You have taken **${funds.amount} ${funds.units}** from youself and sent it to the *Void*. You are now in debt.\nYour New Balance: **${result.amount} ${result.units}**`
+          });
+        }
+        return await interaction.reply({
+          content: `You have taken **${funds.amount} ${funds.units}** from **${user.username}** and sent it to the *Void*. They are now in debt because of you.\n${user.username}'s New Balance: **${result.amount} ${result.units}**`
+        });
+      }
+      if (isSelf) {
+        return await interaction.reply({
+          content: `You have taken **${funds.amount} ${funds.units}** from youself and sent it to the *Void*. You are weird.\nYour New Balance: **${result.amount} ${result.units}**`
+        });
+      }
+      return await interaction.reply({
+        content: `Transfer completed. You have taken **${funds.amount} ${funds.units}** from **${user.username}** and sent it to the *Void*.\n\n${user.username}'s New Balance: **${result.amount} ${result.units}**`
+      });
+    } catch (e) {
+      ErrorServices.handleError(commandName, e);
     }
-    return interaction.reply({
-      content: `Transfer completed. You have taken **${amount} ${amountUnits}** from **${user.username}** and sent it to the *Void*.\n\n${user.username}'s New Balance: **${result} ${resultUnits}**`
-    });
   }
 }

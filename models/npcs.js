@@ -1,33 +1,16 @@
-const { CustomString, CustomText, CustomInteger } = require('./custom-data-types');
+import * as CustomDataTypes from './custom-data-types.js';
+import { sequelize } from '../data/db.js';
+import { DataTypes } from 'sequelize';
 
-module.exports = (sequelize, DataTypes) => {
-  return sequelize.define('Npcs', {
-    npc_id: {
-      type: CustomInteger(),
-      primaryKey: true
-    },
-    name: CustomString(),
-    descriptive_name: CustomString(),
-    proper_name: CustomString(),
-    janken: {
-      type: DataTypes.JSON,
-      allowNull: false,
-      defaultValue: [
-        {
-          choice: 'rock',
-          weight: 1
-        },
-        {
-          choice: 'paper',
-          weight: 1
-        },
-        {
-          choice: 'scissors',
-          weight: 1
-        }
-      ]
-    }
-  }, {
-    timestamps: false
-  });
-}
+export const Npcs = sequelize.define('Npcs', {
+  id: {
+    type: DataTypes.STRING,
+    primaryKey: true
+  },
+  name: {
+    ...CustomDataTypes.String(),
+  },
+  descriptive_name: {
+    ...CustomDataTypes.String(),
+  }
+});

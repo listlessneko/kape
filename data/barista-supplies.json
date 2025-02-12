@@ -1,0 +1,1856 @@
+{
+  "categories": [
+    {
+      "name": "Prepared Coffees",
+      "custom_id": "prepared-coffees",
+      "value": "prepared-coffees",
+      "description": "In and out. Fast drink edition.",
+      "content": "In and out. Fast drink edition.",
+      "placeholder": "Select a coffee",
+      "groups": [
+        {
+          "name": "Hot Coffees",
+          "custom_id": "hot-coffees",
+          "value": "hot-coffees",
+          "description": "Hot coffee.",
+          "content": "Serve some hot coffee.",
+          "placeholder": "Select a hot coffee",
+          "items": [
+            {
+              "id": "PPREPAREDCOFFEES-HOT-C001",
+              "name": "Drip Coffee",
+              "value": "drip-coffee",
+              "description": "Stylish, prepared coffee made from Kapé Coffee Beans.",
+              "type": "hot coffee",
+              "group": "hot coffee"
+            },
+            {
+              "id": "PPREPAREDCOFFEES-HOT-C002",
+              "name": "Very Volcano Drip Coffee",
+              "value": "very-volcano-drip-coffee",
+              "description": "Coffee with a snarky, uncomfortable bite.",
+              "type": "hot coffee",
+              "group": "hot coffee"
+            },
+            {
+              "id": "PPREPAREDCOFFEES-HOT-C003",
+              "name": "Dekaf Drip Coffee",
+              "value": "dekaf-drip-coffee",
+              "description": "Why is this here?",
+              "type": "hot coffee",
+              "group": "hot coffee"
+            }
+          ]
+        },
+        {
+          "name": "Cold Coffees",
+          "custom_id": "cold-coffees",
+          "value": "cold-coffees",
+          "description": "Cold coffee.",
+          "content": "Serve some cold coffee.",
+          "placeholder": "Select a cold coffee",
+          "items": [
+            {
+              "id": "PPREPAREDCOFFEES-COLD-C001",
+              "name": "Cold Brew",
+              "value": "cold-brew",
+              "description": "Quality, prepared cold brew made from Kapé Coffee Beans.",
+              "type": "cold coffee",
+              "group": "cold coffee"
+            },
+            {
+              "id": "PPREPAREDCOFFEES-COLD-C002",
+              "name": "Premium Cold Brew",
+              "value": "premium-cold-brew",
+              "description": "A cold can of premium cold brew made from preimum Kapé Coffeen Beans.",
+              "type": "cold coffee",
+              "group": "cold coffee"
+            },
+            {
+              "id": "PPREPAREDCOFFEES-COLD-C003",
+              "name": "Creamy Cold Brew",
+              "value": "creamy-cold-brew",
+              "description": "A cold can of Kapé cold brew mixed with Kow's Farms milk.",
+              "type": "cold coffee",
+              "group": "cold coffee"
+            },
+            {
+              "id": "PPREPAREDCOFFEES-COLD-C004",
+              "name": "Nitro Cold Brew",
+              "value": "nitro-cold-brew",
+              "description": "Disclaimer: This product does not make you go fast.",
+              "type": "cold coffee",
+              "group": "cold coffee"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Ingredients",
+      "custom_id": "ingredients",
+      "value": "ingredients",
+      "description": "View our supply of ingredients.",
+      "content": "What we brewin' today?",
+      "placeholder": "Select an ingredient",
+      "groups": [
+        {
+          "name": "Coffee Beans",
+          "custom_id": "coffee-beans",
+          "value": "coffee-beans",
+          "description": "Beans for coffee.",
+          "content": "Add some beans.",
+          "placeholder": "Select a bean",
+          "items": [
+            {
+              "id": "INGREDIENTS-COFFEEBEANS-B001",
+              "name": "Kapé Coffee Beans",
+              "value": "kapé-coffee-beans",
+              "description": "Quality coffee beans from Kapé Kafe.",
+              "type": "coffee beans",
+              "group": "coffee beans",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "9g",
+                      "value": "9g",
+                      "description": "Add 9g",
+                      "display_name": "9g",
+                      "amount": 9
+                    },
+                    {
+                      "name": "18g",
+                      "value": "18g",
+                      "description": "Add 18g",
+                      "display_name": "18g",
+                      "amount": 18
+                    },
+                    {
+                      "name": "27g",
+                      "value": "27g",
+                      "description": "Add 27g",
+                      "display_name": "27g",
+                      "amount": 27
+                    },
+                    {
+                      "name": "36g",
+                      "value": "36g",
+                      "description": "Add 36g",
+                      "display_name": "36g",
+                      "amount": 36
+                    }
+                  ]
+                },
+                {
+                  "name": "techniques",
+                  "description": "Do something to the beans.",
+                  "variations": [
+                    {
+                      "name": "Pour-over",
+                      "value": "pour-over",
+                      "description": "Just dum– place in filter and slowly pour hot water over it.",
+                      "display_name": "Pour-over"
+                    },
+                    {
+                      "name": "Pull a shot",
+                      "value": "espresso-shot",
+                      "description": "Tamper and intensely force hot water through beans (use the machine).",
+                      "display_name": "Espresso Shot"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "INGREDIENTS-COFFEEBEANS-B002",
+              "name": "Very Volcano Coffee Beans",
+              "value": "very-volcano-coffee-beans",
+              "type": "coffee beans",
+              "group": "coffee beans",
+              "description": "Quality, dark roast coffee beans from Kapé Kafe.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "9g",
+                      "value": "9g",
+                      "description": "Add 9g",
+                      "display_name": "9g",
+                      "amount": 9
+                    },
+                    {
+                      "name": "18g",
+                      "value": "18g",
+                      "description": "Add 18g",
+                      "display_name": "18g",
+                      "amount": 18
+                    },
+                    {
+                      "name": "27g",
+                      "value": "27g",
+                      "description": "Add 27g",
+                      "display_name": "27g",
+                      "amount": 27
+                    },
+                    {
+                      "name": "36g",
+                      "value": "36g",
+                      "description": "Add 36g",
+                      "display_name": "36g",
+                      "amount": 36
+                    }
+                  ]
+                },
+                {
+                  "name": "techniques",
+                  "description": "Do something to the beans.",
+                  "variations": [
+                    {
+                      "name": "Pour-over",
+                      "value": "pour-over",
+                      "description": "Just dum– place in filter and slowly pour hot water over it.",
+                      "display_name": "Pour-over"
+                    },
+                    {
+                      "name": "Pull a shot",
+                      "value": "espresso-shot",
+                      "description": "Tamper and intensely force hot water through beans (use the machine).",
+                      "display_name": "Espresso Shot"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "INGREDIENTS-COFFEEBEANS-B003",
+              "name": "Dekaf Coffee Beans",
+              "value": "dekaf-coffee-beans",
+              "type": "coffee beans",
+              "group": "coffee beans",
+              "description": "Quality, decaffeinated beans from Kapé Kafe.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "9g",
+                      "value": "9g",
+                      "description": "Add 9g",
+                      "display_name": "9g",
+                      "amount": 9
+                    },
+                    {
+                      "name": "18g",
+                      "value": "18g",
+                      "description": "Add 18g",
+                      "display_name": "18g",
+                      "amount": 18
+                    },
+                    {
+                      "name": "27g",
+                      "value": "27g",
+                      "description": "Add 27g",
+                      "display_name": "27g",
+                      "amount": 27
+                    },
+                    {
+                      "name": "36g",
+                      "value": "36g",
+                      "description": "Add 36g",
+                      "display_name": "36g",
+                      "amount": 36
+                    }
+                  ]
+                },
+                {
+                  "name": "techniques",
+                  "description": "Do something to the beans.",
+                  "variations": [
+                    {
+                      "name": "Pour-over",
+                      "value": "pour-over",
+                      "description": "Just dum– place in filter and slowly pour hot water over it.",
+                      "display_name": "Pour-over"
+                    },
+                    {
+                      "name": "Pull a shot",
+                      "value": "espresso-shot",
+                      "description": "Tamper and intensely force hot water through beans (use the machine).",
+                      "display_name": "Espresso Shot"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Milk",
+          "custom_id": "milk",
+          "value": "milk",
+          "description": "Milk of all kinds.",
+          "content": "Add some white liquid.",
+          "placeholder": "Select a milk",
+          "items": [
+            {
+              "id": "INGREDIENTS-MILK-M001",
+              "name": "Whole Milk",
+              "value": "whole-milk",
+              "type": "whole milk",
+              "group": "milk",
+              "description": "Dairy milk from Kow's Farm.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "12ml",
+                      "value": "12ml",
+                      "description": "Add 12ml",
+                      "display_name": "12ml",
+                      "amount": 12
+                    },
+                    {
+                      "name": "160ml",
+                      "value": "160ml",
+                      "description": "Add 160ml",
+                      "display_name": "160ml",
+                      "amount": 160
+                    },
+                    {
+                      "name": "240ml",
+                      "value": "240ml",
+                      "description": "Add 240ml",
+                      "display_name": "240ml",
+                      "amount": 240
+                    },
+                    {
+                      "name": "360ml",
+                      "value": "360ml",
+                      "description": "Add 360ml",
+                      "display_name": "360ml",
+                      "amount": 360
+                    }
+                  ]
+                },
+                {
+                  "name": "techniques",
+                  "description": "Do something to the milk.",
+                  "variations": [
+                    {
+                      "name": "Regular",
+                      "value": "regular",
+                      "description": "Just dump it in.",
+                      "display_name": "Regular"
+                    },
+                    {
+                      "name": "Steamed with Macrofoam",
+                      "value": "steamed-with-macrofoam",
+                      "description": "Carefully steam the milk until you have a thick layer of bubbly foam.",
+                      "display_name": "Steamed with Macrofoam"
+                    },
+                    {
+                      "name": "Steamed with Microfoam",
+                      "value": "steamed-with-microfoam",
+                      "description": "Carefully steam the milk until you have a silky smooth layer of foam.",
+                      "display_name": "Steamed with Microfoam"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "INGREDIENTS-MILK-M002",
+              "name": "Oat Milk",
+              "value": "oat-milk",
+              "type": "oat milk",
+              "group": "milk",
+              "description": "Oat milk from Kow's Oat Fields.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "12ml",
+                      "value": "12ml",
+                      "description": "Add 12ml",
+                      "display_name": "12ml",
+                      "amount": 12
+                    },
+                    {
+                      "name": "160ml",
+                      "value": "160ml",
+                      "description": "Add 160ml",
+                      "display_name": "160ml",
+                      "amount": 160
+                    },
+                    {
+                      "name": "240ml",
+                      "value": "240ml",
+                      "description": "Add 240ml",
+                      "display_name": "240ml",
+                      "amount": 240
+                    },
+                    {
+                      "name": "360ml",
+                      "value": "360ml",
+                      "description": "Add 360ml",
+                      "display_name": "360ml",
+                      "amount": 360
+                    }
+                  ]
+                },
+                {
+                  "name": "techniques",
+                  "description": "Do something to the milk.",
+                  "variations": [
+                    {
+                      "name": "Regular",
+                      "value": "regular",
+                      "description": "Just dump it in.",
+                      "display_name": "Regular"
+                    },
+                    {
+                      "name": "Steamed with Macrofoam",
+                      "value": "steamed-with-macrofoam",
+                      "description": "Carefully steam the milk until you have a thick layer of bubbly foam.",
+                      "display_name": "Steamed with Macrofoam"
+                    },
+                    {
+                      "name": "Steamed with Microfoam",
+                      "value": "steamed-with-microfoam",
+                      "description": "Carefully steam the milk until you have a silky smooth layer of foam.",
+                      "display_name": "Steamed with Microfoam"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "INGREDIENTS-MILK-M003",
+              "name": "Soy Milk",
+              "value": "soy-milk",
+              "type": "soy milk",
+              "group": "milk",
+              "description": "Soy milk from Your Kow's Plants.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "12ml",
+                      "value": "12ml",
+                      "description": "Add 12ml",
+                      "display_name": "12ml",
+                      "amount": 12
+                    },
+                    {
+                      "name": "160ml",
+                      "value": "160ml",
+                      "description": "Add 160ml",
+                      "display_name": "160ml",
+                      "amount": 160
+                    },
+                    {
+                      "name": "240ml",
+                      "value": "240ml",
+                      "description": "Add 240ml",
+                      "display_name": "240ml",
+                      "amount": 240
+                    },
+                    {
+                      "name": "360ml",
+                      "value": "360ml",
+                      "description": "Add 360ml",
+                      "display_name": "360ml",
+                      "amount": 360
+                    }
+                  ]
+                },
+                {
+                  "name": "techniques",
+                  "description": "Do something to the milk.",
+                  "variations": [
+                    {
+                      "name": "Regular",
+                      "value": "regular",
+                      "description": "Just dump it in.",
+                      "display_name": "Regular"
+                    },
+                    {
+                      "name": "Steamed with Macrofoam",
+                      "value": "steamed-with-macrofoam",
+                      "description": "Carefully steam the milk until you have a thick layer of bubbly foam.",
+                      "display_name": "Steamed with Macrofoam"
+                    },
+                    {
+                      "name": "Steamed with Microfoam",
+                      "value": "steamed-with-microfoam",
+                      "description": "Carefully steam the milk until you have a silky smooth layer of foam.",
+                      "display_name": "Steamed with Microfoam"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Waters",
+          "custom_id": "waters",
+          "value": "waters",
+          "description": "Waters of all temperatures.",
+          "content": "Add some clear liquids.",
+          "placeholder": "Select a water",
+          "items": [
+            {
+              "id": "INGREDIENTS-WATERS-W001",
+              "name": "Water",
+              "value": "water",
+              "type": "water",
+              "group": "waters",
+              "description": "The source of life.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "160ml",
+                      "value": "160ml",
+                      "description": "Add 160ml",
+                      "display_name": "160ml",
+                      "amount": 160
+                    },
+                    {
+                      "name": "240ml",
+                      "value": "240ml",
+                      "description": "Add 240ml",
+                      "display_name": "240ml",
+                      "amount": 240
+                    },
+                    {
+                      "name": "360ml",
+                      "value": "360ml",
+                      "description": "Add 360ml",
+                      "display_name": "360ml",
+                      "amount": 360
+                    }
+                  ]
+                },
+                {
+                  "name": "temperature",
+                  "description": "What temperature?",
+                  "variations": [
+                    {
+                      "name": "Boil water",
+                      "value": "hot",
+                      "description": "Water that is at least above 195˚F or 90˚C.",
+                      "display_name": "Hot"
+                    },
+                    {
+                      "name": "From the filter",
+                      "value": "room-temperature",
+                      "description": "Water that is around 60˚F or 15˚C.",
+                      "display_name": "Room Temperature"
+                    },
+                    {
+                      "name": "Add ice",
+                      "value": "with-ice",
+                      "description": "Water that is around 32˚F or 0˚C.",
+                      "display_name": "With Ice"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "INGREDIENTS-WATERS-W002",
+              "name": "Ice",
+              "value": "ice",
+              "type": "ice",
+              "group": "waters",
+              "description": "Technically, a solid water.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "A little ice",
+                      "value": "little",
+                      "description": "Add a little ice.",
+                      "display_name": "Less"
+                    },
+                    {
+                      "name": "Normal ice",
+                      "value": "normal",
+                      "description": "Add a socially normal amount of ice.",
+                      "display_name": "Normal"
+                    },
+                    {
+                      "name": "A lot of ice",
+                      "value": "alottle",
+                      "description": "Add a lot of ice.",
+                      "display_name": "A Lot"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Powders",
+          "custom_id": "powders",
+          "value": "powders",
+          "description": "Not curses. I promise.",
+          "content": "Add some dust.",
+          "placeholder": "Select a curs– powder",
+          "items": [
+            {
+              "id": "INGREDIENTS-POWDERS-P001",
+              "name": "Cocoa Powder",
+              "value": "cocoa-powder",
+              "type": "cocoa powder",
+              "group": "powders",
+              "description": "coco for cocoa powder.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "10g",
+                      "value": "10g",
+                      "description": "Add 10g",
+                      "display_name": "10g",
+                      "amount": 10
+                    },
+                    {
+                      "name": "15g",
+                      "value": "15g",
+                      "description": "Add 15g",
+                      "display_name": "15g",
+                      "amount": 15
+                    },
+                    {
+                      "name": "20g",
+                      "value": "20g",
+                      "description": "Add 20g",
+                      "display_name": "20g",
+                      "amount": 20
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "INGREDIENTS-POWDERS-P002",
+              "name": "Matcha Powder",
+              "value": "matcha-powder",
+              "type": "matcha powder",
+              "group": "powders",
+              "description": "Pulverized green tea leaves that met their match.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "2g",
+                      "value": "2g",
+                      "description": "Add 2g",
+                      "display_name": "2g",
+                      "amount": 2
+                    },
+                    {
+                      "name": "4g",
+                      "value": "4g",
+                      "description": "Add 4g",
+                      "display_name": "4g",
+                      "amount": 4
+                    },
+                    {
+                      "name": "6g",
+                      "value": "6g",
+                      "description": "Add 6g",
+                      "display_name": "6g",
+                      "amount": 6
+                    }
+                  ]
+                },
+                {
+                  "name": "techniques",
+                  "description": "Do something to the powder.",
+                  "variations": [
+                    {
+                      "name": "Stir",
+                      "value": "Stir",
+                      "description": "Just mix it.",
+                      "display_name": "Stirred"
+                    },
+                    {
+                      "name": "Whisk",
+                      "value": "whisk",
+                      "description": "Mix with air.",
+                      "display_name": "Whisked"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Syrups",
+          "custom_id": "syrups",
+          "value": "syrups",
+          "description": "Liquid, flavored sugar for your beverage.",
+          "content": "Add some sticky, sweet liquid.",
+          "placeholder": "Select a syrup",
+          "items": [
+            {
+              "id":"INGREDIENTS-SYRUPS-S001",
+              "name": "Hazelnut Syrup",
+              "value": "hazelnut-syrup",
+              "type": "hazelnut syrup",
+              "group": "syrups",
+              "description": "Hazy, nutty syrup.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "15ml",
+                      "value": "15ml",
+                      "description": "Add 15ml",
+                      "display_name": "15ml",
+                      "amount": 15
+                    },
+                    {
+                      "name": "30ml",
+                      "value": "30ml",
+                      "description": "Add 30ml",
+                      "display_name": "30ml",
+                      "amount": 30
+                    },
+                    {
+                      "name": "45ml",
+                      "value": "45ml",
+                      "description": "Add 45ml",
+                      "display_name": "45ml",
+                      "amount": 45
+                    },
+                    {
+                      "name": "60ml",
+                      "value": "60ml",
+                      "description": "Add 60ml",
+                      "display_name": "60ml",
+                      "amount": 60
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "INGREDIENTS-SYRUPS-S002",
+              "name": "Chocolate Syrup",
+              "value": "chocolate-syrup",
+              "type": "chocolate syrup",
+              "group": "syrups",
+              "description": "Syrup that is made from chocolate.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "15ml",
+                      "value": "15ml",
+                      "description": "Add 15ml",
+                      "display_name": "15ml",
+                      "amount": 15
+                    },
+                    {
+                      "name": "30ml",
+                      "value": "30ml",
+                      "description": "Add 30ml",
+                      "display_name": "30ml",
+                      "amount": 30
+                    },
+                    {
+                      "name": "45ml",
+                      "value": "45ml",
+                      "description": "Add 45ml",
+                      "display_name": "45ml",
+                      "amount": 45
+                    },
+                    {
+                      "name": "60ml",
+                      "value": "60ml",
+                      "description": "Add 60ml",
+                      "display_name": "60ml",
+                      "amount": 60
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "INGREDIENTS-SYRUPS-S003",
+              "name": "Vanilla Syrup",
+              "value": "vanilla-syrup",
+              "type": "vanilla syrup",
+              "group": "syrups",
+              "description": "Basic syrup.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "15ml",
+                      "value": "15ml",
+                      "description": "Add 15ml",
+                      "display_name": "15ml",
+                      "amount": 15
+                    },
+                    {
+                      "name": "30ml",
+                      "value": "30ml",
+                      "description": "Add 30ml",
+                      "display_name": "30ml",
+                      "amount": 30
+                    },
+                    {
+                      "name": "45ml",
+                      "value": "45ml",
+                      "description": "Add 45ml",
+                      "display_name": "45ml",
+                      "amount": 45
+                    },
+                    {
+                      "name": "60ml",
+                      "value": "60ml",
+                      "description": "Add 60ml",
+                      "display_name": "60ml",
+                      "amount": 60
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "INGREDIENTS-SYRUPS-S004",
+              "name": "Caramel Syrup",
+              "value": "caramel-syrup",
+              "type": "caramel syrup",
+              "group": "syrups",
+              "description": "Cara Mel syrup.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "15ml",
+                      "value": "15ml",
+                      "description": "Add 15ml",
+                      "display_name": "15ml",
+                      "amount": 15
+                    },
+                    {
+                      "name": "30ml",
+                      "value": "30ml",
+                      "description": "Add 30ml",
+                      "display_name": "30ml",
+                      "amount": 30
+                    },
+                    {
+                      "name": "45ml",
+                      "value": "45ml",
+                      "description": "Add 45ml",
+                      "display_name": "45ml",
+                      "amount": 45
+                    },
+                    {
+                      "name": "60ml",
+                      "value": "60ml",
+                      "description": "Add 60ml",
+                      "display_name": "60ml",
+                      "amount": 60
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "INGREDIENTS-SYRUPS-S005",
+              "name": "Peach Syrup",
+              "value": "peach-syrup",
+              "type": "peach syrup",
+              "group": "syrups",
+              "description": "Peachy syrup.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "15ml",
+                      "value": "15ml",
+                      "description": "Add 15ml",
+                      "display_name": "15ml",
+                      "amount": 15
+                    },
+                    {
+                      "name": "30ml",
+                      "value": "30ml",
+                      "description": "Add 30ml",
+                      "display_name": "30ml",
+                      "amount": 30
+                    },
+                    {
+                      "name": "45ml",
+                      "value": "45ml",
+                      "description": "Add 45ml",
+                      "display_name": "45ml",
+                      "amount": 45
+                    },
+                    {
+                      "name": "60ml",
+                      "value": "60ml",
+                      "description": "Add 60ml",
+                      "display_name": "60ml",
+                      "amount": 60
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Tea Leaves",
+          "custom_id": "tea-leaves",
+          "value": "tea-leaves",
+          "description": "Tea leaves (and flowers).",
+          "content": "Add some nature.",
+          "placeholder": "Leaves from the vine...",
+          "items": [
+            {
+              "id": "INGREDIENTS-TEALEAVES-L001",
+              "name": "Sencha Leaves",
+              "value": "sencha-leaves",
+              "type": "sencha leaves",
+              "group": "tea-leaves",
+              "description": "Steamed camellia sinensis leaves.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "3g",
+                      "value": "3g",
+                      "description": "Add 3g",
+                      "display_name": "3g",
+                      "amount": 3
+                    },
+                    {
+                      "name": "6g",
+                      "value": "6g",
+                      "description": "Add 6g",
+                      "display_name": "6g",
+                      "amount": 6
+                    },
+                    {
+                      "name": "9g",
+                      "value": "9g",
+                      "description": "Add 9g",
+                      "display_name": "9g",
+                      "amount": 9
+                    }
+                  ]
+                },
+                {
+                  "name": "steep",
+                  "description": "How long to steep?",
+                  "variations": [
+                    {
+                      "name": "3min",
+                      "value": "3min",
+                      "description": "Steep for 3min",
+                      "display_name": "Steeped for 3min"
+                    },
+                    {
+                      "name": "5min",
+                      "value": "5min",
+                      "description": "Steep for 5min",
+                      "display_name": "Steeped for 5min"
+                    },
+                    {
+                      "name": "10min",
+                      "value": "10min",
+                      "description": "Steep for 10min",
+                      "display_name": "Steeped for 10min"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "INGREDIENTS-TEALEAVES-L002",
+              "name": "Assam Leaves",
+              "value": "assam-leaves",
+              "type": "assam leaves",
+              "group": "tea-leaves",
+              "description": "Fully oxidized camellia sinensis leaves.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "3g",
+                      "value": "3g",
+                      "description": "Add 3g",
+                      "display_name": "3g",
+                      "amount": 3
+                    },
+                    {
+                      "name": "6g",
+                      "value": "6g",
+                      "description": "Add 6g",
+                      "display_name": "6g",
+                      "amount": 6
+                    },
+                    {
+                      "name": "9g",
+                      "value": "9g",
+                      "description": "Add 9g",
+                      "display_name": "9g",
+                      "amount": 9
+                    }
+                  ]
+                },
+                {
+                  "name": "steep",
+                  "description": "How long to steep?",
+                  "variations": [
+                    {
+                      "name": "3min",
+                      "value": "3min",
+                      "description": "Steep for 3min",
+                      "display_name": "Steeped for 3min"
+                    },
+                    {
+                      "name": "5min",
+                      "value": "5min",
+                      "description": "Steep for 5min",
+                      "display_name": "Steeped for 5min"
+                    },
+                    {
+                      "name": "10min",
+                      "value": "10min",
+                      "description": "Steep for 10min",
+                      "display_name": "Steeped for 10min"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "INGREDIENTS-TEALEAVES-L003",
+              "name": "Roasted Barley",
+              "value": "roasted-barley",
+              "type": "roasted barley",
+              "group": "tea-leaves",
+              "description": "Barely roasted tea leaves.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "3g",
+                      "value": "3g",
+                      "description": "Add 3g",
+                      "display_name": "3g",
+                      "amount": 3
+                    },
+                    {
+                      "name": "6g",
+                      "value": "6g",
+                      "description": "Add 6g",
+                      "display_name": "6g",
+                      "amount": 6
+                    },
+                    {
+                      "name": "9g",
+                      "value": "9g",
+                      "description": "Add 9g",
+                      "display_name": "9g",
+                      "amount": 9
+                    }
+                  ]
+                },
+                {
+                  "name": "steep",
+                  "description": "How long to steep?",
+                  "variations": [
+                    {
+                      "name": "3min",
+                      "value": "3min",
+                      "description": "Steep for 3min",
+                      "display_name": "Steeped for 3min"
+                    },
+                    {
+                      "name": "5min",
+                      "value": "5min",
+                      "description": "Steep for 5min",
+                      "display_name": "Steeped for 5min"
+                    },
+                    {
+                      "name": "10min",
+                      "value": "10min",
+                      "description": "Steep for 10min",
+                      "display_name": "Steeped for 10min"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "INGREDIENTS-TEALEAVES-L004",
+              "name": "Oolong Leaves",
+              "value": "oolong-leaves",
+              "type": "oolong-leaves",
+              "group": "tea-leaves",
+              "description": "Very long tea leaves.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "3g",
+                      "value": "3g",
+                      "description": "Add 3g",
+                      "display_name": "3g",
+                      "amount": 3
+                    },
+                    {
+                      "name": "6g",
+                      "value": "6g",
+                      "description": "Add 6g",
+                      "display_name": "6g",
+                      "amount": 6
+                    },
+                    {
+                      "name": "9g",
+                      "value": "9g",
+                      "description": "Add 9g",
+                      "display_name": "9g",
+                      "amount": 9
+                    }
+                  ]
+                },
+                {
+                  "name": "steep",
+                  "description": "How long to steep?",
+                  "variations": [
+                    {
+                      "name": "3min",
+                      "value": "3min",
+                      "description": "Steep for 3min",
+                      "display_name": "Steeped for 3min"
+                    },
+                    {
+                      "name": "5min",
+                      "value": "5min",
+                      "description": "Steep for 5min",
+                      "display_name": "Steeped for 5min"
+                    },
+                    {
+                      "name": "10min",
+                      "value": "10min",
+                      "description": "Steep for 10min",
+                      "display_name": "Steeped for 10min"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "INGREDIENTS-TEALEAVES-L005",
+              "name": "Dried Chamomile Flowers",
+              "value": "dried-chamomile-flowers",
+              "type": "dried-chamomile-flowers",
+              "group": "tea-leaves",
+              "description": "Flowers camouflaged as tea leaves.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "3g",
+                      "value": "3g",
+                      "description": "Add 3g",
+                      "display_name": "3g",
+                      "amount": 3
+                    },
+                    {
+                      "name": "6g",
+                      "value": "6g",
+                      "description": "Add 6g",
+                      "display_name": "6g",
+                      "amount": 6
+                    },
+                    {
+                      "name": "9g",
+                      "value": "9g",
+                      "description": "Add 9g",
+                      "display_name": "9g",
+                      "amount": 9
+                    }
+                  ]
+                },
+                {
+                  "name": "steep",
+                  "description": "How long to steep?",
+                  "variations": [
+                    {
+                      "name": "3min",
+                      "value": "3min",
+                      "description": "Steep for 3min",
+                      "display_name": "Steeped for 3min"
+                    },
+                    {
+                      "name": "5min",
+                      "value": "5min",
+                      "description": "Steep for 5min",
+                      "display_name": "Steeped for 5min"
+                    },
+                    {
+                      "name": "10min",
+                      "value": "10min",
+                      "description": "Steep for 10min",
+                      "display_name": "Steeped for 10min"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "INGREDIENTS-TEALEAVES-L006",
+              "name": "Earl Grey Leaves",
+              "value": "earl-grey-leaves",
+              "type": "earl grey leaves",
+              "group": "tea-leaves",
+              "description": "Leaves from the Earl of Grey.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "3g",
+                      "value": "3g",
+                      "description": "Add 3g",
+                      "display_name": "3g",
+                      "amount": 3
+                    },
+                    {
+                      "name": "6g",
+                      "value": "6g",
+                      "description": "Add 6g",
+                      "display_name": "6g",
+                      "amount": 6
+                    },
+                    {
+                      "name": "9g",
+                      "value": "9g",
+                      "description": "Add 9g",
+                      "display_name": "9g",
+                      "amount": 9
+                    }
+                  ]
+                },
+                {
+                  "name": "steep",
+                  "description": "How long to steep?",
+                  "variations": [
+                    {
+                      "name": "3min",
+                      "value": "3min",
+                      "description": "Steep for 3min",
+                      "display_name": "Steeped for 3min"
+                    },
+                    {
+                      "name": "5min",
+                      "value": "5min",
+                      "description": "Steep for 5min",
+                      "display_name": "Steeped for 5min"
+                    },
+                    {
+                      "name": "10min",
+                      "value": "10min",
+                      "description": "Steep for 10min",
+                      "display_name": "Steeped for 10min"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "INGREDIENTS-TEALEAVES-L007",
+              "name": "Pu-erh Leaves",
+              "value": "pu-erh-leaves",
+              "type": "pu-erh leaves",
+              "group": "tea-leaves",
+              "description": "Leaves from the Emperor.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "3g",
+                      "value": "3g",
+                      "description": "Add 3g",
+                      "display_name": "3g",
+                      "amount": 3
+                    },
+                    {
+                      "name": "6g",
+                      "value": "6g",
+                      "description": "Add 6g",
+                      "display_name": "6g",
+                      "amount": 6
+                    },
+                    {
+                      "name": "9g",
+                      "value": "9g",
+                      "description": "Add 9g",
+                      "display_name": "9g",
+                      "amount": 9
+                    }
+                  ]
+                },
+                {
+                  "name": "steep",
+                  "description": "How long to steep?",
+                  "variations": [
+                    {
+                      "name": "3min",
+                      "value": "3min",
+                      "description": "Steep for 3min",
+                      "display_name": "Steeped for 3min"
+                    },
+                    {
+                      "name": "5min",
+                      "value": "5min",
+                      "description": "Steep for 5min",
+                      "display_name": "Steeped for 5min"
+                    },
+                    {
+                      "name": "10min",
+                      "value": "10min",
+                      "description": "Steep for 10min",
+                      "display_name": "Steeped for 10min"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Sugars",
+          "custom_id": "sugars",
+          "value": "sugars",
+          "description": "Sugar, sugar.",
+          "content": "Add some white powder.",
+          "placeholder": "Select a sugar",
+          "items": [
+            {
+              "id": "INGREDIENTS-SUGARS-S001",
+              "name": "Sugar",
+              "value": "sugar",
+              "type": "sugar",
+              "group": "sugar",
+              "description": "Sweet.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "5g",
+                      "value": "5g",
+                      "description": "Add 5g",
+                      "display_name": "5g",
+                      "amount": 5
+                    },
+                    {
+                      "name": "10g",
+                      "value": "10g",
+                      "description": "Add 10g",
+                      "display_name": "10g",
+                      "amount": 10
+                    },
+                    {
+                      "name": "15g",
+                      "value": "15g",
+                      "description": "Add 15g",
+                      "display_name": "15g",
+                      "amount": 15
+                    },
+                    {
+                      "name": "20g",
+                      "value": "20g",
+                      "description": "Add 20g",
+                      "display_name": "20g",
+                      "amount": 20
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "INGREDIENTS-SUGARS-S002",
+              "name": "Brown Sugar",
+              "value": "brown-sugar",
+              "type": "brown sugar",
+              "group": "sugar",
+              "description": "Sugar that is brown.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "5g",
+                      "value": "5g",
+                      "description": "Add 5g",
+                      "display_name": "5g",
+                      "amount": 5
+                    },
+                    {
+                      "name": "10g",
+                      "value": "10g",
+                      "description": "Add 10g",
+                      "display_name": "10g",
+                      "amount": 10
+                    },
+                    {
+                      "name": "15g",
+                      "value": "15g",
+                      "description": "Add 15g",
+                      "display_name": "15g",
+                      "amount": 15
+                    },
+                    {
+                      "name": "20g",
+                      "value": "20g",
+                      "description": "Add 20g",
+                      "display_name": "20g",
+                      "amount": 20
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Purées",
+          "custom_id": "purées",
+          "value": "purées",
+          "description": "Purées of all kinds.",
+          "content": "Add a splash of natural flavors.",
+          "placeholder": "Select a purée",
+          "items": [
+            {
+              "id": "INGREDIENTS-PURÉES-P001",
+              "name": "Lemon Purée",
+              "value": "lemon-purée",
+              "type": "lemon purée",
+              "group": "purées",
+              "description": "Sour purée.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "30ml",
+                      "value": "30ml",
+                      "description": "Add 30ml",
+                      "display_name": "30ml",
+                      "amount": 30
+                    },
+                    {
+                      "name": "40ml",
+                      "value": "40ml",
+                      "description": "Add 40ml",
+                      "display_name": "40ml",
+                      "amount": 40
+                    },
+                    {
+                      "name": "50ml",
+                      "value": "50ml",
+                      "description": "Add 50ml",
+                      "display_name": "50ml",
+                      "amount": 50
+                    },
+                    {
+                      "name": "60ml",
+                      "value": "60ml",
+                      "description": "Add 60ml",
+                      "display_name": "60ml",
+                      "amount": 60
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "INGREDIENTS-PURÉES-P002",
+              "name": "Orange Purée",
+              "value": "orange-purée",
+              "type": "orange purée",
+              "group": "purées",
+              "description": "Original purée.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "30ml",
+                      "value": "30ml",
+                      "description": "Add 30ml",
+                      "display_name": "30ml",
+                      "amount": 30
+                    },
+                    {
+                      "name": "40ml",
+                      "value": "40ml",
+                      "description": "Add 40ml",
+                      "display_name": "40ml",
+                      "amount": 40
+                    },
+                    {
+                      "name": "50ml",
+                      "value": "50ml",
+                      "description": "Add 50ml",
+                      "display_name": "50ml",
+                      "amount": 50
+                    },
+                    {
+                      "name": "60ml",
+                      "value": "60ml",
+                      "description": "Add 60ml",
+                      "display_name": "60ml",
+                      "amount": 60
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "INGREDIENTS-PURÉES-P003",
+              "name": "Apple Purée",
+              "value": "apple-purée",
+              "type": "apple purée",
+              "group": "purées",
+              "description": "Purée of knowledge.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "30ml",
+                      "value": "30ml",
+                      "description": "Add 30ml",
+                      "display_name": "30ml",
+                      "amount": 30
+                    },
+                    {
+                      "name": "40ml",
+                      "value": "40ml",
+                      "description": "Add 40ml",
+                      "display_name": "40ml",
+                      "amount": 40
+                    },
+                    {
+                      "name": "50ml",
+                      "value": "50ml",
+                      "description": "Add 50ml",
+                      "display_name": "50ml",
+                      "amount": 50
+                    },
+                    {
+                      "name": "60ml",
+                      "value": "60ml",
+                      "description": "Add 60ml",
+                      "display_name": "60ml",
+                      "amount": 60
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "INGREDIENTS-PURÉES-P004",
+              "name": "Pineapple Purée",
+              "value": "pineapple-purée",
+              "type": "pineapple purée",
+              "group": "purées",
+              "description": "Purée of knowledge with spikes.",
+              "modifications": [
+                {
+                  "name": "amounts",
+                  "description": "How much to add?",
+                  "variations": [
+                    {
+                      "name": "30ml",
+                      "value": "30ml",
+                      "description": "Add 30ml",
+                      "display_name": "30ml",
+                      "amount": 30
+                    },
+                    {
+                      "name": "40ml",
+                      "value": "40ml",
+                      "description": "Add 40ml",
+                      "display_name": "40ml",
+                      "amount": 40
+                    },
+                    {
+                      "name": "50ml",
+                      "value": "50ml",
+                      "description": "Add 50ml",
+                      "display_name": "50ml",
+                      "amount": 50
+                    },
+                    {
+                      "name": "60ml",
+                      "value": "60ml",
+                      "description": "Add 60ml",
+                      "display_name": "60ml",
+                      "amount": 60
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Fruits",
+          "custom_id": "fruits",
+          "value": "fruits",
+          "description": "Some kinds of fruits.",
+          "content": "Add some natural flavors.",
+          "placeholder": "Select a fruit",
+          "items": [
+            {
+              "id": "INGREDIENTS-FRUITS-F001",
+              "name": "Lemons",
+              "value": "lemons",
+              "type": "lemons",
+              "group": "fruits",
+              "description": "Their lemons.",
+              "modifications": [
+                {
+                  "name": "something",
+                  "description": "Do something to the lemon.",
+                  "variations": [
+                    {
+                      "name": "Slice",
+                      "value": "slice",
+                      "description": "It's a slice of lemon.",
+                      "display_name": "Slice"
+                    },
+                    {
+                      "name": "Squeeze",
+                      "value": "squeeze",
+                      "description": "Enough to make li– lemonade.",
+                      "display_name": "Squeezed"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "INGREDIENTS-FRUITS-F002",
+              "name": "Oranges",
+              "value": "oranges",
+              "type": "oranges",
+              "group": "fruits",
+              "description": "The origin of original juice and the color.",
+              "modifications": [
+                {
+                  "name": "something",
+                  "description": "Do something to the orange.",
+                  "variations": [
+                    {
+                      "name": "Slice",
+                      "value": "slice",
+                      "description": "Fresh orange slice.",
+                      "display_name": "Sliced"
+                    },
+                    {
+                      "name": "Squeeze",
+                      "value": "squeeze",
+                      "description": "Enough to make orange juice.",
+                      "display_name": "Squeezed"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "INGREDIENTS-FRUITS-F003",
+              "name": "Strawberries",
+              "value": "strawberries",
+              "type": "strawberries",
+              "group": "fruits",
+              "description": "Their just strawberries."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Miscellaneous",
+      "custom_id": "miscellaneous",
+      "value": "miscellaneous",
+      "description": "View our supply of other beverages.",
+      "content": "They could've gone anywhere to get this...",
+      "placeholder": "Miscellaneous",
+      "groups": [
+        {
+          "name": "Special Waters",
+          "custom_id": "special-waters",
+          "value": "special-waters",
+          "description": "Waters with spice.",
+          "content": "Water with some oomph.",
+          "placeholder": "Select a water",
+          "items": [
+            {
+              "id": "MISCS-SPECIALWATERS-S001",
+              "name": "Coconut Water",
+              "value": "coconut-water",
+              "type": "coconut water",
+              "group": "special-waters",
+              "description": "Coconut for water."
+            },
+            {
+              "id": "MISCS-SPECIALWATERS-S002",
+              "name": "Sparkling Water",
+              "value": "sparkling-water",
+              "type": "sparkling water",
+              "group": "special-waters",
+              "description": "Water with attitude."
+            }
+          ]
+        },
+        {
+          "name": "Juices",
+          "custom_id": "juices",
+          "value": "juices",
+          "description": "Made from \"natural\" flavors.",
+          "content": "All kinds of juices.",
+          "placeholder": "Select a juice",
+          "items": [
+            {
+              "id": "MISCS-JUICES-J001",
+              "name": "Orange Juice",
+              "value": "orange-juice",
+              "type": "orange juice",
+              "group": "juices",
+              "description": "Original juice."
+            },
+            {
+              "id": "MISCS-JUICES-J002",
+              "name": "Apple Juice",
+              "value": "apple-juice",
+              "type": "apple juice",
+              "group": "juices",
+              "description": "Juice of knowledge."
+            },
+            {
+              "id": "MISCS-JUICES-J003",
+              "name": "Pineapple Juice",
+              "value": "pineapple-juice",
+              "type": "pineapple juice",
+              "group": "juices",
+              "description": "Juice of knowledge with spikes."
+            }
+          ]
+        },
+        {
+          "name": "Sodas",
+          "custom_id": "sodas",
+          "value": "sodas",
+          "description": "Fizzy drinks.",
+          "content": "Why did they come here?",
+          "placeholder": "Select a soda",
+          "items": [
+            {
+              "id": "MISCS-SODAS-S001",
+              "name": "Root Beer",
+              "value": "root-beer",
+              "type": "root beer",
+              "group": "sodas",
+              "description": "Not alcoholic."
+            }
+          ]
+        },
+        {
+          "name": "Other",
+          "custom_id": "other",
+          "value": "other",
+          "description": "Other drinks I could not fit into a group.",
+          "content": "Why did they really come here?",
+          "placeholder": "Select a beverage",
+          "items": [
+            {
+              "id": "MISCS-OTHER-O001",
+              "name": "Mile",
+              "value": "mile",
+              "type": "mile",
+              "group": "miscellaneous",
+              "description": "Chocolate milk."
+            },
+            {
+              "id": "MISCS-OTHER-O002",
+              "name": "Energy Jelly",
+              "value": "energy-jelly",
+              "type": "energy jelly",
+              "group": "miscellaneous",
+              "description": "Made by Dr. Jelly."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

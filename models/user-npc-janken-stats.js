@@ -1,77 +1,110 @@
-const { CustomString, CustomText, CustomInteger, CustomFloat } = require('./custom-data-types');
+import * as CustomDataTypes from './custom-data-types.js';
+import { sequelize } from '../data/db.js';
+import { DataTypes } from 'sequelize';
 
-module.exports = (sequelize, DataTypes) => {
-  return sequelize.define('UserNpcJankenStats', {
-    composite_key: CustomString(),
-    user_id: {
-      type: DataTypes.STRING,
-      references: {
-        model: 'Users',
-        key: 'user_id'
-      }
-    },
-    npc_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'Npcs',
-        key: 'npc_id'
-      }
-    },
-    battles: CustomInteger(),
-    wins: CustomInteger(),
-    losses: CustomInteger(),
-    draws: CustomInteger(),
-    rock: CustomInteger(),
-    rock_wins: CustomInteger(),
-    rock_losses: CustomInteger(),
-    rock_draws: CustomInteger(),
-    paper: CustomInteger(),
-    paper_wins: CustomInteger(),
-    paper_losses: CustomInteger(),
-    paper_draws: CustomInteger(),
-    scissors: CustomInteger(),
-    scissors_wins: CustomInteger(),
-    scissors_losses: CustomInteger(),
-    scissors_draws: CustomInteger(),
-    energy_spent: CustomInteger(),
-    fortune: CustomFloat(),
+export const UserNpcJankenStats = sequelize.define('UserNpcJankenStats', {
+  id: {
+    ...CustomDataTypes.String(),
+    primaryKey: true,
   },
-    {
-      timestamps: false,
-      hooks: {
-      beforeValidate: (instance) => {
-        if (instance.user_id !== null && instance.npc_id !== null) {
-          instance.composite_key = `${instance.user_id}:${instance.npc_id}`;
-        }
-        else {
-          console.log('Model User Cusotmer Stats User Id:', instance.user_id);
-          console.log('Model User Cusotmer Stats User Id:', instance.npc_id);
-          throw new Error('Both user_id and customer_id must be provided.')
+  user_id: {
+    ...CustomDataTypes.String(),
+  },
+  npc_id: {
+    type: DataTypes.INTEGER,
+    references: {
+      model: 'Npcs',
+      key: 'id'
+    }
+  },
+  battles: {
+    ...CustomDataTypes.Integer(),
+  },
+  wins: {
+    ...CustomDataTypes.Integer(),
+  },
+  losses: {
+    ...CustomDataTypes.Integer(),
+  },
+  draws: {
+    ...CustomDataTypes.Integer(),
+  },
+  rock: {
+    ...CustomDataTypes.Integer(),
+  },
+  rock_wins: {
+    ...CustomDataTypes.Integer(),
+  },
+  rock_losses: {
+    ...CustomDataTypes.Integer(),
+  },
+  rock_draws: {
+    ...CustomDataTypes.Integer(),
+  },
+  paper: {
+    ...CustomDataTypes.Integer(),
+  },
+  paper_wins: {
+    ...CustomDataTypes.Integer(),
+  },
+  paper_losses: {
+    ...CustomDataTypes.Integer(),
+  },
+  paper_draws: {
+    ...CustomDataTypes.Integer(),
+  },
+  scissors: {
+    ...CustomDataTypes.Integer(),
+  },
+  scissors_wins: {
+    ...CustomDataTypes.Integer(),
+  },
+  scissors_losses: {
+    ...CustomDataTypes.Integer(),
+  },
+  scissors_draws: {
+    ...CustomDataTypes.Integer(),
+  },
+  energy_spent: {
+    ...CustomDataTypes.Integer(),
+  },
+  fortune: {
+    ...CustomDataTypes.Float(),
+  },
+}, {
+    hooks: {
+    beforeValidate: (instance) => {
+      if (instance.user_id !== null && instance.npc_id !== null) {
+        instance.id = `${instance.user_id}:${instance.npc_id}`;
+      }
+      else {
+        console.log('Model User Cusotmer Stats User Id:', instance.user_id);
+        console.log('Model User Cusotmer Stats User Id:', instance.npc_id);
+        throw new Error('Both user_id and customer_id must be provided.')
+      }
+    },
+      beforeSave: (instance) => {
+        if (hasChanged(instance)) {
+          calculateTotals(instance);
         }
       },
-        beforeSave: (instance) => {
-          if (hasChanged(instance)) {
-            calculateTotals(instance);
-          }
-        },
-        afterFind: (instances) => {
-          if (Array.isArray(instances)) {
-            instances.forEach(instance => {
-              if (hasChanged(instance)) {
-                calculateTotals(instance);
-              }
-            });
-          }
-          else if (instances) {
-            if (hasChanged(instances)) {
-              calculateTotals(instances);
+      afterFind: (instances) => {
+        if (Array.isArray(instances)) {
+          instances.forEach(instance => {
+            if (hasChanged(instance)) {
+              calculateTotals(instance);
             }
+          });
+        }
+        else if (instances) {
+          if (hasChanged(instances)) {
+            calculateTotals(instances);
           }
         }
       }
-    });
-
-};
+    }
+  }
+);
 
 function hasChanged(instance) {
   const relevantFields = [
