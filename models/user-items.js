@@ -1,23 +1,27 @@
-module.exports = (sequelize, DataTypes) => {
-  return sequelize.define('UserItems', {
-    user_id: DataTypes.STRING,
-    name: DataTypes.STRING,
-    value: DataTypes.STRING,
-    item_id: DataTypes.INTEGER,
-    quantity: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-      defaultValue: 0,
-    },
-    //value: DataTypes.STRING,
-    //description: DataTypes.TEXT,
-    //content: DataTypes.TEXT,
-    //cost: DataTypes.FLOAT,
-    //energy_replen: DataTypes.FLOAT,
-    //uses: DataTypes.FLOAT,
-    //category: DataTypes.STRING,
-    //type: DataTypes.STRING
+import * as CustomDataTypes from './custom-data-types.js';
+import { sequelize } from '../data/db.js';
+import { DataTypes } from 'sequelize';
+
+export const UserItems = sequelize.define('UserItems', {
+  user_id: {
+    ...CustomDataTypes.String(),
+  },
+  item_id: {
+    type: DataTypes.INTEGER,
+  },
+  name: {
+    ...CustomDataTypes.String(),
+  },
+  min_quantity: {
+    ...CustomDataTypes.Integer(),
+  },
+  quantity: {
+    ...CustomDataTypes.Integer(),
+  },
+  max_quantity: {
+    ...CustomDataTypes.Integer(),
+    defaultValue: 99,
+  },
   }, {
-    timestamps: false,
-  });
-};
+  }
+);

@@ -1,6 +1,6 @@
-const { DataTypes } = require('sequelize');
+import { DataTypes } from 'sequelize';
 
-const CustomInteger = () => ({ 
+export const Integer = () => ({
   type: DataTypes.INTEGER,
   defaultValue: 0,
   allowNull: false,
@@ -8,13 +8,14 @@ const CustomInteger = () => ({
     isInt: true,
     notNaN(value) {
       if (typeof value !== 'number' || isNaN(value)) {
+        console.log(`[TEST] CUSTOM DATA TYPE value:`, value, `Type:`, typeof value);
         throw new Error('Value must be a valid number and cannot be NaN.');
       }
     }
   }
 });
 
-const CustomFloat = () => ({ 
+export const Float = () => ({
   type: DataTypes.FLOAT,
   defaultValue: 0,
   allowNull: false,
@@ -28,7 +29,7 @@ const CustomFloat = () => ({
   }
 });
 
-const CustomString = () => ({ 
+export const String = () => ({
   type: DataTypes.STRING,
   defaultValue: 'The Void',
   allowNull: false,
@@ -45,7 +46,7 @@ const CustomString = () => ({
   }
 });
 
-const CustomText = () => ({ 
+export const Text = () => ({ 
   type: DataTypes.TEXT,
   defaultValue: 'The Void',
   allowNull: false,
@@ -61,10 +62,3 @@ const CustomText = () => ({
     }
   }
 });
-
-module.exports = {
-  CustomInteger,
-  CustomFloat,
-  CustomString,
-  CustomText
-}

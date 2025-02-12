@@ -1,180 +1,52 @@
 {
   "npcs": [
     {
-      "npc_id": 0,
+      "id": "NPC-N000",
       "name": "kapé",
       "descriptive_name": "coffee-robot",
-      "proper_name": "Kapé",
-      "janken": {
-        "weapons": [
-          { 
-            "choice": "rock",
-            "weight": 1
-          },
-          { 
-            "choice": "paper",
-            "weight": 1
-          },
-          { 
-            "choice": "scissors",
-            "weight": 1
-          }
-        ]
-      }
+      "proper_name": "Kapé"
     },
     {
-      "npc_id": 1,
+      "id": "NPC-N001",
       "name": "kuga",
       "descriptive_name": "strange boy",
-      "proper_name": "Kuga",
-      "janken": {
-        "weapons": [
-          { 
-            "choice": "rock",
-            "weight": 3
-          },
-          { 
-            "choice": "paper",
-            "weight": 1
-          },
-          { 
-            "choice": "scissors",
-            "weight": 2
-          }
-        ]
-      }
+      "proper_name": "Kuga"
     },
     {
-      "npc_id": 2,
+      "id": "NPC-N002",
       "name": "ken",
       "descriptive_name": "silver-white-haired man",
-      "proper_name": "Ken",
-      "janken": {
-        "weapons": [
-          { 
-            "choice": "rock",
-            "weight": 2
-          },
-          { 
-            "choice": "paper",
-            "weight": 1
-          },
-          { 
-            "choice": "scissors",
-            "weight": 3
-          }
-        ]
-      }
+      "proper_name": "Ken"
     },
     {
-      "npc_id": 3,
+      "id": "NPC-N003",
       "name": "mina",
       "descriptive_name": "young lady",
-      "proper_name": "Mina",
-      "janken": {
-        "weapons": [
-          { 
-            "choice": "rock",
-            "weight": 1
-          },
-          { 
-            "choice": "paper",
-            "weight": 2
-          },
-          { 
-            "choice": "scissors",
-            "weight": 3
-          }
-        ]
-      }
+      "proper_name": "Mina"
     },
     {
-      "npc_id": 4,
+      "id": "NPC-N004",
       "name": "yukino",
       "descriptive_name": "formal girl",
-      "proper_name": "Yukino",
-      "janken": {
-        "weapons": [
-          { 
-            "choice": "rock",
-            "weight": 1
-          },
-          { 
-            "choice": "paper",
-            "weight": 3
-          },
-          { 
-            "choice": "scissors",
-            "weight": 2
-          }
-        ]
-      }
+      "proper_name": "Yukino"
     },
     {
-      "npc_id": 5,
+      "id": "NPC-N005",
       "name": "yui",
       "descriptive_name": "pink-haired girl",
-      "proper_name": "Yui",
-      "janken": {
-        "weapons": [
-          { 
-            "choice": "rock",
-            "weight": 1
-          },
-          { 
-            "choice": "paper",
-            "weight": 1
-          },
-          { 
-            "choice": "scissors",
-            "weight": 3
-          }
-        ]
-      }
+      "proper_name": "Yui"
     },
     {
-      "npc_id": 6,
+      "id": "NPC-N006",
       "name": "hwang",
       "descriptive_name": "mysterious detective",
-      "proper_name": "Hwang",
-      "janken": {
-        "weapons": [
-          { 
-            "choice": "rock",
-            "weight": 1
-          },
-          { 
-            "choice": "paper",
-            "weight": 3
-          },
-          { 
-            "choice": "scissors",
-            "weight": 1
-          }
-        ]
-      }
+      "proper_name": "Hwang"
     },
     {
-      "npc_id": 7,
+      "id": "NPC-N007",
       "name": "saki",
       "descriptive_name": "silver-blue-haired girl",
-      "proper_name": "Saki",
-      "janken": {
-        "weapons": [
-          { 
-            "choice": "rock",
-            "weight": 3
-          },
-          { 
-            "choice": "paper",
-            "weight": 1
-          },
-          { 
-            "choice": "scissors",
-            "weight": 2
-          }
-        ]
-      }
+      "proper_name": "Saki"
     }
   ]
 }

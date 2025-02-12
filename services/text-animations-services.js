@@ -1,6 +1,6 @@
-const wait = require('node:timers/promises').setTimeout;
+import { setTimeout as wait } from 'node:timers/promises';
 
-const TextAnimationsServices = {
+export const TextAnimationsServices = {
   async loadingEllipses(interaction, text) {
     let ellipses = '...';
     let i = 0;
@@ -35,7 +35,3 @@ const TextAnimationsServices = {
     }
   }
 };
-
-module.exports = {
-  TextAnimationsServices
-}

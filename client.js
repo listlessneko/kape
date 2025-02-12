@@ -1,8 +1,5 @@
-const path = require('node:path');
-const { Client, GatewayIntentBits } = require('discord.js');
-
-const environment = process.env.NODE_ENV || 'dev';
-const { token } = require(`./config/${environment}-config.json`);
+import { logger } from './logger.js';
+import { Client, GatewayIntentBits } from 'discord.js';
 
 const client = new Client({
   intents: [
@@ -14,8 +11,4 @@ const client = new Client({
   ],
 });
 
-client.login(token);
-
-module.exports = {
-  client
-}
+export { client };

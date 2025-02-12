@@ -1,18 +1,26 @@
-const path = require('node:path');
-const { SlashCommandBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder, ComponentType } = require('discord.js');
-const { 
+import { logger } from '../../logger.js';
+import { 
+  SlashCommandBuilder, 
+  StringSelectMenuBuilder, 
+  StringSelectMenuOptionBuilder,
+  ActionRowBuilder,
+} from 'discord.js';
+import {
   MathServices,
   UserServices,
-  ScoresServices,
-  UserLevelsServices,
-  NpcServices,
-  CustomerServices,
-  UserCustomerStatsServices
-} = require('../../services/all-services.js');
-const { Customers } = require('../../data/db-objects.js');
-const wait = require('node:timers/promises').setTimeout;
+  StatsServices,
+  JsonSearchServices,
+  CacheServices,
+  FormatServices,
+  ErrorServices,
+} from '../../services/all-services.js';
+import { setTimeout as wait } from 'node:timers/promises';
+import { NotFoundError } from '../../errors/not-found-error.js';
+import npcJanken from '../../data/npc-janken.json' assert { type: 'json' }
+import { InsufficientResourcesError } from '../../errors/insufficient-resources-error.js';
 
-module.exports = {
+const commandName = 'UserCommand.Janken';
+export default {
   cooldown: 5,
   data: new SlashCommandBuilder()
     .setName('janken')
@@ -20,81 +28,75 @@ module.exports = {
     .addStringOption(option =>
       option
       .setName('npc')
-      .setDescription('Input npc name to figh– play with.')
+      .setDescription('Input npc name to figh–... to play with.')
     ),
 
   async execute(interaction) {
     try {
-      const userStatus = await UserServices.getUsers(interaction.user.id);
+      const fighter = {
+        id: interaction.user.id
+      }
+      const fighterStatus = await UserServices.getEnergy(fighter.id);
 
-      if (userStatus.energy < 5) {
-        await interaction.reply({
+      if (fighterStatus.energy < 5) {
+        logger.log(`[LOG] ${commandName}: User ${fighterStatus.id} is too tired.`);
+        return await interaction.reply({
           content: `Uh... You look tired. Get some rest and we can play again later.`,
           components: []
         });
-        return console.log('Janken Cmd: User is too tired.');
       }
 
-      const opponentInteractionString = interaction.options.getString('npc');
-      console.log('Janken Opponent Input:', opponentInteractionString);
-      const opponent = opponentInteractionString ? opponentInteractionString.toLowerCase() : 'kapé';
-      console.log('Janken Opponent:', opponent);
-      const npc = await NpcServices.findNpc(opponent);
-      console.log('Janken Npc:', npc);
+      const npcInteractionString = interaction.options.getString('npc');
+      logger.debug(`[DEBUG] ${commandName} npcInteractionString:`, npcInteractionString);
 
+      const selectedNpc = npcInteractionString ? npcInteractionString.toLowerCase() : 'kapé';
+      logger.debug(`[DEBUG] ${commandName} selectedNpc:`, selectedNpc);
 
-      if (opponent !== 'kapé') {
-        console.log('Janken Opponent Input Boolean:', opponent !== 'kapé');
-        if (!npc) {
-          await interaction.reply({
-            content: `"${opponentInteractionString}" does not exist. Are you remembering ghosts?`,
-            components: []
-          });
-          return console.log(`Janken Cmd: ${interaction.user.id} inputted invalid customer: '${opponentInteractionString}'.`)
-        }
+      let opponent;
 
-        const keys = {
-          key1: {
-            id: interaction.user.id,
-            name: 'user_id'
-          },
-          key2: {
-            id: npc.npc_id,
-            name: 'npc_id'
-          }
-        }
-
-        console.log('Janken - Keys:', keys);
-
-        const customer = await CustomerServices.findCustomer(opponent);
-        console.log('Janken Customer:', customer);
-        const customerKeys = {
-          id: customer.customer_id,
-          name: 'customer_id'
-        }
-
-        console.log('Janken CustomerKeys:', customerKeys);
-
-        const userCustomer = await UserCustomerStatsServices.getUsersCustomerStats(keys.key1, customerKeys)
-
-        if (userCustomer.relationship_level === 'stranger') {
-          await interaction.reply({
-            content: `It seems you and the **${customer.descriptive_name}** are not close enough to play games.`,
-            components: []
-          });
-          return console.log(`Janken Cmd: ${interaction.user.id} is not close enough to '${customer.name}'.`)
-        }
+      const npcExists = await JsonSearchServices.findNpcJanken(selectedNpc);
+      if (!npcExists.success) {
+        logger.log(`[LOG] ${commandName}: '${npcInteractionString}' does not exists.`);
+        return await interaction.reply({
+          content: `"${npcInteractionString}" does not exists. Are you remembering ghosts?`
+        });
+      } else {
+        opponent = npcExists.found;
       }
 
-      const keys = {
+      logger.log(`[LOG] ${commandName} opponent:`, opponent);
+
+      const vsNotKapé = opponent.name !== 'kapé';
+
+      let composite = {
+        theKey: FormatServices.generateCompositeKey(fighter.id, opponent.id),
+        targetModel: 'UserNpcRelationship',
         key1: {
-          id: interaction.user.id,
-          name: 'user_id'
+          id: fighter.id,
+          idName: 'user_id'
         },
         key2: {
-          id: npc.npc_id,
-          name: 'npc_id'
+          id: opponent.id,
+          idName: 'npc_id'
         }
+      }
+
+      if (vsNotKapé) {
+        logger.log(`[LOG] ${commandName} Figher ${fighter.id} challenges ${opponent.name}.`);
+        const xUserNpc = await CacheServices.getOrSetCompositeCacheEntry(composite);
+        logger.debug(`[TEST] ${commandName} xUserNpc:`, xUserNpc);
+        const strangers = xUserNpc.relationship_level === 'stranger';
+        logger.debug(`[TEST] ${commandName} strangers:`, strangers);
+
+        if (strangers) {
+          logger.log(`[LOG] ${commandName}: ${fighter.id} is not close enough to '${opponent.name}'.`)
+          return await interaction.reply({
+            content: `It seems you and the **${opponent.descriptive_name}** are not close enough to figh–... play games.`,
+            components: []
+          });
+        }
+      } else {
+        logger.log(`[LOG] ${commandName} Figher ${fighter.id} challenges the bot, ${opponent.name}.`);
       }
 
       const userWeapons = new StringSelectMenuBuilder()
@@ -138,207 +140,219 @@ module.exports = {
         components: [row]
       });
 
+      const collectorFilter = i => i.user.id === interaction.user.id;
+
+      const confirmation = await response.awaitMessageComponent({
+        filter: collectorFilter,
+        time: 60_000
+      });
+
+      const fighterWeapon = confirmation.values[0];
+      const retreat = fighterWeapon === 'retreat';
+
+      if (retreat) {
+        logger.log(`[LOG] ${commandName}: The "Fighter" has retreated.`);
+        return await interaction.editReply({
+          content: `Scared? Come back after you have trained more.`,
+          components: []
+        });
+      }
+
+      const selectedWeapon = {
+        rock: {
+          weapon_icon: ':rock:',
+          wins_against: 'scissors',
+          wins_against_icon: ':scissors:',
+          loses_against: 'paper',
+          loses_against_icon: ':scroll:',
+          losing_message: 'Busy being wrapped by your thoughts?'
+        },
+        paper: {
+          weapon_icon: ':scroll:',
+          wins_against: 'rock',
+          wins_against_icon: ':rock:',
+          loses_against: 'scissors',
+          loses_against_icon: ':scissors:',
+          losing_message: 'You should just cut your losses.'
+        },
+        scissors: {
+          weapon_icon: ':scissors:',
+          wins_against: 'paper',
+          wins_against_icon: ':scroll:',
+          loses_against: 'rock',
+          loses_against_icon: ':rock:',
+          losing_message: 'You got pummeled.'
+        }
+      };
+
+      const opponentJanken = MathServices.getWeightedSelection(opponent.janken.weapons);
+      const opponentWeapon = opponentJanken.choice;
+
+      const fighterWon = fighterWeapon === selectedWeapon[opponentWeapon]['loses_against'];
+      const draw = fighterWeapon === opponentWeapon;
+      const fighterLost = fighterWeapon === selectedWeapon[opponentWeapon]['wins_against'];
+
+      let fighterLevelUp = false;
+
+      const energyConsumed = 5;
+
+      const results = {
+        victory: false,
+        defeat: false,
+        draw: false,
+        weapon: fighterWeapon,
+        energy_consumed: energyConsumed,
+        rewards: {},
+      };
+
+      let guests = {
+        'UserNpcJankenStats': [fighter.id, opponent.id],
+        'UserEnergy': fighter.id
+      };
+      let bouncer = {};
 
       try {
-        const collector = response.createMessageComponentCollector({
-          componentType: ComponentType.StringSelect,
-          time: 60_000
-        });
+        if (fighterWon) {
+          logger.log(`[LOG] ${commandName}: Fighter victorious.`);
 
-        collector.on('collect', async i => {
+          const thresholds = [.001, .25, .50, 1];
+          const chance = Math.random();
+          const selection = thresholds.findIndex(threshold => chance < threshold);
 
-          if (i.user.id !== interaction.user.id) {
-            await i.editReply({
-              content: `Please wait your turn.`,
-              ephemeral: true
-            });
+          const expChances = [100, 50, 25, 10];
+          const exp = expChances[selection];
+
+          const creditsChances = [25, 10, 5, 2.5];
+          const credits = creditsChances[selection];
+
+          results.victory = true;
+          results.rewards = {
+            exp,
+            credits,
+          };
+
+          guests['UserBalance'] = fighter.id
+          guests['UserLevel'] = fighter.id
+          logger.debug(`[TEST] ${commandName} guests:`, guests);
+
+          bouncer = await ErrorServices.startAdvancedSquealOperations(commandName, guests);
+
+          await StatsServices.calculateJankenStats(composite, results, bouncer);
+          await UserServices.removeEnergy(fighter.id, energyConsumed, bouncer);
+          await UserServices.addBalance(fighter.id, results.rewards.credits, bouncer);
+          const { userLevel, levelUp } = await UserServices.addExp(fighter.id, results.rewards.exp, bouncer);
+          fighter.level = userLevel.level;
+          fighterLevelUp = levelUp;
+
+          await ErrorServices.endAdvancedSquealOperations(commandName, bouncer);
+
+          await interaction.editReply({
+            content: `Jan... ken... pon!\n\n(You) ${selectedWeapon[fighterWeapon]['weapon_icon']} vs. ${selectedWeapon[opponentWeapon]['weapon_icon']} (${opponent.proper_name})\n*Huh, you won.*\n\n-# **-${energyConsumed} energy**\n-# **+${results.rewards.exp} experience**\n-# **+${results.rewards.credits} credits**`,
+            components: []
+          });
+        } if (draw) {
+          logger.log(`[LOG] ${commandName}: A stale fight.`);
+          const thresholds = [.50, 1];
+          const chance = Math.random();
+          const selection = thresholds.findIndex(threshold => chance < threshold);
+
+          const expChances = [10, 5];
+          const exp = expChances[selection];
+
+          const creditsChances = [1, 0];
+          const credits = creditsChances[selection];
+
+          results.draw = true;
+          results.rewards = {
+            exp,
+            credits,
           }
 
-          if (i.user.id === interaction.user.id) {
-            const selectedValue = i.values[0];
-            console.log(`Item:`, selectedValue);
+          guests['UserLevel'] = fighter.id;
+          if (credits) guests['UserBalance'] = fighter.id;
+          logger.debug(`[TEST] ${commandName} guests:`, guests);
 
-            if (selectedValue === 'retreat') {
-              await interaction.editReply({
-                content: `Scared? Come back after you have trained more.`,
-                components: []
-              });
-              return collector.stop('Janken Cmd: User has retreated.');
-            }
+          bouncer = await ErrorServices.startAdvancedSquealOperations(commandName, guests);
 
-            const opponentJanken = MathServices.getWeightedSelection(npc.janken.weapons);
-            console.log(`Janken Opponent Janken:`, opponentJanken);
-            const opponentWeapon = opponentJanken.choice;
-            console.log(`Janken Opponent Weapon:`, opponentWeapon);
+          await StatsServices.calculateJankenStats(composite, results, bouncer);
+          await UserServices.removeEnergy(fighter.id, energyConsumed, bouncer);
+          if (credits) await UserServices.addBalance(fighter.id, results.rewards.credits, bouncer);
+          const { userLevel, levelUp } = await UserServices.addExp(fighter.id, results.rewards.exp, bouncer);
+          fighter.level = userLevel.level;
+          fighterLevelUp = levelUp;
 
-            await interaction.editReply({
-              content: `Jan...`,
-              components: []
-            });
-            await wait(1_000);
+          await ErrorServices.endAdvancedSquealOperations(commandName, bouncer);
 
-            await interaction.editReply({
-              content: `Jan... ken...`,
-              components: []
-            });
-            await wait(1_000);
+          const greens = credits ? '\n-# **+1 credit**' : '';
 
-            const outcomes = {
-              rock: {
-                weapon_icon: ':rock:',
-                loses_to: 'paper',
-                loses_to_icon: ':scroll:',
-                losing_message: 'Busy being wrapped by your thoughts?'
-              },
-              paper: {
-                weapon_icon: ':scroll:',
-                loses_to: 'scissors',
-                loses_to_icon: ':scissors:',
-                losing_message: 'You should just cut your losses.'
-              },
-              scissors: {
-                weapon_icon: ':scissors:',
-                loses_to: 'rock',
-                loses_to_icon: ':rock:',
-                losing_message: 'You got pummeled.'
-              }
-            };
+          await interaction.editReply({
+            content: `Jan... ken... pon!\n\n(You) ${selectedWeapon[fighterWeapon]['weapon_icon']} vs. ${selectedWeapon[opponentWeapon]['weapon_icon']} (${opponent.proper_name})\n*That was stale, mate.*\n\n-# **-${energyConsumed} energy**\n-# **+${results.rewards.exp} experience**${greens}`,
+            components: []
+          });
+        } if (fighterLost) {
+          logger.log(`[LOG] ${commandName}: Fighter defeated.`);
+          const exp = Math.random() < .50 ? 5 : 0;
+          const credits = 0;
 
-            if (selectedValue === opponentWeapon) {
-              const energy_consumed = 5;
-              const rewards = {
-                credits: 0,
-                exp: 10
-              };
-
-              await UserServices.removeEnergy(energy_consumed, interaction.user.id);
-
-              const result = {
-                ...keys,
-                victory: false,
-                defeat: false,
-                draw: true,
-                weapon: selectedValue,
-                energy_consumed,
-                rewards
-              };
-
-              console.log('Janken - Results:', result);
-
-              await ScoresServices.calculateJankenResults(result);
-              const user = await UserLevelsServices.addExp(result.rewards.exp, result.key1.id);
-
-              await interaction.editReply({
-                content: `Jan... ken... pon!\n\n(You) ${outcomes[selectedValue]['weapon_icon']} vs. ${outcomes[opponentWeapon]['weapon_icon']} (${npc.proper_name})\n*That was stale, mate.*\n\nLost **${energy_consumed} energy**\nGained **${rewards.exp} experience**`,
-                components: []
-              });
-
-              if (user.level_up) {
-                await wait(1_000);
-                await interaction.followUp({
-                  content: `*You suddenly feel wiser as though you understand a little bit more how this world turns.*\n\nLeveled up from Level ${user.prev_level} to **Level ${user.level}**`
-                });
-              }
-              return collector.stop('Janken Cmd: A draw.');
-            }
-
-            const userWon = selectedValue === outcomes[opponentWeapon]['loses_to'];
-            console.log('User Won:', userWon);
-
-            if (userWon) {
-              const energy_consumed = 5;
-              const rewards = {
-                credits: 2.5,
-                exp: 25
-              };
-
-              await UserServices.removeEnergy(energy_consumed, interaction.user.id);
-              await UserServices.addBalance(rewards.credits, interaction.user.id);
-
-              const result = {
-                ...keys,
-                victory: true,
-                defeat: false,
-                draw: false,
-                weapon: selectedValue,
-                energy_consumed,
-                rewards
-              };
-
-              console.log('Janken Cmd - Results:', result);
-
-              await ScoresServices.calculateJankenResults(result);
-              const user = await UserLevelsServices.addExp(result.rewards.exp, result.key1.id);
-
-              await interaction.editReply({
-                content: `Jan... ken... pon!\n\n(You) ${outcomes[selectedValue]['weapon_icon']} vs. ${outcomes[opponentWeapon]['weapon_icon']} (${npc.proper_name})\n*Huh, you won.*\n\nLost **${energy_consumed} energy**\nGained **${rewards.exp} experience**\nReceived **${rewards.credits} credits**`,
-                components: []
-              });
-
-              if (user.level_up) {
-                await wait(1_000);
-                await interaction.followUp({
-                  content: `*You suddenly feel wiser as though you understand a little bit more how this world turns.*\n\nLeveled up from Level ${user.prev_level} to **Level ${user.level}**`
-                });
-              }
-              return collector.stop('Janken Cmd - Fight ended. User victory.');
-            }
-
-            else {
-              const energy_consumed = 5;
-              const rewards = {
-                credits: 0,
-                exp: 0
-              };
-
-              await UserServices.removeEnergy(energy_consumed, interaction.user.id);
-
-              const result = {
-                ...keys,
-                victory: false,
-                defeat: true,
-                draw: false,
-                weapon: selectedValue,
-                energy_consumed,
-                rewards
-              };
-
-              console.log('Janken Cmd - Results:', result);
-
-              await ScoresServices.calculateJankenResults(result);
-
-              await interaction.editReply({
-                content: `Jan... ken... pon!\n\n(You) ${outcomes[selectedValue]['weapon_icon']} vs. ${outcomes[opponentWeapon]['weapon_icon']} (${npc.proper_name})\n*Defeat. ${outcomes[selectedValue]['losing_message']}*\n\nLost **${energy_consumed} energy**`,
-                components: []
-              });
-              return collector.stop('Fight ended. User defeated.')
-            }
+          results.defeat = true;
+          results.rewards = {
+            exp,
+            credits,
           }
-        });
 
-        collector.on('end', (collected, reason) => {
-          if (reason === 'time') {
-            console.log('Janken Cmd - time limit reached.');
-            return interaction.editReply({
-              content: `Distracted? Give it some more thought.`,
-              components: []
-            });
-          }
-          else {
-            return console.log(reason);
-          }
-        });
-      }
-      catch (e) {
-        console.error('Janken Cmd - An unexpected error occurred:', e);
+          if (exp) guests['UserLevel'] = fighter.id;
+          logger.debug(`[TEST] ${commandName} guests:`, guests);
+
+          bouncer = await ErrorServices.startAdvancedSquealOperations(commandName, guests);
+
+          await StatsServices.calculateJankenStats(composite, results, bouncer);
+          await UserServices.removeEnergy(fighter.id, energyConsumed, bouncer);
+          if (exp) {
+            const {userLevel, levelUp } = await UserServices.addExp(fighter.id, results.rewards.exp, bouncer);
+            fighter.level = userLevel.level;
+            fighterLevelUp = levelUp;
+          };
+
+          const wisdom = exp ? '\n-# **+5 experience**' : '';
+
+          await ErrorServices.endAdvancedSquealOperations(commandName, bouncer);
+
+          await interaction.editReply({
+            content: `Jan... ken... pon!\n\n(You) ${selectedWeapon[fighterWeapon]['weapon_icon']} vs. ${selectedWeapon[opponentWeapon]['weapon_icon']} (${opponent.proper_name})\n*Defeat. ${selectedWeapon[fighterWeapon]['losing_message']}*\n\n-# **-${energyConsumed} energy**${wisdom}`,
+            components: []
+          });
+        } if (fighterLevelUp) {
+          await wait(1_000);
+          return await interaction.followUp({
+            content: `*You suddenly feel wiser as though you understand a little bit more how this world turns.*\n\nLeveled up from Level ${fighter.level - 1} to **Level ${fighter.level}!**`
+          });
+        }
+        return logger.log(`[LOG] ${commandName}: Fight ended. Results calculated.`);
+      } catch (e) {
+        ErrorServices.handleError(commandName, e);
+        if (!bouncer.transaction.finished) {
+          await ErrorServices.handleAdvancedDataRollback(commandName, guests, bouncer);
+        }
         return await interaction.editReply({
-          content: `*A cat screeches and glass breaks behind the kitchen doors.*\nPlease wait while I take care of something...`,
-          components: [],
+          content: `There seems to have been a weapon malfunction. Please try again later.`,
+          components: []
         });
       }
-    }
-    catch (e) {
-      console.error('Janken Cmd - An unexpected error occurred:', e);
+    } catch (e) {
+      console.error(e);
+      ErrorServices.handleError(commandName, e);
+      if (e instanceof InsufficientResourcesError) {
+        return await interaction.reply({
+          content: `"${opponentInteractionString}" does not exist. Are you remembering ghosts?`,
+          components: []
+        });
+      } if (e.reason === 'time') {
+        logger.error(`[ERROR] ${commandName} The fighter was distracted.`);
+        return await interaction.editReply({
+          content: `Distracted? Give it some more thought.`,
+          components: []
+        });
+      }
       return await interaction.editReply({
         content: `*A cat screeches and glass breaks behind the kitchen doors.*\nPlease wait while I take care of something...`,
         components: [],

@@ -1,8 +1,12 @@
-const { Op, Users, UserItems } = require('../data/db-objects.js');
-const { client } = require('../client.js');
-const userItemsCache = client.cache['userItemsCache'];
+import { logger } from '../logger.js';
+import { Users, UserItems } from '../models/models-barrel.js';
+import { Op } from 'sequelize';
+import { client } from '../client.js';
+import { ErrorServices } from './error-services.js';
 
-const UserItemsServices = {
+const serviceName = 'UserItemsServices';
+
+export const UserItemsServices = {
   async getUserItems(...userIds) {
     //console.log('Get User Items - User Ids:', ...userIds);
 
@@ -153,8 +157,4 @@ const UserItemsServices = {
       return;
     }
   },
-}
-
-module.exports = {
-  UserItemsServices
 }

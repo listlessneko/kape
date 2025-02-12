@@ -1,13 +1,38 @@
-const FormatServices = {
+import { logger } from '../logger.js';
+
+const serviceName = 'FormatServices';
+export const FormatServices = {
   isLowerCaseLetter(word) {
     const code = word.charCodeAt(0);
     return (code >= 97 && code <= 122);
   },
 
-  nameFormatter(string) {
+  isAnOpenBracket(word) {
+    const code = word.charCodeAt(0);
+    return (code === 40 || code === 90 || code === 123);
+  },
+
+  aOrAn(word, stylized={}) {
+    const vowels = [ 'A', 'a', 'E', 'e', 'I', 'i', 'O', 'o', 'U', 'u' ];
+    const firstLetterVowel = vowels.findIndex(vowel => vowel === word.charAt(0));
+    if (stylized === 'italic') {
+      return firstLetterVowel > -1 ? `an *${word}*` : `a *${word}*`;
+    } if (stylized === 'bold') {
+      return firstLetterVowel > -1 ? `an **${word}**` : `a **${word}**`;
+    } else {
+      return firstLetterVowel > -1 ? `an ${word}` : `a ${word}`;
+    }
+  },
+
+  nameFormatter(string, splitter) {
+    const functionName = `${serviceName}.nameFormatter`;
+    logger.log(`[TEST] ${functionName} splitter:`, splitter);
     let newString = '';
-    let elementalize = string.split('_');
+    let elementalize = string.split(splitter);
     let properfy = elementalize.map(word => {
+      if (this.isAnOpenBracket(word)) {
+        return word.charAt(0) + word.charAt(1).toUpperCase() + word.slice(2);
+      }
       if (this.isLowerCaseLetter(word)) {
         return word.charAt(0).toUpperCase() + word.slice(1);
       }
@@ -30,8 +55,4 @@ const FormatServices = {
   generateCompositeKey(key1, key2) {
     return `${key1}:${key2}`
   }
-}
-
-module.exports = {
-  FormatServices
 }
